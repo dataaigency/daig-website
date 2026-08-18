@@ -1,0 +1,56 @@
+{
+  "nav": { "services": "Services", "work": "Work", "about": "About", "contact": "Contact", "cta": "Free audit" },
+  "hero": {
+    "eyebrow": "Data & AI architecture studio",
+    "title": "Take agency over your data.",
+    "sub": "Lakehouses, pipelines and AI-ready foundations — built properly, secured from day one, and handed over so they're yours, not ours.",
+    "cta": "Book a free architecture audit",
+    "secondary": "How we work"
+  },
+  "dictionary": {
+    "label": "The name is the pitch",
+    "entries": [
+      { "word": "data aigency", "pos": "/ˈeɪ·dʒən·si/ · noun", "def": "The capacity to act. You regain agency over your data — one source of truth, owned by you, documented for you." },
+      { "word": "data aigency", "pos": "noun", "def": "A consulting practice. We design the architecture, build the pipelines, and hand everything over — scope, timeline and costs agreed before we start." },
+      { "word": "data aigency", "pos": "noun, ours", "def": "Agency, with AI built in — adopted in phases, with security and governance from the start. Not a vibe-coded data strategy." }
+    ]
+  },
+  "services": {
+    "label": "What we build",
+    "title": "Four things, done properly.",
+    "cta": "See all services",
+    "items": [
+      { "title": "Lakehouse architecture", "desc": "Production-grade lakehouses in Fabric or GCP — semantic layers, governance, medallion done right from day one.", "outcomes": ["One source of truth your teams trust", "Governance and semantic layer from day one", "Documented, transferable architecture"] },
+      { "title": "Pipelines & automation", "desc": "Dependable ELT/ETL with dbt, orchestrated in BigQuery, Python, Airflow or Fabric. Data quality you stop thinking about.", "outcomes": ["Analysts stop cleaning, start analyzing", "Tested, monitored pipelines", "Costs you can predict"] },
+      { "title": "AI-ready data layers", "desc": "Feature stores, training sets and analytics layers your ML and BI teams can actually use.", "outcomes": ["ML-ready features without the scramble", "Training data with lineage", "Analytics layers that answer questions"] },
+      { "title": "AI adoption & governance", "desc": "Phased AI rollout with security, access control and evaluation built in — from first use-case to production.", "outcomes": ["A phased roadmap, not a vibe-coded strategy", "Security and access control designed in", "Evaluation before scale-up"] }
+    ]
+  },
+  "process": {
+    "label": "No black boxes",
+    "title": "Audit → architecture → build → handover. You keep the keys and the docs.",
+    "cta": "Start with the free audit",
+    "note": "30 minutes, no deck, no obligations."
+  },
+  "about": {
+    "title": "One architect, end to end.",
+    "body1": "data aigency is the practice of Vadim Van Den Heuvel. The person who scopes your audit is the person who designs the architecture, builds it, and hands it over.",
+    "body2": "The way of working is simple: agree scope, timeline and costs up front; build with the boring reliability your data deserves; document everything; hand over the keys. No lock-in, no black boxes.",
+    "linkLabel": "Find me on LinkedIn"
+  },
+  "contact": {
+    "title": "Let's audit your data architecture — free.",
+    "sub": "A 30-minute architecture review. No deck, no obligations — you leave with at least one concrete improvement.",
+    "book": "Pick a slot",
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  },
+  "work": {
+    "title": "Work & writing",
+    "empty": "First case study coming soon."
+  },
+  "footer": {
+    "tagline": "From chaos to insights.",
+    "languages": "EN · NL · FR · PT coming later"
+  }
+}
