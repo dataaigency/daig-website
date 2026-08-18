@@ -1,0 +1,14 @@
+:root {
+  --paper: #FAF7F2;
+  --ink: #1A1030;
+  --violet: #6C4CF1;
+  --coral: #FF6B6B;
+  --sun: #FFC93C;
+  --flash: #3BF06E;
+  --ink-soft: #55524B;
+  --line: #E6E0D4;
+  --font-display: 'Bricolage Grotesque Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Hanken Grotesk Variable', 'Segoe UI', system-ui, sans-serif;
+  --radius: 8px;
+  --container: 1080px;
+}

@@ -1,0 +1,36 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.08; letter-spacing: -0.02em; margin: 0; }
+a { color: var(--violet); }
+a:hover { color: #4F32C7; }
+.container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+.eyebrow {
+  font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+  color: #8A857B; font-weight: 600;
+}
+.stripe { height: 12px; }
+.stripe--loud {
+  background: repeating-linear-gradient(-45deg,
+    var(--violet) 0 14px, var(--coral) 14px 28px,
+    var(--sun) 28px 42px, var(--flash) 42px 56px);
+}
+.stripe--quiet {
+  background: repeating-linear-gradient(-45deg, var(--violet) 0 14px, #F1EDFF 14px 28px);
+}
+.btn {
+  display: inline-block; font-weight: 700; font-size: 15px;
+  padding: 13px 26px; border-radius: var(--radius);
+  text-decoration: none; border: none; cursor: pointer;
+}
+.btn--primary { background: var(--violet); color: #fff; }
+.btn--primary:hover { background: #5A3BD8; color: #fff; }
+.btn--secondary { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
