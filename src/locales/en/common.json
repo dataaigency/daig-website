@@ -47,7 +47,14 @@
   },
   "work": {
     "title": "Work & writing",
-    "empty": "First case study coming soon."
+    "empty": "First case study coming soon.",
+    "notFoundPost": "That post doesn't exist.",
+    "backToWork": "Back to work"
+  },
+  "notFound": {
+    "title": "Page not found.",
+    "body": "That page doesn't exist — the nav above has everything that does.",
+    "back": "Back to home"
   },
   "footer": {
     "tagline": "From chaos to insights.",

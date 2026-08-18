@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import Wordmark from './Wordmark'
 import StripeBand from './StripeBand'
@@ -13,6 +14,7 @@ export default function Footer() {
           <Wordmark size={14} inverse />
           <div className="footer__meta">
             <span>{t('footer.tagline')}</span>
+            <Link to="/contact">{t('nav.contact')}</Link>
             <a href={LINKS.linkedin}>LinkedIn</a>
             <a href={LINKS.github}>GitHub</a>
             <span>{t('footer.languages')}</span>

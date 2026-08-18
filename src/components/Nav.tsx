@@ -13,7 +13,8 @@ export default function Nav() {
           <Link to="/services">{t('nav.services')}</Link>
           <Link to="/work">{t('nav.work')}</Link>
           <Link to="/about">{t('nav.about')}</Link>
-          <a className="btn btn--primary" style={{ padding: '8px 18px', fontSize: 13 }} href={LINKS.booking}>{t('nav.cta')}</a>
+          <Link to="/contact">{t('nav.contact')}</Link>
+          <a className="btn btn--primary" style={{ padding: '11px 18px', fontSize: 13 }} href={LINKS.booking}>{t('nav.cta')}</a>
         </div>
       </nav>
     </header>

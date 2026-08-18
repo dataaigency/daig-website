@@ -9,6 +9,7 @@ test.each([
   ['/about', 'One architect, end to end.'],
   ['/contact', "Let's audit your data architecture — free."],
   ['/work', 'Work & writing'],
+  ['/some/unknown/path', 'Page not found.'],
 ])('route %s renders', (path, text) => {
   render(
     <MemoryRouter initialEntries={[path]}>
