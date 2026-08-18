@@ -1,0 +1,21 @@
+.hero { padding: 72px 0 80px; }
+.hero h1 { font-size: clamp(38px, 7vw, 60px); max-width: 640px; }
+.hero__sub { font-size: 17px; color: var(--ink-soft); max-width: 500px; margin: 20px 0 26px; }
+.hero__actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.hero__underline { border-bottom: 5px solid var(--coral); }
+.dict { background: #fff; padding: 64px 0; }
+.dict__entry { border-top: 1px solid var(--line); padding: 24px 0; display: flex; gap: 24px; }
+.dict__entry:last-child { border-bottom: 1px solid var(--line); }
+.dict__num { font-weight: 800; width: 24px; flex-shrink: 0; }
+.dict__word { font-family: var(--font-display); font-size: 22px; font-weight: 800; }
+.dict__pos { font-weight: 400; font-size: 14px; color: #A39C8E; font-style: italic; margin-left: 8px; }
+.dict__def { color: var(--ink-soft); max-width: 560px; margin-top: 6px; }
+.svc { padding: 64px 0; }
+.svc__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-top: 28px; }
+.svc__card { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 22px; }
+.svc__card h3 { font-size: 17px; margin: 12px 0 8px; }
+.svc__card p { font-size: 14px; color: var(--ink-soft); margin: 0; }
+.process { background: #F1EDFF; clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 100%); padding: 88px 0 64px; }
+.process h2 { font-size: clamp(22px, 3.5vw, 28px); max-width: 560px; margin: 12px 0 22px; }
+.process__row { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.process__note { font-size: 14px; color: var(--ink-soft); }

@@ -4,7 +4,7 @@ import './i18n'
 import App from './App'
 
 test.each([
-  ['/', 'Take agency over your data.'],
+  ['/', "Lakehouses, pipelines and AI-ready foundations — built properly, secured from day one, and handed over so they're yours, not ours."],
   ['/services', 'Four things, done properly.'],
   ['/about', 'One architect, end to end.'],
   ['/contact', "Let's audit your data architecture — free."],
