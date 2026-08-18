@@ -1,10 +1,17 @@
 import { useTranslation } from 'react-i18next'
+import { LINKS } from '../links'
 
 export default function Contact() {
   const { t } = useTranslation()
   return (
-    <div className="container" style={{ padding: '56px 24px' }}>
-      <h1>{t('contact.title')}</h1>
-    </div>
+    <section className="container" style={{ padding: '64px 24px', maxWidth: 720 }}>
+      <h1 style={{ fontSize: 'clamp(30px, 5vw, 44px)' }}>{t('contact.title')}</h1>
+      <p style={{ marginTop: 20, color: 'var(--ink-soft)' }}>{t('contact.sub')}</p>
+      <p style={{ marginTop: 24, display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+        <a className="btn btn--primary" href={LINKS.booking}>{t('contact.book')}</a>
+        <a className="btn btn--secondary" href={LINKS.linkedin}>{t('contact.linkedin')}</a>
+        <a className="btn btn--secondary" href={LINKS.github}>{t('contact.github')}</a>
+      </p>
+    </section>
   )
 }
