@@ -61,7 +61,7 @@ export default function Home() {
       </section>
       <section className="process">
         <div className="container">
-          <p className="eyebrow" style={{ color: '#7A6BB8' }}>{t('process.label')}</p>
+          <p className="eyebrow" style={{ color: 'var(--violet-soft)' }}>{t('process.label')}</p>
           <h2>{t('process.title')}</h2>
           <div className="process__row">
             <a className="btn btn--primary" style={{ background: 'var(--ink)' }} href={LINKS.booking}>{t('process.cta')}</a>
