@@ -24,6 +24,10 @@ for (const route of routes) {
     `<meta property="og:description" content="${escapeAttr(meta.description)}" />`,
     `<meta property="og:type" content="website" />`,
     `<meta property="og:url" content="${canonicalUrl(route)}" />`,
+    `<meta property="og:image" content="${SITE_URL}/og-image.png" />`,
+    `<meta property="og:image:width" content="1200" />`,
+    `<meta property="og:image:height" content="630" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
     `<link rel="canonical" href="${canonicalUrl(route)}" />`,
   ].join('\n    ')
   const html = template

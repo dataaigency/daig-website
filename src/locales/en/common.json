@@ -15,6 +15,15 @@
       { "word": "data aigency", "pos": "noun, ours", "def": "Agency, with AI built in — adopted in phases, with security and governance from the start. Not a vibe-coded data strategy." }
     ]
   },
+  "problems": {
+    "label": "Sound familiar?",
+    "title": "The chaos before the insights.",
+    "items": [
+      { "stat": "5+", "text": "systems your data lives in — and no single source of truth between them." },
+      { "stat": "80%", "text": "of analyst time spent cleaning and reconciling data instead of analyzing it." },
+      { "stat": "??", "text": "the return on your AI and cloud spend so far. If nobody can say, that's the answer." }
+    ]
+  },
   "services": {
     "label": "What we build",
     "title": "Four things, done properly.",

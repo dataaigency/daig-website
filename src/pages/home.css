@@ -1,13 +1,20 @@
-.hero { padding: 72px 0 80px; }
+.hero { padding: 72px 0 80px; display: flex; align-items: center; justify-content: space-between; gap: 48px; }
 @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-.hero > * { animation: rise 0.5s ease-out both; }
-.hero > :nth-child(2) { animation-delay: 0.06s; }
-.hero > :nth-child(3) { animation-delay: 0.12s; }
-.hero > :nth-child(4) { animation-delay: 0.18s; }
+.hero__text > * { animation: rise 0.5s ease-out both; }
+.hero__text > :nth-child(2) { animation-delay: 0.06s; }
+.hero__text > :nth-child(3) { animation-delay: 0.12s; }
+.hero__text > :nth-child(4) { animation-delay: 0.18s; }
+.hero__logo { width: min(320px, 30vw); height: auto; flex-shrink: 0; animation: rise 0.6s ease-out 0.15s both; }
+@media (max-width: 860px) { .hero__logo { display: none; } }
 .hero h1 { font-size: clamp(38px, 7vw, 60px); max-width: 640px; }
 .hero__sub { font-size: 17px; color: var(--ink-soft); max-width: 500px; margin: 20px 0 26px; }
 .hero__actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
 .hero__underline { border-bottom: 5px solid var(--coral); }
+.prob { padding: 64px 0; }
+.prob__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 26px; }
+.prob__card { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 22px; }
+.prob__stat { font-family: var(--font-display); font-size: 40px; font-weight: 800; line-height: 1; }
+.prob__text { font-size: 14px; color: var(--ink-soft); margin: 10px 0 0; }
 .dict { background: #fff; padding: 64px 0; }
 .dict__entry { border-top: 1px solid var(--line); padding: 24px 0; display: flex; gap: 24px; }
 .dict__entry:last-child { border-bottom: 1px solid var(--line); }
