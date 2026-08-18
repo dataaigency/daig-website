@@ -9,5 +9,8 @@ const META: Record<string, { title: string; description: string }> = {
 }
 
 export function metaFor(path: string): { title: string; description: string } {
-  return META[path] ?? { title: 'data aigency', description: 'Data & AI architecture studio.' }
+  // GitHub Pages serves directory routes with a trailing slash (/services/),
+  // so normalize before lookup to keep titles correct on hydration.
+  const normalized = path.replace(/\/+$/, '') || '/'
+  return META[normalized] ?? { title: 'data aigency', description: 'Data & AI architecture studio.' }
 }

@@ -10,20 +10,26 @@ const { render, allRoutes, metaFor, SITE_URL } = await import(
 const template = readFileSync(join(dist, 'index.html'), 'utf-8')
 const routes = allRoutes()
 
+// GitHub Pages 301s /services -> /services/, so canonical/og:url/sitemap URLs
+// carry the trailing slash for non-root routes; root stays bare SITE_URL.
+const canonicalUrl = (route) => (route === '/' ? SITE_URL : `${SITE_URL}${route}/`)
+const escapeAttr = (s) => s.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;')
+const escapeText = (s) => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;')
+
 for (const route of routes) {
   const meta = metaFor(route)
   const head = [
-    `<meta name="description" content="${meta.description}" />`,
-    `<meta property="og:title" content="${meta.title}" />`,
-    `<meta property="og:description" content="${meta.description}" />`,
+    `<meta name="description" content="${escapeAttr(meta.description)}" />`,
+    `<meta property="og:title" content="${escapeAttr(meta.title)}" />`,
+    `<meta property="og:description" content="${escapeAttr(meta.description)}" />`,
     `<meta property="og:type" content="website" />`,
-    `<meta property="og:url" content="${SITE_URL}${route === '/' ? '' : route}" />`,
-    `<link rel="canonical" href="${SITE_URL}${route === '/' ? '' : route}" />`,
+    `<meta property="og:url" content="${canonicalUrl(route)}" />`,
+    `<link rel="canonical" href="${canonicalUrl(route)}" />`,
   ].join('\n    ')
   const html = template
-    .replace('<!--app-head-->', head)
-    .replace(/<title>.*?<\/title>/, `<title>${meta.title}</title>`)
-    .replace('<!--app-html-->', render(route))
+    .replace('<!--app-head-->', () => head)
+    .replace(/<title>.*?<\/title>/, () => `<title>${escapeText(meta.title)}</title>`)
+    .replace('<!--app-html-->', () => render(route))
   const outDir = route === '/' ? dist : join(dist, route.slice(1))
   mkdirSync(outDir, { recursive: true })
   writeFileSync(join(outDir, 'index.html'), html)
@@ -38,7 +44,7 @@ writeFileSync(join(dist, '404.html'), template)
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes.map((r) => `  <url><loc>${SITE_URL}${r === '/' ? '' : r}</loc></url>`).join('\n')}
+${routes.map((r) => `  <url><loc>${canonicalUrl(r)}</loc></url>`).join('\n')}
 </urlset>
 `
 writeFileSync(join(dist, 'sitemap.xml'), sitemap)
