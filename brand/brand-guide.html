@@ -3,148 +3,171 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>data aigency — brand guide</title>
+<title>data aigency brand guide</title>
 <style>
   :root {
-    --navy: #061034;        /* primary ground (dark sections) */
-    --navy-deep: #000836;   /* logo navy — headings on paper, footer */
-    --navy-line: #16244E;   /* hairlines on navy */
-    --paper: #F6F5F1;       /* primary ground (light sections) */
+    --navy: #061034;        /* dark ground, used for moments, not for reading */
+    --navy-deep: #000836;   /* logo navy, headings on paper */
+    --navy-line: #1A2A5C;   /* hairlines on navy */
+    --paper: #F6F5F1;       /* main ground, most reading happens here */
     --paper-line: #E2E0D8;  /* hairlines on paper */
-    --flash: #03F856;       /* THE accent — signal, never decoration */
-    --ice: #C8D2EA;         /* secondary text on navy */
-    --ice-dim: #7C8BB0;     /* muted text on navy */
-    --graphite: #3E4552;    /* secondary text on paper */
+    --flash: #03F856;       /* the one signal color */
+    --frost: #E8ECF6;       /* body text on navy, easy to read */
+    --mist: #A9B6D9;        /* muted text on navy */
+    --graphite: #3E4552;    /* body text on paper */
     --white: #FFFFFF;
     --font-display: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
     --font-body: 'Hanken Grotesk', 'Segoe UI', system-ui, sans-serif;
     --font-mono: 'IBM Plex Mono', Consolas, monospace;
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--paper); color: var(--navy-deep); font-family: var(--font-body); line-height: 1.6; }
+  body { margin: 0; background: var(--paper); color: var(--graphite); font-family: var(--font-body); line-height: 1.65; font-size: 15px; }
   .wrap { max-width: 1000px; margin: 0 auto; padding: 0 32px; }
-  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; line-height: 1.1; margin: 0; }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; line-height: 1.1; margin: 0; color: var(--navy-deep); }
   .eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--graphite); display: flex; align-items: center; gap: 8px; }
   .eyebrow::before { content: ''; width: 8px; height: 8px; background: var(--flash); display: inline-block; }
-  section { padding: 64px 0; }
-  .seam { height: 12px; background: repeating-linear-gradient(-45deg, var(--flash) 0 9px, var(--navy) 9px 22px); }
-  .seam--quiet { background: repeating-linear-gradient(-45deg, var(--navy-line) 0 9px, var(--navy) 9px 22px); }
-  .dark { background: var(--navy); color: var(--paper); }
-  .dark .eyebrow { color: var(--ice-dim); }
+  section { padding: 60px 0; }
+  .dark { background: var(--navy); color: var(--frost); }
+  .dark h1, .dark h2, .dark h3 { color: var(--paper); }
+  .dark .eyebrow { color: var(--mist); }
   .grid { display: grid; gap: 16px; }
-  .card { background: var(--white); border: 1px solid var(--paper-line); border-radius: 8px; padding: 20px; }
-  .dark .card { background: transparent; border-color: var(--navy-line); }
-  .swatch { border-radius: 6px; height: 72px; margin-bottom: 8px; }
+  .card { background: var(--white); border: 1px solid var(--paper-line); border-radius: 6px; padding: 20px; }
+  .swatch { border-radius: 4px; height: 72px; margin-bottom: 8px; }
   .mono { font-family: var(--font-mono); font-size: 12px; }
-  .label { font-size: 12px; color: var(--graphite); }
-  .dark .label { color: var(--ice-dim); }
+  .label { font-size: 12.5px; color: var(--graphite); }
   table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
   td, th { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--paper-line); vertical-align: top; }
   th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--graphite); }
   code { font-family: var(--font-mono); font-size: 12px; background: #ECEAE2; padding: 2px 6px; border-radius: 3px; }
-  .dark code { background: #0C1A45; color: var(--ice); }
   .btn { display: inline-block; font-family: var(--font-display); font-weight: 700; font-size: 14px; padding: 13px 24px; border-radius: 3px; text-decoration: none; }
   .btn--flash { background: var(--flash); color: var(--navy); }
   .btn--navy { background: var(--navy-deep); color: var(--paper); }
-  .btn--ghost { border: 1px solid var(--flash); color: var(--flash); background: transparent; }
-  .icon-cell { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 18px 8px; background: var(--white); border: 1px solid var(--paper-line); border-radius: 8px; }
+  .icon-cell { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 18px 8px; background: var(--white); border: 1px solid var(--paper-line); border-radius: 6px; }
   .icon-cell span { font-family: var(--font-mono); font-size: 10.5px; color: var(--graphite); letter-spacing: 0.5px; }
   .do { border-left: 3px solid var(--flash); padding-left: 14px; }
   .dont { border-left: 3px solid #D64545; padding-left: 14px; }
+
+  /* the wordmark: green dot on the i of aigency */
+  .wordmark { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; white-space: nowrap; }
+  .wordmark .idot { position: relative; display: inline-block; }
+  .wordmark .idot i { font-style: normal; }
+  .wordmark .idot::after { content: ''; position: absolute; top: 0.06em; left: 50%; transform: translateX(-50%); width: 0.16em; height: 0.16em; border-radius: 50%; background: var(--flash); }
+
+  /* separator family */
+  .sep-stripes { height: 22px; background: repeating-linear-gradient(-45deg, var(--flash) 0 14px, var(--navy) 14px 34px, var(--flash) 34px 42px, var(--navy) 42px 74px); }
+  .sep-teeth { height: 26px; background-color: var(--paper); background-image: linear-gradient(-45deg, var(--navy) 13px, transparent 0), linear-gradient(45deg, var(--navy) 13px, transparent 0); background-size: 26px 26px; background-repeat: repeat-x; }
+  .sep-cut { height: 56px; background: var(--navy); clip-path: polygon(0 100%, 0 62%, 100% 0, 100% 100%); }
+  .sep-point { height: 40px; background: var(--navy); clip-path: polygon(0 0, 100% 0, 100% 30%, 58% 30%, 50% 100%, 42% 30%, 0 30%); }
 </style>
 </head>
 <body>
 
 <header class="dark" style="position: relative; overflow: hidden;">
-  <div style="position: absolute; right: -60px; top: -60px; width: 340px; height: 480px; background: repeating-linear-gradient(-45deg, rgba(3,248,86,0.13) 0 3px, transparent 3px 26px); transform: skewX(-8deg);"></div>
+  <div style="position: absolute; right: -70px; top: -60px; width: 380px; height: 500px; background: repeating-linear-gradient(-45deg, rgba(3,248,86,0.14) 0 5px, transparent 5px 34px, rgba(3,248,86,0.14) 34px 41px, transparent 41px 70px); transform: skewX(-8deg);"></div>
   <div class="wrap" style="position: relative; padding-top: 72px; padding-bottom: 72px;">
-    <p class="eyebrow">Brand guide · v1 · direction E2 "Navy × stripes"</p>
-    <h1 style="font-size: clamp(40px, 6vw, 64px); color: var(--paper); margin: 18px 0 14px;">data aigency<span style="color: var(--flash);">.</span></h1>
-    <p style="max-width: 560px; color: var(--ice); font-size: 16px;">Clean, professional, with a cutting edge. Navy discipline, one green signal, stripes at −45° announcing every transition. This document is written in the system it describes.</p>
+    <p class="eyebrow">Brand guide · v2 · Navy × stripes</p>
+    <h1 class="wordmark" style="font-size: clamp(40px, 6vw, 64px); margin: 18px 0 14px;">data a<span class="idot"><i>ı</i></span>gency</h1>
+    <p style="max-width: 560px; color: var(--frost); font-size: 16px; line-height: 1.7;">Clean and professional, with a sharp edge. Most of the site is paper and graphite, easy on the eyes. Navy appears for big moments. Green appears where something happens.</p>
   </div>
 </header>
-<div class="seam"></div>
+<div class="sep-stripes"></div>
 
 <section>
   <div class="wrap">
     <p class="eyebrow">01 · Essence</p>
     <h2 style="font-size: 30px; margin: 14px 0 20px;">Strong player. Safe hands. Sharp edge.</h2>
     <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
-      <div class="card"><h3 style="font-size: 16px; margin-bottom: 8px;">Positioning</h3><p style="font-size: 13.5px; color: var(--graphite); margin: 0;">Data architecture studio, Belgium. Lakehouses, pipelines, secure foundations. AI is a capability we govern — never the identity. We de-emphasize AI hype; we emphasize efficient, secure implementation.</p></div>
-      <div class="card"><h3 style="font-size: 16px; margin-bottom: 8px;">Voice</h3><p style="font-size: 13.5px; color: var(--graphite); margin: 0;">Calm, precise, quietly confident. Short sentences. Concrete outcomes. The cheek survives in small doses ("no black boxes"), never in the load-bearing claims. Name lowercase: <strong>data aigency</strong>.</p></div>
-      <div class="card"><h3 style="font-size: 16px; margin-bottom: 8px;">The name, three ways</h3><p style="font-size: 13.5px; color: var(--graphite); margin: 0;">1&nbsp;· agency over your data. 2&nbsp;· a consulting agency. 3&nbsp;· ai-gency — AI adopted in phases, governed from day one.</p></div>
+      <div class="card"><h3 style="font-size: 16px; margin-bottom: 8px;">Positioning</h3><p style="font-size: 13.5px; margin: 0;">A remote data architecture studio. Lakehouses, pipelines and secure foundations. AI is a capability we implement well and govern from day one. It is not the identity, and we never sell hype.</p></div>
+      <div class="card"><h3 style="font-size: 16px; margin-bottom: 8px;">Voice</h3><p style="font-size: 13.5px; margin: 0;">Calm, precise, human. Short sentences in plain language. No jargon walls, no dashes, no clever constructions that slow the reader down. Say the concrete thing. The name is written lowercase: <strong>data aigency</strong>.</p></div>
+      <div class="card"><h3 style="font-size: 16px; margin-bottom: 8px;">The name, three ways</h3><p style="font-size: 13.5px; margin: 0;">1. Agency over your data. 2. A consulting agency. 3. Ai-gency, meaning AI adopted in phases and governed properly.</p></div>
     </div>
   </div>
 </section>
 
-<div class="seam"></div>
-<section class="dark">
-  <div class="wrap">
-    <p class="eyebrow">02 · Color</p>
-    <h2 style="font-size: 30px; margin: 14px 0 6px; color: var(--paper);">Navy is the ground. Green is the signal.</h2>
-    <p style="color: var(--ice-dim); max-width: 620px; font-size: 14px;">Roughly 90% of any screen is navy or paper. Flash green appears where something happens: a CTA, a seam, one accent per viewport. If green is everywhere, it means nothing.</p>
-    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); margin-top: 26px;">
-      <div><div class="swatch" style="background: var(--navy); border: 1px solid var(--navy-line);"></div><div class="mono" style="color: var(--ice);">#061034</div><div class="label">Navy · ground</div></div>
-      <div><div class="swatch" style="background: var(--navy-deep); border: 1px solid var(--navy-line);"></div><div class="mono" style="color: var(--ice);">#000836</div><div class="label">Deep · logo, footer</div></div>
-      <div><div class="swatch" style="background: var(--paper);"></div><div class="mono" style="color: var(--ice);">#F6F5F1</div><div class="label">Paper · light ground</div></div>
-      <div><div class="swatch" style="background: var(--flash);"></div><div class="mono" style="color: var(--ice);">#03F856</div><div class="label">Flash · the signal</div></div>
-      <div><div class="swatch" style="background: var(--ice);"></div><div class="mono" style="color: var(--ice);">#C8D2EA</div><div class="label">Ice · text on navy</div></div>
-      <div><div class="swatch" style="background: var(--graphite);"></div><div class="mono" style="color: var(--ice);">#3E4552</div><div class="label">Graphite · text on paper</div></div>
-    </div>
-    <div style="margin-top: 26px; border: 1px solid var(--navy-line); border-radius: 8px; padding: 18px 22px; font-size: 13px; color: var(--ice);">
-      <strong style="color: var(--paper);">Contrast law:</strong> flash green is UI-safe on navy (≈13:1) — buttons, seams, marks. On paper it is decoration-only (fails for text): never set copy in green on light grounds. Body text: ice on navy, graphite on paper. Headings: paper on navy, deep navy on paper.
-    </div>
-  </div>
-</section>
-<div class="seam"></div>
+<div class="sep-teeth"></div>
 
 <section>
+  <div class="wrap">
+    <p class="eyebrow">02 · Color</p>
+    <h2 style="font-size: 30px; margin: 14px 0 6px;">Read on paper. Impress on navy.</h2>
+    <p style="max-width: 640px; font-size: 14px;">Reading happens in graphite on paper. Navy is for the hero, the footer and one statement section per page, and text on navy uses frost, which is close to white. Green is the signal: one CTA, one seam, one accent per screen.</p>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); margin-top: 26px;">
+      <div><div class="swatch" style="background: var(--paper); border: 1px solid var(--paper-line);"></div><div class="mono">#F6F5F1</div><div class="label">Paper · main ground</div></div>
+      <div><div class="swatch" style="background: var(--graphite);"></div><div class="mono">#3E4552</div><div class="label">Graphite · body text</div></div>
+      <div><div class="swatch" style="background: var(--navy-deep);"></div><div class="mono">#000836</div><div class="label">Deep navy · headings, logo</div></div>
+      <div><div class="swatch" style="background: var(--navy);"></div><div class="mono">#061034</div><div class="label">Navy · dark moments</div></div>
+      <div><div class="swatch" style="background: var(--frost); border: 1px solid var(--paper-line);"></div><div class="mono">#E8ECF6</div><div class="label">Frost · body on navy</div></div>
+      <div><div class="swatch" style="background: var(--flash);"></div><div class="mono">#03F856</div><div class="label">Flash · the signal</div></div>
+    </div>
+    <div style="margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+      <div class="card" style="background: var(--navy); border-color: var(--navy);">
+        <p style="color: var(--frost); font-size: 14.5px; margin: 0;">This is frost on navy. It should feel effortless to read, even in a long paragraph. Muted lines use <span style="color: var(--mist);">mist, like this,</span> and only for short notes.</p>
+      </div>
+      <div class="card">
+        <p style="font-size: 14.5px; margin: 0;">This is graphite on paper, the default reading experience of the whole site. Green never carries text on paper. It fails contrast there, so it stays a shape, a dot or a seam.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="height: 44px; background: var(--navy); clip-path: polygon(0 0, 100% 44%, 100% 100%, 0 100%);"></div>
+<section class="dark" style="padding-top: 48px;">
   <div class="wrap">
     <p class="eyebrow">03 · Logo</p>
     <h2 style="font-size: 30px; margin: 14px 0 20px;">One mark, three duties.</h2>
     <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
-      <div class="card" style="text-align: center;"><img src="../assets/logo-black-vector.png" alt="black logo" style="width: 170px; max-width: 100%;"><p class="label" style="margin: 10px 0 0;"><strong>Black (all-navy)</strong> — the workhorse. Paper sections, documents, print, partners.</p></div>
-      <div class="card" style="text-align: center;"><img src="../assets/logo-green-vector.png" alt="green logo" style="width: 170px; max-width: 100%;"><p class="label" style="margin: 10px 0 0;"><strong>Green bars</strong> — covers, og-image, moments that may carry more energy.</p></div>
-      <div class="card" style="text-align: center; background: var(--navy); border-color: var(--navy);"><div style="width: 170px; height: 137px; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--navy-line); color: var(--ice-dim); font-size: 12px;">white variant<br>(to be generated)</div><p class="label" style="margin: 10px 0 0; color: var(--ice-dim);"><strong style="color: var(--ice);">White</strong> — required for navy grounds. Until it exists, navy sections use the wordmark only.</p></div>
+      <div class="card" style="background: var(--paper); border-color: var(--paper); text-align: center;"><img src="../assets/logo-black-vector.png" alt="black logo" style="width: 170px; max-width: 100%;"><p class="label" style="margin: 10px 0 0;"><strong>Black.</strong> The workhorse. Paper sections, documents, print.</p></div>
+      <div class="card" style="background: var(--paper); border-color: var(--paper); text-align: center;"><img src="../assets/logo-green-vector.png" alt="green logo" style="width: 170px; max-width: 100%;"><p class="label" style="margin: 10px 0 0;"><strong>Green bars.</strong> Covers, social image, higher energy moments.</p></div>
+      <div class="card" style="border-color: var(--navy-line); text-align: center;"><div style="width: 170px; height: 137px; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 1px dashed var(--navy-line); color: var(--mist); font-size: 12px;">white variant<br>(to be generated)</div><p class="label" style="margin: 10px 0 0; color: var(--mist);"><strong style="color: var(--frost);">White.</strong> Needed for navy grounds. Until then, navy sections carry the wordmark only.</p></div>
     </div>
-    <table style="margin-top: 22px;">
-      <tr><th>Rule</th><th>Value</th></tr>
-      <tr><td>Rose-only mark (nav, favicon)</td><td><img src="../public/logo-mark.png" alt="" style="width: 22px; vertical-align: middle;"> derived crop — use at 20–32px; full logo never below 90px width</td></tr>
-      <tr><td>Clear space</td><td>height of the tallest bar on all sides</td></tr>
-      <tr><td>Never</td><td>recolor, rotate, stretch, drop-shadow, place on photos or on stripe fields</td></tr>
+    <div style="margin-top: 22px; border: 1px solid var(--navy-line); border-radius: 6px; padding: 18px 22px;">
+      <p class="mono" style="letter-spacing: 2px; color: var(--mist); margin: 0 0 10px;">WORDMARK</p>
+      <p class="wordmark" style="font-size: 34px; color: var(--paper); margin: 0 0 10px;">data a<span class="idot"><i>ı</i></span>gency</p>
+      <p style="font-size: 13px; color: var(--frost); margin: 0;">The dot of the i in aigency is the flash green dot. That is the whole trick. No green period after the name, no other green letters. In running text the name stays plain lowercase.</p>
+    </div>
+    <table style="margin-top: 20px; color: var(--frost);">
+      <tr><th style="color: var(--mist); border-color: var(--navy-line);">Rule</th><th style="color: var(--mist); border-color: var(--navy-line);">Value</th></tr>
+      <tr><td style="border-color: var(--navy-line);">Rose mark (nav, favicon)</td><td style="border-color: var(--navy-line);">use at 20 to 32px. The full logo never goes below 90px wide.</td></tr>
+      <tr><td style="border-color: var(--navy-line);">Clear space</td><td style="border-color: var(--navy-line);">the height of the tallest bar, on all sides</td></tr>
+      <tr><td style="border-color: var(--navy-line);">Never</td><td style="border-color: var(--navy-line);">recolor, rotate, stretch, add shadows, place on photos or on stripe fields</td></tr>
     </table>
   </div>
 </section>
+<div class="sep-point" style="transform: scaleY(-1);"></div>
 
-<div class="seam"></div>
-<section class="dark">
+<section>
   <div class="wrap">
-    <p class="eyebrow">04 · The stripe system</p>
-    <h2 style="font-size: 30px; margin: 14px 0 6px; color: var(--paper);">−45°, three permitted forms. Nothing else.</h2>
-    <div class="grid" style="grid-template-columns: 1fr; margin-top: 22px; gap: 22px;">
+    <p class="eyebrow">04 · Separators and stripes</p>
+    <h2 style="font-size: 30px; margin: 14px 0 6px;">Every transition is an event.</h2>
+    <p style="max-width: 640px; font-size: 14px;">Pages do not fade into each other, they cut. Four separator forms, all at sharp angles. Each page picks its own mix, so transitions stay unexpected. The rule that never changes: one loud element per screen, and nothing sits behind text.</p>
+
+    <div style="margin-top: 26px; display: flex; flex-direction: column; gap: 26px;">
       <div>
-        <div style="height: 12px; background: repeating-linear-gradient(-45deg, var(--flash) 0 9px, var(--navy) 9px 22px);"></div>
-        <p class="label" style="margin: 8px 0 0;"><strong style="color: var(--paper);">1 · Loud seam (12px)</strong> — announces every navy↔paper transition and the page bottom. <code>repeating-linear-gradient(-45deg, #03F856 0 9px, #061034 9px 22px)</code></p>
+        <div class="sep-stripes"></div>
+        <p class="label" style="margin: 8px 0 0;"><strong>1 · Stripe seam.</strong> Bigger now, 22px, with an irregular rhythm so it feels alive instead of printed. <code>repeating-linear-gradient(-45deg, #03F856 0 14px, #061034 14px 34px, #03F856 34px 42px, #061034 42px 74px)</code></p>
       </div>
       <div>
-        <div style="height: 12px; background: repeating-linear-gradient(-45deg, var(--navy-line) 0 9px, var(--navy) 9px 22px);"></div>
-        <p class="label" style="margin: 8px 0 0;"><strong style="color: var(--paper);">2 · Quiet seam (12px)</strong> — transitions between two dark sections. <code>repeating-linear-gradient(-45deg, #16244E 0 9px, #061034 9px 22px)</code></p>
+        <div class="sep-teeth"></div>
+        <p class="label" style="margin: 8px 0 0;"><strong>2 · Teeth.</strong> Sharp navy points, like the star. Good between paper sections. <code>linear-gradient(-45deg, #061034 13px, transparent 0), linear-gradient(45deg, #061034 13px, transparent 0); background-size: 26px 26px</code></p>
       </div>
       <div>
-        <div style="height: 120px; position: relative; overflow: hidden; border: 1px solid var(--navy-line); border-radius: 6px;">
-          <div style="position: absolute; right: -40px; top: -30px; width: 300px; height: 200px; background: repeating-linear-gradient(-45deg, rgba(3,248,86,0.13) 0 3px, transparent 3px 26px); transform: skewX(-8deg);"></div>
-          <div style="position: absolute; left: 18px; bottom: 14px; font-family: var(--font-display); font-weight: 700; color: var(--paper);">Headline can sit beside it — never on it</div>
-        </div>
-        <p class="label" style="margin: 8px 0 0;"><strong style="color: var(--paper);">3 · Hero field</strong> — ONE per page, hairline stripes at ≤14% opacity, off to a side. <code>rgba(3,248,86,0.13) 0 3px, transparent 3px 26px</code> + <code>skewX(-8deg)</code></p>
+        <div class="sep-cut"></div>
+        <p class="label" style="margin: 8px 0 0;"><strong>3 · Diagonal cut.</strong> A section edge sliced at an angle, entering or leaving navy. <code>clip-path: polygon(0 100%, 0 62%, 100% 0, 100% 100%)</code></p>
+      </div>
+      <div>
+        <div class="sep-point"></div>
+        <p class="label" style="margin: 8px 0 0;"><strong>4 · Star point.</strong> One sharp spike, straight from the compass. Use it once per page at most, for the moment that matters. <code>clip-path: polygon(0 0, 100% 0, 100% 30%, 58% 30%, 50% 100%, 42% 30%, 0 30%)</code></p>
       </div>
     </div>
-    <div class="grid" style="grid-template-columns: 1fr 1fr; margin-top: 24px;">
-      <div class="do" style="font-size: 13px; color: var(--ice);">DO: seams full-bleed; hero field behind empty space; stripe angle always −45°.</div>
-      <div class="dont" style="font-size: 13px; color: var(--ice);">DON'T: stripes behind text, inside cards, as borders, at other angles, in other colors, or more than one loud element per viewport.</div>
+
+    <div class="grid" style="grid-template-columns: 1fr 1fr; margin-top: 26px;">
+      <div class="do" style="font-size: 13px;">DO: full bleed. Vary the separator per page. Keep the angle family at 45 degrees. Hero stripe fields stay faint and off to one side.</div>
+      <div class="dont" style="font-size: 13px;">DON'T: stripes behind text, inside cards, as borders, in other colors. Never two loud separators in one viewport.</div>
     </div>
   </div>
 </section>
-<div class="seam"></div>
+
+<div class="sep-teeth"></div>
 
 <section>
   <div class="wrap">
@@ -152,37 +175,37 @@
     <h2 style="font-size: 30px; margin: 14px 0 20px;">Tight display, calm body, mono details.</h2>
     <table>
       <tr><th>Role</th><th>Face</th><th>Rules</th></tr>
-      <tr><td style="font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -0.02em;">Display</td><td>Space Grotesk (700)</td><td>tracking −2%; sizes 32/44/60; navy-deep on paper, paper on navy</td></tr>
-      <tr><td style="font-size: 15px;">Body</td><td>Hanken Grotesk (400/600)</td><td>15–17px, line-height 1.6–1.7, graphite / ice</td></tr>
-      <tr><td class="mono" style="letter-spacing: 2px;">MONO LABEL</td><td>IBM Plex Mono (500)</td><td>10–12px, tracking +2–4px, UPPERCASE — eyebrows, indices, figures, coordinates</td></tr>
+      <tr><td style="font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -0.02em; color: var(--navy-deep);">Display</td><td>Space Grotesk (700)</td><td>tracking minus 2%. Sizes 32, 44, 60. Deep navy on paper, paper on navy.</td></tr>
+      <tr><td style="font-size: 15px;">Body</td><td>Hanken Grotesk (400/600)</td><td>15 to 17px, line height 1.65. Graphite on paper, frost on navy.</td></tr>
+      <tr><td class="mono" style="letter-spacing: 2px;">MONO LABEL</td><td>IBM Plex Mono (500)</td><td>10 to 12px, wide tracking, uppercase. Eyebrows, indices, figures.</td></tr>
     </table>
-    <p style="font-size: 13px; color: var(--graphite);">Eyebrow pattern: green square tick + mono uppercase (see every section header of this document). All faces self-hosted via @fontsource; this file shows fallbacks.</p>
+    <p style="font-size: 13px;">Writing style is part of the brand: short human sentences, plain words, no dashes, no filler. Every section opens with the green tick eyebrow you see in this document.</p>
   </div>
 </section>
 
-<div class="seam"></div>
-<section class="dark">
+<div style="height: 44px; background: var(--navy); clip-path: polygon(0 0, 100% 56%, 100% 100%, 0 100%);"></div>
+<section class="dark" style="padding-top: 48px;">
   <div class="wrap">
     <p class="eyebrow">06 · Iconography</p>
-    <h2 style="font-size: 30px; margin: 14px 0 6px; color: var(--paper);">2px stroke, 24-grid, one color at a time.</h2>
-    <p style="color: var(--ice-dim); max-width: 620px; font-size: 14px;">Ice or paper stroke on navy; navy stroke on paper. Flash green only for the single "active" icon in a set. No fills, no duotone, no rounded blob backgrounds.</p>
+    <h2 style="font-size: 30px; margin: 14px 0 6px;">Sharp corners, 2px stroke, one color.</h2>
+    <p style="color: var(--frost); max-width: 620px; font-size: 14px;">Square caps and mitered joins, nothing rounded. Frost or paper strokes on navy, navy strokes on paper. Flash green marks only the single active icon in a set.</p>
     <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); margin-top: 24px;">
-      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"/></svg><span>compass</span></div>
-      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L21 7.5 L12 12 L3 7.5 Z"/><path d="M3 12 L12 16.5 L21 12"/><path d="M3 16.5 L12 21 L21 16.5"/></svg><span>lakehouse</span></div>
-      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M7 7.2 L10.5 16"/><path d="M17 7.2 L13.5 16"/><path d="M7.2 6 L16.8 6"/></svg><span>pipeline</span></div>
-      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20 L8 14 L12 16.5 L20 7"/><path d="M15 7 L20 7 L20 12"/></svg><span>growth</span></div>
-      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 L20 6 V11 C20 16 16.5 19.5 12 21 C7.5 19.5 4 16 4 11 V6 Z"/><path d="M9 11.5 L11 13.5 L15 9"/></svg><span>governed</span></div>
-      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10 V7 a4 4 0 0 1 8 0 V10"/></svg><span>secure</span></div>
-      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12 L20 3"/><path d="M16 7 L19 10"/><path d="M18 5 L21 8"/></svg><span>handover</span></div>
-      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3 H15 L19 7 V21 H6 Z"/><path d="M15 3 V7 H19"/><path d="M9 12 H16"/><path d="M9 16 H16"/></svg><span>documented</span></div>
-      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="2.6"/><path d="M5 6 V18 C5 19.4 8.1 20.6 12 20.6 C15.9 20.6 19 19.4 19 18 V6"/><path d="M5 12 C5 13.4 8.1 14.6 12 14.6 C15.9 14.6 19 13.4 19 12"/></svg><span>database</span></div>
-      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14 a8 8 0 0 1 16 0"/><path d="M12 14 L16 9"/><path d="M4 18 H20"/></svg><span>audit</span></div>
-      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="3.5" height="8" rx="1"/><rect x="10.2" y="8" width="3.5" height="12" rx="1"/><rect x="16.4" y="4" width="3.5" height="16" rx="1"/></svg><span>bars</span></div>
-      <div class="icon-cell" style="background: #061034; border-color: #061034;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#03F856" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12 H19"/><path d="M13 6 L19 12 L13 18"/></svg><span style="color: #7C8BB0;">active / cta</span></div>
+      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"/></svg><span>compass</span></div>
+      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M12 3 L21 7.5 L12 12 L3 7.5 Z"/><path d="M3 12 L12 16.5 L21 12"/><path d="M3 16.5 L12 21 L21 16.5"/></svg><span>lakehouse</span></div>
+      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><rect x="3" y="4" width="4" height="4"/><rect x="17" y="4" width="4" height="4"/><rect x="10" y="16" width="4" height="4"/><path d="M7 6 H17"/><path d="M6.5 8 L11 16"/><path d="M17.5 8 L13 16"/></svg><span>pipeline</span></div>
+      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M3 20 L8 14 L12 16.5 L20 7"/><path d="M15 7 L20 7 L20 12"/></svg><span>growth</span></div>
+      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M12 3 L20 6 V11 C20 16 16.5 19.5 12 21 C7.5 19.5 4 16 4 11 V6 Z"/><path d="M8.5 11.5 L11 14 L15.5 9"/></svg><span>governed</span></div>
+      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><rect x="5" y="10" width="14" height="10"/><path d="M8 10 V7 a4 4 0 0 1 8 0 V10"/></svg><span>secure</span></div>
+      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><rect x="4" y="11" width="7" height="7"/><path d="M11 14.5 L21 4.5"/><path d="M16 6 L19.5 9.5"/><path d="M18.5 3.5 L21.5 6.5"/></svg><span>handover</span></div>
+      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M6 3 H15 L19 7 V21 H6 Z"/><path d="M15 3 V7 H19"/><path d="M9 12 H16"/><path d="M9 16 H16"/></svg><span>documented</span></div>
+      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 4 H20 V8 H4 Z"/><path d="M4 10 H20 V14 H4 Z"/><path d="M4 16 H20 V20 H4 Z"/><path d="M7 6 H7.01"/><path d="M7 12 H7.01"/><path d="M7 18 H7.01"/></svg><span>database</span></div>
+      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M4 14 a8 8 0 0 1 16 0"/><path d="M12 14 L17 8"/><path d="M4 18 H20"/></svg><span>audit</span></div>
+      <div class="icon-cell"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#061034" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><rect x="4" y="12" width="3.5" height="8"/><rect x="10.2" y="8" width="3.5" height="12"/><rect x="16.4" y="4" width="3.5" height="16"/></svg><span>bars</span></div>
+      <div class="icon-cell" style="background: #061034; border-color: #061034;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#03F856" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M5 12 H19"/><path d="M13 6 L19 12 L13 18"/></svg><span style="color: var(--mist);">active / cta</span></div>
     </div>
   </div>
 </section>
-<div class="seam"></div>
+<div class="sep-stripes"></div>
 
 <section>
   <div class="wrap">
@@ -190,46 +213,45 @@
     <h2 style="font-size: 30px; margin: 14px 0 20px;">The parts the site is built from.</h2>
     <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
       <div class="card">
-        <p class="mono" style="letter-spacing: 2px; color: var(--graphite); margin-top: 0;">BUTTONS</p>
-        <p style="display: flex; gap: 10px; flex-wrap: wrap; margin: 0;">
+        <p class="mono" style="letter-spacing: 2px; margin-top: 0;">BUTTONS</p>
+        <p style="display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 10px;">
           <span class="btn btn--navy">On paper</span>
           <span class="btn btn--flash">On navy</span>
-          <span class="btn btn--ghost" style="border-color: var(--navy-deep); color: var(--navy-deep);">Ghost</span>
         </p>
-        <p class="label" style="margin-bottom: 0;">3px radius — crisp, not friendly-round. Flash button lives on navy only.</p>
+        <p class="label" style="margin-bottom: 0;">3px radius, crisp not friendly. The flash button lives on navy only.</p>
       </div>
       <div class="card">
-        <p class="mono" style="letter-spacing: 2px; color: var(--graphite); margin-top: 0;">EYEBROW</p>
+        <p class="mono" style="letter-spacing: 2px; margin-top: 0;">EYEBROW</p>
         <p class="eyebrow" style="margin: 0 0 10px;">Section label</p>
-        <p class="label" style="margin-bottom: 0;">Green tick square + mono uppercase + 3px tracking. Every section starts with one.</p>
+        <p class="label" style="margin-bottom: 0;">Green square tick, mono uppercase, wide tracking. Every section starts with one.</p>
       </div>
       <div class="card">
-        <p class="mono" style="letter-spacing: 2px; color: var(--graphite); margin-top: 0;">CARD</p>
-        <p class="label" style="margin-bottom: 0;">White on paper / hairline-ruled on navy. 1px border, 8px radius, no shadows — structure over decoration. Hover: border brightens to flash, nothing moves.</p>
+        <p class="mono" style="letter-spacing: 2px; margin-top: 0;">CARD</p>
+        <p class="label" style="margin-bottom: 0;">White on paper, hairline border, 6px radius, no shadows. On hover the border turns flash. Nothing moves.</p>
       </div>
       <div class="card">
-        <p class="mono" style="letter-spacing: 2px; color: var(--graphite); margin-top: 0;">INDEX NUMBERS</p>
-        <p style="font-family: var(--font-mono); font-size: 13px; color: var(--navy-deep); margin: 0 0 8px;">01 — LAKEHOUSE&nbsp;&nbsp;·&nbsp;&nbsp;02 — PIPELINES</p>
-        <p class="label" style="margin-bottom: 0;">Services, process steps and posts are indexed in mono. Quiet cutting edge.</p>
+        <p class="mono" style="letter-spacing: 2px; margin-top: 0;">INDEX NUMBERS</p>
+        <p style="font-family: var(--font-mono); font-size: 13px; color: var(--navy-deep); margin: 0 0 8px;">01 LAKEHOUSE &nbsp;·&nbsp; 02 PIPELINES</p>
+        <p class="label" style="margin-bottom: 0;">Services, steps and posts are numbered in mono. Quiet cutting edge.</p>
       </div>
       <div class="card">
-        <p class="mono" style="letter-spacing: 2px; color: var(--graphite); margin-top: 0;">STAT</p>
+        <p class="mono" style="letter-spacing: 2px; margin-top: 0;">STAT</p>
         <p style="font-family: var(--font-display); font-size: 38px; font-weight: 700; margin: 0; color: var(--navy-deep);">5+ <span style="font-size: 13px; font-family: var(--font-mono); color: var(--graphite); font-weight: 400;">SYSTEMS</span></p>
-        <p class="label" style="margin-bottom: 0;">Display number + mono unit. Navy on paper; on navy sections the number may be flash.</p>
+        <p class="label" style="margin-bottom: 0;">Display number plus mono unit. On navy the number may be flash.</p>
       </div>
       <div class="card">
-        <p class="mono" style="letter-spacing: 2px; color: var(--graphite); margin-top: 0;">MOTION</p>
-        <p class="label" style="margin-bottom: 0;">One orchestrated entrance per page (rise + stripe seam wipe-in). Hovers are color-only. <code>prefers-reduced-motion</code> disables all of it.</p>
+        <p class="mono" style="letter-spacing: 2px; margin-top: 0;">MOTION</p>
+        <p class="label" style="margin-bottom: 0;">One orchestrated entrance per page. Hovers change color only. Reduced motion turns everything off.</p>
       </div>
     </div>
   </div>
 </section>
 
-<div class="seam--quiet seam"></div>
-<footer class="dark" style="padding: 36px 0;">
+<div class="sep-cut"></div>
+<footer class="dark" style="padding: 36px 0; margin-top: -1px;">
   <div class="wrap" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
-    <span style="font-family: var(--font-display); font-weight: 700;">data aigency<span style="color: var(--flash);">.</span></span>
-    <span class="mono" style="color: var(--ice-dim); font-size: 11px; letter-spacing: 2px;">BRAND GUIDE V1 · 2026 · DIRECTION E2</span>
+    <span class="wordmark" style="font-size: 18px; color: var(--paper);">data a<span class="idot"><i>ı</i></span>gency</span>
+    <span class="mono" style="color: var(--mist); font-size: 11px; letter-spacing: 2px;">BRAND GUIDE V2 · NAVY × STRIPES</span>
   </div>
 </footer>
 
