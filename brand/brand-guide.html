@@ -47,17 +47,12 @@
   .do { border-left: 3px solid var(--flash); padding-left: 14px; }
   .dont { border-left: 3px solid #D64545; padding-left: 14px; }
 
-  /* the wordmark: green dot on the i of aigency */
+  /* the wordmark: plain lowercase, nothing colored */
   .wordmark { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; white-space: nowrap; }
-  .wordmark .idot { position: relative; display: inline-block; }
-  .wordmark .idot i { font-style: normal; }
-  .wordmark .idot::after { content: ''; position: absolute; top: 0.06em; left: 50%; transform: translateX(-50%); width: 0.16em; height: 0.16em; border-radius: 50%; background: var(--flash); }
 
-  /* separator family */
-  .sep-stripes { height: 22px; background: repeating-linear-gradient(-45deg, var(--flash) 0 14px, var(--navy) 14px 34px, var(--flash) 34px 42px, var(--navy) 42px 74px); }
-  .sep-teeth { height: 26px; background-color: var(--paper); background-image: linear-gradient(-45deg, var(--navy) 13px, transparent 0), linear-gradient(45deg, var(--navy) 13px, transparent 0); background-size: 26px 26px; background-repeat: repeat-x; }
-  .sep-cut { height: 56px; background: var(--navy); clip-path: polygon(0 100%, 0 62%, 100% 0, 100% 100%); }
-  .sep-point { height: 40px; background: var(--navy); clip-path: polygon(0 0, 100% 0, 100% 30%, 58% 30%, 50% 100%, 42% 30%, 0 30%); }
+  /* separator family: two forms only */
+  .sep-stripes { height: 12px; background: repeating-linear-gradient(-45deg, var(--flash) 0 9px, var(--white) 9px 22px); }
+  .sep-cut { height: 100px; background: var(--navy); clip-path: polygon(0 100%, 0 78%, 100% 0, 100% 100%); }
 </style>
 </head>
 <body>
@@ -65,8 +60,8 @@
 <header class="dark" style="position: relative; overflow: hidden;">
   <div style="position: absolute; right: -70px; top: -60px; width: 380px; height: 500px; background: repeating-linear-gradient(-45deg, rgba(3,248,86,0.14) 0 5px, transparent 5px 34px, rgba(3,248,86,0.14) 34px 41px, transparent 41px 70px); transform: skewX(-8deg);"></div>
   <div class="wrap" style="position: relative; padding-top: 72px; padding-bottom: 72px;">
-    <p class="eyebrow">Brand guide · v2 · Navy × stripes</p>
-    <h1 class="wordmark" style="font-size: clamp(40px, 6vw, 64px); margin: 18px 0 14px;">data a<span class="idot"><i>ı</i></span>gency</h1>
+    <p class="eyebrow">Brand guide · v3 · Navy × stripes</p>
+    <h1 class="wordmark" style="font-size: clamp(40px, 6vw, 64px); margin: 18px 0 14px;">data aigency</h1>
     <p style="max-width: 560px; color: var(--frost); font-size: 16px; line-height: 1.7;">Clean and professional, with a sharp edge. Most of the site is paper and graphite, easy on the eyes. Navy appears for big moments. Green appears where something happens.</p>
   </div>
 </header>
@@ -84,9 +79,7 @@
   </div>
 </section>
 
-<div class="sep-teeth"></div>
-
-<section>
+<section style="padding-top: 0;">
   <div class="wrap">
     <p class="eyebrow">02 · Color</p>
     <h2 style="font-size: 30px; margin: 14px 0 6px;">Read on paper. Impress on navy.</h2>
@@ -110,8 +103,8 @@
   </div>
 </section>
 
-<div style="height: 44px; background: var(--navy); clip-path: polygon(0 0, 100% 44%, 100% 100%, 0 100%);"></div>
-<section class="dark" style="padding-top: 48px;">
+<div class="sep-cut"></div>
+<section class="dark" style="padding-top: 40px; margin-top: -1px;">
   <div class="wrap">
     <p class="eyebrow">03 · Logo</p>
     <h2 style="font-size: 30px; margin: 14px 0 20px;">One mark, three duties.</h2>
@@ -122,8 +115,8 @@
     </div>
     <div style="margin-top: 22px; border: 1px solid var(--navy-line); border-radius: 6px; padding: 18px 22px;">
       <p class="mono" style="letter-spacing: 2px; color: var(--mist); margin: 0 0 10px;">WORDMARK</p>
-      <p class="wordmark" style="font-size: 34px; color: var(--paper); margin: 0 0 10px;">data a<span class="idot"><i>ı</i></span>gency</p>
-      <p style="font-size: 13px; color: var(--frost); margin: 0;">The dot of the i in aigency is the flash green dot. That is the whole trick. No green period after the name, no other green letters. In running text the name stays plain lowercase.</p>
+      <p class="wordmark" style="font-size: 34px; color: var(--paper); margin: 0 0 10px;">data aigency</p>
+      <p style="font-size: 13px; color: var(--frost); margin: 0;">Plain lowercase, always. No colored letters, no colored dots, no green period. The type does the work on its own. Slick and simple.</p>
     </div>
     <table style="margin-top: 20px; color: var(--frost);">
       <tr><th style="color: var(--mist); border-color: var(--navy-line);">Rule</th><th style="color: var(--mist); border-color: var(--navy-line);">Value</th></tr>
@@ -133,43 +126,33 @@
     </table>
   </div>
 </section>
-<div class="sep-point" style="transform: scaleY(-1);"></div>
+<div class="sep-cut" style="transform: scaleY(-1);"></div>
 
 <section>
   <div class="wrap">
     <p class="eyebrow">04 · Separators and stripes</p>
-    <h2 style="font-size: 30px; margin: 14px 0 6px;">Every transition is an event.</h2>
-    <p style="max-width: 640px; font-size: 14px;">Pages do not fade into each other, they cut. Four separator forms, all at sharp angles. Each page picks its own mix, so transitions stay unexpected. The rule that never changes: one loud element per screen, and nothing sits behind text.</p>
+    <h2 style="font-size: 30px; margin: 14px 0 6px;">Two forms. Used with intent.</h2>
+    <p style="max-width: 640px; font-size: 14px;">Sections cut, they do not fade. There are exactly two separators. The rule that never changes: one loud element per screen, and nothing sits behind text.</p>
 
     <div style="margin-top: 26px; display: flex; flex-direction: column; gap: 26px;">
       <div>
         <div class="sep-stripes"></div>
-        <p class="label" style="margin: 8px 0 0;"><strong>1 · Stripe seam.</strong> Bigger now, 22px, with an irregular rhythm so it feels alive instead of printed. <code>repeating-linear-gradient(-45deg, #03F856 0 14px, #061034 14px 34px, #03F856 34px 42px, #061034 42px 74px)</code></p>
-      </div>
-      <div>
-        <div class="sep-teeth"></div>
-        <p class="label" style="margin: 8px 0 0;"><strong>2 · Teeth.</strong> Sharp navy points, like the star. Good between paper sections. <code>linear-gradient(-45deg, #061034 13px, transparent 0), linear-gradient(45deg, #061034 13px, transparent 0); background-size: 26px 26px</code></p>
+        <p class="label" style="margin: 8px 0 0;"><strong>1 · Stripe seam.</strong> Green and white, even rhythm, 12px, always at 45 degrees. <code>repeating-linear-gradient(-45deg, #03F856 0 9px, #FFFFFF 9px 22px)</code></p>
       </div>
       <div>
         <div class="sep-cut"></div>
-        <p class="label" style="margin: 8px 0 0;"><strong>3 · Diagonal cut.</strong> A section edge sliced at an angle, entering or leaving navy. <code>clip-path: polygon(0 100%, 0 62%, 100% 0, 100% 100%)</code></p>
-      </div>
-      <div>
-        <div class="sep-point"></div>
-        <p class="label" style="margin: 8px 0 0;"><strong>4 · Star point.</strong> One sharp spike, straight from the compass. Use it once per page at most, for the moment that matters. <code>clip-path: polygon(0 0, 100% 0, 100% 30%, 58% 30%, 50% 100%, 42% 30%, 0 30%)</code></p>
+        <p class="label" style="margin: 8px 0 0;"><strong>2 · Diagonal cut.</strong> A wide shallow slice into or out of navy. Flip it vertically to leave navy. <code>height: 100px; clip-path: polygon(0 100%, 0 78%, 100% 0, 100% 100%)</code></p>
       </div>
     </div>
 
     <div class="grid" style="grid-template-columns: 1fr 1fr; margin-top: 26px;">
-      <div class="do" style="font-size: 13px;">DO: full bleed. Vary the separator per page. Keep the angle family at 45 degrees. Hero stripe fields stay faint and off to one side.</div>
-      <div class="dont" style="font-size: 13px;">DON'T: stripes behind text, inside cards, as borders, in other colors. Never two loud separators in one viewport.</div>
+      <div class="do" style="font-size: 13px;">DO: full bleed. Stripe seams between light sections and at page bottoms. Diagonal cuts for every entry into navy. Hero stripe fields stay faint and off to one side.</div>
+      <div class="dont" style="font-size: 13px;">DON'T: stripes behind text, inside cards, as borders, in other colors or widths. Never two loud separators in one viewport.</div>
     </div>
   </div>
 </section>
 
-<div class="sep-teeth"></div>
-
-<section>
+<section style="padding-top: 0;">
   <div class="wrap">
     <p class="eyebrow">05 · Typography</p>
     <h2 style="font-size: 30px; margin: 14px 0 20px;">Tight display, calm body, mono details.</h2>
@@ -183,8 +166,8 @@
   </div>
 </section>
 
-<div style="height: 44px; background: var(--navy); clip-path: polygon(0 0, 100% 56%, 100% 100%, 0 100%);"></div>
-<section class="dark" style="padding-top: 48px;">
+<div class="sep-cut"></div>
+<section class="dark" style="padding-top: 40px; margin-top: -1px;">
   <div class="wrap">
     <p class="eyebrow">06 · Iconography</p>
     <h2 style="font-size: 30px; margin: 14px 0 6px;">Sharp corners, 2px stroke, one color.</h2>
@@ -205,7 +188,7 @@
     </div>
   </div>
 </section>
-<div class="sep-stripes"></div>
+<div class="sep-cut" style="transform: scaleY(-1);"></div>
 
 <section>
   <div class="wrap">
@@ -250,8 +233,8 @@
 <div class="sep-cut"></div>
 <footer class="dark" style="padding: 36px 0; margin-top: -1px;">
   <div class="wrap" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
-    <span class="wordmark" style="font-size: 18px; color: var(--paper);">data a<span class="idot"><i>ı</i></span>gency</span>
-    <span class="mono" style="color: var(--mist); font-size: 11px; letter-spacing: 2px;">BRAND GUIDE V2 · NAVY × STRIPES</span>
+    <span class="wordmark" style="font-size: 18px; color: var(--paper);">data aigency</span>
+    <span class="mono" style="color: var(--mist); font-size: 11px; letter-spacing: 2px;">BRAND GUIDE V3 · NAVY × STRIPES</span>
   </div>
 </footer>
 
