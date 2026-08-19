@@ -15,7 +15,7 @@ export default function Services() {
         <p className="eyebrow">{t('services.label')}</p>
         <h1 style={{ fontSize: 'clamp(30px, 5vw, 44px)', marginTop: 8 }}>{t('services.title')}</h1>
       </section>
-      <StripeBand variant="quiet" />
+      <StripeBand variant="stripes" />
       <section className="container" style={{ padding: '48px 24px 64px', display: 'grid', gap: 24 }}>
         {items.map((s, i) => {
           const Icon = icons[i]

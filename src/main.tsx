@@ -1,5 +1,6 @@
-import '@fontsource-variable/bricolage-grotesque'
+import '@fontsource-variable/space-grotesk'
 import '@fontsource-variable/hanken-grotesk'
+import '@fontsource/ibm-plex-mono/500.css'
 import '@fontsource/montserrat/800.css'
 import './styles/tokens.css'
 import './styles/global.css'

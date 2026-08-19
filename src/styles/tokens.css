@@ -1,15 +1,22 @@
 :root {
-  --paper: #FAF7F2;
-  --ink: #1A1030;
-  --violet: #6C4CF1;
-  --violet-soft: #5F4DA8;
-  --coral: #FF6B6B;
-  --sun: #FFC93C;
-  --flash: #3BF06E;
-  --ink-soft: #55524B;
-  --line: #E6E0D4;
-  --font-display: 'Bricolage Grotesque Variable', 'Segoe UI', system-ui, sans-serif;
+  --navy: #061034;
+  --navy-deep: #000836;
+  --navy-line: #1A2A5C;
+  --paper: #F6F5F1;
+  --paper-line: #E2E0D8;
+  --flash: #03F856;
+  --frost: #E8ECF6;
+  --mist: #A9B6D9;
+  --graphite: #3E4552;
+  --white: #FFFFFF;
+  --font-display: 'Space Grotesk Variable', 'Segoe UI', system-ui, sans-serif;
   --font-body: 'Hanken Grotesk Variable', 'Segoe UI', system-ui, sans-serif;
-  --radius: 8px;
+  --font-mono: 'IBM Plex Mono', Consolas, monospace;
+  --font-wordmark: 'Montserrat', 'Space Grotesk Variable', sans-serif;
+  --radius: 3px;
   --container: 1080px;
+  /* compatibility aliases for pages written against the old token names */
+  --ink: var(--navy-deep);
+  --ink-soft: var(--graphite);
+  --line: var(--paper-line);
 }

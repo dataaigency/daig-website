@@ -8,16 +8,15 @@ export default function Footer() {
   const { t } = useTranslation()
   return (
     <footer>
-      <StripeBand variant="loud" />
+      <StripeBand variant="cut" />
       <div className="footer">
         <div className="footer__inner container">
-          <Wordmark size={14} inverse />
+          <Wordmark size={13} inverse />
           <div className="footer__meta">
             <span>{t('footer.tagline')}</span>
             <Link to="/contact">{t('nav.contact')}</Link>
             <a href={LINKS.linkedin}>LinkedIn</a>
             <a href={LINKS.github}>GitHub</a>
-            <span>{t('footer.languages')}</span>
           </div>
         </div>
       </div>
