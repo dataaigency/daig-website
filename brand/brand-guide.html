@@ -47,12 +47,13 @@
   .do { border-left: 3px solid var(--flash); padding-left: 14px; }
   .dont { border-left: 3px solid #D64545; padding-left: 14px; }
 
-  /* the wordmark: plain lowercase, nothing colored */
-  .wordmark { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; white-space: nowrap; }
+  /* the wordmark: matches the logo lettering. Montserrat ExtraBold, caps, light positive tracking */
+  .wordmark { font-family: 'Montserrat', var(--font-display); font-weight: 800; text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap; }
 
-  /* separator family: two forms only */
-  .sep-stripes { height: 12px; background: repeating-linear-gradient(-45deg, var(--flash) 0 9px, var(--white) 9px 22px); }
-  .sep-cut { height: 100px; background: var(--navy); clip-path: polygon(0 100%, 0 78%, 100% 0, 100% 100%); }
+  /* separator family */
+  .sep-stripes { height: 20px; background: repeating-linear-gradient(-45deg, var(--flash) 0 4px, transparent 4px 18px); }
+  .sep-cut { height: 140px; background: var(--navy); clip-path: polygon(0 100%, 0 82%, 100% 0, 100% 100%); }
+  .sep-cut--flash { height: 90px; background: var(--flash); clip-path: polygon(0 100%, 0 55%, 100% 0, 100% 45%); }
 </style>
 </head>
 <body>
@@ -60,8 +61,8 @@
 <header class="dark" style="position: relative; overflow: hidden;">
   <div style="position: absolute; right: -70px; top: -60px; width: 380px; height: 500px; background: repeating-linear-gradient(-45deg, rgba(3,248,86,0.14) 0 5px, transparent 5px 34px, rgba(3,248,86,0.14) 34px 41px, transparent 41px 70px); transform: skewX(-8deg);"></div>
   <div class="wrap" style="position: relative; padding-top: 72px; padding-bottom: 72px;">
-    <p class="eyebrow">Brand guide · v3 · Navy × stripes</p>
-    <h1 class="wordmark" style="font-size: clamp(40px, 6vw, 64px); margin: 18px 0 14px;">data aigency</h1>
+    <p class="eyebrow">Brand guide · v4 · Navy × stripes</p>
+    <h1 class="wordmark" style="font-size: clamp(32px, 5vw, 54px); margin: 18px 0 14px;">data aigency</h1>
     <p style="max-width: 560px; color: var(--frost); font-size: 16px; line-height: 1.7;">Clean and professional, with a sharp edge. Most of the site is paper and graphite, easy on the eyes. Navy appears for big moments. Green appears where something happens.</p>
   </div>
 </header>
@@ -73,7 +74,7 @@
     <h2 style="font-size: 30px; margin: 14px 0 20px;">Strong player. Safe hands. Sharp edge.</h2>
     <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
       <div class="card"><h3 style="font-size: 16px; margin-bottom: 8px;">Positioning</h3><p style="font-size: 13.5px; margin: 0;">A remote data architecture studio. Lakehouses, pipelines and secure foundations. AI is a capability we implement well and govern from day one. It is not the identity, and we never sell hype.</p></div>
-      <div class="card"><h3 style="font-size: 16px; margin-bottom: 8px;">Voice</h3><p style="font-size: 13.5px; margin: 0;">Calm, precise, human. Short sentences in plain language. No jargon walls, no dashes, no clever constructions that slow the reader down. Say the concrete thing. The name is written lowercase: <strong>data aigency</strong>.</p></div>
+      <div class="card"><h3 style="font-size: 16px; margin-bottom: 8px;">Voice</h3><p style="font-size: 13.5px; margin: 0;">Calm, precise, human. Short sentences in plain language. No jargon walls, no dashes, no clever constructions that slow the reader down. Say the concrete thing. As a wordmark the name is set in caps, matching the logo. In body text write it normally: data aigency.</p></div>
       <div class="card"><h3 style="font-size: 16px; margin-bottom: 8px;">The name, three ways</h3><p style="font-size: 13.5px; margin: 0;">1. Agency over your data. 2. A consulting agency. 3. Ai-gency, meaning AI adopted in phases and governed properly.</p></div>
     </div>
   </div>
@@ -115,8 +116,8 @@
     </div>
     <div style="margin-top: 22px; border: 1px solid var(--navy-line); border-radius: 6px; padding: 18px 22px;">
       <p class="mono" style="letter-spacing: 2px; color: var(--mist); margin: 0 0 10px;">WORDMARK</p>
-      <p class="wordmark" style="font-size: 34px; color: var(--paper); margin: 0 0 10px;">data aigency</p>
-      <p style="font-size: 13px; color: var(--frost); margin: 0;">Plain lowercase, always. No colored letters, no colored dots, no green period. The type does the work on its own. Slick and simple.</p>
+      <p class="wordmark" style="font-size: 30px; color: var(--paper); margin: 0 0 10px;">data aigency</p>
+      <p style="font-size: 13px; color: var(--frost); margin: 0;">Set exactly like the lettering in the logo: Montserrat ExtraBold (800), all caps, tracking around +30 thousandths of an em. No colored letters, no colored dots, no green period. Slick and simple, and it always matches the mark it stands next to.</p>
     </div>
     <table style="margin-top: 20px; color: var(--frost);">
       <tr><th style="color: var(--mist); border-color: var(--navy-line);">Rule</th><th style="color: var(--mist); border-color: var(--navy-line);">Value</th></tr>
@@ -131,28 +132,34 @@
 <section>
   <div class="wrap">
     <p class="eyebrow">04 · Separators and stripes</p>
-    <h2 style="font-size: 30px; margin: 14px 0 6px;">Two forms. Used with intent.</h2>
-    <p style="max-width: 640px; font-size: 14px;">Sections cut, they do not fade. There are exactly two separators. The rule that never changes: one loud element per screen, and nothing sits behind text.</p>
+    <h2 style="font-size: 30px; margin: 14px 0 6px;">Floating stripes and sharp cuts.</h2>
+    <p style="max-width: 640px; font-size: 14px;">Sections cut, they do not fade. The stripes float: green lines with nothing behind them, the same language as the hero field. Use them generously, as seams, edges and accents. The cuts are sharp and wide, and once in a while a cut is pure green for that snap of edge.</p>
 
     <div style="margin-top: 26px; display: flex; flex-direction: column; gap: 26px;">
       <div>
         <div class="sep-stripes"></div>
-        <p class="label" style="margin: 8px 0 0;"><strong>1 · Stripe seam.</strong> Green and white, even rhythm, 12px, always at 45 degrees. <code>repeating-linear-gradient(-45deg, #03F856 0 9px, #FFFFFF 9px 22px)</code></p>
+        <p class="label" style="margin: 8px 0 0;"><strong>1 · Floating stripes.</strong> Thin green lines at 45 degrees, transparent between them, no background band. They sit on paper or on navy and let the ground show through. <code>repeating-linear-gradient(-45deg, #03F856 0 4px, transparent 4px 18px)</code></p>
       </div>
       <div>
         <div class="sep-cut"></div>
-        <p class="label" style="margin: 8px 0 0;"><strong>2 · Diagonal cut.</strong> A wide shallow slice into or out of navy. Flip it vertically to leave navy. <code>height: 100px; clip-path: polygon(0 100%, 0 78%, 100% 0, 100% 100%)</code></p>
+        <p class="label" style="margin: 8px 0 0;"><strong>2 · Diagonal cut.</strong> Sharper and taller now. Every entry into navy is one of these. Flip it vertically to leave navy. <code>height: 140px; clip-path: polygon(0 100%, 0 82%, 100% 0, 100% 100%)</code></p>
+      </div>
+      <div>
+        <div class="sep-cut--flash"></div>
+        <p class="label" style="margin: 8px 0 0;"><strong>3 · Green cut.</strong> A pure flash blade across the page. The statement move. One per page at most, at the moment that deserves it. <code>height: 90px; background: #03F856; clip-path: polygon(0 100%, 0 55%, 100% 0, 100% 45%)</code></p>
       </div>
     </div>
 
     <div class="grid" style="grid-template-columns: 1fr 1fr; margin-top: 26px;">
-      <div class="do" style="font-size: 13px;">DO: full bleed. Stripe seams between light sections and at page bottoms. Diagonal cuts for every entry into navy. Hero stripe fields stay faint and off to one side.</div>
-      <div class="dont" style="font-size: 13px;">DON'T: stripes behind text, inside cards, as borders, in other colors or widths. Never two loud separators in one viewport.</div>
+      <div class="do" style="font-size: 13px;">DO: full bleed. Floating stripes wherever a seam or an edge needs energy. Diagonal cuts for every navy entry. One green cut per page when the page earns it.</div>
+      <div class="dont" style="font-size: 13px;">DON'T: stripes behind text or inside cards. No background bands behind stripes. No other colors, no other angles. Never two loud separators in one viewport.</div>
     </div>
   </div>
 </section>
 
-<section style="padding-top: 0;">
+<div class="sep-cut--flash"></div>
+
+<section style="padding-top: 40px;">
   <div class="wrap">
     <p class="eyebrow">05 · Typography</p>
     <h2 style="font-size: 30px; margin: 14px 0 20px;">Tight display, calm body, mono details.</h2>
@@ -161,6 +168,7 @@
       <tr><td style="font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -0.02em; color: var(--navy-deep);">Display</td><td>Space Grotesk (700)</td><td>tracking minus 2%. Sizes 32, 44, 60. Deep navy on paper, paper on navy.</td></tr>
       <tr><td style="font-size: 15px;">Body</td><td>Hanken Grotesk (400/600)</td><td>15 to 17px, line height 1.65. Graphite on paper, frost on navy.</td></tr>
       <tr><td class="mono" style="letter-spacing: 2px;">MONO LABEL</td><td>IBM Plex Mono (500)</td><td>10 to 12px, wide tracking, uppercase. Eyebrows, indices, figures.</td></tr>
+      <tr><td class="wordmark" style="font-size: 15px; color: var(--navy-deep);">data aigency</td><td>Montserrat ExtraBold (800)</td><td>wordmark only. All caps, tracking +20 to +50 thousandths of an em, to match the logo lettering.</td></tr>
     </table>
     <p style="font-size: 13px;">Writing style is part of the brand: short human sentences, plain words, no dashes, no filler. Every section opens with the green tick eyebrow you see in this document.</p>
   </div>
@@ -234,7 +242,7 @@
 <footer class="dark" style="padding: 36px 0; margin-top: -1px;">
   <div class="wrap" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
     <span class="wordmark" style="font-size: 18px; color: var(--paper);">data aigency</span>
-    <span class="mono" style="color: var(--mist); font-size: 11px; letter-spacing: 2px;">BRAND GUIDE V3 · NAVY × STRIPES</span>
+    <span class="mono" style="color: var(--mist); font-size: 11px; letter-spacing: 2px;">BRAND GUIDE V4 · NAVY × STRIPES</span>
   </div>
 </footer>
 
