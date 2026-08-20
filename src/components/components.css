@@ -1,11 +1,38 @@
-.nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
-.nav__links { display: flex; gap: 22px; align-items: center; font-size: 14px; font-weight: 600; }
+/* page shell: keeps the footer at the bottom on short pages */
+.layout { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+/* flex items with `margin: 0 auto` (the .container header) would otherwise
+   shrink to fit-content instead of stretching */
+.layout > * { width: 100%; }
+.layout > main { flex: 1 0 auto; }
+
+.nav { display: flex; align-items: center; gap: 22px; padding: 18px 0; }
+.nav__brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+.nav__links { display: flex; gap: 22px; align-items: center; font-size: 14px; font-weight: 600; margin-left: auto; }
 .nav__links a:not(.btn) { color: var(--navy-deep); text-decoration: none; padding: 10px 0; }
 .nav__links a:not(.btn):hover { color: var(--navy); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--flash); text-decoration-thickness: 2px; }
-.nav__links a.btn { text-decoration: none; }
+.nav__cta { padding: 11px 18px; font-size: 13px; text-decoration: none; flex-shrink: 0; }
+
+/* below 640px the four text links drop to a second, full-width row.
+   the brand and the CTA keep the first row to themselves. */
+@media (max-width: 640px) {
+  .nav { flex-wrap: wrap; row-gap: 2px; gap: 12px; padding: 14px 0; }
+  .nav__links { order: 3; width: 100%; margin-left: 0; flex-wrap: wrap; gap: 4px 18px; font-size: 13.5px; }
+  .nav__links a:not(.btn) { padding: 8px 0; }
+  .nav__cta { margin-left: auto; padding: 10px 14px; }
+}
+
+/* services: two columns of cards on desktop, one on narrow screens */
+.services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+@media (max-width: 800px) { .services-grid { grid-template-columns: 1fr; } }
+
+.service-card {
+  background: var(--white); border: 1px solid var(--paper-line);
+  border-radius: 6px; padding: 28px; height: 100%;
+}
+.service-card:hover { border-color: var(--flash); }
+
 .footer { background: var(--navy); color: var(--frost); margin-top: -1px; }
 .footer__inner { display: flex; align-items: center; justify-content: space-between; padding: 30px 24px; gap: 16px; flex-wrap: wrap; }
 .footer__meta { display: flex; gap: 18px; font-size: 13px; color: var(--mist); align-items: center; flex-wrap: wrap; }
 .footer__meta a { color: var(--mist); text-decoration: none; padding: 10px 0; }
 .footer__meta a:hover { color: var(--flash); }
-@media (max-width: 640px) { .nav__links { gap: 14px; } }

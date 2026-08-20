@@ -1,0 +1,112 @@
+export const meta = {
+  title: 'What a 30 minute architecture audit actually finds',
+  date: '2026-08-12',
+  tags: ['audit', 'architecture', 'process'],
+  lang: 'en',
+  summary: 'A plain account of how I spend the free 30 minute review and the problems that keep turning up in it.',
+}
+
+Thirty minutes is not long enough to redesign your data platform. It is long
+enough to find the thing that is quietly costing you the most. That is the whole
+bet behind the free audit, and I want to be honest about how it works before you
+book one.
+
+Most people expect a sales call with a deck. It is not that. It is closer to a
+doctor's first appointment. I ask a small number of specific questions, listen
+to how you answer them, and tell you what I would look at first. You leave with
+at least one concrete improvement, whether or not we ever work together.
+
+## How the thirty minutes is spent
+
+Roughly five minutes on what the business needs from data. Roughly fifteen on
+what actually exists. Roughly ten on the gap between those two, and what the
+cheapest first move is.
+
+I ask things like these.
+
+Where does your most important number come from, and who can change it? What
+happens when a load fails at three in the morning? Who finds out, and how? If
+your best data person left tomorrow, what breaks? What is the cloud bill, and
+what is the biggest line on it? Which dashboards do people actually open on a
+Monday?
+
+None of that requires access to your systems. It requires someone in the room
+who knows how the sausage is made. If you can bring the person who built the
+pipelines, bring them. The audit gets twice as useful.
+
+## The problems that keep turning up
+
+I am not going to invent a case study here. What I can tell you is the shape of
+the patterns I keep seeing, because they repeat across very different companies
+and very different stacks.
+
+**Nobody owns the number.** Finance has a revenue figure. The sales dashboard
+has a different one. Both are defensible. Neither is written down anywhere as
+the definition, so every quarter someone rebuilds the reconciliation by hand and
+then leaves. This is not a tooling problem and no new warehouse fixes it. It is
+a missing semantic layer and a missing owner.
+
+**The pipeline is a person.** There is a step that runs because someone
+remembers to run it. A spreadsheet that gets dropped in a folder. A notebook on
+a laptop. It works fine, right up until that person takes a holiday. When I ask
+what happens if they leave, the pause before the answer tells me most of what I
+need to know.
+
+**Failures are silent, or so loud they are silent.** Either nothing alerts, or
+everything alerts into a channel that people muted eight months ago. Both end in
+the same place: someone in the business finds the broken data before the data
+team does, and trust takes the hit.
+
+**The bill has a shape nobody has looked at.** Full refreshes where an
+incremental load would do. A job scheduled hourly to feed a report that gets
+read on Tuesday mornings. Compute sized for a peak that happened once. Cost is
+usually not the reason people book an audit, but it is often the easiest early
+win, because it needs no new architecture at all.
+
+**Access is all or nothing.** Either everyone can see everything, or every new
+question needs a ticket and a week. The first is a governance risk you will only
+notice once. The second is why your analysts are slow, and why people quietly
+export to spreadsheets.
+
+**The documentation is in someone's head.** There may be a wiki. It was accurate
+in the year it was written. Nobody trusts it, so nobody updates it, so nobody
+trusts it. Circular, and very common.
+
+**AI has been bolted to a foundation that cannot hold it.** A pilot got built on
+a copy of a copy of the data. It demoed well. Now it needs lineage, access
+control and a definition of correct, and none of those exist yet. The fix is
+almost never a better model. It is the layer underneath.
+
+## What I will not do in thirty minutes
+
+I will not quote you a project. I will not tell you your platform is wrong
+because it is not the one I would have picked. Migrating tools is expensive and
+mostly boring, and half the time the honest answer is that what you have is fine
+and the problem is one layer up.
+
+I will not give you a forty page report either. Long reports are a way of
+looking busy. You get a short written summary: what I heard, what I would fix
+first, and what I would deliberately leave alone for now. Leaving things alone
+is a real recommendation and I use it often.
+
+## What you leave with
+
+One improvement you can act on without hiring anyone. A clear statement of the
+single biggest structural risk I heard. And an honest read on whether you need
+an architect at all right now, because sometimes you need a person for two days,
+not a project for two months.
+
+If we do end up working together, the audit becomes the first page of the
+architecture. If we do not, you have still had a free hour of a specialist's
+attention on your actual problem, which is more than most vendor calls give you.
+
+## Come prepared, get more
+
+Three things make the session better. Know roughly what your data spend is. Know
+which report the leadership team actually reads. And bring one specific
+frustration rather than a general sense that things could be better. Specific
+frustrations are where the real architecture problems hide.
+
+That is it. No deck, no obligations, no follow-up sequence.
+
+[Book the free 30 minute architecture audit.](https://calendar.app.google/F5mvmg12xMpF73fw6)

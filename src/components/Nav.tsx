@@ -8,8 +8,8 @@ export default function Nav() {
   return (
     <header className="container">
       <nav className="nav">
-        <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 10 }} aria-label="data aigency home">
-          <img src="/logo-mark.png" alt="" style={{ width: 28, height: 28 }} />
+        <Link className="nav__brand" to="/" aria-label="data aigency home">
+          <img src="/logo-mark.png" alt="" width={28} height={28} />
           <Wordmark size={14} />
         </Link>
         <div className="nav__links">
@@ -17,8 +17,8 @@ export default function Nav() {
           <Link to="/work">{t('nav.work')}</Link>
           <Link to="/about">{t('nav.about')}</Link>
           <Link to="/contact">{t('nav.contact')}</Link>
-          <a className="btn btn--primary" style={{ padding: '11px 18px', fontSize: 13 }} href={LINKS.booking}>{t('nav.cta')}</a>
         </div>
+        <a className="btn btn--primary nav__cta" href={LINKS.booking}>{t('nav.cta')}</a>
       </nav>
     </header>
   )

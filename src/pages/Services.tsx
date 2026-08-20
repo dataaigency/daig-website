@@ -16,21 +16,23 @@ export default function Services() {
         <h1 style={{ fontSize: 'clamp(30px, 5vw, 44px)', marginTop: 8 }}>{t('services.title')}</h1>
       </section>
       <StripeBand variant="stripes" />
-      <section className="container" style={{ padding: '48px 24px 64px', display: 'grid', gap: 24 }}>
-        {items.map((s, i) => {
-          const Icon = icons[i]
-          return (
-            <article key={s.title} style={{ background: '#fff', border: '1px solid var(--line)', borderRadius: 10, padding: 28 }}>
-              <Icon />
-              <h2 style={{ fontSize: 22, margin: '12px 0 8px' }}>{s.title}</h2>
-              <p style={{ color: 'var(--ink-soft)', maxWidth: 640 }}>{s.desc}</p>
-              <ul style={{ margin: '14px 0 0', paddingLeft: 20, color: 'var(--ink-soft)' }}>
-                {s.outcomes.map((o) => <li key={o}>{o}</li>)}
-              </ul>
-            </article>
-          )
-        })}
-        <p><a className="btn btn--primary" href={LINKS.booking}>{t('hero.cta')}</a></p>
+      <section className="container" style={{ padding: '48px 24px 64px' }}>
+        <div className="services-grid">
+          {items.map((s, i) => {
+            const Icon = icons[i]
+            return (
+              <article className="service-card" key={s.title}>
+                <Icon />
+                <h2 style={{ fontSize: 22, margin: '12px 0 8px' }}>{s.title}</h2>
+                <p style={{ color: 'var(--graphite)', margin: 0 }}>{s.desc}</p>
+                <ul style={{ margin: '14px 0 0', paddingLeft: 20, color: 'var(--graphite)' }}>
+                  {s.outcomes.map((o) => <li key={o}>{o}</li>)}
+                </ul>
+              </article>
+            )
+          })}
+        </div>
+        <p style={{ marginTop: 32 }}><a className="btn btn--primary" href={LINKS.booking}>{t('hero.cta')}</a></p>
       </section>
     </>
   )

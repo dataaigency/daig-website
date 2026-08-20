@@ -13,10 +13,10 @@ export default function Layout({ children }: { children: ReactNode }) {
   }, [pathname])
 
   return (
-    <>
+    <div className="layout">
       <Nav />
       <main>{children}</main>
       <Footer />
-    </>
+    </div>
   )
 }

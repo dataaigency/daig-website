@@ -1,0 +1,126 @@
+export const meta = {
+  title: 'Medallion architecture: the five mistakes I keep unpicking',
+  date: '2026-08-05',
+  tags: ['lakehouse', 'medallion', 'dbt', 'fabric'],
+  lang: 'en',
+  summary: 'Bronze, silver and gold are easy to draw and easy to get wrong, so here are the five failure patterns I see most and how to avoid them.',
+}
+
+Medallion architecture is three boxes with arrows between them. That is why
+everyone adopts it, and that is why so many implementations end up as three
+folders with the same mess spread across all of them. The pattern is sound. The
+way it gets applied is where the trouble starts.
+
+Databricks describes it as a design pattern for incrementally improving the
+structure and quality of data as it moves through layers, and is careful to say
+that following it is
+[a recommended best practice but not a requirement](https://docs.databricks.com/aws/en/lakehouse/medallion).
+That second half gets skipped a lot. Here are the five failure patterns I keep
+unpicking, in the order they usually cause pain.
+
+## 1. Bronze that is not actually raw
+
+Someone cleans while landing. A date gets parsed. Nulls get dropped. Test rows
+get filtered out. It feels tidy, and it destroys the one property bronze exists
+to give you.
+
+Bronze is your replay button. The Databricks guidance is that it maintains the
+raw state of the source in its original format, is appended to incrementally,
+and enables reprocessing and auditing by retaining all historical data.
+Microsoft's Fabric guidance puts it even more bluntly:
+[store everything exactly as it arrives, no changes allowed](https://learn.microsoft.com/en-us/fabric/onelake/onelake-medallion-lakehouse-architecture).
+
+The moment you filter in bronze you can no longer rebuild silver from scratch
+when a business rule changes. And business rules always change. A cleaned bronze
+layer is a backup you have already edited.
+
+Keep the load boring. Land it, stamp it with when it arrived and where it came
+from, and do nothing else. If the source is already sitting in object storage,
+Fabric even recommends creating a shortcut rather than copying the data across.
+
+## 2. Silver that is bronze with better column names
+
+This is the most common one by a distance. Silver gets built as a rename and
+recast of every bronze table, one to one, and then everything hard gets pushed
+into gold.
+
+Renaming and casting is real work, but it is only half the job. Silver is where
+you decide what a customer is when three systems disagree, where duplicates go,
+and what grain each table sits at. If you have not resolved identity and grain
+in silver, you have not built silver.
+
+The dbt structure guide is a useful sanity check here. Its staging layer is
+deliberately thin: one model per source table, no joins, materialized as views,
+limited to
+[renaming, type casting and basic computations](https://docs.getdbt.com/best-practices/how-we-structure/2-staging).
+That thin layer is not silver. It is the front half of silver. The conforming,
+the deduplication and the joins that create a shared concept belong to
+[the intermediate models](https://docs.getdbt.com/best-practices/how-we-structure/3-intermediate)
+that sit on top of it.
+
+Map it that way and silver stops being a rename step. Skip it and every
+downstream team invents its own version of customer, which is mistake three.
+
+## 3. Gold as one table per dashboard
+
+Gold is meant to be curated, business-facing data. What it often becomes is a
+landfill of near-identical tables, one per report, each with a slightly
+different definition of margin, because each was built in a hurry for a
+different stakeholder.
+
+Medallion tells you about data quality progression. It does not tell you how to
+model. That is a separate decision and you still have to make it. Dimensional
+modelling did not stop being useful because the storage moved to a lake. Shared
+conformed dimensions and a small number of fact tables will serve you far better
+than forty bespoke aggregates.
+
+A practical test: if two gold tables both contain revenue and neither is defined
+as the source of the other, you do not have a gold layer. You have two silver
+tables with ambitions.
+
+## 4. Layers as folders instead of contracts
+
+Draw the dependency graph of a struggling lakehouse and you will usually find
+arrows going everywhere. A gold table reading bronze directly because it was
+urgent. A silver table reading a gold aggregate because the number was already
+computed there. A dashboard pointed straight at a landing file.
+
+Once that happens, the layers are just naming convention. Nobody can reason
+about blast radius, and nobody can refactor anything.
+
+The rule that fixes it is dull and works: each layer reads only from the layer
+directly beneath it, and every shortcut is a documented exception with a name on
+it. Fabric's recommendation to give each layer its own workspace exists for
+exactly this reason, because it gives you control and governance at the layer
+boundary rather than relying on discipline. Enforce it in permissions if you
+can. Good intentions do not survive a deadline.
+
+## 5. Nobody owns the physical layout
+
+Logical design gets the attention. File layout gets none, and then queries get
+slow and everyone blames the tool.
+
+Small files are the usual culprit. Listing, opening and closing thousands of
+tiny files is expensive, and the transaction log itself becomes a planning
+bottleneck. Fabric suggests targeting file sizes between
+[128 MB and 1 GB depending on the table and the layer](https://learn.microsoft.com/en-us/fabric/onelake/onelake-medallion-lakehouse-architecture),
+with smaller files tolerable in bronze and larger ones preferred in gold where
+the reads happen. It also now advises against partitioning for new
+implementations and points to liquid clustering for silver and gold instead.
+
+The maintenance jobs matter too. `OPTIMIZE` compacts small files, and on
+Databricks
+[predictive optimization runs it automatically for Unity Catalog managed tables](https://docs.databricks.com/aws/en/delta/optimize).
+`VACUUM` clears the history you are paying to store, subject to a default
+retention floor of seven days that exists to keep readers consistent. Decide the
+retention window on purpose. Delta keeps history forever until you tell it not
+to, and the storage bill notices before you do.
+
+## The one line worth keeping
+
+Medallion is a way to make quality improvements visible and reversible. It is
+not a filing system, and three is not a magic number. If a layer in your diagram
+does not change the quality, the grain or the audience of the data, it is not a
+layer. It is a copy.
+
+[Book a free 30 minute architecture audit.](https://calendar.app.google/F5mvmg12xMpF73fw6)

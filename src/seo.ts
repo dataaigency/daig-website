@@ -1,16 +1,63 @@
+import { getPosts } from './lib/posts'
+
 export const SITE_URL = 'https://dataaigency.com'
 
-const META: Record<string, { title: string; description: string }> = {
-  '/': { title: 'data aigency — take agency over your data', description: 'Lakehouses, pipelines and AI-ready foundations — built properly, secured from day one, handed over completely. Data & AI architecture studio.' },
-  '/services': { title: 'Services — data aigency', description: 'Lakehouse architecture, pipelines & automation, AI-ready data layers, and phased AI adoption with governance.' },
-  '/work': { title: 'Work — data aigency', description: 'Case studies and writing on data architecture and AI adoption.' },
-  '/about': { title: 'About — data aigency', description: 'One architect, end to end: the practice of Vadim Van Den Heuvel.' },
-  '/contact': { title: 'Contact — data aigency', description: 'Book a free 30-minute data architecture audit.' },
+export const BRAND = 'data aigency'
+
+export type Meta = { title: string; description: string }
+
+const FALLBACK: Meta = {
+  title: BRAND,
+  description:
+    'Data and AI architecture consulting: lakehouses, dbt pipelines and governed AI adoption for small and mid-sized teams.',
 }
 
-export function metaFor(path: string): { title: string; description: string } {
+const META: Record<string, Meta> = {
+  '/': {
+    title: 'data aigency | Data architecture, lakehouses and governed AI',
+    description:
+      'Independent data architecture consulting: lakehouses, dbt pipelines and AI-ready foundations. Built properly, secured from day one, handed over completely.',
+  },
+  '/services': {
+    title: 'Lakehouse, dbt and AI governance consulting | data aigency',
+    description:
+      'Lakehouse architecture on Microsoft Fabric or BigQuery, dbt pipelines and automation, AI-ready data layers, and phased AI adoption with governance you can audit.',
+  },
+  '/work': {
+    title: 'Data architecture case studies and writing | data aigency',
+    description:
+      'Case studies and plain-spoken writing on lakehouse architecture, dbt, data governance and practical AI adoption.',
+  },
+  '/about': {
+    title: 'Data and AI architecture consultant | data aigency',
+    description:
+      'One architect end to end. Vadim Van Den Heuvel on lakehouse design, dbt, data governance and AI adoption that survives handover.',
+  },
+  '/contact': {
+    title: 'Book a free data architecture audit | data aigency',
+    description:
+      'Book a free 30-minute data architecture audit. Bring your stack and your bottleneck, leave with a clear next step for your lakehouse or AI project.',
+  },
+}
+
+/** Title/description for a single MDX post, kept in one place so the
+ *  pre-rendered head and the client-side document.title agree. */
+export function metaForPost(post: { title: string; summary: string }): Meta {
+  return { title: `${post.title} | ${BRAND}`, description: post.summary }
+}
+
+export function metaFor(path: string): Meta {
   // GitHub Pages serves directory routes with a trailing slash (/services/),
   // so normalize before lookup to keep titles correct on hydration.
   const normalized = path.replace(/\/+$/, '') || '/'
-  return META[normalized] ?? { title: 'data aigency', description: 'Data & AI architecture studio.' }
+  const staticMeta = META[normalized]
+  if (staticMeta) return staticMeta
+
+  const slug = normalized.startsWith('/work/') ? normalized.slice('/work/'.length) : null
+  if (slug) {
+    const post = getPosts().find((p) => p.slug === slug)
+    if (post) return metaForPost(post)
+  }
+
+  return FALLBACK
 }
