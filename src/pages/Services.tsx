@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import StripeBand from '../components/StripeBand'
+import Reveal from '../components/Reveal'
 import { IconLayers, IconPipeline, IconChart, IconShield } from '../components/icons'
 import { LINKS } from '../links'
 
@@ -17,6 +18,7 @@ export default function Services() {
       </section>
       <StripeBand variant="stripes" />
       <section className="container" style={{ padding: '48px 24px 64px' }}>
+        <Reveal>
         <div className="services-grid">
           {items.map((s, i) => {
             const Icon = icons[i]
@@ -32,6 +34,7 @@ export default function Services() {
             )
           })}
         </div>
+        </Reveal>
         <p style={{ marginTop: 32 }}><a className="btn btn--primary" href={LINKS.booking}>{t('hero.cta')}</a></p>
       </section>
     </>

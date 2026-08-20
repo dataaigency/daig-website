@@ -44,6 +44,18 @@ a:hover { color: var(--navy); }
 .btn--flash:hover { background: #2FF970; color: var(--navy); }
 .btn--secondary { background: transparent; color: var(--navy-deep); border: 1.5px solid var(--navy-deep); }
 
+/* scroll reveal: hidden state only exists once JS added the `js` class, so
+   prerendered HTML, crawlers and no-JS visitors always see full content */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: var(--reveal-delay, 0s);
+  }
+  html.js .reveal.is-visible { opacity: 1; transform: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

@@ -23,13 +23,22 @@
 .prob__stat { font-family: var(--font-display); font-size: 38px; font-weight: 700; line-height: 1; color: var(--navy-deep); }
 .prob__text { font-size: 14px; color: var(--graphite); margin: 10px 0 0; }
 
-.dict { background: var(--white); padding: 64px 0; }
-.dict__entry { border-top: 1px solid var(--paper-line); padding: 24px 0; display: flex; gap: 24px; }
-.dict__entry:last-child { border-bottom: 1px solid var(--paper-line); }
-.dict__num { font-family: var(--font-mono); font-weight: 500; width: 28px; flex-shrink: 0; color: var(--graphite); }
-.dict__word { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--navy-deep); }
-.dict__pos { font-weight: 400; font-size: 14px; color: var(--graphite); font-style: italic; margin-left: 8px; }
-.dict__def { color: var(--graphite); max-width: 560px; margin-top: 6px; }
+/* the name-play, compact: one slim strip instead of a full section */
+.dict { background: var(--white); padding: 44px 0; }
+.dict__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 20px; }
+@media (max-width: 820px) { .dict__grid { grid-template-columns: 1fr; gap: 18px; } }
+.dict__entry { display: flex; gap: 14px; }
+.dict__num { font-family: var(--font-mono); font-size: 12px; flex-shrink: 0; color: var(--graphite); padding-top: 2px; }
+.dict__word { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--navy-deep); }
+.dict__pos { font-weight: 400; font-size: 11px; color: var(--graphite); font-style: italic; margin-left: 6px; }
+.dict__def { color: var(--graphite); font-size: 13px; line-height: 1.55; margin: 6px 0 0; }
+
+/* animated medallion flow section */
+.flowsec { padding: 64px 0 56px; }
+.flowsec__sub { color: var(--frost); max-width: 640px; margin: 14px 0 0; font-size: 15px; line-height: 1.65; }
+.flow { margin: 34px 0 0; }
+.flow__scroll { overflow-x: auto; }
+.flow__caption { font-size: 12.5px; color: var(--mist); margin-top: 14px; max-width: 720px; line-height: 1.6; }
 
 .svc { padding: 64px 0; }
 .svc__head { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }

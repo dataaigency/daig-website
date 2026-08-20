@@ -24,6 +24,24 @@
       { "stat": "03", "text": "You're paying for automations but not getting ROI from your AI & cloud investment." }
     ]
   },
+  "flow": {
+    "label": "How it works",
+    "title": "One governed flow, from sources to answers.",
+    "sub": "This is the medallion architecture we build. Every source lands raw, gets cleaned and tested once, and feeds every dashboard and model from the same governed layer.",
+    "sources": ["CRM", "ERP", "Files & sheets", "SaaS APIs"],
+    "bronze": "Bronze",
+    "bronzeSub": "raw, as it arrives",
+    "silver": "Silver",
+    "silverSub": "cleaned and tested",
+    "gold": "Gold",
+    "goldSub": "business-ready",
+    "consumers": ["Dashboards", "AI & agents"],
+    "edgeLand": "land",
+    "edgeClean": "clean · test",
+    "edgeModel": "model",
+    "edgeServe": "serve",
+    "caption": "Sources land in Bronze exactly as they arrive. Silver cleans, conforms and tests. Gold carries the semantic layer that dashboards and AI read."
+  },
   "services": {
     "label": "What we build",
     "title": "Four things, done properly.",

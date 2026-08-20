@@ -10,6 +10,8 @@ import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router'
 import App from './App'
 
+document.documentElement.classList.add('js')
+
 const container = document.getElementById('root')!
 const app = (
   <StrictMode>
