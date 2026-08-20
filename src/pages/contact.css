@@ -1,0 +1,13 @@
+.cform { display: grid; gap: 14px; max-width: 560px; margin-top: 32px; }
+.cform label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--graphite); display: grid; gap: 6px; }
+.cform input, .cform textarea {
+  font-family: var(--font-body); font-size: 15px; color: var(--navy-deep);
+  background: var(--white); border: 1px solid var(--paper-line); border-radius: var(--radius);
+  padding: 12px 14px; width: 100%;
+}
+.cform input:focus, .cform textarea:focus { outline: none; border-color: var(--flash); }
+.cform textarea { min-height: 140px; resize: vertical; }
+.cform__status { font-size: 14px; margin: 0; }
+.cform__status--ok { color: var(--navy-deep); font-weight: 600; }
+.cform__status--err { color: #B3261E; }
+.cform__hp { position: absolute; left: -9999px; opacity: 0; height: 0; overflow: hidden; }

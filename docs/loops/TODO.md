@@ -10,6 +10,7 @@ Loops pick the topmost unchecked item whose agent fits the block. Add freely; ke
 - [x] (seo-optimizer) JSON-LD Organization + ProfessionalService + BlogPosting via prerender (content wave 1)
 - [x] (data-expert) Technical credibility pass on all copy and posts (content wave 3)
 - [x] (blog-writer) Medallion mistakes post + audit post shipped (content wave 1)
-- [ ] (backend-developer) Add CI check that dist HTML contains no external URLs except calendar.app.google
+- [ ] (backend-developer) Add CI check that dist HTML contains no external URLs except calendar.app.google and api.web3forms.com
+- [ ] (owner) Paste the Web3Forms access key into src/config.ts (get it at web3forms.com with vadim@dataaigency.com) or the contact form cannot deliver
 - [ ] (blog-writer) Post: "Microsoft Fabric or BigQuery for your first lakehouse?" (highest-value query, needs research time)
 - [ ] (ui-expert) Work index: render tags, reading time, human dates; article shell with closing CTA on posts

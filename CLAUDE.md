@@ -34,7 +34,7 @@ src/
 - Diagonal stripes −45° (`.stripe--loud`/`.stripe--quiet`): section dividers and page bottoms ONLY — never behind text, never card backgrounds.
 - Brand name lowercase "data aigency" in copy; star-dot only in the `Wordmark` component.
 - No hardcoded user-visible strings in components — everything through `t()` / `src/locales/`.
-- Zero external requests at runtime (fonts self-hosted). The Google Calendar booking link is the one allowed external `<a href>`.
+- Zero external requests at page load (fonts self-hosted). Allowed user-initiated external calls: the Google Calendar booking link, and the contact form POST to api.web3forms.com (key in src/config.ts; delivers to the owner's inbox without exposing the address).
 - Voice: warm, plain-spoken, a little cheeky; concrete outcomes over jargon; never invent clients, metrics, or testimonials.
 
 ## Custom agents (.claude/agents/)

@@ -17,7 +17,6 @@ export default function Footer() {
             <Link to="/contact">{t('nav.contact')}</Link>
             <a href={LINKS.linkedin}>LinkedIn</a>
             <a href={LINKS.github}>GitHub</a>
-            <a href={LINKS.email}>vadim@dataaigency.com</a>
           </div>
         </div>
       </div>

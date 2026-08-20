@@ -15,3 +15,12 @@ test('contact links booking, linkedin, github', () => {
   expect(screen.getByRole('link', { name: 'LinkedIn' })).toBeInTheDocument()
   expect(screen.getByRole('link', { name: 'GitHub' })).toBeInTheDocument()
 })
+
+test('contact form renders fields and no visible email address', () => {
+  render(<MemoryRouter><Contact /></MemoryRouter>)
+  expect(screen.getByLabelText('Your name')).toBeInTheDocument()
+  expect(screen.getByLabelText('Your email')).toBeInTheDocument()
+  expect(screen.getByLabelText('What are you working on?')).toBeInTheDocument()
+  expect(screen.getByRole('button', { name: 'Send message' })).toBeInTheDocument()
+  expect(screen.queryByText(/dataaigency\.com/)).not.toBeInTheDocument()
+})
