@@ -1,4 +1,6 @@
 import { useTranslation } from 'react-i18next'
+import Reveal from '../components/Reveal'
+import AboutFlow from '../components/flows/AboutFlow'
 import { LINKS } from '../links'
 
 export default function About() {
@@ -9,8 +11,11 @@ export default function About() {
         <h1 style={{ fontSize: 'clamp(30px, 5vw, 44px)' }}>{t('about.title')}</h1>
         <p style={{ marginTop: 20, color: 'var(--graphite)' }}>{t('about.body1')}</p>
         <p style={{ color: 'var(--graphite)' }}>{t('about.body2')}</p>
-        <p style={{ marginTop: 18 }}><a href={LINKS.linkedin}>{t('about.linkLabel')} →</a></p>
       </div>
+      <Reveal>
+        <AboutFlow />
+      </Reveal>
+      <p style={{ marginTop: 22 }}><a href={LINKS.linkedin}>{t('about.linkLabel')} →</a></p>
     </section>
   )
 }

@@ -42,6 +42,87 @@
     "edgeServe": "serve",
     "caption": "Sources land in Bronze exactly as they arrive. Silver cleans, conforms and tests. Gold carries the semantic layer that dashboards and AI read."
   },
+  "flows": {
+    "lakehouse": {
+      "caption": "One governed store instead of scattered copies. Purview or Dataplex enforces policies and lineage; the semantic layer serves BI and AI from the same numbers.",
+      "sources": "Sources",
+      "lakehouse": "Lakehouse",
+      "bronze": "Bronze · raw",
+      "silver": "Silver · tested",
+      "gold": "Gold · modeled",
+      "governance": "Purview / Dataplex",
+      "govern": "govern",
+      "serve": "serve",
+      "land": "land",
+      "bi": "BI & AI"
+    },
+    "pipelines": {
+      "caption": "Every run is scheduled, built with dbt and tested before anything reaches Gold. When a test fails, the alert comes to the engineer first, never to your stakeholders.",
+      "orch": "Airflow / Fabric",
+      "schedule": "schedule",
+      "dbt": "dbt run",
+      "build": "build",
+      "tests": "tests",
+      "pass": "pass",
+      "fail": "fail",
+      "gold": "Gold tables",
+      "alert": "alert, engineer first"
+    },
+    "aidata": {
+      "caption": "The same governed Gold data feeds both classic ML and retrieval for AI. Every feature and every embedding traces back to its source.",
+      "gold": "Gold data",
+      "features": "Feature store",
+      "embeddings": "Embeddings",
+      "ml": "Model training",
+      "rag": "RAG · agents",
+      "extract": "extract",
+      "embed": "embed",
+      "train": "train",
+      "retrieve": "retrieve",
+      "lineage": "lineage on everything"
+    },
+    "governance": {
+      "caption": "AI reaches production one use case at a time, measured before it scales, on a rail of access control, audit logging and human sign-off.",
+      "uc1": "Use case 1",
+      "evaluate": "Evaluate",
+      "measure": "measure",
+      "pass": "pass",
+      "prod": "Production",
+      "next": "next →",
+      "rail": "access control · audit log · human sign-off"
+    },
+    "about": {
+      "caption": "The whole engagement in one line. From the design onward everything lives in your repositories, so the handover is a formality, not a cliff.",
+      "s1": "Intake call",
+      "s1s": "30 minutes",
+      "s2": "Design",
+      "s2s": "architecture doc",
+      "s3": "Build",
+      "s3s": "code · tests · docs",
+      "s4": "Handover",
+      "s4s": "runbooks & keys",
+      "s5": "Your team runs it",
+      "e1": "talk",
+      "e2": "agree scope",
+      "e3": "ship weekly",
+      "e4": "hand over",
+      "repos": "everything lives in your repositories"
+    },
+    "work": {
+      "caption": "What every engagement looks like from above: point-to-point connections nobody dares to touch, replaced by one governed flow everyone can read.",
+      "before": "Before",
+      "beforeSub": "point to point",
+      "after": "After",
+      "afterSub": "one governed flow",
+      "work": "the work",
+      "chaos": ["CRM", "Sheets", "ERP", "Scripts"],
+      "sources": "Sources",
+      "lakehouse": "Lakehouse",
+      "answers": "Answers",
+      "land": "land",
+      "serve": "serve"
+    }
+  },
   "services": {
     "label": "What we build",
     "title": "Four things, done properly.",

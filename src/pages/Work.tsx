@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router'
+import Reveal from '../components/Reveal'
+import WorkFlow from '../components/flows/WorkFlow'
 import { getPosts } from '../lib/posts'
 
 export default function Work() {
@@ -8,8 +10,11 @@ export default function Work() {
   return (
     <section className="container" style={{ padding: '64px 24px' }}>
       <h1 style={{ fontSize: 'clamp(30px, 5vw, 44px)' }}>{t('work.title')}</h1>
+      <Reveal>
+        <WorkFlow />
+      </Reveal>
       {posts.length === 0 && <p style={{ marginTop: 20 }}>{t('work.empty')}</p>}
-      <div style={{ marginTop: 28, display: 'grid', gap: 16 }}>
+      <div style={{ marginTop: 34, display: 'grid', gap: 16 }}>
         {posts.map((p) => (
           <article key={p.slug} style={{ background: '#fff', border: '1px solid var(--line)', borderRadius: 10, padding: 24 }}>
             <p className="eyebrow">{p.date}</p>

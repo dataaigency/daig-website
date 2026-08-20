@@ -23,6 +23,8 @@
 
 /* services: two columns of cards on desktop, one on narrow screens */
 .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+.services-grid > .reveal { height: 100%; }
+.services-grid > .reveal > article { height: 100%; }
 @media (max-width: 800px) { .services-grid { grid-template-columns: 1fr; } }
 
 .service-card {
