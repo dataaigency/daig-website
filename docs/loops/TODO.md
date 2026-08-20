@@ -4,7 +4,7 @@ Backlog for iteration loops. Each item: `- [ ] (agent) description — acceptanc
 Loops pick the topmost unchecked item whose agent fits the block. Add freely; keep ordered by priority.
 
 - [x] (ui-expert) AA contrast residual: resolved by the v4 retheme (dict labels now graphite on white)
-- [ ] (commercial-specialist) Decide + wire an email contact channel: owner must supply the address; don't invent one
+- [x] (commercial-specialist) Email wired: vadim@dataaigency.com on contact page and footer
 - [x] (ui-expert) Responsive: mobile nav wrap, sticky footer, services grid, edge alignment (content wave 1)
 - [x] (commercial-specialist) Service descriptions lead with outcomes (content wave 2)
 - [x] (seo-optimizer) JSON-LD Organization + ProfessionalService + BlogPosting via prerender (content wave 1)

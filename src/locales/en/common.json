@@ -52,7 +52,9 @@
     "sub": "In 30 minutes we walk through your current setup, find the biggest bottleneck and agree which fix is worth making first. You leave with a short written summary of the findings, whether we work together or not. No deck, no obligations.",
     "book": "Pick a slot",
     "linkedin": "LinkedIn",
-    "github": "GitHub"
+    "email": "Email me",
+    "github": "GitHub",
+    "emailNote": "Not ready to book a call? Write to"
   },
   "work": {
     "title": "Work & writing",

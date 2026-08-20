@@ -11,7 +11,11 @@ export default function Contact() {
         <p style={{ marginTop: 24, display: 'flex', gap: 16, flexWrap: 'wrap' }}>
           <a className="btn btn--primary" href={LINKS.booking}>{t('contact.book')}</a>
           <a className="btn btn--secondary" href={LINKS.linkedin}>{t('contact.linkedin')}</a>
+          <a className="btn btn--secondary" href={LINKS.email}>{t('contact.email')}</a>
           <a className="btn btn--secondary" href={LINKS.github}>{t('contact.github')}</a>
+        </p>
+        <p style={{ marginTop: 18, fontSize: 14, color: 'var(--graphite)' }}>
+          {t('contact.emailNote')} <a href={LINKS.email}>vadim@dataaigency.com</a>
         </p>
       </div>
     </section>
