@@ -74,6 +74,7 @@ export default function Home() {
             <div>
               <p className="eyebrow">{t('services.label')}</p>
               <h2 style={{ fontSize: 30, marginTop: 8 }}>{t('services.title')}</h2>
+              <p style={{ marginTop: 10, maxWidth: 560, color: 'var(--graphite)', fontSize: 14.5 }}>{t('services.sub')}</p>
             </div>
           </div>
         </Reveal>

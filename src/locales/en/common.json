@@ -10,9 +10,9 @@
   "dictionary": {
     "label": "The name is the pitch",
     "entries": [
-      { "word": "data aigency", "pos": "/ˈeɪ·dʒən·si/ · noun", "def": "The capacity to act. You regain agency over your data: one source of truth, owned by you and documented for you." },
-      { "word": "data aigency", "pos": "noun", "def": "A consulting practice. We design the architecture, build the pipelines and hand everything over. Scope, timeline and costs are agreed before we start." },
-      { "word": "data aigency", "pos": "noun, ours", "def": "Agency with AI built in. Adopted in phases, secured and governed from the start. Not a vibe-coded data strategy." }
+      { "word": "data aigency", "pos": "/ˈeɪ·dʒən·si/ · noun", "def": "The capacity to act. Your data in one trusted place, owned by you and documented for you, so decisions stop waiting on it." },
+      { "word": "data aigency", "pos": "noun", "def": "A consulting practice of one architect. Design, build, then a full handover: code, docs, runbooks and keys. Scope, timeline and costs agreed before we start." },
+      { "word": "data aigency", "pos": "noun, ours", "def": "Agency with AI built in. One use case at a time, measured before it scales, governed from day one. Not a vibe-coded data strategy." }
     ]
   },
   "problems": {
@@ -126,6 +126,7 @@
   "services": {
     "label": "What we build",
     "title": "Four things, done properly.",
+    "sub": "Each one comes with a diagram you can read without a data background. What you see drawn here is what gets built, tested, documented and handed over.",
     "cta": "See all services",
     "items": [
       { "title": "Lakehouse architecture", "desc": "One governed source of truth your teams can build on. Delivered as a production-grade lakehouse in Fabric or GCP, with semantic layer, medallion design and governance in Purview or Dataplex from day one.", "outcomes": ["One source of truth your teams trust", "Governance and semantic layer from day one", "Documented, transferable architecture"] },
@@ -142,7 +143,7 @@
   },
   "about": {
     "title": "One architect, end to end.",
-    "body1": "data aigency is the remote practice of Vadim Van Den Heuvel. The person who takes your first call is the person who designs the architecture, builds it and hands it over. Nothing is lost between a salesperson and a delivery team.",
+    "body1": "data aigency is the remote practice of Vadim Van Den Heuvel. The person who takes your first call is the person who designs the architecture, builds it and hands it over. No salesperson, no junior team behind the curtain. Every diagram on this site is drawn the way your documentation will be written: so anyone on your team can read it.",
     "body2": "And nothing depends on me staying. Everything lives in your repositories from the first commit, your tables sit in open formats like Delta and Iceberg, and every decision is documented, so any engineer can pick up where I leave off. Scope, timeline and costs are agreed up front. Full handover of code, docs and runbooks. No lock-in, no black boxes.",
     "linkLabel": "Find me on LinkedIn"
   },

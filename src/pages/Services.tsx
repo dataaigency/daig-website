@@ -17,6 +17,7 @@ export default function Services() {
       <section className="container" style={{ padding: '64px 24px 48px' }}>
         <p className="eyebrow">{t('services.label')}</p>
         <h1 style={{ fontSize: 'clamp(30px, 5vw, 44px)', marginTop: 8 }}>{t('services.title')}</h1>
+        <p style={{ marginTop: 14, maxWidth: 620, color: 'var(--graphite)' }}>{t('services.sub')}</p>
       </section>
       <StripeBand variant="stripes" />
       <section className="container" style={{ padding: '48px 24px 64px' }}>
