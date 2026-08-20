@@ -1,10 +1,10 @@
 {
-  "nav": { "services": "Services", "work": "Work", "about": "About", "contact": "Contact", "cta": "Free audit" },
+  "nav": { "services": "Services", "work": "Work", "about": "About", "contact": "Contact", "cta": "Book a call" },
   "hero": {
-    "eyebrow": "Remote data architecture studio",
-    "title": "Take agency over your data.",
+    "eyebrow": "Data architecture studio",
+    "title": "From chaos to insights.",
     "sub": "One source of truth your whole team trusts, and analysts who get their week back. Built properly, documented fully, handed over completely. AI where it earns its place, governed from day one.",
-    "cta": "Book a free architecture audit",
+    "cta": "Book a free intake call",
     "secondary": "How we work"
   },
   "dictionary": {
@@ -16,12 +16,12 @@
     ]
   },
   "problems": {
-    "label": "Sound familiar?",
-    "title": "The chaos before the insights.",
+    "label": "The problem",
+    "title": "Sound familiar?",
     "items": [
-      { "stat": "5+", "text": "systems your data lives in, with no single source of truth between them." },
-      { "stat": "Most", "text": "of your analysts' week goes to cleaning and reconciling data instead of analysis. Ask them." },
-      { "stat": "??", "text": "the return on your AI and cloud spend so far. If nobody can say, that is the answer." }
+      { "stat": "01", "text": "Your data lives in 5+ different places and nobody can agree on a single source of truth." },
+      { "stat": "02", "text": "Analysts spend 80% of their time cleaning data instead of actually using it." },
+      { "stat": "03", "text": "You're paying for automations but not getting ROI from your AI & cloud investment." }
     ]
   },
   "services": {
@@ -38,18 +38,18 @@
   "process": {
     "label": "No black boxes",
     "title": "Audit, design, build, handover. You keep the keys and the docs.",
-    "cta": "Start with the free audit",
+    "cta": "Book an intake call",
     "note": "30 minutes, no deck, no obligations."
   },
   "about": {
     "title": "One architect, end to end.",
-    "body1": "data aigency is the remote practice of Vadim Van Den Heuvel. The person who runs your audit is the person who designs the architecture, builds it and hands it over. Nothing is lost between a salesperson and a delivery team.",
+    "body1": "data aigency is the remote practice of Vadim Van Den Heuvel. The person who takes your first call is the person who designs the architecture, builds it and hands it over. Nothing is lost between a salesperson and a delivery team.",
     "body2": "And nothing depends on me staying. Everything lives in your repositories from the first commit, your tables sit in open formats like Delta and Iceberg, and every decision is documented, so any engineer can pick up where I leave off. Scope, timeline and costs are agreed up front. Full handover of code, docs and runbooks. No lock-in, no black boxes.",
     "linkLabel": "Find me on LinkedIn"
   },
   "contact": {
-    "title": "Let's audit your data architecture. Free.",
-    "sub": "In 30 minutes we walk through your current setup, find the biggest bottleneck and agree which fix is worth making first. You leave with a short written summary of the findings, whether we work together or not. No deck, no obligations.",
+    "title": "Let's talk about your data stack.",
+    "sub": "A free 30 minute intake call. We walk through your current stack, the problems you are running into and the solutions worth considering. You leave with a short written summary, whether we work together or not. No deck, no obligations.",
     "book": "Pick a slot",
     "linkedin": "LinkedIn",
     "github": "GitHub",
@@ -76,6 +76,6 @@
     "back": "Back to home"
   },
   "footer": {
-    "tagline": "From chaos to insights."
+    "tagline": "Take agency over your data."
   }
 }

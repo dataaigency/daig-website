@@ -34,9 +34,9 @@ const META: Record<string, Meta> = {
       'One architect end to end. Vadim Van Den Heuvel on lakehouse design, dbt, data governance and AI adoption that survives handover.',
   },
   '/contact': {
-    title: 'Book a free data architecture audit | data aigency',
+    title: 'Book a free intake call | data aigency',
     description:
-      'Book a free 30-minute data architecture audit. Bring your stack and your bottleneck, leave with a clear next step for your lakehouse or AI project.',
+      'Book a free 30-minute intake call. We discuss your data stack, the problems you are hitting and the solutions worth considering. No deck, no obligations.',
   },
 }
 
