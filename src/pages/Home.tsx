@@ -18,7 +18,6 @@ export default function Home() {
   return (
     <>
       <section className="hero dark">
-        <div className="hero__field" aria-hidden="true" />
         <div className="container hero__inner">
           <div className="hero__text">
             <p className="eyebrow">{t('hero.eyebrow')}</p>
@@ -29,6 +28,7 @@ export default function Home() {
               <Link className="hero__secondary" to="/about">{t('hero.secondary')}</Link>
             </div>
           </div>
+          <img className="hero__logo" src="/logo-white.png" alt="" width={300} height={300} />
         </div>
       </section>
       <StripeBand variant="cut-exit" />

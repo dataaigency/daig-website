@@ -1,12 +1,9 @@
 @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
 .hero { position: relative; overflow: hidden; }
-.hero__inner { position: relative; padding-top: 88px; padding-bottom: 120px; }
-.hero__field {
-  position: absolute; right: -80px; top: -60px; width: 380px; height: 560px;
-  background: repeating-linear-gradient(-45deg, rgba(3, 248, 86, 0.14) 0 5px, transparent 5px 30px);
-  transform: skewX(-8deg); pointer-events: none;
-}
+.hero__inner { position: relative; padding-top: 88px; padding-bottom: 120px; display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+.hero__logo { width: min(300px, 26vw); height: auto; flex-shrink: 0; animation: rise 0.6s ease-out 0.15s both; }
+@media (max-width: 860px) { .hero__logo { display: none; } }
 .hero__text { max-width: 560px; }
 .hero__text > * { animation: rise 0.5s ease-out both; }
 .hero__text > :nth-child(2) { animation-delay: 0.06s; }
