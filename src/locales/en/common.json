@@ -164,10 +164,15 @@
     }
   },
   "work": {
+    "label": "Case studies and notes",
     "title": "Work & writing",
     "empty": "First case study coming soon.",
     "notFoundPost": "That post doesn't exist.",
-    "backToWork": "Back to work"
+    "backToWork": "Back to work",
+    "tags": "Topics",
+    "minRead_one": "{{count}} min read",
+    "minRead_other": "{{count}} min read",
+    "ctaLine": "If this made sense, the intake call will too."
   },
   "notFound": {
     "title": "Page not found.",

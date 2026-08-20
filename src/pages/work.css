@@ -1,0 +1,138 @@
+/* /work index and single post shell. Paper and graphite for reading, navy for
+   the one closing moment, flash only in seams, markers and the CTA button. */
+
+/* ---------- shared meta line and tag chips ---------- */
+.wmeta {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--graphite); font-weight: 500;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin: 0;
+}
+.wmeta__sep { width: 4px; height: 4px; background: var(--flash); flex-shrink: 0; }
+
+.wtags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.wtag {
+  font-family: var(--font-mono);
+  font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase; line-height: 1;
+  color: var(--graphite); background: var(--white);
+  border: 1px solid var(--paper-line); border-radius: var(--radius);
+  padding: 6px 9px;
+}
+
+/* ---------- index ---------- */
+.work { padding: 56px 0 76px; }
+.work__title { font-size: clamp(30px, 5vw, 44px); margin: 12px 0 0; }
+.work .reveal { margin-top: 32px; }
+.work__empty { color: var(--graphite); margin: 28px 0 0; }
+.work__list { display: grid; gap: 16px; margin-top: 36px; }
+
+.wcard {
+  position: relative;
+  background: var(--white); border: 1px solid var(--paper-line);
+  border-radius: 6px; padding: 24px 26px;
+}
+.wcard:hover { border-color: var(--flash); }
+.wcard:has(.wcard__link:focus-visible) { border-color: var(--flash); }
+.wcard__title { font-size: clamp(19px, 2.4vw, 23px); margin: 12px 0 0; }
+.wcard__link { text-decoration: none; }
+/* the whole card is the hit area, the link text stays the accessible name */
+.wcard__link::after { content: ''; position: absolute; inset: 0; border-radius: 6px; }
+.wcard:hover .wcard__link {
+  text-decoration: underline; text-decoration-color: var(--flash);
+  text-decoration-thickness: 2px; text-underline-offset: 4px;
+}
+.wcard__sum { color: var(--graphite); font-size: 15px; margin: 10px 0 0; max-width: 68ch; }
+.wcard .wtags { margin-top: 16px; }
+
+/* ---------- single post ---------- */
+.post { padding: 40px 0 80px; }
+.post__inner { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+.post__back {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--graphite); text-decoration: none; padding: 10px 0;
+}
+.post__back::before { content: '\2190'; font-size: 13px; }
+.post__back:hover { color: var(--navy-deep); }
+
+.post__tags { margin-top: 18px; }
+.post__meta { margin-top: 14px; }
+.post__title { font-size: clamp(28px, 4.6vw, 40px); margin: 16px 0 0; }
+.post__lede { font-size: 17px; line-height: 1.6; color: var(--graphite); margin: 16px 0 0; }
+/* floating stripes seam, the same language as the section separators */
+.post__seam {
+  height: 14px; margin: 30px 0 32px;
+  background: repeating-linear-gradient(-45deg, var(--flash) 0 3px, transparent 3px 16px);
+}
+
+/* ---------- MDX body ---------- */
+.prose {
+  --code-panel: color-mix(in srgb, var(--paper-line) 65%, var(--white));
+  color: var(--graphite); font-size: 16px; line-height: 1.7;
+}
+.prose > :first-child { margin-top: 0; }
+.prose > :last-child { margin-bottom: 0; }
+.prose p { margin: 0 0 20px; }
+.prose h2 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(21px, 3vw, 25px); line-height: 1.2;
+  margin: 42px 0 12px;
+}
+.prose h3 { font-family: var(--font-display); font-weight: 700; font-size: 17px; margin: 30px 0 8px; }
+.prose h2 + p, .prose h3 + p { margin-top: 0; }
+.prose a { color: var(--navy-deep); text-decoration: underline; text-decoration-color: var(--flash); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.prose a:hover { color: var(--navy); }
+.prose strong { color: var(--navy-deep); font-weight: 600; }
+.prose ul, .prose ol { margin: 0 0 20px; padding-left: 22px; }
+.prose li { margin: 8px 0; }
+.prose li > ul, .prose li > ol { margin: 8px 0 0; }
+.prose ul li::marker { color: var(--flash); }
+.prose ol li::marker { font-family: var(--font-mono); font-size: 13px; color: var(--graphite); }
+.prose blockquote {
+  margin: 26px 0; padding: 4px 0 4px 20px;
+  border-left: 3px solid var(--navy-deep);
+  color: var(--navy-deep); font-size: 17px; line-height: 1.6;
+}
+.prose blockquote p:last-child { margin-bottom: 0; }
+.prose code {
+  font-family: var(--font-mono); font-size: 13.5px;
+  background: var(--code-panel); border-radius: var(--radius); padding: 2px 6px;
+}
+.prose pre {
+  font-family: var(--font-mono); font-size: 13px; line-height: 1.6;
+  background: var(--code-panel); border: 1px solid var(--paper-line);
+  border-radius: 6px; padding: 16px 18px; margin: 0 0 22px;
+  overflow-x: auto;
+}
+.prose pre code { background: none; padding: 0; font-size: inherit; }
+.prose img, .prose canvas, .prose svg, .prose video, .prose iframe {
+  display: block; max-width: 100%; height: auto; margin: 24px 0;
+}
+.prose figure { margin: 24px 0; }
+.prose figcaption { font-size: 12.5px; color: var(--graphite); margin-top: 10px; }
+.prose hr { border: 0; height: 1px; background: var(--paper-line); margin: 34px 0; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 0 0 22px; }
+.prose th, .prose td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--paper-line); vertical-align: top; }
+.prose th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+
+/* ---------- closing CTA ---------- */
+.post-cta {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 22px; flex-wrap: wrap;
+  background: var(--navy); color: var(--frost);
+  border-radius: 6px; padding: 28px 30px; margin-top: 52px;
+}
+.post-cta__line {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 19px; line-height: 1.3; letter-spacing: -0.01em;
+  color: var(--paper); margin: 0; max-width: 32ch; text-wrap: balance;
+}
+
+@media (max-width: 560px) {
+  .wcard { padding: 20px; }
+  .post-cta { padding: 24px; }
+  .post-cta .btn { width: 100%; text-align: center; }
+}

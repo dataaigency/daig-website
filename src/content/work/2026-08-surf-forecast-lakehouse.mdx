@@ -1,0 +1,123 @@
+import { WaveHeightChart, WindChart, PaddleOutChart } from '../../components/charts/SurfCharts'
+
+export const meta = {
+  title: 'Can data tell you when to surf?',
+  date: '2026-08-15',
+  tags: ['data for humans', 'lakehouse', 'medallion', 'charts'],
+  lang: 'en',
+  summary: 'A surf forecast is a tiny data platform, so here is the whole idea explained through one question: when do I paddle out?',
+}
+
+I surf. Not impressively, but enough that I check the forecast the way other
+people check the news. And somewhere between the buoy readings and the wind
+apps it hit me: every surfer is already running a small data platform in their
+head. They pull numbers from three or four messy sources, clean them up on the
+fly, and boil it all down to one decision. Go, or make coffee and wait.
+
+That is also, honestly, the entire job I do for companies. So in this post I
+want to build a surf forecast in the open, because it is the friendliest way I
+know to show what a data platform actually is. No jargon required. If you have
+ever planned a beach day, you already understand the hard parts.
+
+## One question, three messy sources
+
+The question sounds simple: when do I paddle out this week? To answer it you
+need three ingredients.
+
+First, wave height. Out at sea there are buoys that measure the swell rolling
+underneath them. In the US, NOAA operates hundreds of them through its National
+Data Buoy Center, and they publish their readings publicly all day long. Second,
+wind, because wind is what turns a promising swell into either clean walls or
+churned-up chop. Forecast services like Open-Meteo offer a free marine and
+weather API for exactly this. Third, the tide table, which for many spots
+decides whether the wave breaks at all, and which often lives in a PDF from the
+local harbour authority.
+
+Three sources, and none of them agree on anything. The buoy reports in feet,
+the wind forecast in km/h or knots depending on where you ask. One timestamps
+in UTC, another in local time. The buoy occasionally goes silent for an hour.
+The forecast quietly revises itself four times a day.
+
+If you have ever tried to combine two spreadsheets from two departments, this
+mess will feel familiar. It is not a surf problem. It is what data from more
+than one place always looks like. So here is what a small data platform does
+about it, in three moves.
+
+## Move one: keep everything, exactly as it arrived
+
+Before fixing anything, you copy every reading into one place, exactly as it
+came in, and you stamp each copy with when it arrived and where it came from.
+Feet stay feet. Gaps stay gaps. The weird reading from Tuesday night stays
+weird.
+
+This feels lazy and it is the most important habit in the whole system.
+Untouched originals are your receipts. When a number looks wrong three steps
+later, you can walk back and see precisely what the buoy said, rather than
+arguing with your own edits. Engineers call this the raw or bronze layer. I
+call it the shoebox of receipts, and the rule is simple: nothing gets thrown
+away, and nothing gets "helpfully" corrected on the way in.
+
+## Move two: clean it once, in one place
+
+Now, in a second copy, you make everything agree. Feet become metres. Knots
+become km/h. Every timestamp lands in one timezone. Duplicate readings get
+dropped, silent hours get marked as missing instead of pretended away. What
+comes out is one tidy table per spot: time, wave height, wind speed, tide.
+
+The word that matters here is once. Without this step, every person cleans the
+same numbers again in their own spreadsheet, slightly differently, forever.
+With it, there is a single trustworthy version everyone reads from. This is
+the silver layer, and it is where most of the honest work lives.
+
+Here is what a cleaned-up week looks like for Model Point, a surf spot I made
+up for this post. The numbers are invented but believable: a small early week,
+a swell arriving Wednesday, peaking into Friday, then easing off.
+
+<WaveHeightChart />
+
+And the wind for the same week. Calm mornings, an afternoon sea breeze most
+days, and a genuinely windy Thursday as the weather system that brought the
+swell moves through.
+
+<WindChart />
+
+One small craft note, because it teaches a real lesson: these are two separate
+charts on purpose. Metres and km/h live on completely different scales, and
+squeezing them onto one chart with two y-axes lets you stretch either scale
+until the lines tell whatever story you fancy. Two honest charts, stacked, beat
+one clever chart every time.
+
+## Move three: one number you can act on
+
+Two clean charts are nice, but at 6am with a wetsuit in one hand you do not
+want charts. You want an answer. So the last move combines wave and wind into
+one score per morning: waves in the sweet range for the spot, wind light. The
+two multiply rather than add, because both have to be good. A perfect swell in
+howling onshore wind is still a no.
+
+<PaddleOutChart />
+
+Read it and the week snaps into focus. Friday is the day. And notice Thursday:
+the biggest waves of the week, and a score near zero, because it is blown to
+pieces. The raw data says Thursday is the most impressive day. The decision
+layer says Friday is the best one. That gap between impressive and useful is
+exactly what this final step exists to close. Engineers call it the gold
+layer: the small, opinionated view that answers the actual question.
+
+## The whole platform, in one breath
+
+That is it. Keep everything as it arrived, so you can always check your
+receipts. Clean it once, in one place, so everyone reads the same numbers. Then
+boil it down to the few views that answer real questions. In the trade this
+pattern is called a medallion architecture, bronze to silver to gold, and
+almost everything else you hear about, the lakehouses and warehouses and
+pipelines and dbt models, is scaffolding for doing these same three moves at a
+much bigger scale without losing your mind.
+
+And a business is exactly the same platform: replace waves with customers, wind
+with costs, and "when do I paddle out" with whatever decision you keep making
+by gut feel.
+
+If your company's forecast still lives in seventeen spreadsheets and one
+person's head, [book a free 30 minute architecture audit](https://calendar.app.google/F5mvmg12xMpF73fw6)
+and we will find your Friday.
