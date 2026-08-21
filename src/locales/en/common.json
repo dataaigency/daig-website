@@ -2,7 +2,7 @@
   "nav": { "services": "Services", "work": "Work", "about": "About", "contact": "Contact", "cta": "Book a call" },
   "hero": {
     "eyebrow": "Data architecture studio",
-    "title": "From chaos to insights.",
+    "title": "From chaos to clarity.",
     "sub": "One source of truth your whole team trusts, and analysts who get their week back. Built properly, documented fully, handed over completely. AI where it earns its place, governed from day one.",
     "cta": "Book a free intake call",
     "secondary": "How we work"
@@ -130,9 +130,9 @@
     "cta": "See all services",
     "items": [
       { "title": "Lakehouse architecture", "desc": "One governed source of truth your teams can build on. Delivered as a production-grade lakehouse in Fabric or GCP, with semantic layer, medallion design and governance in Purview or Dataplex from day one.", "outcomes": ["One source of truth your teams trust", "Governance and semantic layer from day one", "Documented, transferable architecture"] },
-      { "title": "Pipelines & automation", "desc": "Data that is fresh, tested and ready when your team sits down. Built with dbt on BigQuery or Fabric, orchestrated with Airflow or Fabric pipelines, monitored so quality issues surface before your stakeholders do.", "outcomes": ["Analysts stop cleaning, start analyzing", "Tested, monitored pipelines", "Costs you can predict"] },
-      { "title": "AI-ready data layers", "desc": "Your ML and BI work starts on day one instead of after months of wrangling. Feature stores, training sets and analytics layers, built with lineage so every number can be traced.", "outcomes": ["ML-ready features without the scramble", "Training data with lineage", "Analytics layers that answer questions"] },
-      { "title": "AI adoption & governance", "desc": "AI that reaches production and earns its keep. A phased rollout with security, access control and evaluation built in, from the first use case onward.", "outcomes": ["A phased roadmap, not a vibe-coded strategy", "Security and access control designed in", "Evaluation before scale up"] }
+      { "title": "Automation & DataOps", "desc": "Data that is fresh, tested and ready when your team sits down. Built with dbt on BigQuery or Fabric, orchestrated with Airflow or Fabric pipelines, monitored so quality issues surface before your stakeholders do.", "outcomes": ["Analysts stop cleaning, start analyzing", "Tested, monitored pipelines", "Costs you can predict"] },
+      { "title": "AI-ready data & MLOps", "desc": "Your ML and BI work starts on day one instead of after months of wrangling. Feature stores, training sets and analytics layers, built with lineage so every number can be traced.", "outcomes": ["ML-ready features without the scramble", "Training data with lineage", "Analytics layers that answer questions"] },
+      { "title": "AI governance & LLMOps", "desc": "AI that reaches production and earns its keep. A phased rollout with security, access control and evaluation built in, whether it runs on Azure AI Foundry or the stack you already have.", "outcomes": ["A phased roadmap, not a vibe-coded strategy", "Security and access control designed in", "Evaluation before scale up"] }
     ]
   },
   "handover": {

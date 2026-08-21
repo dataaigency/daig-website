@@ -19,9 +19,9 @@ const META: Record<string, Meta> = {
       'Independent data architecture consulting: lakehouses, dbt pipelines and AI-ready foundations. Built properly, secured from day one, handed over completely.',
   },
   '/services': {
-    title: 'Lakehouse, dbt and AI governance consulting | data aigency',
+    title: 'Lakehouse, DataOps, MLOps and LLMOps consulting | data aigency',
     description:
-      'Lakehouse architecture on Microsoft Fabric or BigQuery, dbt pipelines and automation, AI-ready data layers, and phased AI adoption with governance you can audit.',
+      'Lakehouse architecture on Microsoft Fabric or BigQuery, automation and DataOps with dbt, AI-ready data and MLOps, and governed LLMOps from first use case to production.',
   },
   '/work': {
     title: 'Data architecture case studies and writing | data aigency',
