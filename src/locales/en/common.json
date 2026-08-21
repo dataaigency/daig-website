@@ -162,8 +162,8 @@
   },
   "about": {
     "title": "One architect, end to end.",
-    "body1": "data aigency is the remote practice of Vadim Van Den Heuvel. The person who takes your first call is the person who designs the architecture, builds it and hands it over. No salesperson, no junior team behind the curtain. Every diagram on this site is drawn the way your documentation will be written: so anyone on your team can read it.",
-    "body2": "And nothing depends on me staying. Everything lives in your repositories from the first commit, your tables sit in open formats like Delta and Iceberg, and every decision is documented, so any engineer can pick up where I leave off. Scope, timeline and costs are agreed up front. Full handover of code, docs and runbooks. No lock-in, no black boxes.",
+    "body1": "data aigency is the remote practice of Vadim Van Den Heuvel. One architect who designs, builds and hands over your data platform, end to end. The person on your first call is the person writing the code, embedded in your team and your tools, adding value where it matters most. Every diagram on this site is drawn the way your documentation will be written: so anyone on your team can read it.",
+    "body2": "You keep everything. The platform lives in your repositories from the first commit, your tables sit in open formats like Delta and Iceberg, and every decision is written down. Scope, timeline and costs are agreed up front, and the engagement ends with a full handover: code, docs, runbooks and keys. What we build together is yours to run, extend and own.",
     "linkLabel": "Find me on LinkedIn"
   },
   "contact": {
