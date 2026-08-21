@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import StripeBand from '../components/StripeBand'
 import Reveal from '../components/Reveal'
 import FlowDiagram from '../components/FlowDiagram'
+import Handover from '../components/Handover'
 import { IconLayers, IconPipeline, IconChart, IconShield } from '../components/icons'
 import { LINKS } from '../links'
 import './home.css'
@@ -116,6 +117,10 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
+
+      <StripeBand variant="cut" />
+      <Handover />
+      <StripeBand variant="cut-exit" />
 
       <section className="process container">
         <Reveal>

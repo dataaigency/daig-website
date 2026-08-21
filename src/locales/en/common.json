@@ -135,6 +135,25 @@
       { "title": "AI adoption & governance", "desc": "AI that reaches production and earns its keep. A phased rollout with security, access control and evaluation built in, from the first use case onward.", "outcomes": ["A phased roadmap, not a vibe-coded strategy", "Security and access control designed in", "Evaluation before scale up"] }
     ]
   },
+  "handover": {
+    "label": "The deliverables",
+    "title": "What you keep.",
+    "sub": "Every engagement ends with a handover, not a renewal conversation. This is what lands in your hands, shown as samples, not staged client work.",
+    "tag1": "Sample page · architecture doc",
+    "doc1Title": "Data platform architecture",
+    "cap1": "The design, written so anyone on your team can read it.",
+    "tag2": "Sample · pipeline test run",
+    "tests": ["stg_orders · not_null order_id", "stg_customers · unique customer_id", "fct_revenue · freshness under 2h", "dim_products · relationships valid"],
+    "failTest": "fct_margin · accepted_range",
+    "alert": "alert: engineer first",
+    "pass": "pass",
+    "fail": "fail",
+    "cap2": "Every run tested. A failure alerts the engineer, it never surprises you.",
+    "tag3": "Sample · runbook & your repos",
+    "doc3Title": "Runbook · morning checks",
+    "tree": ["your-company/data-platform", "├─ dbt/", "├─ docs/", "├─ runbooks/", "└─ infra/"],
+    "cap3": "Runbooks and keys, in repositories you own from the first commit."
+  },
   "process": {
     "label": "No black boxes",
     "title": "Audit, design, build, handover. You keep the keys and the docs.",

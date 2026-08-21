@@ -9,6 +9,7 @@ test('home renders hero, three dictionary entries, four services, process CTA', 
   expect(screen.getAllByText('data aigency', { exact: false }).length).toBeGreaterThanOrEqual(3)
   expect(screen.getByText('Sound familiar?')).toBeInTheDocument()
   expect(screen.getByText('One governed flow, from sources to answers.')).toBeInTheDocument()
+  expect(screen.getByText('What you keep.')).toBeInTheDocument()
   expect(screen.getByText('Bronze')).toBeInTheDocument()
   expect(screen.getByText('Lakehouse architecture')).toBeInTheDocument()
   expect(screen.getByText('AI adoption & governance')).toBeInTheDocument()
