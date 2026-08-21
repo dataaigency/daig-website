@@ -13,5 +13,5 @@ Loops pick the topmost unchecked item whose agent fits the block. Add freely; ke
 - [ ] (backend-developer) Add CI check that dist HTML contains no external URLs except calendar.app.google and api.web3forms.com
 - [ ] (owner) Paste the Web3Forms access key into src/config.ts (get it at web3forms.com with vadim@dataaigency.com) or the contact form cannot deliver
 - [ ] (blog-writer) Post: "Microsoft Fabric or BigQuery for your first lakehouse?" (highest-value query, needs research time)
-- [ ] (ui-expert) Work index: render tags, reading time, human dates; article shell with closing CTA on posts
+- [x] (ui-expert) Work index meta + article shell shipped (surf-post wave)
 - [ ] (owner+claude) Build proof asset 1: full sample architecture document (4-6 pages, sanitized template) - memo asset list; decide format (site page vs PDF)
