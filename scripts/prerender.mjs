@@ -27,43 +27,84 @@ const jsonLd = (data) =>
 
 const SAME_AS = [LINKS.linkedin, LINKS.github]
 
-const homeStructuredData = () => [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    '@id': `${SITE_URL}/#organization`,
-    name: BRAND,
-    url: SITE_URL,
-    logo: `${SITE_URL}/logo-full.png`,
-    image: `${SITE_URL}/og-image.png`,
-    description: metaFor('/').description,
-    founder: { '@type': 'Person', name: 'Vadim Van Den Heuvel', url: LINKS.linkedin },
-    sameAs: SAME_AS,
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
-    '@id': `${SITE_URL}/#service`,
-    name: BRAND,
-    url: SITE_URL,
-    logo: `${SITE_URL}/logo-full.png`,
-    image: `${SITE_URL}/og-image.png`,
-    description: metaFor('/services').description,
-    parentOrganization: { '@id': `${SITE_URL}/#organization` },
-    founder: { '@type': 'Person', name: 'Vadim Van Den Heuvel', url: LINKS.linkedin },
-    sameAs: SAME_AS,
-    knowsAbout: [
-      'Data architecture',
-      'Lakehouse architecture',
-      'Microsoft Fabric',
-      'Google BigQuery',
-      'dbt',
-      'Data governance',
-      'AI adoption',
-      'AI governance',
-    ],
-  },
+// The four service pages, in the order they appear on /services. Names are the
+// owner-locked service names; the paths are the child routes.
+const SERVICES = [
+  { name: 'Lakehouse architecture', route: '/services/lakehouse-architecture' },
+  { name: 'Automation & DataOps', route: '/services/automation-dataops' },
+  { name: 'AI-ready data & MLOps', route: '/services/ai-ready-data-mlops' },
+  { name: 'AI governance & LLMOps', route: '/services/ai-governance-llmops' },
 ]
+
+const organization = () => ({
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${SITE_URL}/#organization`,
+  name: BRAND,
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo-full.png`,
+  image: `${SITE_URL}/og-image.png`,
+  description: metaFor('/').description,
+  founder: { '@type': 'Person', name: 'Vadim Van Den Heuvel', url: LINKS.linkedin },
+  sameAs: SAME_AS,
+})
+
+const professionalService = () => ({
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': `${SITE_URL}/#service`,
+  name: BRAND,
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo-full.png`,
+  image: `${SITE_URL}/og-image.png`,
+  description: metaFor('/services').description,
+  parentOrganization: { '@id': `${SITE_URL}/#organization` },
+  founder: { '@type': 'Person', name: 'Vadim Van Den Heuvel', url: LINKS.linkedin },
+  sameAs: SAME_AS,
+  knowsAbout: [
+    'Data architecture',
+    'Lakehouse architecture',
+    'Microsoft Fabric',
+    'Google BigQuery',
+    'dbt',
+    'Data governance',
+    'AI adoption',
+    'AI governance',
+  ],
+})
+
+const homeStructuredData = () => [organization(), professionalService()]
+
+// Same entity as on the home page (same @id), with the catalog of the four
+// service pages attached where the services actually live.
+const servicesStructuredData = () => ({
+  ...professionalService(),
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl('/services') },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Data and AI consulting services',
+    itemListElement: SERVICES.map((service) => ({
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: service.name,
+        url: canonicalUrl(service.route),
+        provider: { '@id': `${SITE_URL}/#organization` },
+      },
+    })),
+  },
+})
+
+const aboutStructuredData = () => ({
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${SITE_URL}/about/#person`,
+  name: 'Vadim Van Den Heuvel',
+  url: canonicalUrl('/about'),
+  jobTitle: 'Data & AI architect',
+  worksFor: { '@id': `${SITE_URL}/#organization` },
+  sameAs: SAME_AS,
+})
 
 const postStructuredData = (route, post) => ({
   '@context': 'https://schema.org',
@@ -79,6 +120,16 @@ const postStructuredData = (route, post) => ({
   image: `${SITE_URL}/og-image.png`,
   author: { '@type': 'Person', name: 'Vadim Van Den Heuvel', url: LINKS.linkedin },
   publisher: { '@id': `${SITE_URL}/#organization` },
+})
+
+const postBreadcrumbs = (route, post) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+    { '@type': 'ListItem', position: 2, name: 'Work', item: canonicalUrl('/work') },
+    { '@type': 'ListItem', position: 3, name: post.title, item: canonicalUrl(route) },
+  ],
 })
 
 for (const route of routes) {
@@ -99,7 +150,9 @@ for (const route of routes) {
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<link rel="canonical" href="${canonicalUrl(route)}" />`,
     ...(route === '/' ? homeStructuredData().map(jsonLd) : []),
-    ...(post ? [jsonLd(postStructuredData(route, post))] : []),
+    ...(route === '/services' ? [jsonLd(servicesStructuredData())] : []),
+    ...(route === '/about' ? [jsonLd(aboutStructuredData())] : []),
+    ...(post ? [jsonLd(postStructuredData(route, post)), jsonLd(postBreadcrumbs(route, post))] : []),
   ].join('\n    ')
   const html = template
     .replace('<!--app-head-->', () => head)

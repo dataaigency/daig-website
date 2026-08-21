@@ -14,14 +14,34 @@ const FALLBACK: Meta = {
 
 const META: Record<string, Meta> = {
   '/': {
-    title: 'data aigency | Data architecture, lakehouses and governed AI',
+    title: 'Data architecture consulting: lakehouse, AI-ready data and governance | data aigency',
     description:
-      'Independent data architecture consulting: lakehouses, dbt pipelines and AI-ready foundations. Built properly, secured from day one, handed over completely.',
+      'Independent data architecture consulting: lakehouse platforms, automated reporting pipelines and AI-ready foundations. Built properly, secured from day one, handed over completely.',
   },
   '/services': {
     title: 'Lakehouse, DataOps, MLOps and LLMOps consulting | data aigency',
     description:
       'Lakehouse architecture on Microsoft Fabric or BigQuery, automation and DataOps with dbt, AI-ready data and MLOps, and governed LLMOps from first use case to production.',
+  },
+  '/services/lakehouse-architecture': {
+    title: 'Lakehouse architecture consulting | data aigency',
+    description:
+      'One governed lakehouse on Microsoft Fabric or BigQuery: a single source of truth that does the work of a data warehouse and a data lake, with governance and a semantic layer from day one.',
+  },
+  '/services/automation-dataops': {
+    title: 'Automation and DataOps consulting | data aigency',
+    description:
+      'Automated reporting your team can trust. Pipelines built with dbt, orchestrated with Airflow or Fabric, tested and monitored so analysts get their hours back.',
+  },
+  '/services/ai-ready-data-mlops': {
+    title: 'AI-ready data and MLOps consulting | data aigency',
+    description:
+      'AI-ready data with lineage on everything: feature stores, training sets and analytics layers, so machine learning starts on day one instead of after months of wrangling.',
+  },
+  '/services/ai-governance-llmops': {
+    title: 'AI governance and LLMOps consulting | data aigency',
+    description:
+      'AI in production one use case at a time, with access control, evaluation and audit logging built in. Practical EU AI Act readiness on Azure AI Foundry or the stack you already have.',
   },
   '/work': {
     title: 'Data architecture case studies and writing | data aigency',

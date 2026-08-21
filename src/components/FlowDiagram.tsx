@@ -56,7 +56,7 @@ export default function FlowDiagram() {
   )
 
   const dot = (pathId: string, dur: number, begin: number) => (
-    <circle r={3.5} fill={FLASH} opacity={0}>
+    <circle key={`${pathId}-${begin}`} r={3.5} fill={FLASH} opacity={0}>
       <set attributeName="opacity" to="1" begin={`${begin}s`} />
       <animateMotion dur={`${dur}s`} begin={`${begin}s`} repeatCount="indefinite">
         <mpath href={`#${pathId}`} />

@@ -2,13 +2,32 @@ import { metaFor, BRAND } from './seo'
 import { getPosts } from './lib/posts'
 
 test('known routes get specific titles, unknown fall back', () => {
-  expect(metaFor('/').title).toBe('data aigency | Data architecture, lakehouses and governed AI')
+  expect(metaFor('/').title).toBe(
+    'Data architecture consulting: lakehouse, AI-ready data and governance | data aigency',
+  )
   expect(metaFor('/services').title).toContain('Lakehouse')
   expect(metaFor('/nonexistent').title).toBe(BRAND)
 })
 
+test('each service detail page gets its own query-aligned title', () => {
+  expect(metaFor('/services/lakehouse-architecture').title).toBe('Lakehouse architecture consulting | data aigency')
+  expect(metaFor('/services/automation-dataops').title).toBe('Automation and DataOps consulting | data aigency')
+  expect(metaFor('/services/ai-ready-data-mlops').title).toBe('AI-ready data and MLOps consulting | data aigency')
+  expect(metaFor('/services/ai-governance-llmops').title).toBe('AI governance and LLMOps consulting | data aigency')
+})
+
 test('every route title keeps the brand and avoids em dashes', () => {
-  for (const path of ['/', '/services', '/work', '/about', '/contact']) {
+  for (const path of [
+    '/',
+    '/services',
+    '/services/lakehouse-architecture',
+    '/services/automation-dataops',
+    '/services/ai-ready-data-mlops',
+    '/services/ai-governance-llmops',
+    '/work',
+    '/about',
+    '/contact',
+  ]) {
     const { title, description } = metaFor(path)
     expect(title).toContain(BRAND)
     expect(title).not.toContain('—')

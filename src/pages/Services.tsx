@@ -1,8 +1,10 @@
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router'
 import StripeBand from '../components/StripeBand'
 import Reveal from '../components/Reveal'
 import { LakehouseFlow, PipelinesFlow, AiDataFlow, GovernanceFlow } from '../components/flows/ServiceFlows'
 import { IconLayers, IconPipeline, IconChart, IconShield } from '../components/icons'
+import { SERVICE_PAGES } from './ServiceDetail'
 import { LINKS } from '../links'
 
 type ServiceItem = { title: string; desc: string; outcomes: string[] }
@@ -25,16 +27,22 @@ export default function Services() {
           {items.map((s, i) => {
             const Icon = icons[i]
             const Flow = flows[i]
+            const detailPath = `/services/${SERVICE_PAGES[i].slug}`
             return (
               <Reveal key={s.title} delay={(i % 2) * 100}>
                 <article className="service-card">
                   <Icon />
-                  <h2 style={{ fontSize: 22, margin: '12px 0 8px' }}>{s.title}</h2>
+                  <h2 style={{ fontSize: 22, margin: '12px 0 8px' }}>
+                    <Link to={detailPath} style={{ color: 'inherit', textDecoration: 'none' }}>{s.title}</Link>
+                  </h2>
                   <p style={{ color: 'var(--graphite)', margin: 0 }}>{s.desc}</p>
                   <Flow />
                   <ul style={{ margin: '14px 0 0', paddingLeft: 20, color: 'var(--graphite)' }}>
                     {s.outcomes.map((o) => <li key={o}>{o}</li>)}
                   </ul>
+                  <p style={{ margin: '14px 0 0' }}>
+                    <Link to={detailPath} aria-label={`${t('services.readMore')}: ${s.title}`}>{t('services.readMore')} →</Link>
+                  </p>
                 </article>
               </Reveal>
             )

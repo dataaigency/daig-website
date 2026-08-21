@@ -1,0 +1,137 @@
+export const meta = {
+  title: 'Does a small business need a data warehouse (or a lakehouse)?',
+  date: '2026-08-16',
+  tags: ['lakehouse', 'buyers guide'],
+  lang: 'en',
+  summary: 'An honest decision guide: the three signals that say yes, what these things actually are, what they cost, and when a spreadsheet is genuinely enough.',
+}
+
+If you are searching this question, something has probably already gone wrong
+in a small way. Two reports disagreed in a meeting. Someone spent a Friday
+copying numbers between systems. A vendor said the word "warehouse" and
+everyone nodded without knowing what it would cost. And most of the answers
+you will find online come from companies that sell warehouses, which makes
+them about as neutral as asking a barber whether you need a haircut.
+
+I design these systems for a living, so I have a barber problem too. So let me
+put the honest answer first and earn your trust from there.
+
+## Does a small business need a data warehouse?
+
+Usually not yet. Sometimes genuinely yes. A warehouse is not a milestone every
+company hits at a certain size, and it is not a trophy for being data driven.
+It is a fix for a specific set of pains. If you do not have the pains, a
+warehouse is cost and maintenance with nothing on the other side of the scale.
+If you do have them, no amount of spreadsheet heroics will make them go away,
+and every month you wait gets quietly more expensive.
+
+So the real question is not "are we big enough" but "do we have the pains".
+Here they are.
+
+## How do I know I actually need one?
+
+Three signals. You need one of them clearly, or two of them partly.
+
+**Your data lives in five or more places that do not talk to each other.** An
+accounting tool, a CRM, a webshop, a planning system, a folder of exports
+someone emails around. Below five sources, a person can still hold the whole
+picture in their head. At five and beyond, every question that spans two
+systems becomes a manual stitching job, and every stitching job is a fresh
+chance to get a different answer than last time.
+
+**The people you hired to analyze spend their week cleaning.** If your analyst
+or office manager spends most of their reporting time exporting, fixing dates,
+deduplicating customers and reconciling totals, and only the leftover sliver
+actually answering questions, you are paying analysis salaries for janitorial
+work. A warehouse moves that cleaning into one place, done once, instead of
+redone by hand before every report.
+
+**You are spending on cloud or AI and cannot say what it returns.** Maybe
+there is a pilot chatbot, a dashboard subscription, a growing cloud bill, and
+nobody can point to the number it moved. AI tools in particular are only as
+good as the data underneath them, and "the data underneath" is exactly what a
+warehouse or lakehouse is. If you want the shiny layer to pay off, this
+unglamorous layer has to exist first.
+
+If you read those three and felt nothing, you have your answer: not yet, and I
+will tell you further down what to do instead.
+
+## What is a data warehouse, in plain words?
+
+A data warehouse is one big, organized database whose only job is answering
+questions. On a schedule, it copies data out of your everyday tools, tidies it
+into one consistent shape, and stores it in one place. Your accounting tool is
+built for invoicing and your CRM is built for selling; neither is built for
+"show me revenue per customer per month, correctly, every time". The warehouse
+is. One location, one definition of every important number, so two dashboards
+can no longer disagree because they are reading the same page.
+
+## What is a lakehouse, and how is it different?
+
+A lakehouse does the same job a different way. Instead of loading everything
+into one database, it keeps data as files in cheap cloud storage and puts a
+query engine on top, so it behaves like a warehouse when you ask it questions
+but can also hold the messy stuff a classic warehouse handles badly: documents,
+logs, images, the raw material AI work feeds on. Most lakehouses organize
+those files in layers from raw to report-ready, a pattern I have written about
+in [the medallion mistakes post](/work/2026-08-medallion-mistakes). For a
+small business the honest news is that the distinction matters less than
+vendors make it sound. Modern platforms blur the two, and picking wrong
+between them is a much smaller risk than building one you did not need.
+
+## What does it cost in money?
+
+Less than you fear for the tools, and it depends on how you run them.
+
+On Google's side, BigQuery charges by the amount of data your queries scan,
+listed at $6.25 per TiB, with the first 1 TiB of queries and 10 GiB of storage
+free every month ([Google's pricing page](https://cloud.google.com/bigquery/pricing)).
+A small company's entire history is often gigabytes, not terabytes, so plenty
+of small setups run near the free tier for a long time.
+
+On Microsoft's side, Fabric sells capacity by the hour, like renting an engine
+by size ([Azure's pricing page](https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/)).
+The smallest size, F2, works out to roughly $263 a month at US list price if
+you leave it running around the clock, and pay-as-you-go capacity can be
+paused when nobody is using it, which shrinks that number a lot
+([a worked breakdown](https://www.synapx.com/blogs/microsoft-fabric-pricing-guide-2026/)).
+
+What actually drives your bill is not company size. It is how many sources you
+connect, how messy they are, and how often things refresh. Refreshing a
+dashboard hourly that gets read on Tuesdays is the classic way small bills
+become medium ones.
+
+## What does it cost in effort?
+
+This is the real price tag, and the one vendors mention least. Expect the
+first working version to take weeks of focused, skilled work, not days: a few
+weeks for a handful of clean sources, more when the sources are messy or the
+business rules are fuzzy. Then someone has to own it. Loads fail, tools change
+their exports, definitions drift. An owned warehouse compounds in value; an
+abandoned one is just a second place for your numbers to be wrong. If nobody
+inside or outside your company will own it, that is a reason to wait, and I
+say that as the person you would hire to build it. The full scope of what
+building and handing one over involves is on my
+[lakehouse architecture service page](/services/lakehouse-architecture).
+
+## When is a spreadsheet genuinely enough?
+
+More often than my invoice would like. If you have fewer than five data
+sources, one person who owns the numbers, and reporting that fits in a
+monthly rhythm, then a spreadsheet plus discipline is a legitimate data
+platform. The discipline is the load-bearing part: one master file instead of
+seventeen copies, a named owner, written definitions of your five most
+important numbers, and a short monthly reconciliation. That setup, actually
+followed, beats a neglected warehouse every single time. Outgrow it first,
+then build.
+
+## What should I do if I am not sure?
+
+Ask someone who is not selling you the answer, or at least someone who will
+tell you "not yet" in writing. I do a free 30 minute architecture audit, and
+[I have written up exactly what happens in it](/work/2026-08-what-an-audit-finds),
+including the part where "leave it alone" is a real recommendation I use
+often. Bring your messiest reporting frustration and I will tell you honestly
+which side of the line you are on.
+
+[Book the free 30 minute architecture audit.](https://calendar.app.google/F5mvmg12xMpF73fw6)

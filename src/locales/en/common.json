@@ -128,12 +128,59 @@
     "title": "Four things, done properly.",
     "sub": "Each one comes with a diagram you can read without a data background. What you see drawn here is what gets built, tested, documented and handed over.",
     "cta": "See all services",
+    "readMore": "Read more",
     "items": [
       { "title": "Lakehouse architecture", "desc": "One governed source of truth your teams can build on. Delivered as a production-grade lakehouse in Fabric or GCP, with semantic layer, medallion design and governance in Purview or Dataplex from day one.", "outcomes": ["One source of truth your teams trust", "Governance and semantic layer from day one", "Documented, transferable architecture"] },
       { "title": "Automation & DataOps", "desc": "Data that is fresh, tested and ready when your team sits down. Built with dbt on BigQuery or Fabric, orchestrated with Airflow or Fabric pipelines, monitored so quality issues surface before your stakeholders do.", "outcomes": ["Analysts stop cleaning, start analyzing", "Tested, monitored pipelines", "Costs you can predict"] },
       { "title": "AI-ready data & MLOps", "desc": "Your ML and BI work starts on day one instead of after months of wrangling. Feature stores, training sets and analytics layers, built with lineage so every number can be traced.", "outcomes": ["ML-ready features without the scramble", "Training data with lineage", "Analytics layers that answer questions"] },
       { "title": "AI governance & LLMOps", "desc": "AI that reaches production and earns its keep. A phased rollout with security, access control and evaluation built in, whether it runs on Azure AI Foundry or the stack you already have.", "outcomes": ["A phased roadmap, not a vibe-coded strategy", "Security and access control designed in", "Evaluation before scale up"] }
     ]
+  },
+  "servicePages": {
+    "eyebrow": "Service",
+    "builtTitle": "What gets built",
+    "teamTitle": "How it works in your team",
+    "relatedTitle": "Related reading",
+    "lakehouse": {
+      "title": "Lakehouse architecture",
+      "lede": "Most teams do not have a data problem. They have five copies of the same number and no way to say which one is right. A lakehouse gives you a single source of truth: one governed place where every report, dashboard and model reads the same data. It does the work of a data warehouse and a data lake in one platform, without locking you into either.",
+      "built": [
+        "The core is a medallion design on Microsoft Fabric or BigQuery. Raw data lands in Bronze exactly as it arrives, gets cleaned and tested once in Silver, and is modeled into business terms in Gold. Your teams stop debating whose spreadsheet is right, because there is one governed layer everyone reads from. If you already run a data warehouse, it fits into this design rather than being thrown away.",
+        "Governance is not a phase two. Purview on the Microsoft side or Dataplex on Google Cloud is wired in from the first table: who can see what, where each number came from, and what breaks if a source changes. On top sits a semantic layer, so revenue means the same thing in every dashboard and in every AI tool that reads your data.",
+        "Everything is documented and transferable. Tables live in open formats like Delta and Iceberg, the code lives in your repositories from the first commit, and the architecture document is written so anyone on your team can read it. Nothing about the platform depends on me once the engagement ends."
+      ],
+      "team": "I work embedded in your team, end to end. The person on the intake call is the person who designs, builds and hands over, so nothing gets lost between a sales deck and a delivery team. You see progress weekly in your own repositories, decisions are written down as they are made, and I add value where your team needs it most: sometimes that is architecture, sometimes it is walking your analysts through the new platform. At handover you get the code, the docs, the runbooks and the keys, and your team runs it."
+    },
+    "dataops": {
+      "title": "Automation & DataOps",
+      "lede": "Every hour an analyst spends fixing a broken export is an hour not spent answering a business question. Automation and DataOps replaces the manual routine with pipelines that run on a schedule, test themselves and tell an engineer when something is off. The result is automated reporting your team can trust: data that is fresh and checked before anyone sits down in the morning.",
+      "built": [
+        "Transformations are built with dbt on BigQuery or Microsoft Fabric. Every business rule lives in version-controlled, tested code instead of in someone's head or a fragile chain of spreadsheets. Cleaning happens once, inside the pipeline, so the hours your analysts currently lose to fixing data every week go back into actual analysis.",
+        "Orchestration runs on Airflow or Fabric pipelines. Every run is scheduled, every model is tested before it reaches the Gold layer, and freshness checks watch the data as it moves. When a test fails, the alert goes to the engineer first, never to your stakeholders. A dashboard that is quietly wrong costs more than one that is loudly late, so the pipelines are built to fail loudly and recover fast.",
+        "Costs stay predictable. Warehouse usage is monitored, heavy models run on a deliberate schedule instead of on every refresh, and you can see what each part of the platform costs. Automated reporting should save money as well as hours, and it only does that when someone designs for it."
+      ],
+      "team": "I work embedded in your team, end to end. The pipelines are built in your repositories, reviewed with your engineers if you have them, and documented with runbooks if you do not. You see the first automated reports early, then coverage widens source by source. At handover your team owns a system it can read, run and extend: every schedule, test and alert is written down, and nothing depends on me being around."
+    },
+    "mlops": {
+      "title": "AI-ready data & MLOps",
+      "lede": "Most AI projects do not fail on the model. They fail months earlier, on data that was never ready for it. AI-ready data means your tables are clean, documented, traceable and structured so a model or an analyst can use them on day one. This service builds that layer, plus the MLOps plumbing around it, so machine learning starts with training instead of wrangling.",
+      "built": [
+        "The starting point is a governed Gold layer, the business-ready data described on the lakehouse page. From it come the assets AI actually consumes: feature stores for classic machine learning, embeddings for retrieval and RAG, and analytics layers that answer the questions your team asks most. All of it built on BigQuery or Microsoft Fabric, with the same engineering discipline as the rest of the platform.",
+        "Lineage runs through everything. Every feature, every training set and every embedding traces back to the source it came from, so when a model gives a strange answer you follow the trail instead of guessing. That traceability is what makes data AI-ready rather than merely available, and it is what auditors and governance frameworks increasingly ask to see.",
+        "The same work pays off for BI immediately. The analytics layers that feed models also feed dashboards, so you do not run one stack for reporting and another for AI. One governed set of numbers serves both, and every improvement in data quality shows up in both on the same day."
+      ],
+      "team": "I work embedded in your team, end to end. If you have data scientists, they get a platform where experiments are reproducible and shipping a model is a pipeline, not a ceremony. If you do not, we scope which use cases justify machine learning at all and make the data AI-ready so the option is real when you want it. Either way the work lands in your repositories with docs and runbooks, and the handover leaves your team in control."
+    },
+    "llmops": {
+      "title": "AI governance & LLMOps",
+      "lede": "Getting an AI pilot to work is easy. Getting AI into production, where it touches real customers and real data, is where most efforts stall. AI governance and LLMOps is the discipline that gets you across: one use case at a time, measured before it scales, with security, access control and human sign-off designed in rather than bolted on.",
+      "built": [
+        "The roadmap is phased on purpose. Each use case is evaluated against a baseline before it goes live and measured after, so scaling decisions rest on evidence instead of enthusiasm. Whether it runs on Azure AI Foundry or the stack you already have, every AI system sits on the same rail: access control, audit logging and a human in the loop where it matters.",
+        "Security is designed in from the first prompt. Models only see the data the asking user is allowed to see, every interaction is logged, and evaluation runs continuously rather than once at launch. An answer from an AI system ends up as governed as a number on a dashboard.",
+        "This is also how you get ready for the EU AI Act. The Act is already in force and its obligations arrive in phases: the bans and AI literacy duties have applied since early 2025, the rules for general-purpose models since August 2025, and the bulk of the high-risk requirements are phasing in now. The practices above, an inventory of your AI systems, logging, human oversight and documented evaluation, are exactly what the Act expects. Building them now is cheaper than retrofitting them under a deadline."
+      ],
+      "team": "I work embedded in your team, end to end. We pick the first use case together, usually something small with a clear owner and a measurable outcome, and take it to production on the governed rail. Your team learns the pattern by shipping with me, not from a slide deck. The evaluation harness, the policies and the documentation all land in your repositories, so use case two is faster than use case one and does not need me."
+    }
   },
   "handover": {
     "label": "The deliverables",
