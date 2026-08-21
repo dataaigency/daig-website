@@ -27,7 +27,7 @@ export default function Home() {
             <h1>{t('hero.title')}</h1>
             <p className="hero__sub">{t('hero.sub')}</p>
             <div className="hero__actions">
-              <a className="btn btn--flash" href={LINKS.booking}>{t('hero.cta')}</a>
+              <a className="btn btn--flash" href={LINKS.booking} target="_blank" rel="noopener noreferrer">{t('hero.cta')}</a>
               <Link className="hero__secondary" to="/about">{t('hero.secondary')}</Link>
             </div>
           </div>
@@ -127,7 +127,7 @@ export default function Home() {
           <p className="eyebrow">{t('process.label')}</p>
           <h2>{t('process.title')}</h2>
           <div className="process__row">
-            <a className="btn btn--primary" href={LINKS.booking}>{t('process.cta')}</a>
+            <a className="btn btn--primary" href={LINKS.booking} target="_blank" rel="noopener noreferrer">{t('process.cta')}</a>
             <span className="process__note">{t('process.note')}</span>
           </div>
         </Reveal>

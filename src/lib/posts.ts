@@ -1,11 +1,12 @@
 import type { ComponentType } from 'react'
+import type { MDXProps } from 'mdx/types'
 
 type MdxModule = {
-  default: ComponentType
+  default: ComponentType<MDXProps>
   meta: { title: string; date: string; tags: string[]; lang: string; summary: string }
 }
 
-export type Post = MdxModule['meta'] & { slug: string; Component: ComponentType; minutes: number }
+export type Post = MdxModule['meta'] & { slug: string; Component: ComponentType<MDXProps>; minutes: number }
 
 const modules = import.meta.glob<MdxModule>('../content/work/*.mdx', { eager: true })
 

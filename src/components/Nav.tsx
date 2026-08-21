@@ -18,7 +18,7 @@ export default function Nav() {
           <Link to="/about">{t('nav.about')}</Link>
           <Link to="/contact">{t('nav.contact')}</Link>
         </div>
-        <a className="btn btn--primary nav__cta" href={LINKS.booking}>{t('nav.cta')}</a>
+        <a className="btn btn--primary nav__cta" href={LINKS.booking} target="_blank" rel="noopener noreferrer">{t('nav.cta')}</a>
       </nav>
     </header>
   )

@@ -15,7 +15,7 @@ export default function About() {
       <Reveal>
         <AboutFlow />
       </Reveal>
-      <p style={{ marginTop: 22 }}><a href={LINKS.linkedin}>{t('about.linkLabel')} →</a></p>
+      <p style={{ marginTop: 22 }}><a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">{t('about.linkLabel')} →</a></p>
     </section>
   )
 }

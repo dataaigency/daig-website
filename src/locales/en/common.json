@@ -19,9 +19,9 @@
     "label": "The problem",
     "title": "Sound familiar?",
     "items": [
-      { "stat": "01", "text": "Your data lives in 5+ different places and nobody can agree on a single source of truth." },
-      { "stat": "02", "text": "Analysts spend 80% of their time cleaning data instead of actually using it." },
-      { "stat": "03", "text": "You're paying for automations but not getting ROI from your AI & cloud investment." }
+      { "stat": "5+", "text": "Your data lives in 5+ different places and nobody can agree on a single source of truth." },
+      { "stat": "80%", "text": "Analysts spend 80% of their time cleaning data instead of actually using it." },
+      { "stat": "??", "text": "You're paying for automations but not getting ROI from your AI & cloud investment." }
     ]
   },
   "flow": {

@@ -47,9 +47,9 @@ export default function Contact() {
         <h1 style={{ fontSize: 'clamp(30px, 5vw, 44px)' }}>{t('contact.title')}</h1>
         <p style={{ marginTop: 20, color: 'var(--graphite)' }}>{t('contact.sub')}</p>
         <p style={{ marginTop: 24, display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-          <a className="btn btn--primary" href={LINKS.booking}>{t('contact.book')}</a>
-          <a className="btn btn--secondary" href={LINKS.linkedin}>{t('contact.linkedin')}</a>
-          <a className="btn btn--secondary" href={LINKS.github}>{t('contact.github')}</a>
+          <a className="btn btn--primary" href={LINKS.booking} target="_blank" rel="noopener noreferrer">{t('contact.book')}</a>
+          <a className="btn btn--secondary" href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">{t('contact.linkedin')}</a>
+          <a className="btn btn--secondary" href={LINKS.github} target="_blank" rel="noopener noreferrer">{t('contact.github')}</a>
         </p>
 
         <h2 style={{ fontSize: 22, marginTop: 48 }}>{t('contact.form.title')}</h2>

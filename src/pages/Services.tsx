@@ -40,7 +40,7 @@ export default function Services() {
             )
           })}
         </div>
-        <p style={{ marginTop: 32 }}><a className="btn btn--primary" href={LINKS.booking}>{t('hero.cta')}</a></p>
+        <p style={{ marginTop: 32 }}><a className="btn btn--primary" href={LINKS.booking} target="_blank" rel="noopener noreferrer">{t('hero.cta')}</a></p>
       </section>
     </>
   )

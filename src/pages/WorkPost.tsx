@@ -1,8 +1,15 @@
 import { useParams, Link } from 'react-router'
 import { useTranslation } from 'react-i18next'
+import type { AnchorHTMLAttributes } from 'react'
 import { getPosts, formatPostDate } from '../lib/posts'
 import { LINKS } from '../links'
 import './work.css'
+
+/** Links inside MDX posts: external ones leave in a new tab, relative ones stay. */
+function MdxLink(props: AnchorHTMLAttributes<HTMLAnchorElement>) {
+  const external = /^https?:\/\//.test(props.href ?? '')
+  return <a {...props} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined} />
+}
 
 export default function WorkPost() {
   const { slug } = useParams()
@@ -38,11 +45,11 @@ export default function WorkPost() {
         <p className="post__lede">{post.summary}</p>
         <div className="post__seam" aria-hidden="true" />
         <div className="prose">
-          <Component />
+          <Component components={{ a: MdxLink }} />
         </div>
         <aside className="post-cta">
           <p className="post-cta__line">{t('work.ctaLine')}</p>
-          <a className="btn btn--flash" href={LINKS.booking}>{t('hero.cta')}</a>
+          <a className="btn btn--flash" href={LINKS.booking} target="_blank" rel="noopener noreferrer">{t('hero.cta')}</a>
         </aside>
       </div>
     </article>
