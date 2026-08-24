@@ -3,10 +3,9 @@ import { MemoryRouter } from 'react-router'
 import '../i18n'
 import Home from './Home'
 
-test('home renders hero, three dictionary entries, four services, process CTA', () => {
+test('home renders hero, four services, process CTA', () => {
   render(<MemoryRouter><Home /></MemoryRouter>)
   expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('From chaos to clarity.')
-  expect(screen.getAllByText('data aigency', { exact: false }).length).toBeGreaterThanOrEqual(3)
   expect(screen.getByText("How many versions of last month's revenue do you have?")).toBeInTheDocument()
   expect(screen.getByText('Scattered sources')).toBeInTheDocument()
   expect(screen.getByText('One governed flow, from sources to answers.')).toBeInTheDocument()

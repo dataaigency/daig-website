@@ -2,9 +2,13 @@ import { useTranslation } from 'react-i18next'
 import Reveal from '../components/Reveal'
 import AboutFlow from '../components/flows/AboutFlow'
 import { LINKS } from '../links'
+import './about.css'
+
+type DictEntry = { word: string; pos: string; def: string }
 
 export default function About() {
   const { t } = useTranslation()
+  const entries = t('dictionary.entries', { returnObjects: true }) as DictEntry[]
   return (
     <section className="container" style={{ padding: '64px 24px' }}>
       <div style={{ maxWidth: 680 }}>
@@ -14,6 +18,23 @@ export default function About() {
       </div>
       <Reveal>
         <AboutFlow />
+      </Reveal>
+      <Reveal>
+        <div className="dict">
+          <p className="eyebrow">{t('dictionary.label')}</p>
+          <div className="dict__grid">
+            {entries.map((e, i) => (
+              <div className="dict__entry" key={i}>
+                <span className="dict__num">0{i + 1}</span>
+                <div>
+                  <span className="dict__word">{e.word}</span>
+                  <span className="dict__pos">{e.pos}</span>
+                  <p className="dict__def">{e.def}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </Reveal>
       <p style={{ marginTop: 22 }}><a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">{t('about.linkLabel')} →</a></p>
     </section>

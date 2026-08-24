@@ -9,13 +9,11 @@ import { IconLayers, IconPipeline, IconChart, IconShield } from '../components/i
 import { LINKS } from '../links'
 import './home.css'
 
-type DictEntry = { word: string; pos: string; def: string }
 type ServiceItem = { title: string; desc: string }
 const icons = [IconLayers, IconPipeline, IconChart, IconShield]
 
 export default function Home() {
   const { t } = useTranslation()
-  const entries = t('dictionary.entries', { returnObjects: true }) as DictEntry[]
   const services = t('services.items', { returnObjects: true }) as ServiceItem[]
   return (
     <>
@@ -88,27 +86,6 @@ export default function Home() {
           })}
         </div>
         <p style={{ marginTop: 20 }}><Link to="/services">{t('services.cta')} →</Link></p>
-      </section>
-
-      <StripeBand variant="stripes" />
-      <section className="dict">
-        <div className="container">
-          <Reveal>
-            <p className="eyebrow">{t('dictionary.label')}</p>
-            <div className="dict__grid">
-              {entries.map((e, i) => (
-                <div className="dict__entry" key={i}>
-                  <span className="dict__num">0{i + 1}</span>
-                  <div>
-                    <span className="dict__word">{e.word}</span>
-                    <span className="dict__pos">{e.pos}</span>
-                    <p className="dict__def">{e.def}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
       </section>
 
       <StripeBand variant="cut" />

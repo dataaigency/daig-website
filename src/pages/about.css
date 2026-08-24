@@ -1,0 +1,9 @@
+/* the name-play: three definitions of "data aigency", one per reading */
+.dict { margin-top: 48px; padding-top: 36px; border-top: 1px solid var(--paper-line); }
+.dict__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 24px; }
+@media (max-width: 820px) { .dict__grid { grid-template-columns: 1fr; gap: 20px; } }
+.dict__entry { display: flex; gap: 14px; }
+.dict__num { font-family: var(--font-mono); font-size: 12px; flex-shrink: 0; color: var(--graphite); padding-top: 2px; }
+.dict__word { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--navy-deep); }
+.dict__pos { font-weight: 400; font-size: 11px; color: var(--graphite); font-style: italic; margin-left: 6px; }
+.dict__def { color: var(--graphite); font-size: 13.5px; line-height: 1.6; margin: 6px 0 0; }

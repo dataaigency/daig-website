@@ -4,9 +4,10 @@ import '../i18n'
 import About from './About'
 import Contact from './Contact'
 
-test('about tells the one-architect story', () => {
+test('about tells the one-architect story and the name-play', () => {
   render(<MemoryRouter><About /></MemoryRouter>)
   expect(screen.getByText(/practice of Vadim Van Den Heuvel/)).toBeInTheDocument()
+  expect(screen.getByText('The name is the pitch')).toBeInTheDocument()
 })
 
 test('contact links booking, linkedin, github', () => {
