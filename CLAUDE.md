@@ -36,7 +36,7 @@ src/
 - No hardcoded user-visible strings in components — everything through `t()` / `src/locales/`.
 - Zero external requests at page load (fonts self-hosted). Allowed user-initiated external calls: the Google Calendar booking link, and the contact form POST to api.web3forms.com (key in src/config.ts; delivers to the owner's inbox without exposing the address).
 - Voice: warm, plain-spoken, a little cheeky; concrete outcomes over jargon; never invent clients, metrics, or testimonials.
-- **Market is Europe.** All prices in EUR from EU-region pricing pages (never casually convert USD list prices); market conditions, regulation (GDPR, EU AI Act) and examples default to the EU context in copy, posts and research. When a source only publishes USD, say so explicitly and give the EU-region figure it corresponds to. Target markets: Belgium, Netherlands, France, Germany, Spain and Portugal (languages Vadim works in: EN, NL, FR, DE, ES, PT); these are listed as areaServed in the JSON-LD (scripts/prerender.mjs). EU only, not the UK.
+- **Market is Europe.** All prices in EUR, from EU-region pricing pages; market conditions, regulation (GDPR, EU AI Act) and examples default to the EU context in copy, posts and research. When a source only publishes USD, show EUR converted at the current ECB rate (e.g. api.frankfurter.dev), note the conversion and rate date once, and link the vendor's own EUR billing source if one exists. No standalone $ figures in user-visible copy. Target markets: Belgium, Netherlands, France, Germany, Spain and Portugal (languages Vadim works in: EN, NL, FR, DE, ES, PT); these are listed as areaServed in the JSON-LD (scripts/prerender.mjs). EU only, not the UK.
 
 ## Flow diagrams (the house visual language)
 
@@ -51,7 +51,7 @@ The site explains everything as node-and-edge mechanism diagrams. To build a new
 
 ## Custom agents (.claude/agents/)
 
-`backend-developer` (tooling/build/CI), `commercial-specialist` (conversion/copy), `seo-optimizer`, `blog-writer` (MDX posts), `data-expert` (technical accuracy), `ui-expert` (design-system/a11y polish). Route work to the matching agent; they know the rules above.
+`backend-developer` (tooling/build/CI), `commercial-specialist` (conversion/copy), `seo-optimizer`, `keyword-scout` (Google demand research, feeds the docs/content-plan.md queue; no paid SEO tools), `blog-writer` (MDX posts), `data-expert` (technical accuracy), `ui-expert` (design-system/a11y polish). Route work to the matching agent; they know the rules above.
 
 ## Improvement loop protocol
 
@@ -64,6 +64,8 @@ When Vadim says "run a loop for X hours in Y minute blocks":
 5. Last block: stop the cron, summarize the ledger entries for Vadim.
 
 ## Process notes
+
+- Blog routine: a claude.ai cloud routine runs `docs/loops/blog-loop.md` twice a week (Mon + Wed), alternating lanes per `docs/content-plan.md` section 4a and opening one PR per post; merging the PR publishes. In-session loops must not take blog-queue items while it is active.
 
 - Active build-out runs via superpowers subagent-driven development; its ledger lives in `.superpowers/sdd/` (git-ignored, not for loops).
 - Final logo emblem is pending from an external tool (brief: `logo-design-brief.md`); interim SVGs in `assets/logo/`, favicon placeholder in `public/`.

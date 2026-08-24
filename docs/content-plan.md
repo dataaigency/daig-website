@@ -93,12 +93,45 @@ Format: working title · target query or audience · angle · effort (S/M/L).
 
 (18 net-new plus two updates; ideas 7 to 11 carry over from the SEO plan's queue and keep their SERP rationale.)
 
+### Keyword-scout additions, pass 1 (2026-08-24)
+
+Source: Google autocomplete harvest (61 seeds, en/nl/fr/de) plus 10 SERP checks. Scores are buyer intent / EU angle / first-hand edge / winnable, each 1 to 5.
+
+21. **Why is Microsoft Fabric so expensive? What a small team can actually do about it** · "why is microsoft fabric so expensive" · en · **18** (5/4/5/4) · SERP: vendor blogs (TimeXtender, dataroots) plus Fabric community threads; no plain-language practitioner piece for small teams. Autocomplete also surfaces "microsoft fabric cost optimization" and "fabric f2 vs f4" — this widens queued post 7's brief (see queue note) and is the strongest standalone candidate for the next queue refresh. · M
+22. **Is Power BI GDPR compliant? The honest configuration answer** · "is power bi gdpr compliant" · en · **17** (4/5/4/4) · SERP: GDPR-vendor blogs, a dated Microsoft whitepaper, forum threads; nothing recent and practitioner-shaped. Clusters with 23 and queued posts 2 and 3. · S
+23. **Microsoft Fabric and GDPR: what the certifications cover, and what stays your job** · "microsoft fabric gdpr compliance" · en · **17** (4/5/4/4) · SERP: vendor/agency content only (TimeXtender, NTT Data, consultancies); the shared-responsibility part is unexplained. Natural sibling of queued post 3. · M
+24. **Is Vertex AI GDPR compliant? DPA, EU data residency, zero retention, in plain words** · "is vertex ai gdpr compliant" · en · **16** (4/5/3/4) · SERP: a Google whitepaper PDF, Medium posts, niche AI-compliance blogs; the "you must sign the GDPR schedule yourself" gotcha is buried. Crossover with idea 20 (EU-hosted LLM). · M
+25. **Dataform vs dbt on BigQuery: free-and-native vs the industry standard** · "dataform vs dbt" · en · **15** (4/2/5/4) · SERP: comparison farms and Medium; "dataform vs dbt reddit" in autocomplete shows searchers distrust the listicles, which is exactly the opening for field notes. Pairs with idea 9. · M
+26. **Azure AI Foundry vs Copilot Studio: who should build your agents** · "azure ai foundry vs copilot studio" · en · **12** (4/2/3/3) · SERP: Microsoft's own Tech Community posts answer it well; only worth writing with a first-hand governance/LLMOps angle. Parked. · M
+27. **Fabric lakehouse vs warehouse (and where OneLake fits)** · "lakehouse vs warehouse fabric" / "onelake vs lakehouse" · en · **11** (3/1/4/3) · SERP: Microsoft's decision guide ranks and genuinely answers it. Skip as a target post; fold as an FAQ block into existing lakehouse/medallion content. · S
+
+Language spot-checks (2026-08-24): local-language demand exists but is thin — "lakehouse architectuur" (nl), "microsoft fabric kosten" (de), "microsoft fabric prix/tarif" (fr) and "bigquery kosten/tarif" (nl/fr/de) all return suggestions but no long tail. Right call for now: keep writing in English, revisit these exact heads when translated pages become a project.
+
+Dud seeds, not worth rescanning: any "\<tool\> small business" (empty for bigquery, vertex ai, mlops); "data platform kosten" nl (drifts to Veeam's product); "data pipeline automatiseren" nl, "consultant data microsoft fabric" fr, "datenplattform kosten" de (all empty); "how to use dataform" (drifts to Excel data forms); "consultant"/"specialist" seeds in every language (drift to jobs and salaries, not buyers); "llmops vs" and "bigquery cost optimization" (SERPs walled by content farms and FinOps vendors).
+
 ---
 
-## 4. The near-term queue: first six, in order
+## 4a. Lanes and rotation (owner ruling, 2026-08-24)
+
+So the blog reads like a person and not a keyword farm, the twice-weekly loop alternates three lanes in a fixed cycle. The loop reads the rotation state below, writes the next post in that lane, then advances the pointer.
+
+- **Lane A, best keyword.** The highest-value buyer query from pillars 1 and 2 plus the scout additions. The keyword-scout refresh feeds this lane.
+- **Lane B, data for humans.** The pillar 3 metaphor series (water sports, winter sports, music theory, AI). Every idea passes the four-part test in 1.3.
+- **Lane C, AI pulse.** State of the art and governance, EU-first: what moved in the last two weeks (AI Act guidance, model releases, EU cloud and sovereignty moves) anchored to one standing concept so the post stays useful after the news fades. Researched fresh at write time; ideas 6, 11, 18, 19 and 20 are the standing anchors for quiet weeks.
+
+**Rotation state (the loop updates these two lines):**
+- Next lane: **C** (start here: post 1, the AI Act deadlines, is perishable)
+- Cycle: C → A → B → repeat
+
+**Lane queues** (top first; scout reshuffles A, never B or C):
+- A: 7 (widened per scout note), 3, 8, 2, 21, 22, 23, 25, 24, 5, 10, 12
+- B: 13, 14, 15, 16, 17
+- C: 1 first, then fresh-news anchored to the standing anchors above
+
+## 4b. The near-term queue: first six, in order
 
 1. **Post 1: AI Act deadlines moved (pillar 1).** First because it is perishable. The Omnibus entered into force on 27 July 2026; the confusion window is open right now and closes as legal blogs get translated into plain language by someone else. Also our strongest single EU finding.
-2. **Post 7: Fabric F2 pricing (pillar 2).** Was already next in the SEO plan's queue with the best demand-to-competition ratio found; EUR framing per CLAUDE.md makes it stronger, not harder.
+2. **Post 7: Fabric F2 pricing (pillar 2).** Was already next in the SEO plan's queue with the best demand-to-competition ratio found; EUR framing per CLAUDE.md makes it stronger, not harder. *Scout note (2026-08-24): widen the brief to also answer "why is microsoft fabric so expensive" and "f2 vs f4" — both live in autocomplete, and idea 21 covers the full cost-pain angle if this post cannot hold it all.*
 3. **Post 3: An EU region is not sovereignty (pillar 1).** The best buyer-intent pocket in the sovereignty noise, and it sets up the residency column in the Fabric vs BigQuery comparison two slots later.
 4. **Post 13: RAG and sheet music (pillar 3).** The series that worked gets its second entry while the surf post is still fresh; it passes all four tests in 1.3 and doubles as the plain-language RAG explainer pillar 4 can link to.
 5. **Post 8: Fabric vs BigQuery (pillar 2).** The exact-stack comparison the SEO plan rated highly winnable; now it can link post 3 for the sovereignty angle and post 7 for pricing, which no content-farm ranker can match.
@@ -110,9 +143,9 @@ Rhythm inside the queue: two pillar-1 posts never run back to back except at the
 
 ## 5. Cadence, and how the loop consumes this plan
 
-**Cadence: one post every two weeks, with a yearly-refresh calendar.** That is roughly one focused writing day plus a review pass per M post, which a solo consultant can hold indefinitely; six posts in the first quarter of this plan, then reassess against Search Console data. An L post (idea 4) may take a full cycle on its own; two S posts can share one. Sustained beats fast: the SEO plan's "one post every 2 to 3 weeks beats six in a month" still stands, and freshness updates count as half a slot (pricing posts every 6 months, regulation posts when dates move).
+**Cadence (owner ruling, 2026-08-24): two posts a week, Monday and Wednesday, via the cloud routine.** The routine (`docs/loops/blog-loop.md`) runs in a Claude cloud session, follows the lane rotation in 4a, and opens one PR per post; Vadim's merge is the review pass and the publish button. Freshness refreshes (pricing every 6 months, regulation when dates move) may take a lane A slot. Reassess the pace after the first month against Search Console: if quality strains or the idea bank thins faster than the scout refills it, drop to weekly rather than thinning posts.
 
-**Loop protocol:** this plan feeds `docs/loops/TODO.md`. One queue item per loop block, top of queue first. Each block: the blog-writer agent researches and drafts (verifying prices and regulation dates at write time, never from this document), marks anything requiring hands-on experience or owner facts as [NEEDS INPUT], runs the tests and build, and the diff gets reviewed before acceptance. When a post ships, cross it off here, pull the next idea from section 3 into the queue, and note any new question the research surfaced as a candidate idea. This document gets a refresh pass when the first six have shipped or when Search Console says the ranking picture changed.
+**Loop protocol:** each run picks per the rotation state in 4a (not simple top-of-queue), researches and drafts with all prices and regulation dates verified at write time (never from this document), marks anything requiring owner facts as [NEEDS INPUT], runs tests and build, and ships as a PR. When a post ships, mark it here with date and path, advance the rotation pointer, and note any new question the research surfaced as a candidate idea. This document gets a refresh pass when the first six have shipped or when Search Console says the ranking picture changed.
 
 ---
 
@@ -137,4 +170,4 @@ House rules for every post, distilled from 1.2:
 - **No invented clients, metrics or testimonials.** Case-study facts come from Vadim or get a [NEEDS INPUT] marker.
 - **Sourced claims only.** Every statistic and every regulation date links its source and gets verified at write time; this plan's citations are starting points, not gospel.
 - **Personal themes are teaching devices, not identity claims.** Water sports, winter sports and music theory appear because they genuinely explain a concept (the four-part test in 1.3), never as biography. Location stays off the site.
-- **Voice per the brand rules:** warm, plain-spoken, a little cheeky, brand name lowercase "data aigency", no em dashes, no filler intros, one CTA per post pointing to the free audit.
+- **Voice per the brand rules:** warm, plain-spoken, a little cheeky, brand name lowercase "data aigency", no em dashes, no filler intros, one CTA per post pointing to the free intake call (never framed as an audit).
