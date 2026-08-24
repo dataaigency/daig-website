@@ -4,9 +4,17 @@ import { getPosts, readingMinutes, formatPostDate } from './posts'
 test('posts load with meta and slug from filename', () => {
   const posts = getPosts()
   expect(posts.length).toBeGreaterThanOrEqual(1)
-  expect(posts[0].slug).toBe('2026-08-hello')
-  expect(posts[0].title).toBeTruthy()
-  expect(typeof posts[0].Component).toBe('function')
+  expect(posts.map((p) => p.slug)).toContain('2026-08-hello')
+  for (const post of posts) {
+    expect(post.slug).toMatch(/^\d{4}-\d{2}-/)
+    expect(post.title).toBeTruthy()
+    expect(typeof post.Component).toBe('function')
+  }
+})
+
+test('posts come back newest first', () => {
+  const dates = getPosts().map((p) => p.date)
+  expect([...dates].sort((a, b) => b.localeCompare(a))).toEqual(dates)
 })
 
 test('every post carries a whole-minute reading time of at least one', () => {

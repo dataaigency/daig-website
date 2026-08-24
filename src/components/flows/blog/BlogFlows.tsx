@@ -111,6 +111,49 @@ export function SurfPipeline() {
   )
 }
 
+/** EU AI Act: a five-stop timeline, with the two deadlines that actually moved flagged. */
+export function AiActTimeline() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  const y = 90
+  const h = 52
+  const stops = [
+    { x: 15, w: 175, year: 'FEB 2025', label: 'Prohibited practices', sub: 'banned since 2025' },
+    { x: 220, w: 175, year: 'AUG 2025', label: 'GPAI provider rules', sub: 'model transparency' },
+    { x: 425, w: 175, year: 'AUG 2026', label: 'Transparency rules', sub: 'Art. 50 + AI literacy' },
+    { x: 630, w: 175, year: 'DEC 2027', label: 'Annex III high-risk', sub: 'HR, credit, insurance', moved: 'moved, was aug 2026' },
+    { x: 835, w: 175, year: 'AUG 2028', label: 'Annex I high-risk', sub: 'AI in regulated products', moved: 'moved, was aug 2027' },
+  ]
+  const todayX = stops[2].x + stops[2].w / 2
+  return (
+    <FlowPanel caption="Only two deadlines moved: high-risk obligations under Annex III (to December 2027) and Annex I (to August 2028). Prohibited practices, GPAI provider rules, transparency labelling and the AI literacy duty stayed on schedule." minWidth={900}>
+      <svg ref={ref} viewBox="0 0 1030 250" role="img" aria-label="A timeline from February 2025 to August 2028 with five EU AI Act obligations. Today, August 2026, is marked at the transparency and AI literacy stop; the two later stops, Annex III and Annex I high-risk rules, are flagged as moved from their original date." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="ai-arrow" />
+        {stops.slice(0, -1).map((s, i) => (
+          <path key={i} id={`ai-e${i}`} d={`M ${s.x + s.w} ${y + h / 2} L ${stops[i + 1].x - 2} ${y + h / 2}`} fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#ai-arrow)" />
+        ))}
+        {stops.map((s, i) => (
+          <g key={s.label}>
+            <text x={s.x + s.w / 2} y={54} fontSize={11} letterSpacing={1.2} fill={i === 2 ? FK.FLASH : FK.SUB} fontFamily="var(--font-mono)" textAnchor="middle">{s.year}</text>
+            <FNode x={s.x} y={y} w={s.w} h={h} label={s.label} sub={s.sub} stroke={i === 2 ? FK.FLASH : FK.NODE_STROKE} />
+            {s.moved && (
+              <>
+                {drop(s.x + s.w / 2, y + h, y + h + 28)}
+                {amberTag(s.x + s.w / 2, y + h + 32, s.moved)}
+              </>
+            )}
+          </g>
+        ))}
+        <text x={todayX} y={20} fontSize={10} letterSpacing={1.4} fill={FK.FLASH} fontFamily="var(--font-mono)" textAnchor="middle">TODAY</text>
+        <line x1={todayX} y1={28} x2={todayX} y2={40} stroke={FK.FLASH} strokeWidth={1.2} strokeDasharray="2 3" />
+        {stops.slice(0, -1).map((_, i) => (
+          <Dot key={i} path={`ai-e${i}`} dur={2} begin={i * 0.5} color={i >= 2 ? FK.AMBER : FK.FLASH} />
+        ))}
+      </svg>
+    </FlowPanel>
+  )
+}
+
 /** Warehouse vs lakehouse: the difference drawn, not described. */
 export function WarehouseVsLakehouse() {
   const ref = useRef<SVGSVGElement>(null)
