@@ -12,6 +12,6 @@ Loops pick the topmost unchecked item whose agent fits the block. Add freely; ke
 - [x] (blog-writer) Medallion mistakes post + audit post shipped (content wave 1)
 - [ ] (backend-developer) Add CI check that dist HTML contains no external URLs except calendar.app.google and api.web3forms.com
 - [x] (owner) Web3Forms key wired, contact form live
-- [ ] (blog-writer) Consume docs/content-plan.md queue top-down, one post per loop block (first: EU AI Act deadlines explainer)
+- [x] (blog-writer) SUPERSEDED by the cloud routines (docs/loops/blog-loop.md + blog-review-loop.md, Mon + Wed): they consume the docs/content-plan.md queue via the lane rotation. In-session loops must not take blog-queue items. First post (EU AI Act deadlines) shipped 2026-08-24 via PR #1.
 - [x] (ui-expert) Work index meta + article shell shipped (surf-post wave)
 - [ ] (owner+claude) Build proof asset 1: full sample architecture document (4-6 pages, sanitized template) - memo asset list; decide format (site page vs PDF)

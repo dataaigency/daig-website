@@ -13,9 +13,11 @@ Marketing site for **Data Aigency** (dataaigency.com). Requirements: `PRD.md`. B
 ## Repo structure
 
 ```
-assets/               brand sources (original logos, generated SVG logo package in assets/logo/)
+.claude/agents/       custom agents (see below)
+assets/               brand sources (final logo vectors: logo-black/white/green-vector.png; assets/diagrams/ = exported SVG diagrams, blogs/ subfolder for post diagrams)
+docs/content-plan.md  standing editorial plan: pillars, idea bank, lane rotation (4a), queue
 docs/superpowers/     specs and implementation plans
-docs/loops/           TODO.md + LEDGER.md for improvement loops (see below)
+docs/loops/           TODO.md + LEDGER.md (in-session loops) · blog-loop.md + blog-review-loop.md (cloud routines)
 public/               static passthrough (favicon.svg, robots.txt, CNAME)
 scripts/prerender.mjs SSG: renders every route to dist/<route>/index.html + sitemap
 src/
@@ -30,8 +32,10 @@ src/
 
 ## Binding brand rules
 
-- Palette: Paper `#FAF7F2`, Ink `#1A1030`, Violet `#6C4CF1`, Coral `#FF6B6B`, Sun `#FFC93C`, Flash `#3BF06E`. ~90% paper/ink; accents in seams/underlines/icons only.
-- Diagonal stripes −45° (`.stripe--loud`/`.stripe--quiet`): section dividers and page bottoms ONLY — never behind text, never card backgrounds.
+- Palette (v4 "Navy × stripes", tokens.css is the source of truth): Navy `#061034`, Navy-deep `#000836`, Paper `#F6F5F1`, Flash green `#03F856`, Frost `#E8ECF6`, Mist `#A9B6D9`, Graphite `#3E4552`. Navy and paper carry the site; flash only in seams, underlines, dots, buttons and the one "good" diagram node; amber `#E8B437` only for warning states in diagrams.
+- Fonts (self-hosted): Space Grotesk (display), Hanken Grotesk (body), IBM Plex Mono (labels), Montserrat 800 caps (wordmark only).
+- Separators via the `StripeBand` component: `stripes` (floating −45° green lines), `cut` / `cut-exit` (wide diagonal navy blades), `cut-flash` (green blade). Section dividers and page bottoms ONLY — never behind text, never card backgrounds.
+- Buttons: solid CTAs flash green with near-black `#02120A` text, text flips white on hover; outlined buttons navy border, hover turns border flash with a soft green wash.
 - Brand name "Data Aigency" (title case) in copy; star-dot only in the `Wordmark` component. The founder is named as Vadim Lucas on the site (never the full legal surname).
 - No hardcoded user-visible strings in components — everything through `t()` / `src/locales/`.
 - Zero external requests at page load (fonts self-hosted). Allowed user-initiated external calls: the Google Calendar booking link, and the contact form POST to api.web3forms.com (key in src/config.ts; delivers to the owner's inbox without exposing the address).
@@ -69,5 +73,6 @@ When Vadim says "run a loop for X hours in Y minute blocks":
 
 - Blog routine: a claude.ai cloud routine runs `docs/loops/blog-loop.md` twice a week (Mon + Wed), alternating lanes per `docs/content-plan.md` section 4a and opening one PR per post. One hour later a second routine runs `docs/loops/blog-review-loop.md`: an independent fact, voice and build review that merges the PR (which deploys) or holds it with a comment and a notification. In-session loops must not take blog-queue items or touch open `blog:` PRs while these are active.
 
-- Active build-out runs via superpowers subagent-driven development; its ledger lives in `.superpowers/sdd/` (git-ignored, not for loops).
-- Final logo emblem is pending from an external tool (brief: `logo-design-brief.md`); interim SVGs in `assets/logo/`, favicon placeholder in `public/`.
+- Initial build ran via superpowers subagent-driven development; its ledger lives in `.superpowers/sdd/` (git-ignored, not for loops).
+- Final logo vectors are in `assets/` (black on paper sections, white in the navy hero, green for covers/og). The favicon in `public/` is still the interim mark.
+- Custom domain dataaigency.com is live on GitHub Pages; HTTPS certificate was pending issuance as of 2026-08-24 (re-add the custom domain in repo Settings → Pages to re-trigger if stuck).

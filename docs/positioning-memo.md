@@ -63,12 +63,12 @@ All strings live in `src/locales/en/common.json`. Immovable strings are untouche
 **Before**
 > One architect, end to end.
 >
-> data aigency is the remote practice of Vadim Van Den Heuvel. The person who takes your first call is the person who designs the architecture, builds it and hands it over. Nothing is lost between a salesperson and a delivery team.
+> data aigency is the remote practice of Vadim Lucas. The person who takes your first call is the person who designs the architecture, builds it and hands it over. Nothing is lost between a salesperson and a delivery team.
 
 **After**
 > One architect, end to end.
 >
-> data aigency is the practice of Vadim Van Den Heuvel. The person who takes your first call is the person who designs the architecture, builds it and hands it over. No salesperson, no junior team behind the curtain. Every diagram on this site is drawn the way your documentation will be written: so anyone on your team can read it.
+> data aigency is the practice of Vadim Lucas. The person who takes your first call is the person who designs the architecture, builds it and hands it over. No salesperson, no junior team behind the curtain. Every diagram on this site is drawn the way your documentation will be written: so anyone on your team can read it.
 
 Rationale: keeps the title, keeps the anti-handoff point, and adds the gap 1 claim in one sentence. Drops "remote" quietly (no location claims either way, and "remote" invites a location question). The last sentence turns the site's diagrams into stated proof.
 

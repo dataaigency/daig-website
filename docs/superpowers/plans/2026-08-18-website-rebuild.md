@@ -390,7 +390,7 @@ Run: `npm test` — Expected: FAIL (cannot resolve `./i18n`).
   },
   "about": {
     "title": "One architect, end to end.",
-    "body1": "data aigency is the practice of Vadim Van Den Heuvel. The person who scopes your audit is the person who designs the architecture, builds it, and hands it over.",
+    "body1": "data aigency is the practice of Vadim Lucas. The person who scopes your audit is the person who designs the architecture, builds it, and hands it over.",
     "body2": "The way of working is simple: agree scope, timeline and costs up front; build with the boring reliability your data deserves; document everything; hand over the keys. No lock-in, no black boxes.",
     "linkLabel": "Find me on LinkedIn"
   },
@@ -1066,7 +1066,7 @@ import Contact from './Contact'
 
 test('about tells the one-architect story', () => {
   render(<MemoryRouter><About /></MemoryRouter>)
-  expect(screen.getByText(/practice of Vadim Van Den Heuvel/)).toBeInTheDocument()
+  expect(screen.getByText(/practice of Vadim Lucas/)).toBeInTheDocument()
 })
 
 test('contact links booking, linkedin, github', () => {
@@ -1332,7 +1332,7 @@ const META: Record<string, { title: string; description: string }> = {
   '/': { title: 'data aigency — take agency over your data', description: 'Lakehouses, pipelines and AI-ready foundations — built properly, secured from day one, handed over completely. Data & AI architecture studio.' },
   '/services': { title: 'Services — data aigency', description: 'Lakehouse architecture, pipelines & automation, AI-ready data layers, and phased AI adoption with governance.' },
   '/work': { title: 'Work — data aigency', description: 'Case studies and writing on data architecture and AI adoption.' },
-  '/about': { title: 'About — data aigency', description: 'One architect, end to end: the practice of Vadim Van Den Heuvel.' },
+  '/about': { title: 'About — data aigency', description: 'One architect, end to end: the practice of Vadim Lucas.' },
   '/contact': { title: 'Contact — data aigency', description: 'Book a free 30-minute data architecture audit.' },
 }
 

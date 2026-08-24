@@ -59,7 +59,7 @@ Each is a small edit in `src/seo.ts`, `scripts/prerender.mjs` or one MDX file. I
 - description: `Four services, one architect: lakehouse architecture on Microsoft Fabric or BigQuery, DataOps with dbt, AI-ready data and MLOps, and governed LLMOps. Each with a diagram you can read.`
 
 **/about.** Put the name in the title; people who meet Vadim search the name.
-- title: `Vadim Van Den Heuvel, data and AI architecture consultant | data aigency`
+- title: `Vadim Lucas, data and AI architecture consultant | data aigency`
 - description: keep as is.
 
 **/work.** Drop the case-study claim until one exists; honest titles also convert better.

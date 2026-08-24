@@ -1,6 +1,8 @@
 # Data Aigency — Website Rebuild PRD
 
-**Owner:** Vadim Van Den Heuvel · **Repo:** daig-website · **Status:** draft for review · **Last updated:** 2026-08-18
+**Owner:** Vadim Lucas · **Repo:** daig-website · **Status:** shipped 2026-08 (historical document) · **Last updated:** 2026-08-24
+
+> **Note:** this PRD is the original build brief and is kept as history. Several things evolved during the build: the brand pivoted from the neo-pop palette below to the "Navy × stripes" system (navy `#061034`, paper, flash green `#03F856`), the brand name is written "Data Aigency" in copy, the name-play moved to the About page, positioning shifted from "one architect" to "led by one, backed by a network", and the CTA system is "Book a free intake call". **`CLAUDE.md` is the source of truth for current rules; `docs/content-plan.md` for content.**
 
 ## 1. Goal
 
