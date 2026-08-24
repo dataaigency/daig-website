@@ -1,5 +1,22 @@
 * { box-sizing: border-box; }
 figure { margin: 0; }
+
+/* Branded scrollbars. scrollbar-color inherits from html and covers
+   Chrome/Edge/Firefox; the -webkit rules cover Safari (each browser
+   ignores the other's syntax). Navy panels override with flash green. */
+html { scrollbar-color: color-mix(in srgb, var(--navy) 65%, var(--paper)) transparent; }
+::-webkit-scrollbar { width: 12px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--navy) 65%, var(--paper));
+  border-radius: 999px;
+  border: 3px solid var(--paper);
+}
+.flow-scroll { scrollbar-width: thin; scrollbar-color: var(--flash) #12234f; }
+.flow-scroll::-webkit-scrollbar { height: 8px; }
+.flow-scroll::-webkit-scrollbar-track { background: #12234f; border-radius: 999px; }
+.flow-scroll::-webkit-scrollbar-thumb { background: var(--flash); border-radius: 999px; border: 0; }
+.prose pre { scrollbar-width: thin; }
 body {
   margin: 0;
   background: var(--paper);

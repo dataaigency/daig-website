@@ -75,7 +75,7 @@ export function EdgeLabel({ x, y, text }: { x: number; y: number; text: string }
 export function FlowPanel({ children, caption, minWidth = 440 }: { children: ReactNode; caption?: string; minWidth?: number }) {
   return (
     <figure style={{ marginTop: 18 /* top only: horizontal margins stay CSS-controlled so .prose can center the breakout */ }}>
-      <div style={{ background: FK.NAVY, borderRadius: 8, padding: '14px 16px', overflowX: 'auto' }}>
+      <div className="flow-scroll" style={{ background: FK.NAVY, borderRadius: 8, padding: '14px 16px', overflowX: 'auto' }}>
         <div style={{ minWidth }}>{children}</div>
       </div>
       {caption && <figcaption style={{ fontSize: 12, color: 'var(--graphite)', marginTop: 10, lineHeight: 1.55 }}>{caption}</figcaption>}
