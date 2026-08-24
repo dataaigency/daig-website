@@ -8,7 +8,7 @@ export default function Nav() {
   return (
     <header className="container">
       <nav className="nav">
-        <Link className="nav__brand" to="/" aria-label="data aigency home">
+        <Link className="nav__brand" to="/" aria-label="Data Aigency home">
           <img src="/logo-mark.png" alt="" width={28} height={28} />
           <Wordmark size={14} />
         </Link>

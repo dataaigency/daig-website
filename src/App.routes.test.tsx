@@ -10,7 +10,7 @@ test.each([
   ['/services/automation-dataops', /fixing a broken export/],
   ['/services/ai-ready-data-mlops', /data that was never ready for it/],
   ['/services/ai-governance-llmops', /Getting an AI pilot to work is easy/],
-  ['/about', 'One architect, end to end.'],
+  ['/about', 'Senior hands, end to end.'],
   ['/contact', "Let's talk about your data stack."],
   ['/work', 'Work & writing'],
   ['/some/unknown/path', 'Page not found.'],

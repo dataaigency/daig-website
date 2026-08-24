@@ -36,6 +36,10 @@ export default function About() {
           </div>
         </div>
       </Reveal>
+      <div style={{ marginTop: 36, display: 'flex', alignItems: 'center', gap: 22, flexWrap: 'wrap' }}>
+        <a className="btn btn--flash" href={LINKS.booking} target="_blank" rel="noopener noreferrer">{t('hero.cta')}</a>
+        <span style={{ fontSize: 14, color: 'var(--graphite)' }}>{t('about.ctaLine')}</span>
+      </div>
       <p style={{ marginTop: 22 }}><a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">{t('about.linkLabel')} →</a></p>
     </section>
   )

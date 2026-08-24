@@ -17,17 +17,17 @@
     "label": "The name is the pitch",
     "entries": [
       {
-        "word": "data aigency",
+        "word": "Data Aigency",
         "pos": "/ˈeɪ·dʒən·si/ · noun",
         "def": "The capacity to act. Your data in one trusted place, owned by you and documented for you, so decisions stop waiting on it."
       },
       {
-        "word": "data aigency",
+        "word": "Data Aigency",
         "pos": "noun",
-        "def": "A consulting practice of one architect. Design, build, then a full handover: code, docs, runbooks and keys. Scope, timeline and costs agreed before we start."
+        "def": "A consulting practice with senior hands. Design, build, then a full handover: code, docs, runbooks and keys. Scope, timeline and costs agreed before we start."
       },
       {
-        "word": "data aigency",
+        "word": "Data Aigency",
         "pos": "noun, ours",
         "def": "Agency with AI built in. One use case at a time, measured before it scales, governed from day one. Not a vibe-coded data strategy."
       }
@@ -217,7 +217,8 @@
           "Evaluation before scale up"
         ]
       }
-    ]
+    ],
+    "more": "Learn more"
   },
   "servicePages": {
     "eyebrow": "Service",
@@ -302,10 +303,11 @@
     "note": "30 minutes, no deck, no obligations."
   },
   "about": {
-    "title": "One architect, end to end.",
-    "body1": "data aigency is the remote practice of Vadim Van Den Heuvel, working with teams across the EU in English, Dutch, French, German, Spanish and Portuguese. One architect who designs, builds and hands over your data platform, end to end. The person on your first call is the person writing the code, embedded in your team and your tools, adding value where it matters most. Every diagram on this site is drawn the way your documentation will be written: so anyone on your team can read it.",
+    "title": "Senior hands, end to end.",
+    "body1": "Data Aigency is the remote data and AI practice of Vadim Lucas, working with teams across the EU in English, Dutch, French, German, Spanish and Portuguese. Every engagement is led by the person you meet on the first call, and scales with a trusted network of data, MLOps, DevOps and IT professionals when a project needs more hands. You get the reach of a team with the accountability of one name. Every diagram on this site is drawn the way your documentation will be written: so anyone on your team can read it.",
     "body2": "You keep everything. The platform lives in your repositories from the first commit, your tables sit in open formats like Delta and Iceberg, and every decision is written down. Scope, timeline and costs are agreed up front, and the engagement ends with a full handover: code, docs, runbooks and keys. What we build together is yours to run, extend and own.",
-    "linkLabel": "Find me on LinkedIn"
+    "linkLabel": "Find me on LinkedIn",
+    "ctaLine": "Curious whether we fit? The first call is free and honest."
   },
   "contact": {
     "title": "Let's talk about your data stack.",
@@ -333,7 +335,10 @@
     "tags": "Topics",
     "minRead_one": "{{count}} min read",
     "minRead_other": "{{count}} min read",
-    "ctaLine": "If this made sense, the intake call will too."
+    "ctaLine": "If this made sense, the intake call will too.",
+    "olderPost": "Older",
+    "newerPost": "Newer",
+    "backToTop": "Back to top"
   },
   "notFound": {
     "title": "Page not found.",

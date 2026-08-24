@@ -58,7 +58,7 @@ const organization = () => ({
   logo: `${SITE_URL}/logo-full.png`,
   image: `${SITE_URL}/og-image.png`,
   description: metaFor('/').description,
-  founder: { '@type': 'Person', name: 'Vadim Van Den Heuvel', url: LINKS.linkedin },
+  founder: { '@type': 'Person', name: 'Vadim Lucas', url: LINKS.linkedin },
   areaServed: AREA_SERVED,
   sameAs: SAME_AS,
 })
@@ -73,7 +73,7 @@ const professionalService = () => ({
   image: `${SITE_URL}/og-image.png`,
   description: metaFor('/services').description,
   parentOrganization: { '@id': `${SITE_URL}/#organization` },
-  founder: { '@type': 'Person', name: 'Vadim Van Den Heuvel', url: LINKS.linkedin },
+  founder: { '@type': 'Person', name: 'Vadim Lucas', url: LINKS.linkedin },
   areaServed: AREA_SERVED,
   availableLanguage: LANGUAGES,
   sameAs: SAME_AS,
@@ -115,7 +115,7 @@ const aboutStructuredData = () => ({
   '@context': 'https://schema.org',
   '@type': 'Person',
   '@id': `${SITE_URL}/about/#person`,
-  name: 'Vadim Van Den Heuvel',
+  name: 'Vadim Lucas',
   url: canonicalUrl('/about'),
   jobTitle: 'Data & AI architect',
   worksFor: { '@id': `${SITE_URL}/#organization` },
@@ -135,7 +135,7 @@ const postStructuredData = (route, post) => ({
   url: canonicalUrl(route),
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl(route) },
   image: `${SITE_URL}/og-image.png`,
-  author: { '@type': 'Person', name: 'Vadim Van Den Heuvel', url: LINKS.linkedin },
+  author: { '@type': 'Person', name: 'Vadim Lucas', url: LINKS.linkedin },
   publisher: { '@id': `${SITE_URL}/#organization` },
 })
 

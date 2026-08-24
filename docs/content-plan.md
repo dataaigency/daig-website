@@ -178,4 +178,4 @@ House rules for every post, distilled from 1.2:
 - **No invented clients, metrics or testimonials.** Case-study facts come from Vadim or get a [NEEDS INPUT] marker.
 - **Sourced claims only.** Every statistic and every regulation date links its source and gets verified at write time; this plan's citations are starting points, not gospel.
 - **Personal themes are teaching devices, not identity claims.** Water sports, winter sports and music theory appear because they genuinely explain a concept (the four-part test in 1.3), never as biography. Location stays off the site.
-- **Voice per the brand rules:** warm, plain-spoken, a little cheeky, brand name lowercase "data aigency", no em dashes, no filler intros, one CTA per post pointing to the free intake call (never framed as an audit).
+- **Voice per the brand rules:** warm, plain-spoken, a little cheeky, brand name "Data Aigency" (title case), no em dashes, no filler intros, one CTA per post pointing to the free intake call (never framed as an audit).

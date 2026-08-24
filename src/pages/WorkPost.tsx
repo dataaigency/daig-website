@@ -14,7 +14,11 @@ function MdxLink(props: AnchorHTMLAttributes<HTMLAnchorElement>) {
 export default function WorkPost() {
   const { slug } = useParams()
   const { t } = useTranslation()
-  const post = getPosts().find((p) => p.slug === slug)
+  const posts = getPosts()
+  const idx = posts.findIndex((p) => p.slug === slug)
+  const post = idx >= 0 ? posts[idx] : undefined
+  const newer = idx > 0 ? posts[idx - 1] : undefined
+  const older = idx >= 0 && idx < posts.length - 1 ? posts[idx + 1] : undefined
 
   if (!post) {
     return (
@@ -51,6 +55,23 @@ export default function WorkPost() {
           <p className="post-cta__line">{t('work.ctaLine')}</p>
           <a className="btn btn--flash" href={LINKS.booking} target="_blank" rel="noopener noreferrer">{t('hero.cta')}</a>
         </aside>
+        <nav className="post-nav" aria-label={t('work.label')}>
+          {older ? (
+            <Link className="post-nav__item" to={`/work/${older.slug}`}>
+              <span className="post-nav__dir">← {t('work.olderPost')}</span>
+              <span className="post-nav__title">{older.title}</span>
+            </Link>
+          ) : <span />}
+          <button className="post-nav__top" type="button" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            {t('work.backToTop')} ↑
+          </button>
+          {newer ? (
+            <Link className="post-nav__item post-nav__item--right" to={`/work/${newer.slug}`}>
+              <span className="post-nav__dir">{t('work.newerPost')} →</span>
+              <span className="post-nav__title">{newer.title}</span>
+            </Link>
+          ) : <span />}
+        </nav>
       </div>
     </article>
   )

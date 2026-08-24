@@ -5,6 +5,7 @@ import Reveal from '../components/Reveal'
 import FlowDiagram from '../components/FlowDiagram'
 import Handover from '../components/Handover'
 import ProblemChain from '../components/flows/ProblemChain'
+import { SERVICE_PAGES } from './ServiceDetail'
 import { IconLayers, IconPipeline, IconChart, IconShield } from '../components/icons'
 import { LINKS } from '../links'
 import './home.css'
@@ -62,7 +63,7 @@ export default function Home() {
       <section className="svc container">
         <Reveal>
           <div className="svc__head">
-            <img className="svc__logo" src="/logo-full.png" alt="data aigency logo" />
+            <img className="svc__logo" src="/logo-full.png" alt="Data Aigency logo" />
             <div>
               <p className="eyebrow">{t('services.label')}</p>
               <h2 style={{ fontSize: 30, marginTop: 8 }}>{t('services.title')}</h2>
@@ -75,12 +76,13 @@ export default function Home() {
             const Icon = icons[i]
             return (
               <Reveal key={s.title} delay={i * 90}>
-                <div className="svc__card">
+                <Link className="svc__card svc__card--link" to={`/services/${SERVICE_PAGES[i].slug}`}>
                   <div className="svc__index">0{i + 1}</div>
                   <Icon />
                   <h3>{s.title}</h3>
                   <p>{s.desc}</p>
-                </div>
+                  <span className="svc__more">{t('services.more')} →</span>
+                </Link>
               </Reveal>
             )
           })}

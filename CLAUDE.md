@@ -1,6 +1,6 @@
 # CLAUDE.md — daig-website
 
-Marketing site for **data aigency** (dataaigency.com). Requirements: `PRD.md`. Brand canvas: https://claude.ai/code/artifact/2499de40-de94-4e62-b31c-9b4df2f6bc96
+Marketing site for **Data Aigency** (dataaigency.com). Requirements: `PRD.md`. Brand canvas: https://claude.ai/code/artifact/2499de40-de94-4e62-b31c-9b4df2f6bc96
 
 ## Commands
 
@@ -32,7 +32,7 @@ src/
 
 - Palette: Paper `#FAF7F2`, Ink `#1A1030`, Violet `#6C4CF1`, Coral `#FF6B6B`, Sun `#FFC93C`, Flash `#3BF06E`. ~90% paper/ink; accents in seams/underlines/icons only.
 - Diagonal stripes −45° (`.stripe--loud`/`.stripe--quiet`): section dividers and page bottoms ONLY — never behind text, never card backgrounds.
-- Brand name lowercase "data aigency" in copy; star-dot only in the `Wordmark` component.
+- Brand name "Data Aigency" (title case) in copy; star-dot only in the `Wordmark` component. The founder is named as Vadim Lucas on the site (never the full legal surname).
 - No hardcoded user-visible strings in components — everything through `t()` / `src/locales/`.
 - Zero external requests at page load (fonts self-hosted). Allowed user-initiated external calls: the Google Calendar booking link, and the contact form POST to api.web3forms.com (key in src/config.ts; delivers to the owner's inbox without exposing the address).
 - Voice: warm, plain-spoken, a little cheeky; concrete outcomes over jargon; never invent clients, metrics, or testimonials.

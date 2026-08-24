@@ -24,7 +24,7 @@ Read the new post. For every load-bearing claim (dates, prices, thresholds, regu
 Against CLAUDE.md and the content plan's house rules:
 
 - Plain human language, short sentences, no em dashes or double hyphens anywhere in the post.
-- Brand name lowercase "data aigency" if mentioned; no hardcoded strings changed in components.
+- Brand name "Data Aigency" (title case) if mentioned; the author is Vadim Lucas, never a full legal surname; no hardcoded strings changed in components.
 - Question-shaped headings with the answer in the first sentences beneath them.
 - Exactly one CTA, framed as the free intake call, never "audit".
 - At least one internal link to a service page or earlier post; external links as normal markdown.

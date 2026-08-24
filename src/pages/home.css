@@ -33,6 +33,8 @@
 .svc__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-top: 28px; }
 .svc__card { background: var(--white); border: 1px solid var(--paper-line); border-radius: 6px; padding: 22px; }
 .svc__card:hover { border-color: var(--flash); }
+.svc__card--link { display: block; text-decoration: none; color: inherit; height: 100%; }
+.svc__more { display: inline-block; margin-top: 14px; font-size: 13px; font-weight: 600; color: var(--navy-deep); border-bottom: 2px solid var(--flash); padding-bottom: 1px; }
 .svc__index { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; color: var(--graphite); margin-bottom: 10px; }
 .svc__card h3 { font-size: 17px; margin: 12px 0 8px; }
 .svc__card p { font-size: 14px; color: var(--graphite); margin: 0; }
