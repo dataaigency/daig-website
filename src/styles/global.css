@@ -58,7 +58,8 @@ a:hover { color: var(--navy); }
 }
 .btn--primary, .btn--flash { background: var(--flash); color: #02120A; transition: color 0.15s ease; }
 .btn--primary:hover, .btn--flash:hover { background: var(--flash); color: #FFFFFF; }
-.btn--secondary { background: transparent; color: var(--navy-deep); border: 1.5px solid var(--navy-deep); }
+.btn--secondary { background: transparent; color: var(--navy-deep); border: 1.5px solid var(--navy-deep); transition: border-color 0.15s ease, background 0.15s ease; }
+.btn--secondary:hover { border-color: var(--flash); background: rgba(3, 248, 86, 0.12); color: var(--navy-deep); }
 
 /* scroll reveal: hidden state only exists once JS added the `js` class, so
    prerendered HTML, crawlers and no-JS visitors always see full content */
