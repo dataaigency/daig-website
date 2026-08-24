@@ -47,7 +47,8 @@ The site explains everything as node-and-edge mechanism diagrams. To build a new
 3. **Every label through t()** — add keys to `src/locales/en/common.json` so diagrams translate with the site.
 4. **Register it** in `src/diagrams-entry.tsx`, then run `npm run diagrams` — this exports every diagram as a standalone animated SVG to `assets/diagrams/` (fonts and navy ground baked in) for reuse in decks, LinkedIn posts and documents.
 5. Existing examples: `FlowDiagram` (medallion), `ProblemChain` (causal chain with amber stall), `ServiceFlows` (4 mechanisms incl. a fail branch), `AboutFlow` (steps + container annotation), `WorkFlow` (before/after comparison).
-6. **Blog diagrams** live in `src/components/flows/blog/BlogFlows.tsx` and are imported directly into MDX posts. Exception to rule 3: their labels are literal English because posts are per-language content files. Register them with `blogs/...` keys so they export to `assets/diagrams/blogs/`. House patterns there: amber diamond tags for failure/trouble spots, dashed drop lines to annotations, side-by-side halves with a dashed divider for comparisons.
+6. In posts, figures (diagrams and charts) break out of the reading column automatically up to 1080px wide (`.prose figure` in work.css) — design for a ~1020 viewBox width and desktop renders it fully; the panel's inner minWidth only causes scrolling on small screens.
+7. **Blog diagrams** live in `src/components/flows/blog/BlogFlows.tsx` and are imported directly into MDX posts. Exception to rule 3: their labels are literal English because posts are per-language content files. Register them with `blogs/...` keys so they export to `assets/diagrams/blogs/`. House patterns there: amber diamond tags for failure/trouble spots, dashed drop lines to annotations, side-by-side halves with a dashed divider for comparisons.
 
 ## Custom agents (.claude/agents/)
 

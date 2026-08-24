@@ -83,7 +83,7 @@ export default function ChartCanvas({ title, config, aspect = 2 }: Props) {
   }, [config])
 
   return (
-    <figure style={{ margin: '2.5rem 0' }}>
+    <figure style={{ marginTop: '2.5rem', marginBottom: '2.5rem' }}>
       <figcaption
         style={{
           color: INK,

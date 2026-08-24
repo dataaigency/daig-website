@@ -74,7 +74,7 @@ export function EdgeLabel({ x, y, text }: { x: number; y: number; text: string }
 /** Navy inset panel the diagrams sit on (pages are paper/white). */
 export function FlowPanel({ children, caption, minWidth = 440 }: { children: ReactNode; caption?: string; minWidth?: number }) {
   return (
-    <figure style={{ margin: '18px 0 0' }}>
+    <figure style={{ marginTop: 18 /* top only: horizontal margins stay CSS-controlled so .prose can center the breakout */ }}>
       <div style={{ background: FK.NAVY, borderRadius: 8, padding: '14px 16px', overflowX: 'auto' }}>
         <div style={{ minWidth }}>{children}</div>
       </div>

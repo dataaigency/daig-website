@@ -1,4 +1,5 @@
 * { box-sizing: border-box; }
+figure { margin: 0; }
 body {
   margin: 0;
   background: var(--paper);
