@@ -65,7 +65,7 @@ When Vadim says "run a loop for X hours in Y minute blocks":
 
 ## Process notes
 
-- Blog routine: a claude.ai cloud routine runs `docs/loops/blog-loop.md` twice a week (Mon + Wed), alternating lanes per `docs/content-plan.md` section 4a and opening one PR per post; merging the PR publishes. In-session loops must not take blog-queue items while it is active.
+- Blog routine: a claude.ai cloud routine runs `docs/loops/blog-loop.md` twice a week (Mon + Wed), alternating lanes per `docs/content-plan.md` section 4a and opening one PR per post. One hour later a second routine runs `docs/loops/blog-review-loop.md`: an independent fact, voice and build review that merges the PR (which deploys) or holds it with a comment and a notification. In-session loops must not take blog-queue items or touch open `blog:` PRs while these are active.
 
 - Active build-out runs via superpowers subagent-driven development; its ledger lives in `.superpowers/sdd/` (git-ignored, not for loops).
 - Final logo emblem is pending from an external tool (brief: `logo-design-brief.md`); interim SVGs in `assets/logo/`, favicon placeholder in `public/`.
