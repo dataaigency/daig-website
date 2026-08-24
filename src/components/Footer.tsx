@@ -14,6 +14,9 @@ export default function Footer() {
           <Wordmark size={13} inverse />
           <div className="footer__meta">
             <span>{t('footer.tagline')}</span>
+            <Link to="/services">{t('nav.services')}</Link>
+            <Link to="/work">{t('nav.work')}</Link>
+            <Link to="/about">{t('nav.about')}</Link>
             <Link to="/contact">{t('nav.contact')}</Link>
             <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a href={LINKS.github} target="_blank" rel="noopener noreferrer">GitHub</a>

@@ -1,7 +1,7 @@
 export const meta = {
-  title: 'What a 30 minute architecture audit actually finds',
+  title: 'What a 30 minute first look at your data stack actually finds',
   date: '2026-08-12',
-  tags: ['audit', 'architecture', 'process'],
+  tags: ['first look', 'architecture', 'process'],
   lang: 'en',
   summary: 'A plain account of how I spend the free 30 minute review and the problems that keep turning up in it.',
 }
@@ -10,7 +10,7 @@ import { AuditStackMap } from '../../components/flows/blog/BlogFlows'
 
 Thirty minutes is not long enough to redesign your data platform. It is long
 enough to find the thing that is quietly costing you the most. That is the whole
-bet behind the free audit, and I want to be honest about how it works before you
+bet behind the free first look, and I want to be honest about how it works before you
 book one.
 
 Most people expect a sales call with a deck. It is not that. It is closer to a
@@ -34,7 +34,7 @@ Monday?
 
 None of that requires access to your systems. It requires someone in the room
 who knows how the sausage is made. If you can bring the person who built the
-pipelines, bring them. The audit gets twice as useful.
+pipelines, bring them. The session gets twice as useful.
 
 ## The problems that keep turning up
 
@@ -64,7 +64,7 @@ team does, and trust takes the hit.
 **The bill has a shape nobody has looked at.** Full refreshes where an
 incremental load would do. A job scheduled hourly to feed a report that gets
 read on Tuesday mornings. Compute sized for a peak that happened once. Cost is
-usually not the reason people book an audit, but it is often the easiest early
+usually not the reason people book a call, but it is often the easiest early
 win, because it needs no new architecture at all.
 
 **Access is all or nothing.** Either everyone can see everything, or every new
@@ -100,7 +100,7 @@ single biggest structural risk I heard. And an honest read on whether you need
 an architect at all right now, because sometimes you need a person for two days,
 not a project for two months.
 
-If we do end up working together, the audit becomes the first page of the
+If we do end up working together, the first look becomes the first page of the
 architecture. If we do not, you have still had a free half hour of a specialist's
 attention on your actual problem, which is more than most vendor calls give you.
 
@@ -116,7 +116,7 @@ That is it. No deck, no obligations, no follow-up sequence.
 ## Keep reading
 
 - [Medallion architecture: the five mistakes I keep unpicking](/work/2026-08-medallion-mistakes/),
-  the long version of the layer problems the audit keeps finding.
+  the long version of the layer problems the first look keeps finding.
 - [Lakehouse architecture](/services/lakehouse-architecture/), if you already
   know the foundation is the part that needs work.
 

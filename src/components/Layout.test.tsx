@@ -11,5 +11,8 @@ test('layout renders nav, content and footer', () => {
   )
   expect(screen.getAllByText(/gency/).length).toBeGreaterThanOrEqual(2)
   expect(screen.getByText('page-content')).toBeInTheDocument()
-  expect(screen.getByRole('link', { name: 'Services' })).toHaveAttribute('href', '/services')
+  for (const link of screen.getAllByRole('link', { name: 'Services' })) {
+    expect(link).toHaveAttribute('href', '/services')
+  }
+  expect(screen.getAllByRole('link', { name: 'Services' })).toHaveLength(2)
 })
