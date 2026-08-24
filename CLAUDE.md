@@ -36,6 +36,7 @@ src/
 - No hardcoded user-visible strings in components — everything through `t()` / `src/locales/`.
 - Zero external requests at page load (fonts self-hosted). Allowed user-initiated external calls: the Google Calendar booking link, and the contact form POST to api.web3forms.com (key in src/config.ts; delivers to the owner's inbox without exposing the address).
 - Voice: warm, plain-spoken, a little cheeky; concrete outcomes over jargon; never invent clients, metrics, or testimonials.
+- CTA system (owner-locked 2026-08-24): primary button "Book a free intake call" (nav short form "Free intake call"); supporting line invites "Ask any question" and promises an answer or a clear next step from the free 30 minutes. Full designs and proposals are scoped after the call, never promised free. Never framed as an "audit".
 - **Market is Europe.** All prices in EUR, from EU-region pricing pages; market conditions, regulation (GDPR, EU AI Act) and examples default to the EU context in copy, posts and research. When a source only publishes USD, show EUR converted at the current ECB rate (e.g. api.frankfurter.dev), note the conversion and rate date once, and link the vendor's own EUR billing source if one exists. No standalone $ figures in user-visible copy. Target markets: Belgium, Netherlands, France, Germany, Spain and Portugal (languages Vadim works in: EN, NL, FR, DE, ES, PT); these are listed as areaServed in the JSON-LD (scripts/prerender.mjs). EU only, not the UK.
 
 ## Flow diagrams (the house visual language)

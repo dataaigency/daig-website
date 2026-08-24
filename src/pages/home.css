@@ -12,6 +12,7 @@
 .hero h1 { font-size: clamp(38px, 7vw, 62px); letter-spacing: -0.03em; }
 .hero__sub { font-size: 16px; color: var(--frost); max-width: 480px; margin: 20px 0 28px; line-height: 1.7; }
 .hero__actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.hero__note { font-size: 13px; color: var(--mist); margin: 14px 0 0; }
 .hero__secondary { font-size: 14px; color: var(--frost); border-bottom: 1px solid var(--flash); padding-bottom: 2px; text-decoration: none; }
 .hero__secondary:hover { color: var(--flash); }
 @media (max-width: 700px) { .hero__field { opacity: 0.5; right: -160px; } }

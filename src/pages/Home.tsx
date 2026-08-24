@@ -28,6 +28,7 @@ export default function Home() {
               <a className="btn btn--flash" href={LINKS.booking} target="_blank" rel="noopener noreferrer">{t('hero.cta')}</a>
               <Link className="hero__secondary" to="/about">{t('hero.secondary')}</Link>
             </div>
+            <p className="hero__note">{t('hero.note')}</p>
           </div>
           <img className="hero__logo" src="/logo-white.png" alt="" width={300} height={300} />
         </div>

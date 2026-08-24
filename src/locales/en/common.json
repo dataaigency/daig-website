@@ -4,14 +4,15 @@
     "work": "Work",
     "about": "About",
     "contact": "Contact",
-    "cta": "Book a call"
+    "cta": "Free intake call"
   },
   "hero": {
     "eyebrow": "Data architecture studio",
     "title": "From chaos to clarity.",
     "sub": "One source of truth your whole team trusts, and analysts who get their week back. Built properly, documented fully, handed over completely. AI where it earns its place, governed from day one.",
     "cta": "Book a free intake call",
-    "secondary": "How we work"
+    "secondary": "How we work",
+    "note": "Ask any question. You leave with an answer or a clear next step."
   },
   "dictionary": {
     "label": "The name is the pitch",
@@ -299,19 +300,19 @@
   "process": {
     "label": "No black boxes",
     "title": "Audit, design, build, handover. You keep the keys and the docs.",
-    "cta": "Book an intake call",
-    "note": "30 minutes, no deck, no obligations."
+    "cta": "Book a free intake call",
+    "note": "Ask any question. 30 minutes, no deck, no obligations. You leave with an answer or a clear next step."
   },
   "about": {
     "title": "Senior hands, end to end.",
     "body1": "Data Aigency is the remote data and AI practice of Vadim Lucas, working with teams across the EU in English, Dutch, French, German, Spanish and Portuguese. Every engagement is led by the person you meet on the first call, and scales with a trusted network of data, MLOps, DevOps and IT professionals when a project needs more hands. You get the reach of a team with the accountability of one name. Every diagram on this site is drawn the way your documentation will be written: so anyone on your team can read it.",
     "body2": "You keep everything. The platform lives in your repositories from the first commit, your tables sit in open formats like Delta and Iceberg, and every decision is written down. Scope, timeline and costs are agreed up front, and the engagement ends with a full handover: code, docs, runbooks and keys. What we build together is yours to run, extend and own.",
     "linkLabel": "Find me on LinkedIn",
-    "ctaLine": "Curious whether we fit? The first call is free and honest."
+    "ctaLine": "Ask any question. The first 30 minutes are free and you leave with an answer or a clear next step."
   },
   "contact": {
     "title": "Let's talk about your data stack.",
-    "sub": "A free 30 minute intake call. We walk through your current stack, the problems you are running into and the solutions worth considering. You leave with a short written summary, whether we work together or not. No deck, no obligations.",
+    "sub": "A free 30 minute intake call. Bring any question about your data stack: we walk through your current setup, the problems you are running into and the solutions worth considering. You leave with an answer and a short written summary, whether we work together or not. When the answer needs a full design or a proposal, we scope that together after the call. No deck, no obligations.",
     "book": "Pick a slot",
     "linkedin": "LinkedIn",
     "github": "GitHub",

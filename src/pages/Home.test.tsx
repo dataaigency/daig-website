@@ -13,5 +13,5 @@ test('home renders hero, four services, process CTA', () => {
   expect(screen.getByText('Bronze')).toBeInTheDocument()
   expect(screen.getByText('Lakehouse architecture')).toBeInTheDocument()
   expect(screen.getByText('AI governance & LLMOps')).toBeInTheDocument()
-  expect(screen.getByRole('link', { name: 'Book a free intake call' })).toBeInTheDocument()
+  expect(screen.getAllByRole('link', { name: 'Book a free intake call' }).length).toBeGreaterThanOrEqual(2)
 })
