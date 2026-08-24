@@ -1,0 +1,132 @@
+export const meta = {
+  title: 'The EU AI Act deadlines moved. Here is what your company still has to do in 2026',
+  date: '2026-08-24',
+  tags: ['eu ai act', 'compliance', 'governance'],
+  lang: 'en',
+  summary: 'The Digital Omnibus pushed high-risk AI Act obligations back to December 2027, but transparency labelling, AI literacy, prohibited uses and GPAI rules did not move. A plain-language calendar and a five-item to-do list.',
+}
+
+import { AiActTimeline } from '../../components/flows/blog/BlogFlows'
+
+If you heard "the AI Act got delayed" somewhere this summer and quietly stopped
+worrying about it, I want to stop you before that becomes an expensive
+assumption. Something did move. Most of it did not.
+
+## What changed in the EU AI Act on 27 July 2026?
+
+The Digital Omnibus on AI, a simplification package agreed by the Council on
+29 June 2026, was published in the Official Journal on 24 July as
+[Regulation (EU) 2026/1744](https://eur-lex.europa.eu/eli/reg/2026/1744/oj/eng)
+and entered into force three days later, on 27 July 2026
+([Lewis Silkin](https://www.lewissilkin.com/insights/2026/07/27/the-digital-omnibus-on-ai-enters-into-force-today-102nedo),
+[White & Case](https://www.whitecase.com/insight-alert/eu-ai-omnibus-enters-force-amending-ai-act)).
+It postpones two specific deadlines and leaves everything else where it was.
+That "everything else" is doing a lot of work, and it is the part most
+summaries skip.
+
+## Which deadlines actually moved?
+
+Two, and only two:
+
+- **Annex III high-risk systems** (recruitment and hiring tools, credit
+  scoring, insurance pricing, education and law-enforcement uses) move from
+  2 August 2026 to **2 December 2027**, a sixteen-month extension
+  ([Gibson Dunn](https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/),
+  [Cloud Security Alliance](https://labs.cloudsecurityalliance.org/research/csa-research-note-eu-ai-act-omnibus-vii-deadline-delay-20260/)).
+- **Annex I high-risk systems**, meaning AI embedded inside already-regulated
+  products such as medical devices or machinery, move from 2 August 2027 to
+  **2 August 2028**.
+
+If your company builds or deploys either category, you get more runway. If it
+does not, the Omnibus barely touches you, because the obligations that were
+never tied to Annex III or I did not move at all.
+
+## What is live right now, delay or no delay?
+
+Four things, and they apply regardless of whether you touch a high-risk
+system:
+
+**Prohibited practices** have been banned since 2 February 2025: social
+scoring, manipulative or exploitative AI, and a short list of other uses the
+Act rules out entirely. That ban is not affected by the Omnibus in any way
+([DLA Piper](https://www.dlapiper.com/en-us/insights/publications/2025/08/latest-wave-of-obligations-under-the-eu-ai-act-take-effect)).
+
+**GPAI provider rules** have applied since 2 August 2025 to anyone placing a
+general-purpose AI model on the EU market above the compute threshold set in
+the Act, covering transparency documentation and a copyright policy
+([Skadden](https://www.skadden.com/insights/publications/2025/08/eus-general-purpose-ai-obligations)).
+Most small businesses use these models rather than build them, so this one is
+usually your vendor's problem, not yours, but it is worth confirming which
+side of that line you sit on.
+
+**Article 50 transparency rules** took effect on 2 August 2026, which is
+this month. If your product uses a chatbot, generates synthetic content, does
+emotion recognition, or produces deepfakes, you now have to disclose it:
+people need to be told they are talking to AI, and AI-generated images,
+audio or video need to be labelled as such
+([artificialintelligenceact.eu](https://artificialintelligenceact.eu/transparency-rules-article-50/)).
+There is one small grace period inside this: generative systems already on
+the market before 2 August 2026 have until 2 December 2026 to add the
+machine-readable marking specifically, so if you shipped before this month
+you have a few more weeks on that one technical piece, not the disclosure
+duty itself.
+
+**AI literacy**, Article 4, has been a standing obligation since the Act's
+general application date and was never on a separate clock. It requires
+providers and deployers to ensure staff who operate or use AI systems have
+"sufficient" understanding of how they work, their risks, and their limits.
+Nobody enforces this with a single deadline the way a product certification
+works, which is exactly why it is the most commonly ignored item on this
+list.
+
+<AiActTimeline />
+
+## Does the small mid-cap relief apply to you?
+
+Possibly, and it is broader than the SME exemptions you may already know
+about. The Omnibus introduces a new "small mid-cap" category: companies with
+fewer than 750 employees and either annual turnover up to €150 million or a
+balance sheet total up to €129 million
+([European Parliament](https://www.europarl.europa.eu/news/en/press-room/20260220IPR35906/simplified-rules-for-small-mid-cap-companies)).
+If you qualify, you get a simplified technical documentation template for
+high-risk systems, more proportionate quality-management expectations, and
+priority access to regulatory sandboxes. This sits on top of the existing SME
+relief, not instead of it, so check both bands rather than assuming you are
+too big for either.
+
+## What should you actually do before December 2026?
+
+Five things, in the order I would do them:
+
+1. **Find out if you touch Annex III at all.** Hiring, credit, insurance,
+   education or law-enforcement uses. If none of these describe you, most of
+   the postponed rules never applied to you regardless of the delay.
+2. **Check Article 50 against every AI feature you ship**, not just the
+   obvious chatbot. Emotion detection in a support tool and AI-generated
+   marketing images both count.
+3. **Confirm the marking grace period date if you shipped before this
+   month.** 2 December 2026 for machine-readable marking, not a free pass on
+   disclosure.
+4. **Run an actual AI literacy session for whoever operates these systems.**
+   An hour of "here is what this tool does and does not know" satisfies
+   Article 4 better than a policy document nobody reads.
+5. **Check the small mid-cap thresholds before you assume you need a full
+   compliance programme.** The relief exists precisely so a fifty-person
+   company does not have to build what a bank builds.
+
+## Do you need a consultant, or a checklist?
+
+For most small and mid-sized companies, this list. The Act rewards knowing
+which category you are in and doing the four things that never moved; it
+does not reward buying a compliance platform for problems you do not have.
+Where I actually add something is the layer underneath all of this: AI
+literacy and disclosure duties are easy to state and hard to make true if
+nobody can trace what your AI systems are doing with what data. That
+traceability is the same governance work I do for
+[AI governance and LLMOps](/services/ai-governance-llmops) generally, deadline
+or no deadline.
+
+If you want a second opinion on which of these five items actually apply to
+you, [book the free 30 minute intake call](https://calendar.app.google/F5mvmg12xMpF73fw6)
+and bring your AI features. I will tell you honestly which category you fall
+into, including if the honest answer is "you are fine, go back to work."

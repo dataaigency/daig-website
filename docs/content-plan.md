@@ -12,7 +12,7 @@ Note on the earlier queue: post 5.1 from the SEO plan ("Does a small business ne
 
 ### 1.1 What Europeans are visibly asking in 2026, and which questions carry money
 
-The single most important fact of the season: **the EU AI Act deadlines moved, and almost nobody outside legal blogs has explained it in plain words.** The Digital Omnibus on AI entered into force on 27 July 2026. It pushed Annex III high-risk obligations from 2 August 2026 to **2 December 2027**, and Annex I (AI embedded in regulated products) to August 2028. What did NOT move: the Article 50 transparency and AI-content-labeling duties (live from 2 August 2026), the AI literacy obligation, the prohibited-practices regime (in force since February 2025), and GPAI provider rules (since August 2025). SME and mid-cap relief got wider (simplified documentation now extends to companies up to €250M revenue). Sources: [Gibson Dunn](https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/), [Council press release](https://www.consilium.europa.eu/en/press/press-releases/2026/06/29/artificial-intelligence-council-gives-final-green-light-to-simplify-and-streamline-rules/), [CSA research note](https://labs.cloudsecurityalliance.org/research/csa-research-note-eu-ai-act-high-risk-deadline-omnibus-20260/), [Delbion SME guide](https://www.delbion.com/en/insights/eu-ai-act-sme-compliance-guide/).
+The single most important fact of the season: **the EU AI Act deadlines moved, and almost nobody outside legal blogs has explained it in plain words.** The Digital Omnibus on AI entered into force on 27 July 2026. It pushed Annex III high-risk obligations from 2 August 2026 to **2 December 2027**, and Annex I (AI embedded in regulated products) to August 2028. What did NOT move: the Article 50 transparency and AI-content-labeling duties (live from 2 August 2026), the AI literacy obligation, the prohibited-practices regime (in force since February 2025), and GPAI provider rules (since August 2025). SME and mid-cap relief got wider (the new small mid-cap band: fewer than 750 employees and turnover up to €150M or balance sheet up to €129M; the earlier €250M figure noted here was wrong, see post 1 for the sourced definition). Sources: [Gibson Dunn](https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/), [Council press release](https://www.consilium.europa.eu/en/press/press-releases/2026/06/29/artificial-intelligence-council-gives-final-green-light-to-simplify-and-streamline-rules/), [CSA research note](https://labs.cloudsecurityalliance.org/research/csa-research-note-eu-ai-act-high-risk-deadline-omnibus-20260/), [Delbion SME guide](https://www.delbion.com/en/insights/eu-ai-act-sme-compliance-guide/).
 
 The delay created confusion, and confusion is search demand with buyer intent behind it: "does this still apply to us", "what do we actually have to do, by when". A consultant marketplace with 61 listed EU AI Act advisors already exists ([AI Act Advisors](https://aiactadvisors.com/consultants)) and compliance tool spend is projected up 50% in 2026 ([SQ Magazine](https://sqmagazine.co.uk/eu-ai-act-compliance-cost-statistics/)), so commercial demand is forming, not hypothetical.
 
@@ -61,7 +61,7 @@ Format: working title · target query or audience · angle · effort (S/M/L).
 
 ### Pillar 1: EU buyer questions
 
-1. **The EU AI Act deadlines moved. Here is what your company still has to do in 2026** · "eu ai act delay what applies now sme" · plain-language calendar after the Digital Omnibus: what shifted to Dec 2027, what is live today (transparency, AI literacy, prohibitions), a 5-item to-do list · M
+1. ~~**The EU AI Act deadlines moved. Here is what your company still has to do in 2026**~~ · **PUBLISHED 2026-08-24** → `src/content/work/2026-08-ai-act-deadlines-moved.mdx` · plain-language calendar after the Digital Omnibus: what shifted to Dec 2027, what is live today (transparency, AI literacy, prohibitions), a 5-item to-do list · M
 2. **Can your team use ChatGPT with customer data? The GDPR answer in plain words** · "chatgpt gdpr customer data" · which product tiers have a DPA, lawful basis, when you need a DPIA, a one-page checklist · M
 3. **An EU region is not sovereignty: what data residency really buys you** · "azure eu data boundary cloud act" / Fabric-vs-sovereignty worriers · residency vs jurisdiction explained for a platform decision, when the distinction matters for you and when it honestly does not · M
 4. **What EU cloud actually costs: Hetzner, Scaleway and OVHcloud vs the hyperscalers, in euros** · "european cloud provider cost comparison" · worked EUR examples from EU pricing pages including egress, and the honest catch list (services you give up) · L
@@ -109,6 +109,14 @@ Language spot-checks (2026-08-24): local-language demand exists but is thin — 
 
 Dud seeds, not worth rescanning: any "\<tool\> small business" (empty for bigquery, vertex ai, mlops); "data platform kosten" nl (drifts to Veeam's product); "data pipeline automatiseren" nl, "consultant data microsoft fabric" fr, "datenplattform kosten" de (all empty); "how to use dataform" (drifts to Excel data forms); "consultant"/"specialist" seeds in every language (drift to jobs and salaries, not buyers); "llmops vs" and "bigquery cost optimization" (SERPs walled by content farms and FinOps vendors).
 
+### Follow-ups surfaced while writing post 1 (2026-08-24)
+
+28. **The 2 December 2026 machine-readable marking deadline: what it means if you shipped a generative feature before August** · "ai act machine readable marking deadline" · the narrow grace period inside Article 50 that summaries collapse into the headline date; perishable, worth writing before December · S
+29. **Are you a "small mid-cap" under EU digital law? The 750/€150M/€129M test** · "small mid-cap definition eu" · the new SMC band cuts across the AI Act and the wider Omnibus package; nobody has written the plain-language qualifier test for a scaling company · S
+30. **Article 4 AI literacy: a one-hour session outline you can actually run** · overlaps queued idea 6, now with a concrete deliverable angle (the outline itself) rather than an explainer; consider merging into 6 when 6 comes up · S
+
+Research note: the EU's own `digital-strategy.ec.europa.eu` and several law-firm domains were unreachable from the build environment's egress proxy during this run. Facts were verified against reachable secondary sources (Gibson Dunn, White & Case, Skadden, DLA Piper, European Parliament, artificialintelligenceact.eu) instead. If a future run needs a primary Official Journal citation, fetch it from a reachable mirror.
+
 ---
 
 ## 4a. Lanes and rotation (owner ruling, 2026-08-24)
@@ -120,17 +128,17 @@ So the blog reads like a person and not a keyword farm, the twice-weekly loop al
 - **Lane C, AI pulse.** State of the art and governance, EU-first: what moved in the last two weeks (AI Act guidance, model releases, EU cloud and sovereignty moves) anchored to one standing concept so the post stays useful after the news fades. Researched fresh at write time; ideas 6, 11, 18, 19 and 20 are the standing anchors for quiet weeks.
 
 **Rotation state (the loop updates these two lines):**
-- Next lane: **C** (start here: post 1, the AI Act deadlines, is perishable)
+- Next lane: **A** (post 1 shipped 2026-08-24 on lane C; lane A is next, so the run refreshes keywords first)
 - Cycle: C → A → B → repeat
 
 **Lane queues** (top first; scout reshuffles A, never B or C):
 - A: 7 (widened per scout note), 3, 8, 2, 21, 22, 23, 25, 24, 5, 10, 12
 - B: 13, 14, 15, 16, 17
-- C: 1 first, then fresh-news anchored to the standing anchors above
+- C: ~~1~~ (published 2026-08-24), then fresh-news anchored to the standing anchors above
 
 ## 4b. The near-term queue: first six, in order
 
-1. **Post 1: AI Act deadlines moved (pillar 1).** First because it is perishable. The Omnibus entered into force on 27 July 2026; the confusion window is open right now and closes as legal blogs get translated into plain language by someone else. Also our strongest single EU finding.
+1. ~~**Post 1: AI Act deadlines moved (pillar 1).**~~ **Shipped 2026-08-24.** First because it is perishable. The Omnibus entered into force on 27 July 2026; the confusion window is open right now and closes as legal blogs get translated into plain language by someone else. Also our strongest single EU finding.
 2. **Post 7: Fabric F2 pricing (pillar 2).** Was already next in the SEO plan's queue with the best demand-to-competition ratio found; EUR framing per CLAUDE.md makes it stronger, not harder. *Scout note (2026-08-24): widen the brief to also answer "why is microsoft fabric so expensive" and "f2 vs f4" — both live in autocomplete, and idea 21 covers the full cost-pain angle if this post cannot hold it all.*
 3. **Post 3: An EU region is not sovereignty (pillar 1).** The best buyer-intent pocket in the sovereignty noise, and it sets up the residency column in the Fabric vs BigQuery comparison two slots later.
 4. **Post 13: RAG and sheet music (pillar 3).** The series that worked gets its second entry while the surf post is still fresh; it passes all four tests in 1.3 and doubles as the plain-language RAG explainer pillar 4 can link to.
