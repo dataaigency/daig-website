@@ -47,31 +47,52 @@ export function AuditStackMap() {
   )
 }
 
-/** The five medallion mistakes, located where they happen. */
+/** Numbered amber diamond marker; the same mark appears on the map and in the key. */
+const numDiamond = (cx: number, cy: number, n: number) => (
+  <g>
+    <rect x={cx - 6.5} y={cy - 6.5} width={13} height={13} transform={`rotate(45 ${cx} ${cy})`} fill={FK.AMBER} />
+    <text x={cx} y={cy + 3.5} fontSize={9.5} fontWeight={700} fill="#061034" fontFamily="var(--font-mono)" textAnchor="middle">{n}</text>
+  </g>
+)
+
+/** The five medallion mistakes: markers on the trunk, one aligned key below. */
 export function MedallionMistakesMap() {
   const ref = useRef<SVGSVGElement>(null)
   useFlowPause(ref)
+  const keyItem = (x: number, y: number, n: number, label: string) => (
+    <g>
+      {numDiamond(x + 7, y - 4, n)}
+      <text x={x + 26} y={y} fontSize={10.5} letterSpacing={0.8} fill={FK.AMBER} fontFamily="var(--font-mono)">{label.toUpperCase()}</text>
+    </g>
+  )
+  const keyHead = (x: number, y: number, text: string) => (
+    <text x={x} y={y} fontSize={10} letterSpacing={2} fill={FK.SUB} fontFamily="var(--font-mono)">{text}</text>
+  )
   return (
     <FlowPanel caption="The five failure patterns, placed where they live: three inside the layers, two in the seams between them." minWidth={760}>
-      <svg ref={ref} viewBox="0 0 1020 240" role="img" aria-label="Bronze, Silver and Gold layers with five numbered failure patterns marked at the layer or seam where each occurs." style={{ width: '100%', height: 'auto', display: 'block' }}>
+      <svg ref={ref} viewBox="0 0 1020 320" role="img" aria-label="Bronze, Silver and Gold layers with numbered markers: failures 1 to 3 sit inside the layers, 4 and 5 sit on the seams between them; a key below names each one." style={{ width: '100%', height: 'auto', display: 'block' }}>
         <ArrowDefs id="mm-arrow" />
-        <path id="mm-e1" d="M 320 120 L 388 120" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#mm-arrow)" />
-        <path id="mm-e2" d="M 570 120 L 638 120" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#mm-arrow)" />
-        <FNode x={140} y={94} w={180} h={52} label="Bronze" sub="raw, as it arrived" chip="#C9884A" />
-        <FNode x={390} y={94} w={180} h={52} label="Silver" sub="cleaned and tested" chip="#AFB9C8" />
-        <FNode x={640} y={94} w={180} h={52} label="Gold" sub="business-ready" chip="#E8B437" />
-        {drop(230, 60, 92)}
-        {amberTag(230, 28, '1 · edits in raw data')}
-        {drop(480, 148, 176)}
-        {amberTag(480, 180, '2 · renamed, never tested', 'start')}
-        {drop(730, 60, 92)}
-        {amberTag(730, 28, '3 · one table per dashboard')}
-        {drop(354, 148, 176)}
-        {amberTag(354, 180, '4 · folders, not contracts', 'end')}
-        {drop(604, 60, 92)}
-        {amberTag(604, 28, '5 · nobody owns the layout', 'end')}
+        <path id="mm-e1" d="M 320 76 L 388 76" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#mm-arrow)" />
+        <path id="mm-e2" d="M 570 76 L 638 76" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#mm-arrow)" />
+        <FNode x={140} y={50} w={180} h={52} label="Bronze" sub="raw, as it arrived" chip="#C9884A" />
+        <FNode x={390} y={50} w={180} h={52} label="Silver" sub="cleaned and tested" chip="#AFB9C8" />
+        <FNode x={640} y={50} w={180} h={52} label="Gold" sub="business-ready" chip="#E8B437" />
         <Dot path="mm-e1" dur={1.7} begin={0.3} />
         <Dot path="mm-e2" dur={1.7} begin={1.1} />
+        {/* markers drawn after the dots so the pulse passes beneath the gate */}
+        {numDiamond(230, 50, 1)}
+        {numDiamond(480, 50, 2)}
+        {numDiamond(730, 50, 3)}
+        {numDiamond(354, 76, 4)}
+        {numDiamond(604, 76, 5)}
+        <line x1={140} y1={148} x2={880} y2={148} stroke={FK.NODE_STROKE} strokeWidth={1} strokeDasharray="3 5" />
+        {keyHead(140, 186, 'INSIDE THE LAYERS')}
+        {keyItem(140, 216, 1, 'edits in raw data')}
+        {keyItem(140, 246, 2, 'renamed, never tested')}
+        {keyItem(140, 276, 3, 'one table per dashboard')}
+        {keyHead(600, 186, 'IN THE SEAMS')}
+        {keyItem(600, 216, 4, 'folders, not contracts')}
+        {keyItem(600, 246, 5, 'nobody owns the layout')}
       </svg>
     </FlowPanel>
   )

@@ -42,8 +42,8 @@ a:hover { color: var(--navy); }
 .dark { background: var(--navy); color: var(--frost); }
 .dark h1, .dark h2, .dark h3 { color: var(--paper); }
 .dark .eyebrow { color: var(--mist); }
-.dark a { color: var(--frost); }
-.dark a:hover { color: var(--flash); }
+.dark a:not(.btn) { color: var(--frost); }
+.dark a:not(.btn):hover { color: var(--flash); }
 
 /* separators: floating stripes, diagonal cut, green cut */
 .sep-stripes { height: 20px; background: repeating-linear-gradient(-45deg, var(--flash) 0 4px, transparent 4px 18px); }
