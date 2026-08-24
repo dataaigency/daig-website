@@ -34,7 +34,13 @@
 .service-card:hover { border-color: var(--flash); }
 
 .footer { background: var(--navy); color: var(--frost); margin-top: -1px; }
-.footer__inner { display: flex; align-items: center; justify-content: space-between; padding: 30px 24px; gap: 16px; flex-wrap: wrap; }
+.footer__inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 30px 24px; gap: 16px; }
+.footer__tagline { font-size: 13px; color: var(--mist); text-align: center; }
+.footer__inner .footer__meta { justify-self: end; }
+@media (max-width: 820px) {
+  .footer__inner { grid-template-columns: 1fr; justify-items: center; row-gap: 14px; }
+  .footer__inner .footer__meta { justify-self: center; justify-content: center; }
+}
 .footer__meta { display: flex; gap: 18px; font-size: 13px; color: var(--mist); align-items: center; flex-wrap: wrap; }
 .footer__meta a { color: var(--mist); text-decoration: none; padding: 10px 0; }
 .footer__meta a:hover { color: var(--flash); }

@@ -12,8 +12,8 @@ export default function Footer() {
       <div className="footer">
         <div className="footer__inner container">
           <Wordmark size={13} inverse />
+          <span className="footer__tagline">{t('footer.tagline')}</span>
           <div className="footer__meta">
-            <span>{t('footer.tagline')}</span>
             <Link to="/services">{t('nav.services')}</Link>
             <Link to="/work">{t('nav.work')}</Link>
             <Link to="/about">{t('nav.about')}</Link>
