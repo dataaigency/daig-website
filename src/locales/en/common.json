@@ -17,12 +17,16 @@
   },
   "problems": {
     "label": "The problem",
-    "title": "Sound familiar?",
-    "items": [
-      { "stat": "5+", "text": "Your data lives in 5+ different places and nobody can agree on a single source of truth." },
-      { "stat": "80%", "text": "Analysts spend 80% of their time cleaning data instead of actually using it." },
-      { "stat": "??", "text": "You're paying for automations but not getting ROI from your AI & cloud investment." }
-    ]
+    "title": "How many versions of last month's revenue do you have?",
+    "intro": "Most companies do not have one data problem. They have a chain reaction, and each link makes the next one worse.",
+    "nodes": [
+      { "label": "Scattered sources", "sub": "every tool keeps its own numbers" },
+      { "label": "Broken trust", "sub": "reports disagree, people re-check" },
+      { "label": "Endless cleanup", "sub": "every team fixes its own copy" },
+      { "label": "AI stalls", "sub": "pilots never reach production" }
+    ],
+    "edges": ["numbers drift", "confidence drops", "no clean base"],
+    "closing": "The chain does not break at the last link. It breaks at the first one, and the section below shows how."
   },
   "flow": {
     "label": "How it works",

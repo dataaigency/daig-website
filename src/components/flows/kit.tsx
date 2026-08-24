@@ -39,11 +39,11 @@ export function ArrowDefs({ id }: { id: string }) {
   )
 }
 
-export function Dot({ path, dur, begin }: { path: string; dur: number; begin: number }) {
+export function Dot({ path, dur, begin, color = FK.FLASH }: { path: string; dur: number; begin: number; color?: string }) {
   // opacity starts at 0 so the dot is not visible parked at the svg origin
   // before its first animation cycle begins
   return (
-    <circle r={3.2} fill={FK.FLASH} opacity={0}>
+    <circle r={3.2} fill={color} opacity={0}>
       <set attributeName="opacity" to="1" begin={`${begin}s`} />
       <animateMotion dur={`${dur}s`} begin={`${begin}s`} repeatCount="indefinite">
         <mpath href={`#${path}`} />

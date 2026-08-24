@@ -4,20 +4,19 @@ import StripeBand from '../components/StripeBand'
 import Reveal from '../components/Reveal'
 import FlowDiagram from '../components/FlowDiagram'
 import Handover from '../components/Handover'
+import ProblemChain from '../components/flows/ProblemChain'
 import { IconLayers, IconPipeline, IconChart, IconShield } from '../components/icons'
 import { LINKS } from '../links'
 import './home.css'
 
 type DictEntry = { word: string; pos: string; def: string }
 type ServiceItem = { title: string; desc: string }
-type ProblemItem = { stat: string; text: string }
 const icons = [IconLayers, IconPipeline, IconChart, IconShield]
 
 export default function Home() {
   const { t } = useTranslation()
   const entries = t('dictionary.entries', { returnObjects: true }) as DictEntry[]
   const services = t('services.items', { returnObjects: true }) as ServiceItem[]
-  const problems = t('problems.items', { returnObjects: true }) as ProblemItem[]
   return (
     <>
       <section className="hero dark">
@@ -39,18 +38,12 @@ export default function Home() {
       <section className="prob container">
         <Reveal>
           <p className="eyebrow">{t('problems.label')}</p>
-          <h2 style={{ fontSize: 30, marginTop: 12 }}>{t('problems.title')}</h2>
+          <h2 style={{ fontSize: 30, marginTop: 12, maxWidth: 640 }}>{t('problems.title')}</h2>
+          <p className="prob__intro">{t('problems.intro')}</p>
         </Reveal>
-        <div className="prob__grid">
-          {problems.map((p, i) => (
-            <Reveal key={p.stat} delay={i * 110}>
-              <div className="prob__card">
-                <div className="prob__stat">{p.stat}</div>
-                <p className="prob__text">{p.text}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        <Reveal delay={120}>
+          <ProblemChain />
+        </Reveal>
       </section>
 
       <StripeBand variant="cut" />

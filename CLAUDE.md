@@ -37,6 +37,16 @@ src/
 - Zero external requests at page load (fonts self-hosted). Allowed user-initiated external calls: the Google Calendar booking link, and the contact form POST to api.web3forms.com (key in src/config.ts; delivers to the owner's inbox without exposing the address).
 - Voice: warm, plain-spoken, a little cheeky; concrete outcomes over jargon; never invent clients, metrics, or testimonials.
 
+## Flow diagrams (the house visual language)
+
+The site explains everything as node-and-edge mechanism diagrams. To build a new one:
+
+1. **Use the kit**: `src/components/flows/kit.tsx` exports `FK` (colors), `FNode` (node with label/sub/optional accent stroke), `EdgeLabel` (mono uppercase, ≤3 words), `ArrowDefs` (per-diagram marker id), `Dot` (animated pulse, optional color), `FlowPanel` (navy inset panel + caption for light pages), `useFlowPause` (reduced-motion).
+2. **Design rules**: horizontal left-to-right flow; nodes `#0B1C4E` fill with `#24356E` stroke; edges `#2A3A6E` 1.5px with labeled hops; green `#03F856` = motion/signal only (pulses, the one "good" end node); amber `#E8B437` = warning/fail/stall states; frost text on navy. Draw the mechanism, not labels-in-boxes: what flows where, what gates what, what fails to whom. One figure, one claim; every diagram gets a plain-language caption and `aria-label`.
+3. **Every label through t()** — add keys to `src/locales/en/common.json` so diagrams translate with the site.
+4. **Register it** in `src/diagrams-entry.tsx`, then run `npm run diagrams` — this exports every diagram as a standalone animated SVG to `assets/diagrams/` (fonts and navy ground baked in) for reuse in decks, LinkedIn posts and documents.
+5. Existing examples: `FlowDiagram` (medallion), `ProblemChain` (causal chain with amber stall), `ServiceFlows` (4 mechanisms incl. a fail branch), `AboutFlow` (steps + container annotation), `WorkFlow` (before/after comparison).
+
 ## Custom agents (.claude/agents/)
 
 `backend-developer` (tooling/build/CI), `commercial-specialist` (conversion/copy), `seo-optimizer`, `blog-writer` (MDX posts), `data-expert` (technical accuracy), `ui-expert` (design-system/a11y polish). Route work to the matching agent; they know the rules above.

@@ -17,11 +17,7 @@
 @media (max-width: 700px) { .hero__field { opacity: 0.5; right: -160px; } }
 
 .prob { padding: 64px 0; }
-.prob__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 26px; }
-.prob__card { background: var(--white); border: 1px solid var(--paper-line); border-radius: 6px; padding: 22px; }
-.prob__card:hover { border-color: var(--flash); }
-.prob__stat { font-family: var(--font-display); font-size: 38px; font-weight: 700; line-height: 1; color: var(--navy-deep); }
-.prob__text { font-size: 14px; color: var(--graphite); margin: 10px 0 0; }
+.prob__intro { color: var(--graphite); max-width: 620px; margin: 14px 0 0; font-size: 15px; line-height: 1.65; }
 
 /* the name-play, compact: one slim strip instead of a full section */
 .dict { background: var(--white); padding: 44px 0; }
