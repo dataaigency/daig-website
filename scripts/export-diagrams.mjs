@@ -1,5 +1,5 @@
 import { writeFileSync, mkdirSync } from 'node:fs'
-import { resolve, join } from 'node:path'
+import { resolve, join, dirname } from 'node:path'
 import { pathToFileURL } from 'node:url'
 
 // Renders every flow diagram to a standalone SVG in assets/diagrams/ so the
@@ -32,6 +32,8 @@ for (const [name, markup] of Object.entries(renderAll())) {
   if (vb) svg = svg.replace(/(<svg[^>]*>)/, `$1<rect width="${vb[1]}" height="${vb[2]}" fill="${NAVY}"/>`)
   const leftoverVar = svg.match(/var\(--[a-z-]+\)/)
   if (leftoverVar) console.warn(`warning ${name}: unsubstituted ${leftoverVar[0]}`)
-  writeFileSync(join(OUT, `${name}.svg`), svg)
+  const outPath = join(OUT, `${name}.svg`)
+  mkdirSync(dirname(outPath), { recursive: true })
+  writeFileSync(outPath, svg)
   console.log(`wrote assets/diagrams/${name}.svg (${svg.length} bytes)`)
 }

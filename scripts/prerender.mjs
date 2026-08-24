@@ -27,6 +27,19 @@ const jsonLd = (data) =>
 
 const SAME_AS = [LINKS.linkedin, LINKS.github]
 
+// Machine-readable service area: fully remote across the EU, with the markets
+// where the languages are covered listed explicitly. No physical location on
+// purpose: the practice is remote and the owner's location stays off the site.
+const AREA_SERVED = [
+  { '@type': 'Place', name: 'European Union' },
+  ...['Belgium', 'Netherlands', 'France', 'Germany', 'Spain', 'Portugal'].map((name) => ({
+    '@type': 'Country',
+    name,
+  })),
+]
+
+const LANGUAGES = ['English', 'Dutch', 'French', 'German', 'Spanish', 'Portuguese']
+
 // The four service pages, in the order they appear on /services. Names are the
 // owner-locked service names; the paths are the child routes.
 const SERVICES = [
@@ -46,6 +59,7 @@ const organization = () => ({
   image: `${SITE_URL}/og-image.png`,
   description: metaFor('/').description,
   founder: { '@type': 'Person', name: 'Vadim Van Den Heuvel', url: LINKS.linkedin },
+  areaServed: AREA_SERVED,
   sameAs: SAME_AS,
 })
 
@@ -60,6 +74,8 @@ const professionalService = () => ({
   description: metaFor('/services').description,
   parentOrganization: { '@id': `${SITE_URL}/#organization` },
   founder: { '@type': 'Person', name: 'Vadim Van Den Heuvel', url: LINKS.linkedin },
+  areaServed: AREA_SERVED,
+  availableLanguage: LANGUAGES,
   sameAs: SAME_AS,
   knowsAbout: [
     'Data architecture',
@@ -103,6 +119,7 @@ const aboutStructuredData = () => ({
   url: canonicalUrl('/about'),
   jobTitle: 'Data & AI architect',
   worksFor: { '@id': `${SITE_URL}/#organization` },
+  knowsLanguage: LANGUAGES,
   sameAs: SAME_AS,
 })
 

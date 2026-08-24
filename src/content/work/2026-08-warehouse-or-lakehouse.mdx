@@ -6,6 +6,8 @@ export const meta = {
   summary: 'An honest decision guide: the three signals that say yes, what these things actually are, what they cost, and when a spreadsheet is genuinely enough.',
 }
 
+import { WarehouseVsLakehouse } from '../../components/flows/blog/BlogFlows'
+
 If you are searching this question, something has probably already gone wrong
 in a small way. Two reports disagreed in a meeting. Someone spent a Friday
 copying numbers between systems. A vendor said the word "warehouse" and
@@ -79,22 +81,32 @@ small business the honest news is that the distinction matters less than
 vendors make it sound. Modern platforms blur the two, and picking wrong
 between them is a much smaller risk than building one you did not need.
 
+<WarehouseVsLakehouse />
+
 ## What does it cost in money?
 
 Less than you fear for the tools, and it depends on how you run them.
 
-On Google's side, BigQuery charges by the amount of data your queries scan,
-listed at $6.25 per TiB, with the first 1 TiB of queries and 10 GiB of storage
-free every month ([Google's pricing page](https://cloud.google.com/bigquery/pricing)).
-A small company's entire history is often gigabytes, not terabytes, so plenty
-of small setups run near the free tier for a long time.
+On Google's side, BigQuery charges by the amount of data your queries scan.
+Google publishes these prices in US dollars only, even for its European
+locations: keeping your data in the EU multi-region costs $6.25 per TiB
+scanned, and single European regions list a little higher, for example $7.50
+in Belgium or the Netherlands and $8.13 in Frankfurt
+([Google's pricing page](https://cloud.google.com/bigquery/pricing)). If you
+pay in euros, the euro rates on [Google's SKU price list](https://cloud.google.com/skus)
+apply. Either way the first 1 TiB of queries and 10 GiB of storage are free
+every month, and a small company's entire history is often gigabytes, not
+terabytes, so plenty of small setups run near the free tier for a long time.
 
 On Microsoft's side, Fabric sells capacity by the hour, like renting an engine
-by size ([Azure's pricing page](https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/)).
-The smallest size, F2, works out to roughly $263 a month at US list price if
-you leave it running around the clock, and pay-as-you-go capacity can be
-paused when nobody is using it, which shrinks that number a lot
-([a worked breakdown](https://www.synapx.com/blogs/microsoft-fabric-pricing-guide-2026/)).
+by size, and Microsoft does publish euro prices for European regions
+([Azure's pricing page](https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/),
+with the region set to West Europe and the currency to euros). The smallest
+size, F2, lists at about €0.39 an hour there, which works out to roughly
+€282 a month if you leave it running around the clock. Pay-as-you-go
+capacity can be paused when nobody is using it
+([Microsoft's pause and resume docs](https://learn.microsoft.com/en-us/fabric/enterprise/pause-resume)),
+which shrinks that number a lot.
 
 What actually drives your bill is not company size. It is how many sources you
 connect, how messy they are, and how often things refresh. Refreshing a

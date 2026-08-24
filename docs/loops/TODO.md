@@ -12,6 +12,6 @@ Loops pick the topmost unchecked item whose agent fits the block. Add freely; ke
 - [x] (blog-writer) Medallion mistakes post + audit post shipped (content wave 1)
 - [ ] (backend-developer) Add CI check that dist HTML contains no external URLs except calendar.app.google and api.web3forms.com
 - [x] (owner) Web3Forms key wired, contact form live
-- [ ] (blog-writer) Post: "Microsoft Fabric or BigQuery for your first lakehouse?" (highest-value query, needs research time)
+- [ ] (blog-writer) Consume docs/content-plan.md queue top-down, one post per loop block (first: EU AI Act deadlines explainer)
 - [x] (ui-expert) Work index meta + article shell shipped (surf-post wave)
 - [ ] (owner+claude) Build proof asset 1: full sample architecture document (4-6 pages, sanitized template) - memo asset list; decide format (site page vs PDF)

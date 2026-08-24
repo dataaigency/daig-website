@@ -1,5 +1,11 @@
 {
-  "nav": { "services": "Services", "work": "Work", "about": "About", "contact": "Contact", "cta": "Book a call" },
+  "nav": {
+    "services": "Services",
+    "work": "Work",
+    "about": "About",
+    "contact": "Contact",
+    "cta": "Book a call"
+  },
   "hero": {
     "eyebrow": "Data architecture studio",
     "title": "From chaos to clarity.",
@@ -10,9 +16,21 @@
   "dictionary": {
     "label": "The name is the pitch",
     "entries": [
-      { "word": "data aigency", "pos": "/ˈeɪ·dʒən·si/ · noun", "def": "The capacity to act. Your data in one trusted place, owned by you and documented for you, so decisions stop waiting on it." },
-      { "word": "data aigency", "pos": "noun", "def": "A consulting practice of one architect. Design, build, then a full handover: code, docs, runbooks and keys. Scope, timeline and costs agreed before we start." },
-      { "word": "data aigency", "pos": "noun, ours", "def": "Agency with AI built in. One use case at a time, measured before it scales, governed from day one. Not a vibe-coded data strategy." }
+      {
+        "word": "data aigency",
+        "pos": "/ˈeɪ·dʒən·si/ · noun",
+        "def": "The capacity to act. Your data in one trusted place, owned by you and documented for you, so decisions stop waiting on it."
+      },
+      {
+        "word": "data aigency",
+        "pos": "noun",
+        "def": "A consulting practice of one architect. Design, build, then a full handover: code, docs, runbooks and keys. Scope, timeline and costs agreed before we start."
+      },
+      {
+        "word": "data aigency",
+        "pos": "noun, ours",
+        "def": "Agency with AI built in. One use case at a time, measured before it scales, governed from day one. Not a vibe-coded data strategy."
+      }
     ]
   },
   "problems": {
@@ -20,26 +38,50 @@
     "title": "How many versions of last month's revenue do you have?",
     "intro": "Most companies do not have one data problem. They have a chain reaction, and each link makes the next one worse.",
     "nodes": [
-      { "label": "Scattered sources", "sub": "every tool keeps its own numbers" },
-      { "label": "Broken trust", "sub": "reports disagree, people re-check" },
-      { "label": "Endless cleanup", "sub": "every team fixes its own copy" },
-      { "label": "AI stalls", "sub": "pilots never reach production" }
+      {
+        "label": "Scattered sources",
+        "sub": "every tool keeps its own numbers"
+      },
+      {
+        "label": "Broken trust",
+        "sub": "reports disagree, people re-check"
+      },
+      {
+        "label": "Endless cleanup",
+        "sub": "every team fixes its own copy"
+      },
+      {
+        "label": "AI stalls",
+        "sub": "pilots never reach production"
+      }
     ],
-    "edges": ["numbers drift", "confidence drops", "no clean base"],
-    "closing": "The chain does not break at the last link. It breaks at the first one, and the section below shows how."
+    "edges": [
+      "numbers drift",
+      "confidence drops",
+      "no clean base"
+    ],
+    "closing": "The chain does not break at the last link. It breaks at the first one. That is where the work starts."
   },
   "flow": {
     "label": "How it works",
     "title": "One governed flow, from sources to answers.",
     "sub": "This is the medallion architecture we build. Every source lands raw, gets cleaned and tested once, and feeds every dashboard and model from the same governed layer.",
-    "sources": ["CRM", "ERP", "Files & sheets", "SaaS APIs"],
+    "sources": [
+      "CRM",
+      "ERP",
+      "Files & sheets",
+      "SaaS APIs"
+    ],
     "bronze": "Bronze",
     "bronzeSub": "raw, as it arrives",
     "silver": "Silver",
     "silverSub": "cleaned and tested",
     "gold": "Gold",
     "goldSub": "business-ready",
-    "consumers": ["Dashboards", "AI & agents"],
+    "consumers": [
+      "Dashboards",
+      "AI & agents"
+    ],
     "edgeLand": "land",
     "edgeClean": "clean · test",
     "edgeModel": "model",
@@ -119,7 +161,12 @@
       "after": "After",
       "afterSub": "one governed flow",
       "work": "the work",
-      "chaos": ["CRM", "Sheets", "ERP", "Scripts"],
+      "chaos": [
+        "CRM",
+        "Sheets",
+        "ERP",
+        "Scripts"
+      ],
       "sources": "Sources",
       "lakehouse": "Lakehouse",
       "answers": "Answers",
@@ -134,10 +181,42 @@
     "cta": "See all services",
     "readMore": "Read more",
     "items": [
-      { "title": "Lakehouse architecture", "desc": "One governed source of truth your teams can build on. Delivered as a production-grade lakehouse in Fabric or GCP, with semantic layer, medallion design and governance in Purview or Dataplex from day one.", "outcomes": ["One source of truth your teams trust", "Governance and semantic layer from day one", "Documented, transferable architecture"] },
-      { "title": "Automation & DataOps", "desc": "Data that is fresh, tested and ready when your team sits down. Built with dbt on BigQuery or Fabric, orchestrated with Airflow or Fabric pipelines, monitored so quality issues surface before your stakeholders do.", "outcomes": ["Analysts stop cleaning, start analyzing", "Tested, monitored pipelines", "Costs you can predict"] },
-      { "title": "AI-ready data & MLOps", "desc": "Your ML and BI work starts on day one instead of after months of wrangling. Feature stores, training sets and analytics layers, built with lineage so every number can be traced.", "outcomes": ["ML-ready features without the scramble", "Training data with lineage", "Analytics layers that answer questions"] },
-      { "title": "AI governance & LLMOps", "desc": "AI that reaches production and earns its keep. A phased rollout with security, access control and evaluation built in, whether it runs on Azure AI Foundry or the stack you already have.", "outcomes": ["A phased roadmap, not a vibe-coded strategy", "Security and access control designed in", "Evaluation before scale up"] }
+      {
+        "title": "Lakehouse architecture",
+        "desc": "One governed source of truth your teams can build on. Delivered as a production-grade lakehouse in Fabric or GCP, with semantic layer, medallion design and governance in Purview or Dataplex from day one.",
+        "outcomes": [
+          "One source of truth your teams trust",
+          "Governance and semantic layer from day one",
+          "Documented, transferable architecture"
+        ]
+      },
+      {
+        "title": "Automation & DataOps",
+        "desc": "Data that is fresh, tested and ready when your team sits down. Built with dbt on BigQuery or Fabric, orchestrated with Airflow or Fabric pipelines, monitored so quality issues surface before your stakeholders do.",
+        "outcomes": [
+          "Analysts stop cleaning, start analyzing",
+          "Tested, monitored pipelines",
+          "Costs you can predict"
+        ]
+      },
+      {
+        "title": "AI-ready data & MLOps",
+        "desc": "Your ML and BI work starts on day one instead of after months of wrangling. Feature stores, training sets and analytics layers, built with lineage so every number can be traced.",
+        "outcomes": [
+          "ML-ready features without the scramble",
+          "Training data with lineage",
+          "Analytics layers that answer questions"
+        ]
+      },
+      {
+        "title": "AI governance & LLMOps",
+        "desc": "AI that reaches production and earns its keep. A phased rollout with security, access control and evaluation built in, whether it runs on Azure AI Foundry or the stack you already have.",
+        "outcomes": [
+          "A phased roadmap, not a vibe-coded strategy",
+          "Security and access control designed in",
+          "Evaluation before scale up"
+        ]
+      }
     ]
   },
   "servicePages": {
@@ -194,7 +273,12 @@
     "doc1Title": "Data platform architecture",
     "cap1": "The design, written so anyone on your team can read it.",
     "tag2": "Sample · pipeline test run",
-    "tests": ["stg_orders · not_null order_id", "stg_customers · unique customer_id", "fct_revenue · freshness under 2h", "dim_products · relationships valid"],
+    "tests": [
+      "stg_orders · not_null order_id",
+      "stg_customers · unique customer_id",
+      "fct_revenue · freshness under 2h",
+      "dim_products · relationships valid"
+    ],
     "failTest": "fct_margin · accepted_range",
     "alert": "alert: engineer first",
     "pass": "pass",
@@ -202,7 +286,13 @@
     "cap2": "Every run tested. A failure alerts the engineer, it never surprises you.",
     "tag3": "Sample · runbook & your repos",
     "doc3Title": "Runbook · morning checks",
-    "tree": ["your-company/data-platform", "├─ dbt/", "├─ docs/", "├─ runbooks/", "└─ infra/"],
+    "tree": [
+      "your-company/data-platform",
+      "├─ dbt/",
+      "├─ docs/",
+      "├─ runbooks/",
+      "└─ infra/"
+    ],
     "cap3": "Runbooks and keys, in repositories you own from the first commit."
   },
   "process": {
@@ -213,7 +303,7 @@
   },
   "about": {
     "title": "One architect, end to end.",
-    "body1": "data aigency is the remote practice of Vadim Van Den Heuvel. One architect who designs, builds and hands over your data platform, end to end. The person on your first call is the person writing the code, embedded in your team and your tools, adding value where it matters most. Every diagram on this site is drawn the way your documentation will be written: so anyone on your team can read it.",
+    "body1": "data aigency is the remote practice of Vadim Van Den Heuvel, working with teams across the EU in English, Dutch, French, German, Spanish and Portuguese. One architect who designs, builds and hands over your data platform, end to end. The person on your first call is the person writing the code, embedded in your team and your tools, adding value where it matters most. Every diagram on this site is drawn the way your documentation will be written: so anyone on your team can read it.",
     "body2": "You keep everything. The platform lives in your repositories from the first commit, your tables sit in open formats like Delta and Iceberg, and every decision is written down. Scope, timeline and costs are agreed up front, and the engagement ends with a full handover: code, docs, runbooks and keys. What we build together is yours to run, extend and own.",
     "linkLabel": "Find me on LinkedIn"
   },

@@ -36,6 +36,7 @@ src/
 - No hardcoded user-visible strings in components — everything through `t()` / `src/locales/`.
 - Zero external requests at page load (fonts self-hosted). Allowed user-initiated external calls: the Google Calendar booking link, and the contact form POST to api.web3forms.com (key in src/config.ts; delivers to the owner's inbox without exposing the address).
 - Voice: warm, plain-spoken, a little cheeky; concrete outcomes over jargon; never invent clients, metrics, or testimonials.
+- **Market is Europe.** All prices in EUR from EU-region pricing pages (never casually convert USD list prices); market conditions, regulation (GDPR, EU AI Act) and examples default to the EU context in copy, posts and research. When a source only publishes USD, say so explicitly and give the EU-region figure it corresponds to. Target markets: Belgium, Netherlands, France, Germany, Spain and Portugal (languages Vadim works in: EN, NL, FR, DE, ES, PT); these are listed as areaServed in the JSON-LD (scripts/prerender.mjs). EU only, not the UK.
 
 ## Flow diagrams (the house visual language)
 
@@ -46,6 +47,7 @@ The site explains everything as node-and-edge mechanism diagrams. To build a new
 3. **Every label through t()** — add keys to `src/locales/en/common.json` so diagrams translate with the site.
 4. **Register it** in `src/diagrams-entry.tsx`, then run `npm run diagrams` — this exports every diagram as a standalone animated SVG to `assets/diagrams/` (fonts and navy ground baked in) for reuse in decks, LinkedIn posts and documents.
 5. Existing examples: `FlowDiagram` (medallion), `ProblemChain` (causal chain with amber stall), `ServiceFlows` (4 mechanisms incl. a fail branch), `AboutFlow` (steps + container annotation), `WorkFlow` (before/after comparison).
+6. **Blog diagrams** live in `src/components/flows/blog/BlogFlows.tsx` and are imported directly into MDX posts. Exception to rule 3: their labels are literal English because posts are per-language content files. Register them with `blogs/...` keys so they export to `assets/diagrams/blogs/`. House patterns there: amber diamond tags for failure/trouble spots, dashed drop lines to annotations, side-by-side halves with a dashed divider for comparisons.
 
 ## Custom agents (.claude/agents/)
 

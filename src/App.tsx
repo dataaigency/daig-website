@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router'
 import Layout from './components/Layout'
+import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import Services from './pages/Services'
 import ServiceDetail, { SERVICE_PAGES } from './pages/ServiceDetail'
@@ -12,6 +13,7 @@ import NotFound from './pages/NotFound'
 export default function App() {
   return (
     <Layout>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />

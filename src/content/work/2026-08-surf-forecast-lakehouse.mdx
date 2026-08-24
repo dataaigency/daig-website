@@ -7,6 +7,7 @@ export const meta = {
   lang: 'en',
   summary: 'A surf forecast is a tiny data platform, so here is the whole idea explained through one question: when do I paddle out?',
 }
+import { SurfPipeline } from '../../components/flows/blog/BlogFlows'
 
 I surf. Not impressively, but enough that I check the forecast the way other
 people check the news. And somewhere between the buoy readings and the wind
@@ -105,6 +106,8 @@ exactly what this final step exists to close. Engineers call it the gold
 layer: the small, opinionated view that answers the actual question.
 
 ## The whole platform, in one breath
+
+<SurfPipeline />
 
 That is it. Keep everything as it arrived, so you can always check your
 receipts. Clean it once, in one place, so everyone reads the same numbers. Then
