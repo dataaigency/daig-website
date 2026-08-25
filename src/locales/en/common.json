@@ -308,7 +308,10 @@
     "body1": "Data Aigency is the remote data and AI practice of Vadim Lucas, working with teams across the EU in English, Dutch, French, German, Spanish and Portuguese. Every engagement is led by the person you meet on the first call, and scales with a trusted network of data, MLOps, DevOps and IT professionals when a project needs more hands. You get the reach of a team with the accountability of one name. Every diagram on this site is drawn the way your documentation will be written: so anyone on your team can read it.",
     "body2": "You keep everything. The platform lives in your repositories from the first commit, your tables sit in open formats like Delta and Iceberg, and every decision is written down. Scope, timeline and costs are agreed up front, and the engagement ends with a full handover: code, docs, runbooks and keys. What we build together is yours to run, extend and own.",
     "linkLabel": "Find me on LinkedIn",
-    "ctaLine": "Ask any question. The first 30 minutes are free and you leave with an answer or a clear next step."
+    "ctaLine": "Ask any question. The first 30 minutes are free and you leave with an answer or a clear next step.",
+    "portraitAlt": "Portrait of Vadim Lucas, founder of Data Aigency",
+    "portraitName": "Vadim Lucas",
+    "portraitRole": "Founder"
   },
   "contact": {
     "title": "Let's talk about your data stack.",

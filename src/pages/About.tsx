@@ -11,10 +11,20 @@ export default function About() {
   const entries = t('dictionary.entries', { returnObjects: true }) as DictEntry[]
   return (
     <section className="container" style={{ padding: '64px 24px' }}>
-      <div style={{ maxWidth: 680 }}>
-        <h1 style={{ fontSize: 'clamp(30px, 5vw, 44px)' }}>{t('about.title')}</h1>
-        <p style={{ marginTop: 20, color: 'var(--graphite)' }}>{t('about.body1')}</p>
-        <p style={{ color: 'var(--graphite)' }}>{t('about.body2')}</p>
+      <div className="about-intro">
+        <div style={{ maxWidth: 680 }}>
+          <h1 style={{ fontSize: 'clamp(30px, 5vw, 44px)' }}>{t('about.title')}</h1>
+          <p style={{ marginTop: 20, color: 'var(--graphite)' }}>{t('about.body1')}</p>
+          <p style={{ color: 'var(--graphite)' }}>{t('about.body2')}</p>
+        </div>
+        <figure className="portrait">
+          <div className="portrait__frame">
+            <img src="/vadim-headshot.jpg" alt={t('about.portraitAlt')} width={800} height={1000} />
+          </div>
+          <figcaption className="portrait__caption">
+            {t('about.portraitName')} <span>· {t('about.portraitRole')}</span>
+          </figcaption>
+        </figure>
       </div>
       <Reveal>
         <AboutFlow />
