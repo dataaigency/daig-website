@@ -73,6 +73,15 @@ export function metaFor(path: string): Meta {
   const staticMeta = META[normalized]
   if (staticMeta) return staticMeta
 
+  const pageMatch = normalized.match(/^\/work\/page\/(\d+)$/)
+  if (pageMatch) {
+    const work = META['/work']
+    return {
+      title: `Data architecture case studies and writing, page ${pageMatch[1]} | ${BRAND}`,
+      description: work.description,
+    }
+  }
+
   const slug = normalized.startsWith('/work/') ? normalized.slice('/work/'.length) : null
   if (slug) {
     const post = getPosts().find((p) => p.slug === slug)

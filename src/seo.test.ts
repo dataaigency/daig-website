@@ -51,3 +51,10 @@ test('post routes use the MDX meta title and summary, not the fallback', () => {
 test('unknown post slugs still fall back', () => {
   expect(metaFor('/work/not-a-post').title).toBe(BRAND)
 })
+
+test('work index pages get their own numbered title', () => {
+  const meta = metaFor('/work/page/2')
+  expect(meta.title).toContain('page 2')
+  expect(meta.title).toContain(BRAND)
+  expect(metaFor('/work/page/2/')).toEqual(meta)
+})

@@ -12,6 +12,20 @@ const modules = import.meta.glob<MdxModule>('../content/work/*.mdx', { eager: tr
 
 const WORDS_PER_MINUTE = 200
 
+export const POSTS_PER_PAGE = 10
+
+/** Number of index pages for a given post count. An empty index still has one page. */
+export function workPageCount(postCount: number): number {
+  return Math.max(1, Math.ceil(postCount / POSTS_PER_PAGE))
+}
+
+/** Routes for index pages beyond the first: page 1 is /work itself. */
+export function workPageRoutes(postCount: number): string[] {
+  const routes: string[] = []
+  for (let page = 2; page <= workPageCount(postCount); page++) routes.push(`/work/page/${page}`)
+  return routes
+}
+
 /** Whole minutes of reading for a piece of prose. Never returns 0. */
 export function readingMinutes(text: string): number {
   const words = text.split(/\s+/).filter(Boolean).length

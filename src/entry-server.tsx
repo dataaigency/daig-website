@@ -3,13 +3,14 @@ import { StaticRouter } from 'react-router'
 import './i18n'
 import App from './App'
 import { STATIC_ROUTES } from './routes'
-import { getPosts } from './lib/posts'
+import { getPosts, workPageRoutes } from './lib/posts'
 
 export { metaFor, SITE_URL, BRAND } from './seo'
 export { LINKS } from './links'
 
 export function allRoutes(): string[] {
-  return [...STATIC_ROUTES, ...getPosts().map((p) => `/work/${p.slug}`)]
+  const posts = getPosts()
+  return [...STATIC_ROUTES, ...workPageRoutes(posts.length), ...posts.map((p) => `/work/${p.slug}`)]
 }
 
 /** Serializable post meta for the prerender script (no React components), keyed

@@ -27,6 +27,21 @@
 .work__empty { color: var(--graphite); margin: 28px 0 0; }
 .work__list { display: grid; gap: 16px; margin-top: 36px; }
 
+/* older/newer pager under the list; only rendered past 10 posts */
+.wpage {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--paper-line);
+}
+.wpage__info {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--graphite);
+}
+.wpage__link {
+  font-size: 14px; font-weight: 600; color: var(--navy-deep);
+  text-decoration: none; border-bottom: 2px solid var(--flash); padding-bottom: 1px;
+}
+
 .wcard {
   position: relative;
   background: var(--white); border: 1px solid var(--paper-line);

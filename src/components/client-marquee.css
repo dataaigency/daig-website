@@ -1,44 +1,21 @@
 /* client logo marquee: slow endless slide, greyed logos, soft edge fade.
-   Framed like the About portrait: offset flash border + -45° dashed stripes. */
-.clients { padding: 44px 24px 46px; }
-.clients__frame { position: relative; max-width: 1140px; margin: 24px auto 0; }
-.clients__frame::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  transform: translate(12px, 12px);
-  border: 2px solid var(--flash);
-  pointer-events: none;
+   No frame: the strip sits on paper, aligned with the container like any
+   section. The one green moment is the tick cluster next to the label. */
+.clients { padding: 44px 0 40px; }
+.clients__head { display: flex; align-items: center; gap: 14px; }
+.clients__head .eyebrow { margin: 0; }
+.clients__ticks {
+  width: 34px; height: 12px; flex-shrink: 0;
+  background: repeating-linear-gradient(115deg, var(--flash) 0 3px, transparent 3px 9px);
 }
-.clients__frame::after {
-  content: '';
-  position: absolute;
-  top: -14px;
-  right: -6px;
-  width: 120px;
-  height: 22px;
-  transform: rotate(-45deg);
-  background: repeating-linear-gradient(
-    to bottom,
-    var(--flash) 0 3px,
-    transparent 3px 14px
-  );
-  pointer-events: none;
-  z-index: 2;
-}
-.clients .eyebrow { max-width: 1140px; margin-inline: auto; }
 .clients__marquee {
-  position: relative;
-  z-index: 1;
   overflow: hidden;
-  background: var(--white);
-  border: 1px solid var(--paper-line);
+  margin-top: 26px;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
 }
 .clients__track { display: flex; width: max-content; animation: clients-slide 45s linear infinite; }
-.clients__marquee:hover .clients__track { animation-play-state: paused; }
-.clients__set { display: flex; align-items: center; gap: 76px; padding: 26px 38px; margin: 0; list-style: none; }
+.clients__set { display: flex; align-items: center; gap: 76px; padding: 6px 38px; margin: 0; list-style: none; }
 .clients__item { flex-shrink: 0; }
 .clients__item img { display: block; width: auto; filter: grayscale(1); opacity: 0.66; }
 .clients__item--tall img { height: 58px; }

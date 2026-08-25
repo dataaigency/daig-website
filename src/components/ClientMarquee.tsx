@@ -19,8 +19,11 @@ export default function ClientMarquee() {
   const { t } = useTranslation()
   return (
     <section className="clients" aria-label={t('clients.label')}>
-      <p className="eyebrow">{t('clients.label')}</p>
-      <div className="clients__frame">
+      <div className="container">
+        <div className="clients__head">
+          <p className="eyebrow">{t('clients.label')}</p>
+          <span className="clients__ticks" aria-hidden="true" />
+        </div>
         <div className="clients__marquee">
           <div className="clients__track">
             {[0, 1].map((copy) => (

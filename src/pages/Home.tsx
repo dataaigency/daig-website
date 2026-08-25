@@ -96,11 +96,6 @@ export default function Home() {
       <Handover />
       <StripeBand variant="cut-exit" />
 
-      <Reveal>
-        <ClientMarquee />
-      </Reveal>
-      <StripeBand variant="stripes" />
-
       <section className="process container">
         <Reveal>
           <p className="eyebrow">{t('process.label')}</p>
@@ -111,6 +106,11 @@ export default function Home() {
           </div>
         </Reveal>
       </section>
+
+      <StripeBand variant="stripes" />
+      <Reveal>
+        <ClientMarquee />
+      </Reveal>
     </>
   )
 }

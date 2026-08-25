@@ -1,30 +1,43 @@
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router'
+import { Link, useParams } from 'react-router'
 import Reveal from '../components/Reveal'
 import ClientMarquee from '../components/ClientMarquee'
 import WorkFlow from '../components/flows/WorkFlow'
-import { getPosts, formatPostDate } from '../lib/posts'
+import NotFound from './NotFound'
+import { getPosts, formatPostDate, workPageCount, POSTS_PER_PAGE } from '../lib/posts'
 import './work.css'
 
 export default function Work() {
   const { t } = useTranslation()
+  const { page: pageParam } = useParams()
   const posts = getPosts()
+  const totalPages = workPageCount(posts.length)
+  const page = pageParam === undefined ? 1 : Number(pageParam)
+  // page 1 lives at /work itself, so /work/page/1 (and anything out of range) is a 404
+  if (pageParam !== undefined && (!/^\d+$/.test(pageParam) || page < 2 || page > totalPages)) {
+    return <NotFound />
+  }
+  const shown = posts.slice((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE)
   return (
     <section className="work">
       <div className="container">
         <p className="eyebrow">{t('work.label')}</p>
         <h1 className="work__title">{t('work.title')}</h1>
       </div>
-      <Reveal>
-        <ClientMarquee />
-      </Reveal>
-      <div className="container">
+      {page === 1 && (
         <Reveal>
-          <WorkFlow />
+          <ClientMarquee />
         </Reveal>
+      )}
+      <div className="container">
+        {page === 1 && (
+          <Reveal>
+            <WorkFlow />
+          </Reveal>
+        )}
         {posts.length === 0 && <p className="work__empty">{t('work.empty')}</p>}
         <div className="work__list">
-          {posts.map((p) => (
+          {shown.map((p) => (
             <article className="wcard" key={p.slug}>
               <p className="wmeta">
                 <time dateTime={p.date}>{formatPostDate(p.date)}</time>
@@ -43,6 +56,25 @@ export default function Work() {
             </article>
           ))}
         </div>
+        {totalPages > 1 && (
+          <nav className="wpage" aria-label={t('work.pageNav')}>
+            {page > 1 ? (
+              <Link className="wpage__link" to={page === 2 ? '/work' : `/work/page/${page - 1}`}>
+                ← {t('work.newerPosts')}
+              </Link>
+            ) : (
+              <span aria-hidden="true" />
+            )}
+            <span className="wpage__info">{t('work.pageOf', { page, total: totalPages })}</span>
+            {page < totalPages ? (
+              <Link className="wpage__link" to={`/work/page/${page + 1}`}>
+                {t('work.olderPosts')} →
+              </Link>
+            ) : (
+              <span aria-hidden="true" />
+            )}
+          </nav>
+        )}
       </div>
     </section>
   )

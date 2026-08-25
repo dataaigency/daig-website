@@ -1,5 +1,15 @@
 import i18n from '../i18n'
-import { getPosts, readingMinutes, formatPostDate } from './posts'
+import { getPosts, readingMinutes, formatPostDate, workPageCount, workPageRoutes } from './posts'
+
+test('index pagination: 10 posts per page, page 1 lives at /work itself', () => {
+  expect(workPageCount(0)).toBe(1)
+  expect(workPageCount(10)).toBe(1)
+  expect(workPageCount(11)).toBe(2)
+  expect(workPageCount(25)).toBe(3)
+  expect(workPageRoutes(6)).toEqual([])
+  expect(workPageRoutes(11)).toEqual(['/work/page/2'])
+  expect(workPageRoutes(25)).toEqual(['/work/page/2', '/work/page/3'])
+})
 
 test('posts load with meta and slug from filename', () => {
   const posts = getPosts()
