@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router'
 import StripeBand from '../components/StripeBand'
+import ClientMarquee from '../components/ClientMarquee'
 import Reveal from '../components/Reveal'
 import FlowDiagram from '../components/FlowDiagram'
 import Handover from '../components/Handover'
@@ -94,6 +95,11 @@ export default function Home() {
       <StripeBand variant="cut" />
       <Handover />
       <StripeBand variant="cut-exit" />
+
+      <Reveal>
+        <ClientMarquee />
+      </Reveal>
+      <StripeBand variant="stripes" />
 
       <section className="process container">
         <Reveal>

@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router'
 import Reveal from '../components/Reveal'
+import ClientMarquee from '../components/ClientMarquee'
 import WorkFlow from '../components/flows/WorkFlow'
 import { getPosts, formatPostDate } from '../lib/posts'
 import './work.css'
@@ -13,6 +14,11 @@ export default function Work() {
       <div className="container">
         <p className="eyebrow">{t('work.label')}</p>
         <h1 className="work__title">{t('work.title')}</h1>
+      </div>
+      <Reveal>
+        <ClientMarquee />
+      </Reveal>
+      <div className="container">
         <Reveal>
           <WorkFlow />
         </Reveal>
