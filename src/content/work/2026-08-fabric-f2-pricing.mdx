@@ -1,0 +1,175 @@
+export const meta = {
+  title: 'Microsoft Fabric F2 pricing: what a small team actually pays',
+  date: '2026-08-26',
+  tags: ['fabric', 'pricing', 'power bi'],
+  lang: 'en',
+  summary: "What an F2 capacity costs in euros, why a one-year reservation is usually the wrong lever, and the Power BI licensing cliff at F64 that quietly lands on your invoice.",
+}
+
+import { PowerBiLicensingCliff } from '../../components/flows/blog/BlogFlows'
+
+Everyone finds the F2 price first. Smallest capacity, a few hundred euros a
+month, that sounds survivable. So the pilot starts. Then the first full invoice
+arrives with a second line nobody mentioned in the demo, and someone has to
+explain to the finance lead why the cheap option grew a tail.
+
+The tail is Power BI licensing. I will get to it, because it is the part almost
+nobody puts a euro number on. First, the honest sticker price.
+
+## How much does an F2 capacity actually cost?
+
+An F2 is the smallest Fabric capacity Microsoft sells. Two capacity units, and
+capacity units are the only currency Fabric really understands.
+
+In West Europe, an F2 lists at roughly €0.38 an hour on pay as you go. Left
+running around the clock that is about €278 a month, because Azure counts 730
+hours in an average month. A one-year reservation brings it to roughly €165 a
+month, a discount of about 40 percent
+([Agilytic's Belgian and Dutch breakdown](https://www.agilytic.com/blog/microsoft-fabric-pricing),
+[Pexon's German F-SKU table](https://pexon-consulting.de/data-services/analytics/microsoft-fabric-kosten-fsku-preise/),
+both checked August 2026).
+
+Two things that price does not cover. OneLake storage is billed separately at
+about €0.02 per GB per month
+([Microsoft's OneLake consumption docs](https://learn.microsoft.com/en-us/fabric/onelake/onelake-consumption)),
+which for a small company's entire history is rounding error. And Power BI
+licences for the people who read the reports, which is not rounding error at
+all.
+
+One quirk worth knowing before you build a budget on any of this: Microsoft
+sets Fabric capacity prices in dollars and converts them to euros, so your euro
+number drifts month to month with the exchange rate. Open
+[the Azure pricing page](https://azure.microsoft.com/en-us/pricing/details/microsoft-fabric/),
+set the region to West Europe and the currency to euros, and read today's
+number before you sign anything. Every figure in this post is an August 2026
+snapshot, not a quote.
+
+## Why is Microsoft Fabric so expensive?
+
+Because you are not buying usage. You are renting an engine, and the engine has
+a minimum size.
+
+Three things make that feel expensive to a five person company. There is a
+floor: F2 is the smallest thing on the shelf, and there is no tier below it for
+a team of two. The clock runs on wall time, not on work done, so an idle
+capacity bills exactly like a busy one. And on the small sizes, per user Power
+BI licences sit on top of the capacity rather than inside it.
+
+Compared to a consumption engine like BigQuery, where a quiet month is a cheap
+month, Fabric trades that flexibility for predictability. That trade is genuinely
+good for some companies and genuinely bad for others. I wrote about which side
+of that line a small business usually sits on in
+[the warehouse or lakehouse post](/work/2026-08-warehouse-or-lakehouse).
+
+## F2 or F4: which one should I start on?
+
+F4 is twice the capacity units and twice the price, about €556 a month on pay as
+you go. That is the whole difference. Nothing unlocks at F4, you just get more
+engine.
+
+In practice F2 is a build size. One person developing, small datasets, a couple
+of dashboards read by a handful of people. F4 suits a small team with one data
+engineer and a few analysts. Real production reporting for ten to twenty five
+people reading at once tends to want F8
+([Datatako's SKU sizing guide](https://datatako.com/blog/which-fabric-capacity-do-i-need)).
+
+So start at F2. You can resize a capacity in the Azure portal in a couple of
+minutes, and buying headroom you are not using is just a donation.
+
+## What happens when you push an F2 too hard?
+
+This is the part that surprises people, because Fabric does not simply fall
+over. It has three behaviours stacked on top of each other, and they are all
+documented in
+[Microsoft's metrics app calculations](https://learn.microsoft.com/en-us/fabric/enterprise/metrics-app-calculations).
+
+**Bursting** lets a job briefly use more capacity units than you bought, so a
+heavy notebook finishes instead of failing.
+
+**Smoothing** then spreads the cost of that burst forward in time. Interactive
+work smooths over the next few minutes; scheduled background work smooths over
+the next 24 hours. This is why an F2 can handle a spike that looks impossible on
+paper.
+
+**Throttling** is what happens when the smoothing runs out of future to borrow
+from. It arrives in stages. Once you have consumed the next 10 minutes of
+capacity, interactive requests get a 20 second delay. Past 60 minutes, they get
+rejected. Past 24 hours, background jobs get rejected too.
+
+The practical translation: an overloaded F2 gets slow first, then rude. People
+report that "the dashboard is broken" long before anything actually breaks.
+
+## Does a Fabric capacity replace Power BI Pro licences?
+
+Not until F64. This is the buying trap, and it is worth a picture.
+
+On any capacity from F2 up to F32, everyone who opens a shared Power BI report
+still needs their own Power BI Pro or Premium Per User licence. The capacity
+buys performance, not seats. At F64 and above, people with the free licence and
+a viewer role can read reports with no seat of their own
+([Microsoft's licensing docs](https://learn.microsoft.com/en-us/fabric/enterprise/licenses)).
+The people who build reports still need a Pro seat either way.
+
+<PowerBiLicensingCliff />
+
+Now the euros. Power BI Pro runs about €13 per user per month in Europe after
+Microsoft's April 2025 increase
+([Toucan Toco's European pricing breakdown](https://www.toucantoco.com/en/blog/power-bi-pricing);
+Microsoft's global list price is 14 dollars, which is €12.00 at the ECB
+reference rate of 1.1664 on 25 August 2026, and European list prices sit a
+little above the straight conversion).
+
+An F64 reservation in West Europe is somewhere around €5,290 a month against
+roughly €165 for a reserved F2. That gap is about €5,125, which buys around 390
+Pro seats. So the cliff only pays for itself once you have something like 400
+report readers
+([SpendWeave reaches the same conclusion in dollars](https://spendweave.com/blog/microsoft-fabric-f64-licensing-threshold/)).
+
+If you have 20 readers, that is €260 a month in seats. Buy the seats. Anyone
+telling a 20 person company to jump to F64 for licence relief is doing the
+arithmetic backwards.
+
+## Does a one-year reservation pay off?
+
+Only if the capacity is genuinely on all the time. A reservation bills for
+every hour of the year whether the capacity is running or paused, and it saves
+about 40 percent
+([Microsoft's Fabric reservation docs](https://learn.microsoft.com/en-us/azure/cost-management-billing/reservations/fabric-capacity)).
+So the break-even is simple: a reservation wins when you would otherwise run the
+capacity more than about 60 percent of the hours in a month. That is roughly 14
+hours a day, every day, weekends included.
+
+Most small teams are nowhere near that. Which points at the lever nobody sells
+you, because nobody makes money from it: pause the thing.
+
+Pay as you go capacity can be paused and resumed
+([Microsoft's pause and resume docs](https://learn.microsoft.com/en-us/fabric/enterprise/pause-resume)),
+and while it is paused the compute meter stops. Run an F2 for twelve hours on
+working days only and you are billing around 264 hours instead of 730, which
+puts you near €100 a month. That beats the reservation, and it beats it without
+a twelve month commitment.
+
+Two cautions. Anything scheduled during the pause simply does not run, so your
+refresh windows have to sit inside the on hours. And if you use mirroring, the
+free mirrored storage allowance turns billable while the capacity is paused, so
+check that before you automate anything.
+
+## What should a small team actually buy?
+
+Start on a pay as you go F2 with a pause schedule around your working hours.
+Buy Power BI Pro seats for the people who need them and count them honestly.
+Ignore reservations until the capacity has been on more than fourteen hours a
+day for three months in a row. Ignore F64 until you have several hundred report
+readers, which for most companies I work with means never.
+
+And spend the effort you saved on the layer underneath, because a well shaped
+lakehouse on an F2 will outrun a messy one on an F8 every time. That shaping is
+what [my lakehouse architecture work](/services/lakehouse-architecture) is,
+and the failure patterns it avoids are in
+[the medallion mistakes post](/work/2026-08-medallion-mistakes).
+
+Bring me your Fabric bill and your reader count and I will tell you which of
+these levers is actually yours to pull. Ask any question you like in the free
+30 minutes; you leave with an answer or a clear next step.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6)
