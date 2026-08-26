@@ -175,6 +175,69 @@ export function AiActTimeline() {
   )
 }
 
+/** The Power BI licensing cliff: what a Fabric capacity does and does not buy you. */
+export function PowerBiLicensingCliff() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  const viewerY = [52, 105, 158]
+  return (
+    <FlowPanel
+      caption="Below F64, a Fabric capacity buys engines, not seats: every person who opens a Power BI report still needs their own Pro licence on top. At F64 and above that gate falls away for viewers, though the people who build the reports still need a seat."
+      minWidth={860}
+    >
+      <svg ref={ref} viewBox="0 0 1020 300" role="img" aria-label="Two halves side by side. On the left, an F2 to F32 capacity feeds its reports through a Power BI Pro seat gate that every viewer has to pass, so cost scales per head. On the right, an F64 or larger capacity feeds the same viewers with that gate removed, although report creators still need a Pro licence." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="pc-arrow" />
+
+        {/* left half: the gate */}
+        <text x={20} y={26} fontSize={11} letterSpacing={2} fill={FK.SUB} fontFamily="var(--font-mono)">F2 TO F32</text>
+        <path id="pc-l0" d="M 160 125 L 206 125" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pc-arrow)" />
+        <FNode x={20} y={98} w={140} h={54} label="Capacity" sub="the engines" />
+        <g>
+          <rect x={210} y={68} width={110} height={114} rx={8} fill={FK.NODE_FILL} stroke={FK.AMBER} strokeWidth={1.5} />
+          <text x={265} y={112} fontSize={12.5} fontWeight={600} fill={FK.TEXT} fontFamily="var(--font-body)" textAnchor="middle">Pro seat</text>
+          <text x={265} y={130} fontSize={10.5} fill={FK.SUB} fontFamily="var(--font-body)" textAnchor="middle">per viewer</text>
+          <text x={265} y={154} fontSize={10.5} letterSpacing={0.8} fill={FK.AMBER} fontFamily="var(--font-mono)" textAnchor="middle">~ €13 / MO</text>
+        </g>
+        <path id="pc-l1" d="M 320 125 L 362 125" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pc-arrow)" />
+        <path d="M 320 125 C 344 125, 340 72, 362 72" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pc-arrow)" />
+        <path d="M 320 125 C 344 125, 340 178, 362 178" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pc-arrow)" />
+        {viewerY.map((y) => (
+          <FNode key={`l${y}`} x={364} y={y} w={136} h={40} label="Viewer" />
+        ))}
+        {drop(432, 198, 222)}
+        {amberTag(432, 226, 'cost scales per head')}
+
+        <line x1={510} y1={16} x2={510} y2={284} stroke={FK.NODE_STROKE} strokeWidth={1.2} strokeDasharray="4 5" />
+
+        {/* right half: the gate is gone */}
+        <text x={540} y={26} fontSize={11} letterSpacing={2} fill={FK.SUB} fontFamily="var(--font-mono)">F64 AND ABOVE</text>
+        <path id="pc-r0" d="M 680 125 L 726 125" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pc-arrow)" />
+        <FNode x={540} y={98} w={140} h={54} label="Capacity" sub="the same engines" />
+        <g>
+          <rect x={730} y={68} width={110} height={114} rx={8} fill="none" stroke={FK.NODE_STROKE} strokeWidth={1.5} strokeDasharray="4 5" />
+          <text x={785} y={112} fontSize={12.5} fontWeight={600} fill={FK.FLASH} fontFamily="var(--font-body)" textAnchor="middle">No seat</text>
+          <text x={785} y={130} fontSize={10.5} fill={FK.SUB} fontFamily="var(--font-body)" textAnchor="middle">free licence</text>
+          <text x={785} y={154} fontSize={10.5} letterSpacing={0.8} fill={FK.SUB} fontFamily="var(--font-mono)" textAnchor="middle">GATE GONE</text>
+        </g>
+        <path id="pc-r1" d="M 840 125 L 878 125" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pc-arrow)" />
+        <path d="M 840 125 C 864 125, 860 72, 878 72" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pc-arrow)" />
+        <path d="M 840 125 C 864 125, 860 178, 878 178" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pc-arrow)" />
+        {viewerY.map((y) => (
+          <FNode key={`r${y}`} x={880} y={y} w={134} h={40} label="Viewer" stroke={FK.FLASH} />
+        ))}
+        {drop(785, 182, 222)}
+        {amberTag(785, 226, 'creators still need pro')}
+        <text x={540} y={272} fontSize={10.5} letterSpacing={0.8} fill={FK.SUB} fontFamily="var(--font-mono)">BREAK-EVEN ABOUT 390 VIEWERS</text>
+
+        <Dot path="pc-l0" dur={1.3} begin={0.2} color={FK.AMBER} />
+        <Dot path="pc-l1" dur={1.3} begin={1.1} color={FK.AMBER} />
+        <Dot path="pc-r0" dur={1.3} begin={0.2} />
+        <Dot path="pc-r1" dur={1.3} begin={1.1} />
+      </svg>
+    </FlowPanel>
+  )
+}
+
 /** Warehouse vs lakehouse: the difference drawn, not described. */
 export function WarehouseVsLakehouse() {
   const ref = useRef<SVGSVGElement>(null)

@@ -70,7 +70,7 @@ Format: working title · target query or audience · angle · effort (S/M/L).
 
 ### Pillar 2: Practitioner how-tos
 
-7. **Microsoft Fabric pricing for a small team: what F2 actually covers** · "fabric f2 capacity small business" · worked example from EU-region list prices, when reservation pays off, what breaks first as you grow · M
+7. ~~**Microsoft Fabric pricing for a small team: what F2 actually covers**~~ · **PUBLISHED 2026-08-26** → `src/content/work/2026-08-fabric-f2-pricing.mdx` · worked EUR example from West Europe list prices, F2 vs F4, throttle/smooth/burst behavior, the Power BI licensing cliff at F64 (~390 viewer break-even), and pausing outside working hours as the real cost lever over a reservation · M
 8. **Microsoft Fabric vs BigQuery for a small European data team** · "fabric vs bigquery" · decision criteria by team shape, plus the EU-region and residency column no comparison includes · M
 9. **Running dbt on Microsoft Fabric: field notes** · "dbt microsoft fabric" · hands-on gotchas beyond the docs; needs real verification at write time · M
 10. **Fractional data engineer, consultant, or full-time hire?** · "fractional data engineer vs consultant" · honest cost and fit comparison from someone who is one of the options · S
@@ -150,8 +150,9 @@ So the blog reads like a person and not a keyword farm, the twice-weekly loop al
 - Cycle: C → A → B → repeat
 
 **Lane queues** (top first; scout reshuffles A, never B or C):
-- A: 7 (widened per scout notes), 3, **31**, 8, 2, **32**, **33**, 21, 22, 23, **34**, 25, **36**, 24, 5, 10, 12
+- A: ~~7~~ (published 2026-08-26), **31** (now top), 3, 8, 2, **32**, **33**, 21, 22, 23, **34**, 25, **36**, 24, 5, 10, 12
   - *Scout reshuffle 2026-08-26 (pass 2):* post 7 holds the top slot — nothing found beats it, and it now has a second widening note (below). Three new candidates inserted: **31** (17) at slot 3, ahead of 21/22/23 because it is a direct purchase decision that pairs with and links post 7; **32** (16) and **33** (16) at slots 6-7, with 32 placed between 2 and 33 so two pillar-1 posts do not run back to back; **34** (15) and **36** (14) slotted by score. Items 8, 2, 21, 22, 23, 25, 24, 5, 10 and 12 are **displaced downward by insertion only** — none removed, none rescored. Parked, not queued: **35** (fold into 7), **37**, **38** (FAQ block, same call as 27), **39** (parked with 26).
+  - *Loop run 2026-08-26:* post 7 shipped as the Fabric F2 pricing post (path above), pulling in idea 35 (throttle/smooth/burst) and the Power BI licensing-cliff finding as sections rather than standalone posts, per the scout's own recommendation. **31** (Power BI Pro vs Fabric capacity licensing) now leads the queue — it was written to pair with and link the shipped post, so it should run next while that link is freshest.
 - B: 13, 14, 15, 16, 17
 - C: ~~1~~ (published 2026-08-24), then fresh-news anchored to the standing anchors above
 
