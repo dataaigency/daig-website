@@ -1,0 +1,153 @@
+export const meta = {
+  title: 'RAG, explained: why the band still needs sheet music',
+  date: '2026-08-31',
+  tags: ['data for humans', 'rag', 'ai', 'llm'],
+  lang: 'en',
+  summary: 'Retrieval-augmented generation in one image: the model brings the technique, your data brings the sheet music, and a good system says so when the music is missing.',
+}
+
+import { RagSheetMusic } from '../../components/flows/blog/BlogFlows'
+
+I play keys in a covers band. Function gigs, the odd wedding, the occasional
+corporate night nobody talks about afterward. There is a specific kind of
+silence that happens on stage: someone leans over mid set and says "let's do
+the one from the June wedding", naming a song none of us has touched since.
+Everyone technically knows how to play. Nobody remembers the actual chart. The
+band has the skill. It does not have the song.
+
+That gap, skill without the actual song, is the whole idea behind
+retrieval-augmented generation, or RAG. It's one of the more useful ideas in AI
+right now, buried under a name that sounds like a database term. It isn't.
+It's sheet music.
+
+## What does "the model knows how to play" actually mean?
+
+Large language models are trained on an enormous pile of text: books,
+articles, code, documentation, forum threads, years of it. That training
+teaches pattern and technique. Grammar, reasoning shapes, how a good answer to
+"how does X work" tends to read, thousands of chord progressions absorbed so
+deeply they come out as instinct rather than memory. That's genuinely useful.
+It's also, on its own, generic. It's every song the band has ever half
+learned, blended into a feel rather than kept as individual charts.
+
+What it is not is a copy of your company's contract from March, or the ticket
+your support team closed yesterday, or the pricing table someone updated this
+morning. The model never saw those, because they didn't exist when it was
+trained, or because they're yours and nobody handed them over. Ask it a
+question that depends on them anyway and it does the only thing it knows how
+to do: play something that sounds right, from memory, whether or not the
+notes are correct. That's what people mean by hallucination. Not lying.
+Confidently improvising.
+
+## So what is retrieval-augmented generation?
+
+RAG is handing the band the actual sheet music for tonight's song, right
+before it plays.
+
+Mechanically: your question triggers a search over your own material, usually
+matched by meaning rather than exact keywords, a technique the field calls
+embedding or vector search. The best matching passages get pulled out, not the
+whole archive, just the relevant pages, and handed to the model alongside your
+question in the same request. The model then answers using both: its trained
+technique, plus the specific material sitting in front of it right now. The
+pattern was named in a 2020 paper by
+[Patrick Lewis and a team then at Facebook AI Research](https://arxiv.org/abs/2005.11401),
+and it's become the standard shape for making a language model answer from
+your own facts instead of only its training.
+
+## What is the context window, exactly?
+
+The music stand. Whatever gets placed on the stand is what the band can see
+while it plays. Off the stand, effectively forgotten for this song.
+
+That stand has a size limit. A model's context window is a fixed budget,
+measured in tokens, roughly chunks of a word. You can't hand it your entire
+company wiki and expect it to hold all of it in mind at once. This is exactly
+why the retrieval step matters: it decides which handful of pages earn a spot
+on the stand. Get that step wrong, retrieve the wrong pages, or too many
+barely relevant ones, and the band plays a worse set even though the right
+sheet music exists somewhere in the folder. This is the single most common way
+RAG systems disappoint people, and it has nothing to do with how smart the
+model is.
+
+## Does handing over the sheet music actually stop wrong answers?
+
+Mostly, not entirely. Grounding a model in real retrieved evidence, instead of
+pure recall, measurably cuts hallucination. One 2026 study of relevance
+scoring techniques found grounding answers in retrieved evidence cut
+hallucination rates by more than 40 percent compared with ungrounded
+generation
+([ScienceDirect, 2026](https://www.sciencedirect.com/science/article/pii/S1877050926017114)).
+A separate study testing chatbots on cancer information found something
+starker: hallucination rates around 40 percent for a plain chatbot, against 0
+to 6 percent once retrieval from curated sources was added
+([PubMed, 2026](https://pubmed.ncbi.nlm.nih.gov/40934488/)).
+
+But "mostly" is doing real work in that sentence. If retrieval hands over the
+wrong page, or two documents that quietly disagree, the model can still
+misread its own sheet music. Good RAG isn't "add search and stop worrying."
+It's "add search, and now the quality of the search is the thing you actually
+have to get right."
+
+## What happens when there's no sheet music for this song?
+
+This is the part I care about most, because it's where trust gets earned or
+spent. A band asked for a song nobody in the group has ever learned has one
+honest move: say so. "We don't know that one." A band that instead fakes its
+way through, hoping nobody notices, is the bad outcome, and it's exactly what
+an ungrounded model does at the edge of what it knows.
+
+A well built RAG system is designed to notice a weak or empty search result
+and answer accordingly: say it doesn't have that information, rather than
+reach into its training and improvise something plausible. That single habit,
+admitting the gap instead of papering over it, is most of what separates a RAG
+system a business can actually trust from one that just sounds confident.
+
+<RagSheetMusic />
+
+## Where does the metaphor stop working?
+
+Every teaching metaphor should show its own seams, so here are RAG's. A real
+band reads a chart once and plays it live, note by note, in time. A model
+reads its entire retrieved context at once; there's no real-time pacing to it,
+which changes what "sight reading" even means here. Sheet music is usually one
+agreed version of a song. Retrieval often comes back with several passages
+that half agree, an old pricing page and a newer one, a policy and its
+exception, and the model has to reconcile that itself rather than stopping to
+ask which chart is current. And the failure mode that matters most in
+practice doesn't really have a band equivalent: retrieval can confidently hand
+over the wrong song's sheet music entirely, filed under a title that looked
+right, and the model will play it fluently, correct sounding and wrong. A
+musician glancing at the title would probably catch that. A model doesn't
+reliably.
+
+That last seam is the real lesson for anyone considering RAG for their own
+company. The system is only as trustworthy as the archive it searches. If your
+documents are outdated, duplicated, or scattered across three tools that
+disagree with each other, retrieval will confidently find and serve exactly
+that mess. The unglamorous part of building a good RAG system, cleaning,
+structuring and keeping one honest version of your own data, is most of the
+actual work, and it looks a lot like
+[the shoebox and clean-once habits I wrote about building a surf forecast](/work/2026-08-surf-forecast-lakehouse):
+keep the originals, clean them once in one place, so there's one trustworthy
+version to retrieve from at all.
+
+One honest note, since this site tends to flag EU rules where they're real:
+the AI Act's Article 50 transparency duty, live since August 2026, requires
+telling a user they're talking to an AI. It doesn't require an AI to cite its
+retrieved sources. That's a separate, good habit rather than a legal one,
+worth doing anyway. If you're tracking what the Act actually requires this
+year, [I wrote about the deadlines that moved and the ones that didn't](/work/2026-08-ai-act-deadlines-moved).
+
+## Is this worth building for your company?
+
+If your team keeps asking an AI assistant questions that depend on your own
+documents, tickets, contracts or product details, plain chat is the wrong tool
+and RAG is the right shape. But the return on it is capped by the state of the
+archive it searches. I'd rather tell you that honestly in a 30 minute call
+than sell you a chatbot pointed at a folder of stale PDFs.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6) Ask
+any question you like; you leave with an answer or a clear next step. Bring
+your messiest internal wiki and we'll figure out together whether retrieval or
+a tidy-up comes first.

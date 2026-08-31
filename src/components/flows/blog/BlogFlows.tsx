@@ -238,6 +238,40 @@ export function PowerBiLicensingCliff() {
   )
 }
 
+/** RAG in one chain: a question triggers a search of your own archive, the
+ *  matches land on the context window, the model plays using both trained
+ *  patterns and those pages, and a good system says so when nothing matches. */
+export function RagSheetMusic() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  const nodes = [
+    { x: 15, w: 155, label: 'Your question' },
+    { x: 200, w: 195, label: 'Search the archive', sub: 'matches by meaning' },
+    { x: 425, w: 175, label: 'On the stand', sub: 'the pages it found' },
+    { x: 630, w: 180, label: 'The band plays', sub: 'patterns + your pages' },
+    { x: 840, w: 165, label: 'Answer, sourced', stroke: FK.FLASH },
+  ]
+  const mid = 32 + 24
+  return (
+    <FlowPanel caption="How retrieval-augmented generation actually works: a question triggers a search of your own material, the matching pages sit in the context window like sheet music on a stand, and the model answers from both its training and those pages, saying so honestly when nothing relevant turns up." minWidth={860}>
+      <svg ref={ref} viewBox="0 0 1020 160" role="img" aria-label="Five steps left to right: your question, a search of the archive, the matching pages on the context window, the model playing from both trained patterns and those pages, and a sourced answer. A note under the search step flags the honest fallback: no match found means it says so instead of guessing." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="rs-arrow" />
+        {nodes.slice(0, -1).map((n, i) => (
+          <path key={i} id={`rs-e${i}`} d={`M ${n.x + n.w} ${mid} L ${nodes[i + 1].x - 2} ${mid}`} fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#rs-arrow)" />
+        ))}
+        {nodes.map((n) => (
+          <FNode key={n.label} x={n.x} y={32} w={n.w} h={48} label={n.label} sub={n.sub} stroke={n.stroke ?? FK.NODE_STROKE} />
+        ))}
+        {drop(nodes[1].x + nodes[1].w / 2, 80, 108)}
+        {amberTag(nodes[1].x + nodes[1].w / 2, 112, 'no match: says so')}
+        {nodes.slice(0, -1).map((_, i) => (
+          <Dot key={i} path={`rs-e${i}`} dur={1.7} begin={i * 0.6} />
+        ))}
+      </svg>
+    </FlowPanel>
+  )
+}
+
 /** Warehouse vs lakehouse: the difference drawn, not described. */
 export function WarehouseVsLakehouse() {
   const ref = useRef<SVGSVGElement>(null)

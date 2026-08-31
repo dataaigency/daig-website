@@ -79,7 +79,7 @@ Format: working title · target query or audience · angle · effort (S/M/L).
 
 ### Pillar 3: Data for humans
 
-13. **RAG, explained: why the band needs sheet music** · "what is RAG plain english" / non-technical buyers · the model knows how to play (patterns from years of practice) but not your song (your data); the music stand is the context window; where the analogy stops · M
+13. ~~**RAG, explained: why the band needs sheet music**~~ · **PUBLISHED 2026-08-31** → `src/content/work/2026-08-rag-sheet-music.mdx` · "what is RAG plain english" / non-technical buyers · the model knows how to play (patterns from years of practice) but not your song (your data); the music stand is the context window; where the analogy stops · M
 14. **What an avalanche report teaches you about deciding with imperfect data** · non-technical buyers evaluating dashboards · risk levels, confidence, the human factor: acting on data that is honest about its own uncertainty · M
 15. **Why a band can improvise and your company cannot** · "data governance" for skeptics · a key signature and a form are what make improvisation safe; governance as the shared structure that enables speed rather than blocking it · M
 16. **The tide table is the oldest data product** · non-technical buyers · computed years ahead from a stable model, published in a form everyone trusts: what reference data and data contracts are, and why your KPI definitions should work the same way · M
@@ -131,6 +131,10 @@ Scores are buyer intent / EU angle / first-hand edge / winnable, each 1 to 5.
 38. **Direct Lake vs Import mode for a small Fabric team** · "direct lake vs import mode" · en · **11** (3/1/5/2) · SERP: SQLBI and MS Learn own this and answer it definitively. Skip as a target post; fold as an FAQ block into Fabric content, same call as idea 27. · S
 39. **Vertex AI vs Azure AI Foundry** · "vertex ai vs azure ai foundry" · en · **11** (4/2/3/2) · SERP: three-way comparison farms (index.dev, PeerSpot, tech-insider, Bits Lovers) stacked several deep. Same verdict as idea 26 — parked unless a first-hand governance angle appears. · M
 
+### Follow-up surfaced while writing post 13 (2026-08-31)
+
+40. **Why your RAG chatbot confidently answers from the wrong document** · buyers who already built or bought a RAG assistant and don't trust its answers · pillar 4, sibling to idea 19; the retrieval-mismatch failure mode named in post 13's "where the metaphor stops working" section deserves its own worked example, ideally with a real before/after from a client's document set once one exists · M
+
 Dud angles from this pass, not worth rescanning: any three-way hyperscaler AI platform comparison (39, and 26 from pass 1 — comparison farms are entrenched); "fabric pause capacity" as a standalone target (MS Learn plus Syntera and russ.cloud already cover it — it is a paragraph inside post 7, not a post); generic "microsoft fabric vs power bi" without the small-business qualifier (pure listicle territory).
 
 Research note: the EU's own `digital-strategy.ec.europa.eu` and several law-firm domains were unreachable from the build environment's egress proxy during this run. Facts were verified against reachable secondary sources (Gibson Dunn, White & Case, Skadden, DLA Piper, European Parliament, artificialintelligenceact.eu) instead. If a future run needs a primary Official Journal citation, fetch it from a reachable mirror.
@@ -146,14 +150,14 @@ So the blog reads like a person and not a keyword farm, the twice-weekly loop al
 - **Lane C, AI pulse.** State of the art and governance, EU-first: what moved in the last two weeks (AI Act guidance, model releases, EU cloud and sovereignty moves) anchored to one standing concept so the post stays useful after the news fades. Researched fresh at write time; ideas 6, 11, 18, 19 and 20 are the standing anchors for quiet weeks.
 
 **Rotation state (the loop updates these two lines):**
-- Next lane: **B** (lane A's run on 2026-08-26 takes post 7, in flight; lane B is next)
+- Next lane: **C** (lane B's run on 2026-08-31 takes post 13; lane C is next)
 - Cycle: C → A → B → repeat
 
 **Lane queues** (top first; scout reshuffles A, never B or C):
 - A: ~~7~~ (published 2026-08-26), **31** (now top), 3, 8, 2, **32**, **33**, 21, 22, 23, **34**, 25, **36**, 24, 5, 10, 12
   - *Scout reshuffle 2026-08-26 (pass 2):* post 7 holds the top slot — nothing found beats it, and it now has a second widening note (below). Three new candidates inserted: **31** (17) at slot 3, ahead of 21/22/23 because it is a direct purchase decision that pairs with and links post 7; **32** (16) and **33** (16) at slots 6-7, with 32 placed between 2 and 33 so two pillar-1 posts do not run back to back; **34** (15) and **36** (14) slotted by score. Items 8, 2, 21, 22, 23, 25, 24, 5, 10 and 12 are **displaced downward by insertion only** — none removed, none rescored. Parked, not queued: **35** (fold into 7), **37**, **38** (FAQ block, same call as 27), **39** (parked with 26).
   - *Loop run 2026-08-26:* post 7 shipped as the Fabric F2 pricing post (path above), pulling in idea 35 (throttle/smooth/burst) and the Power BI licensing-cliff finding as sections rather than standalone posts, per the scout's own recommendation. **31** (Power BI Pro vs Fabric capacity licensing) now leads the queue — it was written to pair with and link the shipped post, so it should run next while that link is freshest.
-- B: 13, 14, 15, 16, 17
+- B: ~~13~~ (published 2026-08-31), 14, 15, 16, 17
 - C: ~~1~~ (published 2026-08-24), then fresh-news anchored to the standing anchors above
 
 ## 4b. The near-term queue: first six, in order
@@ -162,7 +166,7 @@ So the blog reads like a person and not a keyword farm, the twice-weekly loop al
 2. **Post 7: Fabric F2 pricing (pillar 2).** Was already next in the SEO plan's queue with the best demand-to-competition ratio found; EUR framing per CLAUDE.md makes it stronger, not harder. *Scout note (2026-08-24): widen the brief to also answer "why is microsoft fabric so expensive" and "f2 vs f4" — both live in autocomplete, and idea 21 covers the full cost-pain angle if this post cannot hold it all.*
    *Scout note 2 (2026-08-26): two more things belong in this post, both verified at SERP level this run and both mis-served by every page currently ranking. (a) **F2 does not buy Power BI licence relief.** Below F64, every viewer still needs their own Pro licence, so a small team buying F2 to "save on Power BI" has bought performance and nothing else. State this plainly and early; idea 31 carries the full EUR break-even math if this post cannot hold it. (b) **Pausing the capacity is the real small-team cost lever** — pause overnight and at weekends and the bill drops steeply, which is the honest answer to "why is Fabric so expensive". Also fold in idea 35: what actually breaks first on an F2 (bursting, smoothing, then the three throttling stages) as the "what you grow out of" section. Verify every figure against the EU-region (West Europe) Azure pricing page at write time in EUR — every source found this run quotes USD list, and one scopes its break-even explicitly to US regions.*
 3. **Post 3: An EU region is not sovereignty (pillar 1).** The best buyer-intent pocket in the sovereignty noise, and it sets up the residency column in the Fabric vs BigQuery comparison two slots later.
-4. **Post 13: RAG and sheet music (pillar 3).** The series that worked gets its second entry while the surf post is still fresh; it passes all four tests in 1.3 and doubles as the plain-language RAG explainer pillar 4 can link to.
+4. ~~**Post 13: RAG and sheet music (pillar 3).**~~ **Shipped 2026-08-31.** The series that worked gets its second entry while the surf post is still fresh; it passes all four tests in 1.3 and doubles as the plain-language RAG explainer pillar 4 can link to.
 5. **Post 8: Fabric vs BigQuery (pillar 2).** The exact-stack comparison the SEO plan rated highly winnable; now it can link post 3 for the sovereignty angle and post 7 for pricing, which no content-farm ranker can match.
 6. **Post 2: ChatGPT and customer data under GDPR (pillar 1).** High-intent, evergreen-ish, and by this slot the site has an AI Act post and a sovereignty post for it to link to, forming a small EU-compliance cluster.
 
