@@ -5,7 +5,7 @@ import { LakehouseFlow, PipelinesFlow, AiDataFlow, GovernanceFlow } from './comp
 import AboutFlow from './components/flows/AboutFlow'
 import WorkFlow from './components/flows/WorkFlow'
 import ProblemChain from './components/flows/ProblemChain'
-import { AuditStackMap, MedallionMistakesMap, SurfPipeline, WarehouseVsLakehouse, AiActTimeline, PowerBiLicensingCliff } from './components/flows/blog/BlogFlows'
+import { AuditStackMap, MedallionMistakesMap, SurfPipeline, WarehouseVsLakehouse, AiActTimeline, PowerBiLicensingCliff, RagPipeline } from './components/flows/blog/BlogFlows'
 
 /** Server-render every flow diagram to markup so scripts/export-diagrams.mjs
  *  can extract standalone SVG files into assets/diagrams/. */
@@ -25,6 +25,7 @@ export function renderAll(): Record<string, string> {
     'blogs/warehouse-vs-lakehouse': <WarehouseVsLakehouse />,
     'blogs/ai-act-timeline': <AiActTimeline />,
     'blogs/power-bi-licensing-cliff': <PowerBiLicensingCliff />,
+    'blogs/rag-pipeline': <RagPipeline />,
   }
   return Object.fromEntries(Object.entries(items).map(([name, el]) => [name, renderToStaticMarkup(el)]))
 }

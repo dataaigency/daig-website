@@ -1,0 +1,148 @@
+import { RagPipeline } from '../../components/flows/blog/BlogFlows'
+
+export const meta = {
+  title: 'RAG, explained: why the band needs sheet music',
+  date: '2026-09-02',
+  tags: ['data for humans', 'ai', 'rag', 'governance'],
+  lang: 'en',
+  summary: 'Retrieval-augmented generation through the oldest trick in live music: a great player still needs the chart for a song they have never heard, and a bad chart gets played with total confidence.',
+}
+
+I have spent enough evenings sitting in with a band I do not normally play
+with to know exactly how this feels. You can read music, you know your
+scales, your ears are good, and the bandleader still hands you a chart before
+the song starts. Not because you cannot play. Because you have never heard
+this particular song, and nobody wants to find that out live.
+
+That handoff, chart first, then play, is the entire idea behind
+retrieval-augmented generation, RAG for short. Once you see the mechanism in
+a band, the AI version stops being mysterious.
+
+## What is RAG, in one sentence?
+
+RAG is a way of handing a language model the specific pages it needs before
+asking it to answer, instead of hoping it already knows your business by
+heart. The model supplies the general skill. Your documents supply the
+specific song.
+
+## Why does a good musician still need the sheet music?
+
+A model like the ones behind ChatGPT or Claude has practised, in a sense,
+an enormous songbook: grammar, reasoning, the shape of a good explanation,
+thousands of patterns from thousands of documents. That is real skill, the
+same way a session player's timing and chord vocabulary are real skill.
+
+None of it tells the model what your return policy says, what ticket
+#4471 was actually about, or what changed in your pricing page last month.
+That is not in the songbook. It was never trained on your internal wiki, and
+even where it was trained on something close to your world, that training is
+frozen at a point in the past. Ask it anyway and a fluent model will often
+still answer, the way a confident player will vamp something that sounds
+plausible in the right key. It just will not be your song.
+
+RAG's fix is blunt and effective: stop asking the model to remember your
+song, and start handing it the chart at the moment you ask.
+
+## How does the system find the right page?
+
+In a band, someone has already filed every chart by key and title, so when
+a singer calls a song, the right page turns up in seconds instead of a
+five-minute search through a binder.
+
+RAG does the filing ahead of time too. Every document, policy, ticket,
+contract, gets cut into passages and converted into a kind of numeric
+fingerprint called an embedding, positioned so that passages about similar
+things sit near each other in that space (see [IBM's explanation of the
+mechanism](https://www.ibm.com/think/topics/retrieval-augmented-generation)
+and [Pinecone's](https://www.pinecone.io/learn/retrieval-augmented-generation/)
+for the fuller technical version). When your question comes in, it gets the
+same treatment, and the system pulls whichever passages sit closest to it.
+This is why a vaguely worded question still finds the right passage: the
+match is on meaning, not on typing the exact words the document uses.
+
+## Why can't you just hand over the whole binder?
+
+Because the music stand only holds so many pages. Hand a player the entire
+binder mid-song and they will spend more time flipping than playing.
+
+A model has the same limit, called the context window: a cap on how much
+text it can hold in view for one answer. Stuff it with your whole company
+wiki and either it does not fit, or it fits and the one paragraph that
+actually answers the question gets buried under forty that do not. This is
+why chunking, cutting documents into passages of a sensible size, and
+retrieval, picking only the handful that matter, are the real engineering in
+a RAG system. The model at the end is almost the easy part.
+
+## What happens when the chart is wrong?
+
+Here is the part every honest musician recognises. Hand a good player a
+chart with the wrong chords, or an old chart for a song that got rearranged
+last year, and they will not stop and question it mid-gig. They will play
+what is in front of them, confidently, because playing confidently is the
+job.
+
+RAG fails the same way, and this is the part that should worry you more than
+it usually does. Nothing in the pipeline checks whether the retrieved
+passage was correct, current, or even the right passage for the question.
+A stale pricing page, a policy someone forgot to update, a support article
+that was wrong when it was written, all of it gets retrieved with the same
+confidence as a good passage, and the model turns it into fluent, certain
+prose. The mechanism does not launder bad data into good data. It launders
+bad data into a good-sounding answer, which is worse.
+
+<RagPipeline />
+
+This is also the strongest argument for treating the documents underneath a
+RAG system as a real, governed asset rather than "whatever is in the shared
+drive". Clean, current, access-controlled source material is not a nice to
+have here. It is the only thing standing between a useful answer and a
+convincing wrong one.
+
+## Where the analogy stops working
+
+A human player who gets handed a genuinely wrong chart can sometimes feel it
+in their gut, stop, and ask. Most RAG systems have no equivalent instinct.
+They do not know what they do not know, so they rarely hesitate, and a
+system that always sounds equally sure is a system you cannot read for
+doubt the way you can read a bandmate's face. That gap has to be closed with
+engineering, not personality: evaluation before you scale, source documents
+that are actually kept current, and, ideally, answers that cite which
+passage they came from so a human can check the chart themselves.
+
+## The EU angle: RAG and your data protection duties
+
+There is a genuine GDPR upside here that gets less attention than it
+deserves. Training a model on personal data bakes that data into the
+model's weights, which sits awkwardly next to GDPR duties like erasure and
+purpose limitation: you cannot easily un-teach a model one customer's
+record once it has been absorbed. Retrieval avoids that problem by design.
+Your data stays in your own store, under your own access controls, and is
+only pulled in at the moment of the question, rather than memorised forever
+([the European Data Protection Supervisor's own technology-monitoring
+page](https://www.edps.europa.eu/data-protection/technology-monitoring/techsonar/retrieval-augmented-generation-rag_en)
+covers this trade-off well). It is not a free pass. A specific enough
+question can still pull back personal data that should never have been
+retrievable by that user, so access control on the retrieval layer matters
+as much as the model does. But it is a genuinely better starting shape than
+training on the same data would be.
+
+## The whole mechanism, in one breath
+
+Index your documents once. Match the question against that index. Let a
+handful of the closest passages ride into the context window with the
+question. Let the model draft from both. Every step of that chain is doing
+real work, and every step can also be the one that quietly breaks, which is
+why "we added RAG" is not the same claim as "we can trust the answer".
+
+If your AI pilot works in the demo and you are not sure it would survive
+someone asking it the wrong question with confidence, that gap is exactly
+what [AI governance and LLMOps](/services/ai-governance-llmops) is for.
+[Book a free 30 minute intake call](https://calendar.app.google/F5mvmg12xMpF73fw6)
+and we will look at what your model is actually being handed before it
+answers.
+
+Further reading: the [medallion architecture post](/work/2026-08-medallion-mistakes)
+covers the five ways the layer underneath a system like this usually breaks
+first, and [the surf forecast post](/work/2026-08-surf-forecast-lakehouse) is
+the same "keep the receipts, clean it once" idea from the other data-for-humans
+post in this series.

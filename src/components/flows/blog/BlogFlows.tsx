@@ -238,6 +238,54 @@ export function PowerBiLicensingCliff() {
   )
 }
 
+/** RAG in one mechanism: documents get indexed once, a question is matched
+ *  against that index, the closest passages ride into a limited context
+ *  window, and the model drafts from both. Messy source documents are never
+ *  caught by this chain; they come out the other end as a fluent, wrong answer. */
+export function RagPipeline() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  const nodes = [
+    { x: 15, w: 178, label: 'Your documents', sub: 'policies, tickets, contracts', flag: 'messy or stale' },
+    { x: 213, w: 178, label: 'Indexed passages', sub: 'chunked and searchable' },
+    { x: 411, w: 178, label: 'Retrieval', sub: 'matches your question' },
+    { x: 609, w: 178, label: 'Context window', sub: 'question + a few passages' },
+    { x: 807, w: 180, label: 'Model', sub: 'drafts the answer', stroke: FK.FLASH, flag: 'confident, wrong answer' },
+  ]
+  const mid = 116
+  return (
+    <FlowPanel
+      caption="How retrieval-augmented generation actually works: your documents are indexed once, your question is matched against that index, the closest passages ride into a context window that only fits a few pages, and the model drafts its answer from both. Nothing in this chain checks whether the source documents were right in the first place, so stale or messy ones come out the other end as a confident, wrong answer."
+      minWidth={840}
+    >
+      <svg ref={ref} viewBox="0 0 1020 205" role="img" aria-label="A question is matched against an index of your documents, the closest passages join it inside a limited context window, and a model drafts the answer from both. A flag under the first box, messy or stale, connects by the same chain to a flag under the model, confident wrong answer." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="rag-arrow" />
+        {nodes.slice(0, -1).map((n, i) => (
+          <path key={i} id={`rag-e${i}`} d={`M ${n.x + n.w} ${mid} L ${nodes[i + 1].x - 2} ${mid}`} fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#rag-arrow)" />
+        ))}
+        <path id="rag-q" d="M 500 55 L 500 90" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#rag-arrow)" />
+        <FNode x={411} y={15} w={178} h={40} label="Your question" />
+        {nodes.map((n) => (
+          <g key={n.label}>
+            <FNode x={n.x} y={92} w={n.w} h={48} label={n.label} sub={n.sub} stroke={n.stroke} />
+            {n.flag && (
+              <>
+                {drop(n.x + n.w / 2, 140, 165)}
+                {amberTag(n.x + n.w / 2, 169, n.flag)}
+              </>
+            )}
+          </g>
+        ))}
+        <Dot path="rag-q" dur={1.2} begin={0.1} />
+        <Dot path="rag-e0" dur={1.5} begin={0.3} />
+        <Dot path="rag-e1" dur={1.5} begin={0.9} />
+        <Dot path="rag-e2" dur={1.5} begin={1.5} />
+        <Dot path="rag-e3" dur={1.5} begin={2.1} color={FK.FLASH} />
+      </svg>
+    </FlowPanel>
+  )
+}
+
 /** Warehouse vs lakehouse: the difference drawn, not described. */
 export function WarehouseVsLakehouse() {
   const ref = useRef<SVGSVGElement>(null)
