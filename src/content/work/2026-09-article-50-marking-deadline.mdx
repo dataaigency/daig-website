@@ -1,0 +1,131 @@
+export const meta = {
+  title: 'The Article 50 marking deadline: what actually changes on 2 December 2026',
+  date: '2026-09-07',
+  tags: ['eu ai act', 'compliance', 'governance'],
+  lang: 'en',
+  summary: 'Only one of Article 50\'s four transparency duties has a clock still running: machine-readable marking for AI features shipped before August. Here is what that actually requires, and what does not wait for it.',
+}
+
+import { MarkingRunway } from '../../components/flows/blog/BlogFlows'
+
+I keep hearing the same relieved sentence from founders who shipped an AI
+feature earlier this year: "we're fine, we've got until December." Half of
+that is true. The other half is the part that gets a company fined, so it is
+worth separating them properly.
+
+## What actually happens on 2 December 2026?
+
+The grace period for one specific piece of [Article
+50](https://artificialintelligenceact.eu/transparency-rules-article-50/) runs
+out: machine-readable marking of AI-generated content, for systems that were
+already on the market before 2 August 2026. After that date, every generative
+AI feature you run, old or new, has to mark its own output in a way a
+machine can detect as artificially generated.
+
+That is the whole deadline. It is not a deadline for telling people they are
+talking to an AI. It is not a deadline for labelling deepfakes. Those started
+on 2 August 2026, and nothing about the December date moved them, the same
+way the [Annex III and Annex I high-risk
+deadlines](/work/2026-08-ai-act-deadlines-moved) moved but everything else in
+the Act did not.
+
+## Which of Article 50's four duties actually has a clock on it?
+
+Article 50 bundles four separate obligations, and the confusion mostly comes
+from treating them as one thing:
+
+- **Bot disclosure.** If someone is interacting with an AI system and it
+  would not otherwise be obvious, you have to tell them.
+- **Biometric or emotion-recognition disclosure.** If you deploy a system
+  that recognises emotion or categorises people biometrically, the people
+  exposed to it have to be informed.
+- **Deepfake and public-interest text labelling.** If you deploy a system
+  that generates deepfakes, or AI-generated text published on a matter of
+  public interest, you have to disclose that it is artificially generated or
+  manipulated.
+- **Content marking.** If you provide a system that generates synthetic
+  audio, image, video or text, the output itself has to carry a
+  machine-readable mark, not just a disclosure to the person reading it.
+
+All four became enforceable on 2 August 2026. The Digital Omnibus only
+carved out a transition window for the last one, and only for systems
+already live before that date: they get until 2 December 2026 to add the
+mark itself
+([Gibson Dunn](https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/),
+[ComplianceHub.Wiki](https://compliancehub.wiki/eu-ai-act-december-2-2026-legacy-systems-watermarking-grace-period-expiry/)).
+The disclosure duty in that same feature, "tell the person they are talking
+to AI", was never on that clock. It applied from August, legacy system or not.
+
+<MarkingRunway />
+
+## What counts as "shipped before 2 August 2026"?
+
+A system you placed on the market or put into service before that date. If
+your chatbot, content generator, or AI writing assistant was live and in use
+before 2 August, it is the one that gets the extra runway on marking. Anything
+you ship for the first time after that date has to arrive with the mark
+already built in; there is no fresh three-month grace period for a feature
+you launch next week.
+
+## What does "machine-readable marking" actually require?
+
+More than a footnote in the UI. The European Commission's Code of Practice
+on Transparency, finalised after a public draft and signed by roughly 190
+organisations by the end of July 2026, points to a layered approach because
+no single technique is considered robust enough on its own: signed
+provenance metadata in the style of the [C2PA
+standard](https://c2paviewer.com/articles/eu-ai-act-content-credentials) for
+images, audio and video, plus an embedded watermark where the format
+supports one, with logging as a fallback where neither is technically
+feasible.
+
+Text is the hard case, and it is worth knowing where your own vendor stands.
+Anthropic announced in August 2026 that every Claude model now weaves an
+imperceptible, machine-readable pattern directly into its generated text,
+applied worldwide rather than only for EU users, specifically as its answer
+to Article 50(2)
+([TechCrunch](https://techcrunch.com/2026/08/11/anthropic-says-it-will-watermark-text-generated-by-its-ai-models/),
+[Claude Help Center](https://support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content)).
+If you built a feature on top of a model that already does this, a real
+chunk of your obligation is already handled upstream. If you built on a model
+that does not, or you post-process the output before it reaches a user, the
+mark can get stripped along the way and the obligation is back on you.
+
+## What if your AI feature is text-only, like a support chatbot?
+
+Two different duties can apply to the same feature, and it is easy to satisfy
+one and miss the other. The bot-disclosure duty ("you are talking to an AI")
+is a UI problem: a line of text or a chat header solves it, and it has
+applied since August regardless of when you shipped. The content-marking
+duty is a data problem: the actual output has to carry something a machine
+can check, which a disclosure banner does not provide on its own. A chatbot
+that says "I'm an AI assistant" at the top of the window has done the first
+duty and nothing for the second.
+
+## What happens if you miss it?
+
+Breaches of Article 50's transparency obligations sit in the AI Act's lower
+enforcement band: fines up to €15 million or 3 percent of global annual
+turnover, whichever is higher, with authorities directed to apply the lower
+of the two figures proportionately for SMEs and the newer small mid-cap
+category
+([Securing.AI](https://securing.ai/eu-ai-act-content-marking/)). That is a
+real number for a small company, and enforcement discretion is not the same
+as being ignored.
+
+## Do you need a consultant, or an inventory?
+
+Usually the second one, and it is smaller than it sounds. Most companies I
+talk to cannot immediately answer "which of our features generate synthetic
+content, and when did each one go live." That single list, features against
+launch dates, is what tells you whether you are racing the December
+deadline or already past it with room to spare. It is the same underlying
+work as
+[AI governance and LLMOps](/services/ai-governance-llmops): knowing what your
+AI systems actually do, with what data, before a regulator or a customer asks.
+
+If you want a second opinion on which of your AI features need the mark and
+which just need a better disclosure line, [book the free 30 minute intake
+call](https://calendar.app.google/F5mvmg12xMpF73fw6) and bring the list. I
+will tell you honestly where you stand, including if the honest answer is
+"you already did this."

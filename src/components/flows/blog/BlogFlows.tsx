@@ -272,6 +272,70 @@ export function RagSheetMusic() {
   )
 }
 
+/** Article 50: four duties, one clock. Three duties and the disclosure half
+ *  of the fourth are live regardless of ship date; only content marking gets
+ *  a runway, and only for features already on the market before Aug 2026. */
+export function MarkingRunway() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  const rowY = [40, 104, 168, 232]
+  const duties = [
+    { label: 'Bot disclosure', sub: 'you know it is AI' },
+    { label: 'Biometric disclosure', sub: 'emotion & categorization' },
+    { label: 'Deepfake & PI text', sub: 'deployer labels it' },
+    { label: 'Content marking', sub: 'machine-readable' },
+  ]
+  const srcY = 130
+  const half = (prefix: string, srcX: number, dutyX: number, markingLive: boolean) => (
+    <g>
+      <FNode x={srcX} y={srcY} w={170} h={56} label="Your AI feature" />
+      {duties.map((d, i) => (
+        <path
+          key={`${prefix}p${i}`}
+          id={`${prefix}e${i}`}
+          d={`M ${srcX + 170} ${srcY + 28} C ${srcX + 200} ${srcY + 28}, ${srcX + 194} ${rowY[i] + 22}, ${dutyX} ${rowY[i] + 22}`}
+          fill="none"
+          stroke={FK.EDGE}
+          strokeWidth={1.5}
+          markerEnd="url(#mr-arrow)"
+        />
+      ))}
+      {duties.map((d, i) => {
+        const amber = i === 3 && !markingLive
+        return (
+          <g key={`${prefix}n${i}`}>
+            <FNode x={dutyX} y={rowY[i]} w={250} h={44} label={d.label} sub={d.sub} stroke={amber ? FK.AMBER : FK.FLASH} />
+            {amber && (
+              <>
+                {drop(dutyX + 125, rowY[i] + 44, rowY[i] + 68)}
+                {amberTag(dutyX + 125, rowY[i] + 72, 'runway to 2 dec 2026')}
+              </>
+            )}
+          </g>
+        )
+      })}
+      {duties.map((d, i) => (
+        <Dot key={`${prefix}d${i}`} path={`${prefix}e${i}`} dur={1.9} begin={i * 0.4} color={i === 3 && !markingLive ? FK.AMBER : FK.FLASH} />
+      ))}
+    </g>
+  )
+  return (
+    <FlowPanel
+      caption="Article 50 sets four duties, all enforceable since 2 August 2026 regardless of when a feature shipped. Only one of them, machine-readable content marking, gets a runway, and only for systems already live before that date: those get until 2 December 2026 to add the mark. Everything else, including telling people they are talking to AI, was never on that clock."
+      minWidth={900}
+    >
+      <svg ref={ref} viewBox="0 0 1020 340" role="img" aria-label="Two halves. Left: an AI feature shipped before 2 August 2026, where bot disclosure, biometric disclosure and deepfake or public-interest labelling are live now in green, while content marking is flagged amber with a runway to 2 December 2026. Right: an AI feature shipped after 2 August 2026, where all four duties, including content marking, are live now with no runway." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="mr-arrow" />
+        <text x={20} y={16} fontSize={11} letterSpacing={1.6} fill={FK.SUB} fontFamily="var(--font-mono)" textAnchor="start">SHIPPED BEFORE 2 AUG 2026</text>
+        {half('l', 20, 250, false)}
+        <line x1={510} y1={10} x2={510} y2={330} stroke={FK.NODE_STROKE} strokeWidth={1.2} strokeDasharray="4 5" />
+        <text x={540} y={16} fontSize={11} letterSpacing={1.6} fill={FK.SUB} fontFamily="var(--font-mono)" textAnchor="start">SHIPPED AFTER 2 AUG 2026</text>
+        {half('r', 540, 770, true)}
+      </svg>
+    </FlowPanel>
+  )
+}
+
 /** Warehouse vs lakehouse: the difference drawn, not described. */
 export function WarehouseVsLakehouse() {
   const ref = useRef<SVGSVGElement>(null)
