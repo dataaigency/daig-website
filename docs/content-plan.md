@@ -111,7 +111,7 @@ Dud seeds, not worth rescanning: any "\<tool\> small business" (empty for bigque
 
 ### Follow-ups surfaced while writing post 1 (2026-08-24)
 
-28. **The 2 December 2026 machine-readable marking deadline: what it means if you shipped a generative feature before August** · "ai act machine readable marking deadline" · the narrow grace period inside Article 50 that summaries collapse into the headline date; perishable, worth writing before December · S
+28. ~~**The 2 December 2026 machine-readable marking deadline: what it means if you shipped a generative feature before August**~~ · **PUBLISHED 2026-09-07** → `src/content/work/2026-09-article-50-marking-deadline.mdx` · "ai act machine readable marking deadline" · the narrow grace period inside Article 50 that summaries collapse into the headline date; perishable, worth writing before December · S
 29. **Are you a "small mid-cap" under EU digital law? The 750/€150M/€129M test** · "small mid-cap definition eu" · the new SMC band cuts across the AI Act and the wider Omnibus package; nobody has written the plain-language qualifier test for a scaling company · S
 30. **Article 4 AI literacy: a one-hour session outline you can actually run** · overlaps queued idea 6, now with a concrete deliverable angle (the outline itself) rather than an explainer; consider merging into 6 when 6 comes up · S
 
@@ -135,6 +135,10 @@ Scores are buyer intent / EU angle / first-hand edge / winnable, each 1 to 5.
 
 40. **Why your RAG chatbot confidently answers from the wrong document** · buyers who already built or bought a RAG assistant and don't trust its answers · pillar 4, sibling to idea 19; the retrieval-mismatch failure mode named in post 13's "where the metaphor stops working" section deserves its own worked example, ideally with a real before/after from a client's document set once one exists · M
 
+### Follow-up surfaced while writing the Article 50 marking post (2026-09-07)
+
+41. **Which AI vendors already mark their output for you? A quick Article 50 checklist by tool** · buyers who built a feature on top of ChatGPT, Claude, Gemini or an open model and don't know which side of the marking obligation their vendor already covers · pillar 1/2 crossover; Anthropic's August 2026 text watermarking rollout is one data point, worth a short comparison table once two or three more vendors confirm their approach · S
+
 Dud angles from this pass, not worth rescanning: any three-way hyperscaler AI platform comparison (39, and 26 from pass 1 — comparison farms are entrenched); "fabric pause capacity" as a standalone target (MS Learn plus Syntera and russ.cloud already cover it — it is a paragraph inside post 7, not a post); generic "microsoft fabric vs power bi" without the small-business qualifier (pure listicle territory).
 
 Research note: the EU's own `digital-strategy.ec.europa.eu` and several law-firm domains were unreachable from the build environment's egress proxy during this run. Facts were verified against reachable secondary sources (Gibson Dunn, White & Case, Skadden, DLA Piper, European Parliament, artificialintelligenceact.eu) instead. If a future run needs a primary Official Journal citation, fetch it from a reachable mirror.
@@ -150,7 +154,7 @@ So the blog reads like a person and not a keyword farm, the twice-weekly loop al
 - **Lane C, AI pulse.** State of the art and governance, EU-first: what moved in the last two weeks (AI Act guidance, model releases, EU cloud and sovereignty moves) anchored to one standing concept so the post stays useful after the news fades. Researched fresh at write time; ideas 6, 11, 18, 19 and 20 are the standing anchors for quiet weeks.
 
 **Rotation state (the loop updates these two lines):**
-- Next lane: **C** (lane B's run on 2026-08-31 takes post 13; lane C is next)
+- Next lane: **A** (lane C's run on 2026-09-07 took idea 28; lane A is next)
 - Cycle: C → A → B → repeat
 
 **Lane queues** (top first; scout reshuffles A, never B or C):
@@ -158,7 +162,7 @@ So the blog reads like a person and not a keyword farm, the twice-weekly loop al
   - *Scout reshuffle 2026-08-26 (pass 2):* post 7 holds the top slot — nothing found beats it, and it now has a second widening note (below). Three new candidates inserted: **31** (17) at slot 3, ahead of 21/22/23 because it is a direct purchase decision that pairs with and links post 7; **32** (16) and **33** (16) at slots 6-7, with 32 placed between 2 and 33 so two pillar-1 posts do not run back to back; **34** (15) and **36** (14) slotted by score. Items 8, 2, 21, 22, 23, 25, 24, 5, 10 and 12 are **displaced downward by insertion only** — none removed, none rescored. Parked, not queued: **35** (fold into 7), **37**, **38** (FAQ block, same call as 27), **39** (parked with 26).
   - *Loop run 2026-08-26:* post 7 shipped as the Fabric F2 pricing post (path above), pulling in idea 35 (throttle/smooth/burst) and the Power BI licensing-cliff finding as sections rather than standalone posts, per the scout's own recommendation. **31** (Power BI Pro vs Fabric capacity licensing) now leads the queue — it was written to pair with and link the shipped post, so it should run next while that link is freshest.
 - B: ~~13~~ (published 2026-08-31), 14, 15, 16, 17
-- C: ~~1~~ (published 2026-08-24), then fresh-news anchored to the standing anchors above
+- C: ~~1~~ (published 2026-08-24), ~~28~~ (published 2026-09-07), then fresh-news anchored to the standing anchors above (6, 11, 18, 19, 20)
 
 ## 4b. The near-term queue: first six, in order
 
