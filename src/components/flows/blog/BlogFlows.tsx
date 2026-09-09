@@ -336,6 +336,56 @@ export function MarkingRunway() {
   )
 }
 
+/** Residency vs sovereignty: one flow that forks on who legally controls
+ *  the provider, not on which data center the bytes sit in. */
+export function DataResidencyFork() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  return (
+    <FlowPanel
+      caption="An EU region answers where your data sits, not who can be legally compelled to hand it over. A US-owned provider can still be reached by a CLOUD Act warrant no matter which EU data center holds the bytes; only a provider with no US parent closes that gate, usually for a premium."
+      minWidth={880}
+    >
+      <svg ref={ref} viewBox="0 0 1040 340" role="img" aria-label="Your data flows into an EU data center, which satisfies residency. The chain then asks who legally controls the provider. One branch, a US-owned provider, still lets a CLOUD Act warrant reach the data regardless of location, rare in practice but legally real. The other branch, an EU-incorporated entity with no US parent, keeps the data under EU law only, usually at a premium of ten to fifteen percent." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="rj-arrow" />
+
+        <path id="rj-e1" d="M 145 139 L 173 139" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#rj-arrow)" />
+        <path id="rj-e2" d="M 365 139 L 393 139" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#rj-arrow)" />
+        <FNode x={15} y={112} w={130} h={54} label="Your data" />
+        <FNode x={175} y={112} w={190} h={54} label="EU data center" sub="at rest: EU region" />
+        <FNode x={395} y={112} w={210} h={54} label="Who legally controls it" sub="the provider's HQ" />
+        <EdgeLabel x={159} y={118} text="stored in" />
+        <EdgeLabel x={379} y={118} text="controlled by" />
+
+        {/* upper branch: US-owned provider, CLOUD Act still reaches in */}
+        <path id="rj-fa" d="M 605 139 C 630 100, 620 70, 650 54" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#rj-arrow)" />
+        <path id="rj-ea" d="M 830 54 L 858 54" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#rj-arrow)" />
+        <FNode x={650} y={30} w={180} h={48} label="US-owned provider" sub="EU region, US parent" stroke={FK.AMBER} />
+        <FNode x={860} y={30} w={170} h={48} label="CLOUD Act reaches in" sub="regardless of location" stroke={FK.AMBER} />
+        <text x={618} y={88} fontSize={9.5} letterSpacing={0.8} fill={FK.AMBER} fontFamily="var(--font-mono)" textAnchor="start">US PARENT</text>
+        {drop(945, 78, 102)}
+        {amberTag(945, 106, 'rare, still legal')}
+
+        {/* lower branch: EU-incorporated entity, no US parent to compel */}
+        <path id="rj-fb" d="M 605 139 C 630 180, 620 210, 650 252" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#rj-arrow)" />
+        <path id="rj-eb" d="M 830 252 L 858 252" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#rj-arrow)" />
+        <FNode x={650} y={228} w={180} h={48} label="EU-incorporated entity" sub="no US parent authority" stroke={FK.FLASH} />
+        <FNode x={860} y={228} w={170} h={48} label="Stays under EU law" sub="true sovereign tier" stroke={FK.FLASH} />
+        <text x={618} y={198} fontSize={9.5} letterSpacing={0.8} fill={FK.SUB} fontFamily="var(--font-mono)" textAnchor="start">EU ONLY</text>
+        {drop(945, 276, 300)}
+        {amberTag(945, 304, 'premium +10 to 15%')}
+
+        <Dot path="rj-e1" dur={1.6} begin={0} />
+        <Dot path="rj-e2" dur={1.6} begin={0.7} />
+        <Dot path="rj-fa" dur={1.8} begin={1.4} color={FK.AMBER} />
+        <Dot path="rj-ea" dur={1.2} begin={2.6} color={FK.AMBER} />
+        <Dot path="rj-fb" dur={1.8} begin={1.4} />
+        <Dot path="rj-eb" dur={1.2} begin={2.6} />
+      </svg>
+    </FlowPanel>
+  )
+}
+
 /** Warehouse vs lakehouse: the difference drawn, not described. */
 export function WarehouseVsLakehouse() {
   const ref = useRef<SVGSVGElement>(null)
