@@ -1,0 +1,146 @@
+export const meta = {
+  title: 'An EU region is not sovereignty: what data residency really buys you',
+  date: '2026-09-09',
+  tags: ['gdpr', 'sovereignty', 'compliance'],
+  lang: 'en',
+  summary: 'Data residency and data sovereignty answer different questions. Here is what each one actually protects, what a CLOUD Act warrant still reaches, and when the difference is worth paying for.',
+}
+
+import { DataResidencyFork } from '../../components/flows/blog/BlogFlows'
+
+Someone in the room says "don't worry, it's all hosted in the EU" and the
+conversation moves on. It shouldn't, not yet. That sentence answers where your
+data sits. It does not answer who can be legally ordered to hand it over. Those
+are two different questions, and mixing them up is how a company ends up
+either overpaying for protection it does not need, or trusting protection it
+does not have.
+
+I get asked some version of this before almost every Fabric or BigQuery
+platform decision I work on. Here is the honest, unhurried answer.
+
+## What does "our data is stored in the EU" actually mean?
+
+It means the bytes sit on disks in an EU data center, and usually nothing
+more. For Microsoft's core cloud services that is a real, checkable guarantee:
+the EU Data Boundary keeps customer data and pseudonymised personal data for
+Microsoft 365, Power Platform and most Azure services inside the EU and EFTA
+region, completed as a program in February 2025
+([Microsoft's own announcement](https://blogs.microsoft.com/on-the-issues/2025/02/26/microsoft-completes-landmark-eu-data-boundary-offering-enhanced-data-residency-and-transparency/)).
+Fabric layers its own version on top: a multi-geo capacity puts your OneLake
+storage and compute in the region you choose, separate from your tenant's
+home region, though the tenant's own metadata stays put
+([Microsoft's multi-geo docs](https://learn.microsoft.com/en-us/fabric/admin/service-admin-premium-multi-geo)).
+BigQuery does the same thing its own way: choose the EU multi-region and your
+table data lives only in Belgium or the Netherlands, never in the London or
+Zurich data centers that sit geographically close but outside that boundary
+([Google's regional endpoint docs](https://docs.cloud.google.com/bigquery/docs/regional-endpoints)).
+
+That is data residency, and it is genuinely useful. It is also, on its own,
+not what most people mean when they say "our data is safe from US
+jurisdiction."
+
+## Is that not the same as sovereignty?
+
+No, and the gap between the two is exactly where the CLOUD Act lives. The US
+Clarifying Lawful Overseas Use of Data Act lets US authorities compel a US
+company to produce data it controls, wherever in the world that data
+physically sits. A Frankfurt data center does not change who owns the
+company running it
+([MassiveGRID's plain explanation](https://massivegrid.com/blog/us-cloud-act-explained-europe/),
+[Exoscale on the GDPR conflict](https://www.exoscale.com/blog/cloudact-vs-gdpr/)).
+Residency is about geography. Sovereignty is about which legal system has
+authority over the company holding your data, and that is decided by
+corporate structure, not by a region dropdown.
+
+Worth saying plainly, because fear sells consulting hours: this is a legal
+possibility, not a daily occurrence. AWS states it has not disclosed
+enterprise or government content stored outside the US in response to a
+CLOUD Act request
+([AWS's own CLOUD Act page](https://aws.amazon.com/compliance/cloud-act/)).
+Take that as the provider's claim, not an independent audit, but it is a
+useful corrective to the scarier framing you will see elsewhere. The warrant
+power is real. It is rarely the thing that actually happens to a company like
+yours.
+
+<DataResidencyFork />
+
+## Does the EU-US Data Privacy Framework fix this?
+
+It is the mechanism most companies lean on for ordinary EU-to-US transfers,
+and as of mid-2026 it is still valid, but standing on shakier ground than
+when it was adopted. The EU General Court upheld it against one legal
+challenge in September 2025, that ruling is now under appeal, and the privacy
+group noyb sent the European Commission a formal challenge on 30 June 2026
+arguing the US safeguards behind it are not durable
+([Berkeley Technology Law Journal's rundown](https://btlj.org/2026/02/third-times-the-charm-the-fate-of-the-eu-u-s-data-privacy-framework/)).
+Nobody expects a ruling before late 2026 at the earliest. If your company
+relies on the Framework or on standard contractual clauses for transfers, that
+is a live legal question, not settled ground, and worth a line in your risk
+register rather than a shrug.
+
+## What does a "sovereign cloud" actually change?
+
+It changes who legally owns the entity you are contracting with. AWS
+launched its European Sovereign Cloud in January 2026 around a new region in
+Brandenburg, Germany, run by AWS European Sovereign Cloud GmbH, a German
+company with EU citizens in its governance structure
+([AWS's launch announcement](https://press.aboutamazon.com/aws/2026/1/aws-launches-aws-european-sovereign-cloud-and-announces-expansion-across-europe)).
+That structure is the point: a US court order aimed at the American parent
+has a much harder time reaching a subsidiary that is genuinely, legally
+European. Early comparisons put the premium at roughly 10 to 15 percent over
+standard AWS EU regions, with some benchmarks against Frankfurt landing closer
+to 17 percent
+([tecRacer's pricing breakdown](https://www.tecracer.com/blog/2026/01/aws-european-sovereign-cloud-esc-launch-pricing-and-whats-next.html)).
+The EU Commission has started grading this distinction too: its Cloud
+Sovereignty Framework scores providers across eight dimensions, from legal
+structure to supply chain transparency, and EU institutions have already used
+it to award cloud contracts
+([the Commission's own explainer](https://commission.europa.eu/news-and-media/news/sovereign-cloud-framework-explained-2026-06-01_en)).
+
+One more nuance that surprises people: GDPR itself does not actually demand
+EU-only storage. It demands a lawful basis for any transfer outside the EEA,
+which SCCs and adequacy decisions provide. Residency requirements usually come
+from somewhere else, a client contract, a sector regulator, or plain caution,
+not from the regulation everyone blames.
+
+## So when does this actually matter for you?
+
+For most of the companies I work with, honestly, less than the sales decks
+suggest. If you run ordinary business data, no health records, no
+classified or critical-infrastructure workloads, a standard EU-region
+deployment on Fabric or BigQuery with a proper Data Processing Agreement and
+current SCCs is a defensible, normal choice. Paying the sovereign-tier
+premium for a five-person analytics team is buying insurance against a risk
+that, per the providers' own numbers, has not materialized against them yet.
+
+It starts to matter when one of three things is true. You are in a regulated
+sector where a supervisor or client contract specifically requires EU-only
+legal jurisdiction, not just EU storage. You are processing something
+genuinely sensitive at real scale, health data, biometric data, anything a
+DPIA would flag as high risk. Or a specific customer, often a public-sector
+one, simply will not sign without it. Outside those three, spend the budget
+on the platform work instead: the shaping of the data itself is what
+[my lakehouse architecture work](/services/lakehouse-architecture) does, and
+it matters more to most companies day to day than which passport their
+cloud provider's parent company holds.
+
+## What should you actually ask a vendor?
+
+Four questions, in order: Where is the data at rest, specifically, not just
+"the EU"? What legal entity are you actually contracting with, and where is
+its ultimate parent incorporated? What does the DPA say about government
+access requests, and does the vendor publish a transparency report? And if
+residency genuinely is not enough for your case, what does the sovereign or
+EU-only tier cost, concretely, in euros, not as a footnote.
+
+I priced out what an EU-region Fabric capacity costs on its own terms in
+[the F2 pricing post](/work/2026-08-fabric-f2-pricing); the sovereignty
+question sits one layer above that, on the vendor you pick before you ever
+open a pricing calculator.
+
+Send me your vendor's DPA and I will tell you, honestly, whether residency is
+enough for what you are doing or whether you are one of the real exceptions.
+Ask any question you like in the free 30 minutes; you leave with an answer or
+a clear next step.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6)
