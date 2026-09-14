@@ -427,3 +427,48 @@ export function WarehouseVsLakehouse() {
     </FlowPanel>
   )
 }
+
+/** Two "considerable" days can carry the same headline number and very
+ *  different certainty underneath, depending on which avalanche problem
+ *  produced it. The fork is the whole lesson: read past the digit. */
+export function AvalancheConfidenceFork() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  return (
+    <FlowPanel
+      caption="Two mornings can both show danger level 3, considerable, and mean very different things. A wind slab is visible and testable, so the forecaster's confidence is high. A deep persistent slab hides for weeks and resists direct testing, so the same headline number carries far less certainty. The digit alone never tells you which one you're reading."
+      minWidth={780}
+    >
+      <svg ref={ref} viewBox="0 0 940 340" role="img" aria-label="Today's bulletin shows danger level 3, considerable. That single number forks depending on which avalanche problem produced it: a wind slab problem, which is observable and testable, carries high confidence; a deep persistent slab, which hides for weeks and resists direct testing, carries low confidence despite showing the same headline number." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="ac-arrow" />
+
+        <path id="ac-e1" d="M 155 139 L 183 139" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#ac-arrow)" />
+        <FNode x={15} y={112} w={140} h={54} label="Today's bulletin" />
+        <FNode x={185} y={112} w={230} h={54} label="Danger: 3, considerable" sub="the headline number" />
+        <EdgeLabel x={169} y={118} text="reads" />
+
+        {/* upper branch: wind slab, observable, high confidence */}
+        <path id="ac-fa" d="M 415 139 C 430 100, 420 70, 445 54" fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#ac-arrow)" />
+        <path id="ac-e2" d="M 635 54 L 663 54" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#ac-arrow)" />
+        <FNode x={445} y={30} w={190} h={48} label="Wind slab problem" sub="visible, testable" stroke={FK.FLASH} />
+        <FNode x={665} y={30} w={180} h={48} label="High confidence" sub="forecaster can point to it" stroke={FK.FLASH} />
+        <text x={428} y={88} fontSize={9.5} letterSpacing={0.8} fill={FK.FLASH} fontFamily="var(--font-mono)" textAnchor="start">OBSERVABLE</text>
+
+        {/* lower branch: deep persistent slab, hidden, low confidence */}
+        <path id="ac-fb" d="M 415 139 C 430 180, 420 210, 445 252" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#ac-arrow)" />
+        <path id="ac-e3" d="M 635 252 L 663 252" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#ac-arrow)" />
+        <FNode x={445} y={228} w={190} h={48} label="Deep persistent slab" sub="hidden weak layer" stroke={FK.AMBER} />
+        <FNode x={665} y={228} w={180} h={48} label="Low confidence" sub="hides for weeks" stroke={FK.AMBER} />
+        <text x={428} y={198} fontSize={9.5} letterSpacing={0.8} fill={FK.AMBER} fontFamily="var(--font-mono)" textAnchor="start">HARD TO TEST</text>
+        {drop(755, 276, 300)}
+        {amberTag(755, 304, 'same number, less sure')}
+
+        <Dot path="ac-e1" dur={1.4} begin={0} />
+        <Dot path="ac-fa" dur={1.8} begin={0.8} />
+        <Dot path="ac-e2" dur={1.2} begin={2} />
+        <Dot path="ac-fb" dur={1.8} begin={0.8} color={FK.AMBER} />
+        <Dot path="ac-e3" dur={1.2} begin={2} color={FK.AMBER} />
+      </svg>
+    </FlowPanel>
+  )
+}

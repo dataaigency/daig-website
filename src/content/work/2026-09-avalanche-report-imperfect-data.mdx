@@ -1,0 +1,133 @@
+export const meta = {
+  title: 'What an avalanche report teaches you about deciding with imperfect data',
+  date: '2026-09-14',
+  tags: ['data for humans', 'dashboards', 'decision-making', 'data quality'],
+  lang: 'en',
+  summary: 'A ski tourer reads a danger number, a problem type and a confidence level before deciding whether to go. Most business dashboards only ever give you the number.',
+}
+
+import { AvalancheConfidenceFork } from '../../components/flows/blog/BlogFlows'
+
+I ski tour in the Alps most winters, and most tour mornings start the same
+way: standing in a cold car park before sunrise, coffee going lukewarm, phone
+out, reading the day's avalanche bulletin before anyone clips into a ski.
+The bulletin gives you a number, 1 to 5. It is tempting to read that number,
+decide, and go. Experienced tourers don't, because the number by itself is
+the least useful part of the report. What actually decides the day is
+everything underneath it, and that stack of underneath-the-number thinking
+turns out to be a better lesson in reading imperfect data than most
+dashboards ever teach.
+
+## What does the danger number actually mean?
+
+The European Avalanche Danger Scale runs 1 to 5: low, moderate, considerable,
+high, very high. It has been the shared standard across France, Italy,
+Switzerland, Austria and Germany since 1993
+([EAWS](https://www.avalanches.org/standards/avalanche-danger-scale/)).
+Forecasters don't read that number off a sensor. It comes out of a
+consensus process, the EAWS matrix, that combines three separate judgements:
+how unstable the snowpack is, how widespread that instability is across the
+terrain, and how large a resulting avalanche could be
+([EAWS matrix study, 2025](https://nhess.copernicus.org/articles/25/4503/2025/)).
+Three fuzzy inputs, turned into one clean-looking digit. That compression is
+exactly what a KPI on a dashboard does too, and it is exactly where the
+trouble starts.
+
+## Why can two "considerable" days feel completely different?
+
+Because the number hides which kind of problem produced it, and the problem
+types don't carry the same certainty. A wind slab, snow that piled up
+behind a ridge overnight, is visible, testable and moves predictably; a
+forecaster can point at the slope and tell you where it is. A deep
+persistent slab, a weak layer buried under months of snow, is nearly
+impossible to test directly, can sit dormant for weeks, and produces the
+avalanches that kill experienced people who read the bulletin correctly
+(problem definitions per
+[Colorado Avalanche Information Center](https://avalanche.state.co.us/forecasts/tutorial/avalanche-problems),
+a structure Europe's forecasters use the same way). Two "3, considerable"
+ratings, one built on a wind slab and one on a deep persistent slab, are not
+the same day. One number, two very different amounts of forecaster
+certainty behind it. A revenue dashboard that says "3.2%" behaves the same
+way: the number never says whether it came from a clean, complete pipeline
+or a spreadsheet somebody patched together at 11pm.
+
+## Why doesn't the bulletin just publish a confidence score?
+
+Some do, in words if not always in a number. The Canadian avalanche
+industry formalised this as a separate confidence rating, defined as the
+forecaster's own degree of certainty about the prediction, and low
+confidence usually means the snowpack is changing fast or the observation
+network is thin that day (definition via
+[Joe Stock's summary of the InfoEx standard](https://www.stockalpine.com/posts/avalanche-uncertainty-scale)).
+European bulletins more often fold that same judgement into the written
+discussion above the number rather than a standalone score, but the
+information is the same: how sure is the person publishing this. Most
+business dashboards skip both the score and the words. A single traffic
+light or one decimal number gets shipped with total confidence attached by
+default, whether the underlying pipeline is solid or held together with
+manual exports. That's the habit worth stealing directly: attach an honest
+confidence signal to a number, not just the number.
+
+## What does the bulletin show that a single number can't?
+
+Location. Every European bulletin publishes danger broken out by aspect,
+which direction a slope faces, and by elevation band, because the same
+storm loads a north-facing bowl and a south-facing ridge completely
+differently. The result is usually drawn as a rose, a stylised top-down
+view of a mountain colour-coded by compass direction and height. The
+headline number is really a ceiling; the rose is where the actual, useful
+detail lives. That is the same relationship a summary KPI has to the
+dimension breakdown underneath it: the top-line number tells you there's a
+number, the segment-by-segment view tells you where the number actually
+comes from and whether it's safe to trust everywhere.
+
+<AvalancheConfidenceFork />
+
+## So who actually decides, if the number can't?
+
+You do, every time, with whatever the bulletin gives you. Forecasters never
+promise to remove the judgement call; the entire discipline of ski touring
+assumes you'll read the danger level, the problem type, the confidence and
+the terrain rose together, then still make a human call about which slope
+to ski, because nobody is coming to make it for you. That's not a design
+flaw in avalanche forecasting. It's the honest acknowledgement that the
+data will never be complete enough to fully replace judgement, so the job
+of the report is to make the judgement call as informed as it can be, not
+to pretend the call isn't needed. A good business dashboard should aim for
+exactly that, and most stop one step short: they hand over the number and
+imply the decision is now automatic, dropping the parts, the confidence,
+the breakdown, that would actually help someone decide well.
+
+## Where does the metaphor stop working?
+
+A few places, honestly. Avalanche forecasters run an expensive, purpose
+built observation network, weather stations, snowpack pits dug by hand,
+a network of professional and volunteer field reports feeding one bulletin
+every morning. Most companies have nothing close to that scale of
+dedicated sensing for their own numbers, and building it is real work, not
+a checkbox. The stakes also don't compare; nobody dies from a dashboard,
+though a bad decision from a false-confident one can certainly cost real
+money. And once you commit to a slope you're mostly locked into the
+outcome for the next thirty seconds, while a business decision, wrongly
+made on bad data, can usually still be revisited tomorrow. That last
+difference cuts in favour of dashboards, not against them: there is even
+less excuse for shipping a number with no confidence attached when you can
+actually afford to get it wrong and fix it, unlike a skier on a slope.
+
+## Is this worth fixing on your own dashboards?
+
+If your team makes real decisions off numbers that come from a pipeline
+nobody has stress-tested lately, the fix looks a lot like the bulletin: know
+which numbers rest on solid ground and which ones are closer to a deep
+persistent slab, quietly serious and hard to test. I wrote about the
+failure patterns that put a number on shaky ground in
+[the five medallion mistakes I keep unpicking](/work/2026-08-medallion-mistakes),
+and the honest, boil-it-to-one-number habit itself in
+[the surf forecast platform I built in the open](/work/2026-08-surf-forecast-lakehouse).
+Automation and DataOps is the service page for the actual mechanism, tests
+that catch a broken number before your team ever sees it, described on
+[the automation and DataOps page](/services/automation-dataops).
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6)
+Ask any question you like about your own numbers; you'll leave with an
+answer or a clear next step, no obligation either way.

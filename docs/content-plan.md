@@ -80,7 +80,7 @@ Format: working title · target query or audience · angle · effort (S/M/L).
 ### Pillar 3: Data for humans
 
 13. ~~**RAG, explained: why the band needs sheet music**~~ · **PUBLISHED 2026-08-31** → `src/content/work/2026-08-rag-sheet-music.mdx` · "what is RAG plain english" / non-technical buyers · the model knows how to play (patterns from years of practice) but not your song (your data); the music stand is the context window; where the analogy stops · M
-14. **What an avalanche report teaches you about deciding with imperfect data** · non-technical buyers evaluating dashboards · risk levels, confidence, the human factor: acting on data that is honest about its own uncertainty · M
+14. ~~**What an avalanche report teaches you about deciding with imperfect data**~~ · **PUBLISHED 2026-09-14** → `src/content/work/2026-09-avalanche-report-imperfect-data.mdx` · risk levels, confidence, the human factor: acting on data that is honest about its own uncertainty · M
 15. **Why a band can improvise and your company cannot** · "data governance" for skeptics · a key signature and a form are what make improvisation safe; governance as the shared structure that enables speed rather than blocking it · M
 16. **The tide table is the oldest data product** · non-technical buyers · computed years ahead from a stable model, published in a form everyone trusts: what reference data and data contracts are, and why your KPI definitions should work the same way · M
 17. **Reading the wind window: thresholds, ranges and when not to go out** · ops leads drowning in alerts · kitesurfing wind windows as operating ranges: why "is the number good" beats "what is the number", alert thresholds done honestly · M
@@ -154,7 +154,7 @@ So the blog reads like a person and not a keyword farm, the twice-weekly loop al
 - **Lane C, AI pulse.** State of the art and governance, EU-first: what moved in the last two weeks (AI Act guidance, model releases, EU cloud and sovereignty moves) anchored to one standing concept so the post stays useful after the news fades. Researched fresh at write time; ideas 6, 11, 18, 19 and 20 are the standing anchors for quiet weeks.
 
 **Rotation state (the loop updates these two lines):**
-- Next lane: **B** (lane A's run on 2026-09-09 took idea 3; lane B is next)
+- Next lane: **C** (lane B's run on 2026-09-14 took idea 14; lane C is next)
 - Cycle: C → A → B → repeat
 
 **Lane queues** (top first; scout reshuffles A, never B or C):
@@ -162,7 +162,8 @@ So the blog reads like a person and not a keyword farm, the twice-weekly loop al
   - *Scout reshuffle 2026-08-26 (pass 2):* post 7 holds the top slot — nothing found beats it, and it now has a second widening note (below). Three new candidates inserted: **31** (17) at slot 3, ahead of 21/22/23 because it is a direct purchase decision that pairs with and links post 7; **32** (16) and **33** (16) at slots 6-7, with 32 placed between 2 and 33 so two pillar-1 posts do not run back to back; **34** (15) and **36** (14) slotted by score. Items 8, 2, 21, 22, 23, 25, 24, 5, 10 and 12 are **displaced downward by insertion only** — none removed, none rescored. Parked, not queued: **35** (fold into 7), **37**, **38** (FAQ block, same call as 27), **39** (parked with 26).
   - *Loop run 2026-08-26:* post 7 shipped as the Fabric F2 pricing post (path above), pulling in idea 35 (throttle/smooth/burst) and the Power BI licensing-cliff finding as sections rather than standalone posts, per the scout's own recommendation.
   - *Loop run 2026-09-09:* the keyword autocomplete endpoint was unreachable again this run (connection failure via the egress proxy, confirmed once), so no fresh scoring pass — per protocol this never blocks the post. Idea 31 turned out to be already fully covered by post 7's shipped licensing-cliff section (see the idea bank entry for the detailed comparison), so this run skipped it rather than duplicate a live post, and took queue item 3 instead: **An EU region is not sovereignty**, published as `src/content/work/2026-09-eu-region-not-sovereignty.mdx`. **32** now leads the lane A queue.
-- B: ~~13~~ (published 2026-08-31), 14, 15, 16, 17
+- B: ~~13~~ (published 2026-08-31), ~~14~~ (published 2026-09-14), 15, 16, 17
+  - *Loop run 2026-09-14:* took the top item, the avalanche report post, as `src/content/work/2026-09-avalanche-report-imperfect-data.mdx`. Passes the four-part test in 1.3: structural (a bulletin's danger number, problem type and confidence are the same layers as a dashboard's headline metric, its data quality and its uncertainty), first-hand (Vadim ski tours in the Alps), names the real terms (the European Avalanche Danger Scale, avalanche problem types, forecaster confidence ratings), and shows its seams (no purpose-built sensor network at most companies, lower physical stakes, decisions can be revisited). 15 now leads the lane B queue.
 - C: ~~1~~ (published 2026-08-24), ~~28~~ (published 2026-09-07), then fresh-news anchored to the standing anchors above (6, 11, 18, 19, 20)
 
 ## 4b. The near-term queue: first six, in order
