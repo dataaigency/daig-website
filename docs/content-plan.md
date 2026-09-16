@@ -135,6 +135,10 @@ Scores are buyer intent / EU angle / first-hand edge / winnable, each 1 to 5.
 
 40. **Why your RAG chatbot confidently answers from the wrong document** · buyers who already built or bought a RAG assistant and don't trust its answers · pillar 4, sibling to idea 19; the retrieval-mismatch failure mode named in post 13's "where the metaphor stops working" section deserves its own worked example, ideally with a real before/after from a client's document set once one exists · M
 
+### Follow-up surfaced while writing the EU-hosted LLM post (2026-09-16)
+
+42. **Does the AI Office's first compliance sweep actually cover your sector?** · a low-quality SEO source (blog.mean.ceo, cubbbix.com) claimed a "first wave of AI Office inspections" hit HR/credit/health high-risk systems in September 2026, which contradicts the already-verified Annex III deferral to December 2027 (see post 1's sourcing); worth a short debunk-and-clarify post once a primary EU source is reachable again, since the confusion itself is exactly the kind of search demand this pillar targets · pillar 1 · S
+
 ### Follow-up surfaced while writing the Article 50 marking post (2026-09-07)
 
 41. **Which AI vendors already mark their output for you? A quick Article 50 checklist by tool** · buyers who built a feature on top of ChatGPT, Claude, Gemini or an open model and don't know which side of the marking obligation their vendor already covers · pillar 1/2 crossover; Anthropic's August 2026 text watermarking rollout is one data point, worth a short comparison table once two or three more vendors confirm their approach · S
@@ -154,7 +158,7 @@ So the blog reads like a person and not a keyword farm, the twice-weekly loop al
 - **Lane C, AI pulse.** State of the art and governance, EU-first: what moved in the last two weeks (AI Act guidance, model releases, EU cloud and sovereignty moves) anchored to one standing concept so the post stays useful after the news fades. Researched fresh at write time; ideas 6, 11, 18, 19 and 20 are the standing anchors for quiet weeks.
 
 **Rotation state (the loop updates these two lines):**
-- Next lane: **C** (lane B's run on 2026-09-14 took idea 14; lane C is next)
+- Next lane: **A** (lane C's run on 2026-09-16 took a fresh-news idea, anchored to standing anchor 20; lane A is next)
 - Cycle: C → A → B → repeat
 
 **Lane queues** (top first; scout reshuffles A, never B or C):
@@ -164,7 +168,8 @@ So the blog reads like a person and not a keyword farm, the twice-weekly loop al
   - *Loop run 2026-09-09:* the keyword autocomplete endpoint was unreachable again this run (connection failure via the egress proxy, confirmed once), so no fresh scoring pass — per protocol this never blocks the post. Idea 31 turned out to be already fully covered by post 7's shipped licensing-cliff section (see the idea bank entry for the detailed comparison), so this run skipped it rather than duplicate a live post, and took queue item 3 instead: **An EU region is not sovereignty**, published as `src/content/work/2026-09-eu-region-not-sovereignty.mdx`. **32** now leads the lane A queue.
 - B: ~~13~~ (published 2026-08-31), ~~14~~ (published 2026-09-14), 15, 16, 17
   - *Loop run 2026-09-14:* took the top item, the avalanche report post, as `src/content/work/2026-09-avalanche-report-imperfect-data.mdx`. Passes the four-part test in 1.3: structural (a bulletin's danger number, problem type and confidence are the same layers as a dashboard's headline metric, its data quality and its uncertainty), first-hand (Vadim ski tours in the Alps), names the real terms (the European Avalanche Danger Scale, avalanche problem types, forecaster confidence ratings), and shows its seams (no purpose-built sensor network at most companies, lower physical stakes, decisions can be revisited). 15 now leads the lane B queue.
-- C: ~~1~~ (published 2026-08-24), ~~28~~ (published 2026-09-07), then fresh-news anchored to the standing anchors above (6, 11, 18, 19, 20)
+- C: ~~1~~ (published 2026-08-24), ~~28~~ (published 2026-09-07), ~~20~~ (published 2026-09-16), then fresh-news anchored to the remaining standing anchors above (6, 11, 18, 19)
+  - *Loop run 2026-09-16:* researched the last two weeks of EU AI/data news. GPAI enforcement went live 2 August 2026 (Commission can now request documentation, model access, or recalls) and Mistral shipped real September product news (OCR 4.1 GA at €3.50/1k pages, Agentic Search, 20+ connectors), building on its March infrastructure raise. Anchored to standing idea **20** (choosing an EU-hosted LLM), published as `src/content/work/2026-09-eu-hosted-llm-menu.mdx`. Verified against WebSearch synthesis only: WebFetch was blocked for essentially every external domain tried this run (techcrunch.com, aws.amazon.com, venturebeat.com, docs.mistral.ai, gerloff.dev, aiprovidertrust.com, gibsondunn.com, commission.europa.eu, helpnetsecurity.com all returned EGRESS_BLOCKED), so every fact was cross-checked across multiple independent WebSearch results rather than a direct fetch. One claim was caught and discarded as likely unreliable: a low-quality SEO blog (blog.mean.ceo, echoed by cubbbix.com) claimed the EU AI Office began "first wave of compliance inspections" in September 2026 targeting HR/credit/health high-risk systems — this contradicts our own already-verified fact that Annex III high-risk obligations were deferred to December 2027 by the Digital Omnibus, so it was not used. Follow-up idea added below.
 
 ## 4b. The near-term queue: first six, in order
 
