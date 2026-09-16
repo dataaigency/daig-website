@@ -1,0 +1,145 @@
+export const meta = {
+  title: 'Choosing an EU-hosted LLM in 2026: what is actually on the menu',
+  date: '2026-09-16',
+  tags: ['llm', 'sovereignty', 'gdpr', 'ai'],
+  lang: 'en',
+  summary: 'GPAI enforcement is now live and Mistral shipped real product news this month. Here is an honest map of which language models are genuinely EU-owned, which are just EU-hosted, and which give you neither.',
+}
+
+import { LlmMenuFork } from '../../components/flows/blog/BlogFlows'
+
+"Just use an EU model" is the kind of sentence that sounds like an answer
+and isn't. It skips the actual question, which is: EU-owned, or just
+EU-hosted, and does that distinction even matter for what you're building?
+Both halves of that question got sharper this month, so here is the honest,
+current map.
+
+## What actually changed this month?
+
+Two things. First, enforcement for general-purpose AI models has been live
+since 2 August 2026: the Commission can now request a provider's technical
+documentation, get access to a model for evaluation, and require corrective
+measures, including recalls
+([Latham & Watkins](https://www.lw.com/en/insights/eu-ai-act-gpai-model-obligations-in-force-and-final-gpai-code-of-practice-in-place)).
+Signing the EU's General-Purpose AI Code of Practice is voluntary, but it
+buys a documented compliance path and counts as a mitigating factor if a
+provider ever gets fined
+([artificialintelligenceact.eu](https://artificialintelligenceact.eu/code-of-practice-overview/)).
+That makes "did our vendor sign it" a real due-diligence question now, not a
+nice-to-have.
+
+Second, Mistral, the closest thing Europe has to a flagship LLM provider,
+shipped real product news in September: OCR 4.1 went generally available at
+€3.50 per 1,000 pages with bounding boxes and confidence scores, alongside
+a new Agentic Search retrieval layer and more than 20 connectors including
+Google Drive and GitHub
+([getaibook.com](https://getaibook.com/news/bounding-boxes-arrive-in-mistral-ocr-4-for-agentic-retrieval/)).
+That builds on the $830 million in debt financing Mistral raised in March
+from a consortium including Bpifrance, BNP Paribas and Crédit Agricole, to
+buy 13,800 Nvidia GPUs and 44MW of power for a data centre near Paris, with
+a stated goal of 200MW across Europe by the end of 2027
+([DataCenterDynamics](https://www.datacenterdynamics.com/en/news/mistral-ai-raises-830m-in-debt-financing-for-data-center-in-paris-france/),
+[CNBC](https://www.cnbc.com/2026/03/30/mistral-ai-paris-data-center-cluster-debt-financing.html)).
+The infrastructure and the product roadmap are catching up to the marketing
+at the same time enforcement teeth arrive. Worth a fresh look.
+
+## Is "EU-hosted" one thing?
+
+No, and collapsing it into one thing is the mistake I see most often. It
+forks three ways, and the fork runs on two separate questions: who legally
+owns the company behind the model, and whether an EU-region host actually
+exists for the specific model version you plan to call.
+
+<LlmMenuFork />
+
+I wrote the residency-versus-sovereignty distinction up properly in
+[an earlier post](/work/2026-09-eu-region-not-sovereignty): an EU data
+centre answers where the bytes sit, not who can be legally compelled to
+hand them over under the US CLOUD Act. The same logic applies to picking a
+model, it just changes what you're choosing between.
+
+## Which models are genuinely EU-owned?
+
+Two real answers, and one honest asterisk. Mistral AI is French, privately
+held, and runs its own European infrastructure end to end, which is the
+cleanest "no CLOUD Act exposure" answer on the market today.
+
+Aleph Alpha is the other one, and it comes with a caveat worth stating
+plainly. Its enterprise platform, PhariaAI, runs on Schwarz Group's STACKIT
+cloud in Germany with no US hyperscaler at any layer, which is a genuinely
+sovereign infrastructure stack
+([Futurum Group](https://futurumgroup.com/insights/cohere-acquires-aleph-alpha-a-deal-born-of-sovereignty-necessity/)).
+But Aleph Alpha merged with Canada's Cohere in April 2026. The infrastructure
+is still German; the parent company is no longer purely European. If a
+client's requirement is "no non-EU parent, full stop," check the current
+ownership yourself rather than trusting last year's press release. Marketing
+language ages faster than corporate structures change, and sometimes it's
+the other way round.
+
+## Can you keep Claude, GPT or Gemini inside the EU?
+
+Yes, for residency. No, for sovereignty. And it depends on which model
+version, so check before you build.
+
+Claude runs in-region through AWS Bedrock in Frankfurt, Dublin, Paris and
+Stockholm, and through Google Vertex AI's EU regions, but Anthropic's own
+direct API defaults to US hosting, and Claude on Microsoft Foundry still has
+no EU data zone as of late August 2026 despite being listed as "coming"
+([Requesty's regional breakdown](https://www.requesty.ai/eu/claude)).
+OpenAI now offers data residency in Europe for the API and for ChatGPT
+Enterprise through `eu.api.openai.com`, alongside the UK, US, Japan, Canada
+and several other regions
+([OpenAI](https://openai.com/index/introducing-data-residency-in-europe/)).
+Google's Gemini gets regional pinning through Vertex AI across Belgium,
+the Netherlands, Finland and several other EU locations, but that guarantee
+does not automatically carry over to every new model release the day it
+ships
+([Google Cloud's own data residency docs](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/data-residency)).
+
+The pattern across all three: the platform having an EU region is not the
+same as the specific model you're calling being available in it. Check the
+model's own documentation page, not the platform's homepage.
+
+| Provider | Model owner is EU-based | EU-region hosting exists | Signed the GPAI Code |
+|---|---|---|---|
+| Mistral AI | Yes | Native | Yes |
+| Aleph Alpha (PhariaAI) | German infra, Canadian parent since Apr 2026 | Native | Yes |
+| Anthropic Claude | No | Bedrock, Vertex AI (not Foundry) | Yes |
+| OpenAI GPT | No | `eu.api.openai.com`, ChatGPT Enterprise | Yes |
+| Google Gemini | No | Vertex AI, per model version | Yes |
+
+## Does the Code of Practice actually matter to you as a buyer?
+
+More than it did in August. Around 190 organisations had signed by the end
+of July, including Amazon, Anthropic, Google, IBM, Microsoft, Mistral AI and
+OpenAI
+([General-Purpose AI Code of Practice, Wikipedia](https://en.wikipedia.org/wiki/General-Purpose_AI_Code_of_Practice)).
+Meta had not signed as of the most recent public count, and neither had the
+major Chinese labs, Alibaba, Baidu or DeepSeek. That doesn't make an
+unsigned model unusable. It does mean you're relying on your own contract
+and DPA to cover ground the Code would otherwise cover for you, which is a
+fair trade-off for some use cases and a real gap for others, especially once
+a model touches anything a regulator would call high-risk later.
+
+## So what should you actually pick?
+
+Three honest defaults, by situation. No specific compliance requirement and
+cost or capability drives the decision: pick whichever model does the job
+best, EU-owned or not, and don't pay a sovereignty premium you don't need.
+You need EU data residency because a client contract or a DPIA calls for it,
+but not full sovereignty: any of Claude, GPT or Gemini through their EU
+regions is a defensible, normal choice, same logic as the F2-versus-F4
+capacity decision I wrote up for Fabric. You are in a genuinely sensitive
+sector, health data, biometric data, public-sector procurement that
+specifically requires an EU-only legal chain: Mistral is the cleanest
+answer today, and Aleph Alpha is a strong second if the Cohere ownership
+question doesn't disqualify it for your case.
+
+This is exactly the kind of decision that looks simple until you're the one
+signing the DPA. Send me the model and the use case and I'll tell you,
+honestly, which tier you actually need, as part of the
+[AI governance work](/services/ai-governance-llmops) I do with clients
+before anything ships to production. Ask any question you like in the free
+30 minutes; you leave with an answer or a clear next step.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6)

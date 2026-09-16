@@ -386,6 +386,62 @@ export function DataResidencyFork() {
   )
 }
 
+/** Choosing an LLM in the EU: the same "pick a model" step forks three ways
+ *  depending on who legally owns the provider and whether an EU-region host
+ *  exists for that specific model, not on marketing language. */
+export function LlmMenuFork() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  const mainY = 165
+  const mainH = 54
+  const mainMid = mainY + mainH / 2
+  const rowA = { y: 16, mid: 40 }
+  const rowB = { y: 168, mid: 192 }
+  const rowC = { y: 320, mid: 344 }
+  return (
+    <FlowPanel
+      caption="Picking a model forks three ways, and the fork runs on who legally owns the provider and whether an EU-region host exists for that exact model, not on the word 'EU' in a brochure. Only an EU-incorporated provider closes the CLOUD Act gate; an EU-region host on a US-owned model buys residency, not sovereignty; and some model versions still have no EU host at all."
+      minWidth={900}
+    >
+      <svg ref={ref} viewBox="0 0 1020 400" role="img" aria-label="Your AI workload picks a model, which forks three ways. Top: an EU-incorporated provider like Mistral or Aleph Alpha closes CLOUD Act exposure entirely. Middle: a US-owned model such as Claude, GPT or Gemini hosted in an AWS Bedrock, Vertex AI or eu.api region buys data residency but the CLOUD Act can still reach it. Bottom: the same US-owned models called directly or on a version without an EU host default to US storage with no residency at all." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="lm-arrow" />
+
+        <path id="lm-e1" d={`M 165 ${mainMid} L 183 ${mainMid}`} fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#lm-arrow)" />
+        <FNode x={15} y={mainY} w={150} h={mainH} label="Your AI workload" />
+        <FNode x={185} y={mainY} w={190} h={mainH} label="Pick a model" sub="which provider, which host" />
+
+        {/* fork into three rows */}
+        <path id="lm-fa" d={`M 375 ${mainMid} C 388 100, 388 60, 400 ${rowA.mid}`} fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#lm-arrow)" />
+        <path id="lm-fb" d={`M 375 ${mainMid} L 400 ${rowB.mid}`} fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#lm-arrow)" />
+        <path id="lm-fc" d={`M 375 ${mainMid} C 388 260, 388 300, 400 ${rowC.mid}`} fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#lm-arrow)" />
+
+        <FNode x={400} y={rowA.y} w={240} h={48} label="EU-incorporated model" sub="Mistral, Aleph Alpha" stroke={FK.FLASH} />
+        <path id="lm-ea" d={`M 640 ${rowA.mid} L 668 ${rowA.mid}`} fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#lm-arrow)" />
+        <FNode x={670} y={rowA.y} w={230} h={48} label="No CLOUD Act exposure" sub="true sovereign tier" stroke={FK.FLASH} />
+
+        <FNode x={400} y={rowB.y} w={240} h={48} label="US-owned model, EU host" sub="Bedrock, Vertex, eu.api" stroke={FK.AMBER} />
+        <path id="lm-eb" d={`M 640 ${rowB.mid} L 668 ${rowB.mid}`} fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#lm-arrow)" />
+        <FNode x={670} y={rowB.y} w={230} h={48} label="Residency, not sovereignty" sub="CLOUD Act still reaches" stroke={FK.AMBER} />
+
+        <FNode x={400} y={rowC.y} w={240} h={48} label="US-owned model, no EU host" sub="direct API, older version" stroke={FK.AMBER} />
+        <path id="lm-ec" d={`M 640 ${rowC.mid} L 668 ${rowC.mid}`} fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#lm-arrow)" />
+        <FNode x={670} y={rowC.y} w={230} h={48} label="Defaults to US storage" sub="no residency at all" stroke={FK.AMBER} />
+
+        {drop(785, rowC.y + 48, rowC.y + 72)}
+        {amberTag(785, rowC.y + 76, 'check per model version')}
+
+        <Dot path="lm-e1" dur={1.2} begin={0} />
+        <Dot path="lm-fa" dur={1.9} begin={0.6} color={FK.FLASH} />
+        <Dot path="lm-ea" dur={1.1} begin={2.4} color={FK.FLASH} />
+        <Dot path="lm-fb" dur={1.7} begin={0.6} color={FK.AMBER} />
+        <Dot path="lm-eb" dur={1.1} begin={2.2} color={FK.AMBER} />
+        <Dot path="lm-fc" dur={1.9} begin={0.6} color={FK.AMBER} />
+        <Dot path="lm-ec" dur={1.1} begin={2.4} color={FK.AMBER} />
+      </svg>
+    </FlowPanel>
+  )
+}
+
 /** Warehouse vs lakehouse: the difference drawn, not described. */
 export function WarehouseVsLakehouse() {
   const ref = useRef<SVGSVGElement>(null)
