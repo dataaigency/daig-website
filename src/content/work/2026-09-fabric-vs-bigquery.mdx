@@ -1,0 +1,136 @@
+export const meta = {
+  title: 'Microsoft Fabric or BigQuery: which one fits a small European data team?',
+  date: '2026-09-21',
+  tags: ['fabric', 'bigquery', 'comparison'],
+  lang: 'en',
+  summary: 'Fabric rents you an engine with a floor price; BigQuery meters what you actually scan. Here is the honest cost, residency and skills comparison for a five to twenty person team.',
+}
+
+import { PlatformMeteringFork } from '../../components/flows/blog/BlogFlows'
+
+Every comparison I read treats this like a feature checklist. Rows and rows of
+ticks and crosses, both platforms mostly tied, and a conclusion that says
+"it depends on your needs" without saying what that actually means for a team
+your size. It is a genuinely close call for a big enterprise. For a five to
+twenty person team it usually is not, and the reason has nothing to do with
+features.
+
+## Which one is actually cheaper for a small team?
+
+Usually BigQuery, because of how the two platforms are metered, not because
+either one is inherently pricier.
+
+Fabric rents you an engine. The smallest capacity, an F2, lists at roughly
+€0.38 an hour in West Europe, which is about €278 a month left running around
+the clock, or about €165 with a one year reservation
+([Agilytic's breakdown](https://www.agilytic.com/blog/microsoft-fabric-pricing),
+[Pexon's F-SKU table](https://pexon-consulting.de/data-services/analytics/microsoft-fabric-kosten-fsku-preise/),
+both checked August 2026; I go through the full math, including the pause
+schedule that gets a small team closer to €100 a month, in
+[the F2 pricing post](/work/2026-08-fabric-f2-pricing)). That bill exists
+whether the capacity ran one query or ten thousand. It is a floor, not a
+meter.
+
+BigQuery meters what you actually scan. The first tebibyte of on-demand
+queries each month is free, and beyond that the EU multi-region charges
+$6.25 per TiB, converting to roughly €5.44 at $1 ≈ €0.87
+([Google's own BigQuery pricing page](https://cloud.google.com/bigquery/pricing),
+checked 21 September 2026; the ECB's free API was unreachable from this
+environment, so the rate comes from the Federal Reserve's
+[H.10 foreign exchange release](https://www.federalreserve.gov/releases/h10/hist/dat00_eu.htm)
+for 18 September 2026 instead). Storage runs about €0.017 per GB a month
+active, half that once a table has sat untouched for 90 days. A quiet month
+costs close to nothing beyond storage. A busy month costs more, but it costs
+more because you did more.
+
+There is a matching floor on the BigQuery side too, and it is worth naming so
+nobody gets surprised by it: slot reservations (the Editions tier, for teams
+that outgrow on-demand) have a 100 slot minimum. At EU Standard edition rates
+that is about €3.83 an hour, north of €2,700 a month run continuously. That
+is a real floor, just one almost no team your size should ever reach, because
+on-demand querying has no minimum at all. Stay on it until a specific,
+measured problem tells you otherwise.
+
+## What does "EU region" actually buy you on each platform?
+
+Different things, and the difference matters more than either vendor's
+marketing suggests. I wrote the long version in
+[the residency-versus-sovereignty post](/work/2026-09-eu-region-not-sovereignty);
+here is the platform-specific part.
+
+Pick a Fabric capacity in a Multi-Geo enabled EU region and your OneLake
+storage and compute sit in that specific region, though your tenant's own
+metadata stays in its home region regardless
+([Microsoft's multi-geo docs](https://learn.microsoft.com/en-us/fabric/admin/service-admin-premium-multi-geo)).
+You are choosing one country: West Europe means the Netherlands, North
+Europe means Ireland.
+
+BigQuery's "EU" location is a multi-region, not a single country: your table
+data can sit in Belgium or the Netherlands, and Google guarantees it stays
+inside that EU boundary without guaranteeing you which of the two
+([Google's regional locations documentation](https://cloud.google.com/bigquery/docs/locations)).
+For most companies that is a distinction without a difference. It starts to
+matter if a client contract or a sector regulator names a specific country,
+not just "the EU", in which case you want a single BigQuery region like
+`europe-west1` (Belgium) or `europe-west4` (Netherlands) instead of the
+multi-region bucket, and the honest sovereignty question, who can legally be
+compelled to hand the data over, is identical on both platforms until you pay
+for a genuinely EU-owned provider.
+
+<PlatformMeteringFork />
+
+## Which one fits the tools your team already has?
+
+This decides more comparisons than price does. If your company already runs
+on Microsoft 365 and Power BI is already how people read numbers, Fabric
+removes a real integration tax: Power BI, the warehouse, the lakehouse and
+the pipelines share one workspace and one copy of data in OneLake, so nobody
+copies exports between tools. If your team already lives in GCP, or wants
+SQL-first tooling that stays out of the way, BigQuery pairs naturally with
+Dataform for transformation and Looker Studio for a free, if less polished,
+BI layer, with paid Looker available when you outgrow it.
+
+The honest disqualifier: switching either direction to chase a features list
+costs more in retraining and rebuilt pipelines than either platform ever
+saves you in list price. Pick based on what your team can run well on day
+one.
+
+## What about the AI layer?
+
+Both platforms now sell you a governed way to build on top of the data,
+and both are genuinely usable at small scale. Fabric's Data Science
+workspace and Copilot features sit on the same OneLake data your BI already
+uses. BigQuery ML lets you train and run models with SQL directly against
+warehouse tables, and Vertex AI takes over from there for anything heavier.
+Neither wins outright here; the governance work underneath, clean layers,
+access control, lineage, matters more than which vendor's AI menu you pick,
+which is exactly [what I cover in AI-ready data work](/services/ai-ready-data-mlops).
+
+## The comparison, in one table
+
+| | Microsoft Fabric | BigQuery |
+|---|---|---|
+| Pricing model | Rented capacity, wall-clock billed | Metered per query scanned |
+| Cost floor | ~€165 to €278/month (F2) | None on-demand; ~€2,700/month if you buy reservations |
+| Free tier | None for production capacity | First 1 TiB queried/month |
+| EU residency granularity | One chosen region (country-level) | EU multi-region (Belgium or Netherlands) or a single region |
+| Native BI | Power BI, built in | Looker Studio (free) or Looker (paid), separate |
+| Best fit | Already a Microsoft shop, steady daily use | Already on GCP, spiky or unpredictable use |
+
+## So which should you actually buy?
+
+If your usage is steady, all day, every working day, and your team already
+lives in Power BI, Fabric's floor stops being a downside and starts being a
+predictable line item. If your usage is spiky, exploratory, or you are not
+yet sure how much querying you will actually do, BigQuery's metered model
+means you find out at low cost before committing to anything. Most five to
+twenty person teams I meet are still in that second position, which is
+exactly why the free tier and the absence of a floor tends to win the
+argument before features ever come up.
+
+Send me your query patterns and your team's current stack and I will tell
+you, honestly, which floor you would actually be paying for. Ask any
+question you like in the free 30 minutes; you leave with an answer or a
+clear next step.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6)
