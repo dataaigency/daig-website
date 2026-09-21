@@ -484,6 +484,48 @@ export function WarehouseVsLakehouse() {
   )
 }
 
+/** Fabric rents an engine at a fixed wall-clock rate; BigQuery meters what a
+ *  query actually scans. Same shape as the warehouse/lakehouse comparison,
+ *  drawn as what happens to the bill, not as a feature list. */
+export function PlatformMeteringFork() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  return (
+    <FlowPanel
+      caption="Fabric bills the capacity by the hour whether it is idle or busy, so the floor is fixed. BigQuery bills by the byte a query actually scans, with the first tebibyte each month free, so a quiet month costs next to nothing and a busy one costs more because it did more."
+      minWidth={860}
+    >
+      <svg ref={ref} viewBox="0 0 1020 240" role="img" aria-label="Two halves side by side. On the left, a Fabric capacity runs on wall-clock time and bills the same whether it sits idle or busy, landing on a fixed floor around one hundred sixty five to two hundred seventy eight euros a month. On the right, a BigQuery query is metered by bytes scanned, the first tebibyte each month is free, and the bill tracks actual usage." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="pm-arrow" />
+
+        {/* left half: Fabric, fixed floor regardless of use */}
+        <text x={20} y={26} fontSize={11} letterSpacing={2} fill={FK.SUB} fontFamily="var(--font-mono)">FABRIC: RENT THE ENGINE</text>
+        <path id="pm-l0" d="M 180 108 L 226 108" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pm-arrow)" />
+        <FNode x={20} y={82} w={160} h={52} label="Capacity (F2+)" sub="pay as you go" />
+        <FNode x={228} y={82} w={252} h={52} label="Runs on wall clock" sub="idle or busy, same meter" stroke={FK.AMBER} />
+        {drop(354, 134, 158)}
+        {amberTag(354, 162, 'floor ~€165 to €278 / mo')}
+
+        <line x1={510} y1={16} x2={510} y2={224} stroke={FK.NODE_STROKE} strokeWidth={1.2} strokeDasharray="4 5" />
+
+        {/* right half: BigQuery, metered by what a query actually scans */}
+        <text x={540} y={26} fontSize={11} letterSpacing={2} fill={FK.SUB} fontFamily="var(--font-mono)">BIGQUERY: PAY PER QUERY</text>
+        <path id="pm-r0" d="M 700 108 L 746 108" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pm-arrow)" />
+        <FNode x={540} y={82} w={160} h={52} label="Query submitted" />
+        <FNode x={748} y={82} w={252} h={52} label="Bytes scanned, metered" sub="bill tracks usage" stroke={FK.FLASH} />
+        {drop(874, 134, 158)}
+        <g>
+          <rect x={874 - 4} y={162 - 8} width={8} height={8} transform={`rotate(45 874 ${162 - 4})`} fill={FK.FLASH} />
+          <text x={874} y={178} fontSize={10.5} letterSpacing={0.8} fill={FK.FLASH} fontFamily="var(--font-mono)" textAnchor="middle">FIRST 1 TIB / MO FREE</text>
+        </g>
+
+        <Dot path="pm-l0" dur={1.5} begin={0.2} color={FK.AMBER} />
+        <Dot path="pm-r0" dur={1.5} begin={0.2} />
+      </svg>
+    </FlowPanel>
+  )
+}
+
 /** Two "considerable" days can carry the same headline number and very
  *  different certainty underneath, depending on which avalanche problem
  *  produced it. The fork is the whole lesson: read past the digit. */

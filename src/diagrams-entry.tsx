@@ -5,7 +5,7 @@ import { LakehouseFlow, PipelinesFlow, AiDataFlow, GovernanceFlow } from './comp
 import AboutFlow from './components/flows/AboutFlow'
 import WorkFlow from './components/flows/WorkFlow'
 import ProblemChain from './components/flows/ProblemChain'
-import { AuditStackMap, MedallionMistakesMap, SurfPipeline, WarehouseVsLakehouse, AiActTimeline, PowerBiLicensingCliff, RagSheetMusic, MarkingRunway, DataResidencyFork, AvalancheConfidenceFork, LlmMenuFork } from './components/flows/blog/BlogFlows'
+import { AuditStackMap, MedallionMistakesMap, SurfPipeline, WarehouseVsLakehouse, AiActTimeline, PowerBiLicensingCliff, RagSheetMusic, MarkingRunway, DataResidencyFork, AvalancheConfidenceFork, LlmMenuFork, PlatformMeteringFork } from './components/flows/blog/BlogFlows'
 
 /** Server-render every flow diagram to markup so scripts/export-diagrams.mjs
  *  can extract standalone SVG files into assets/diagrams/. */
@@ -30,6 +30,7 @@ export function renderAll(): Record<string, string> {
     'blogs/data-residency-fork': <DataResidencyFork />,
     'blogs/avalanche-confidence-fork': <AvalancheConfidenceFork />,
     'blogs/llm-menu-fork': <LlmMenuFork />,
+    'blogs/platform-metering-fork': <PlatformMeteringFork />,
   }
   return Object.fromEntries(Object.entries(items).map(([name, el]) => [name, renderToStaticMarkup(el)]))
 }
