@@ -1,0 +1,138 @@
+export const meta = {
+  title: 'Why a band can improvise and your company cannot',
+  date: '2026-09-23',
+  tags: ['data for humans', 'data governance', 'data contracts'],
+  lang: 'en',
+  summary: 'A band of strangers can improvise together the moment someone calls the key and the changes. Your teams can move just as fast, once the same kind of shared structure exists for your data.',
+}
+
+import { SharedFormFork } from '../../components/flows/blog/BlogFlows'
+
+Show up to an open jam and you will usually find a room full of people who have
+never played together. Different bands, different towns, some of them meeting
+for the first time at the bar five minutes earlier. Someone calls a tune,
+names a key, and the band plays it like they rehearsed for weeks. Nobody
+rehearsed anything. What they share isn't a plan. It's a structure, agreed in
+about four seconds, that everyone already knows how to fill in.
+
+That's the part people miss about improvisation. It looks like freedom from
+rules. It's actually freedom that only works because of one small, very
+specific rule, stated out loud before a single note gets played.
+
+## What actually makes a jam session work?
+
+Before the first bar, someone calls the tune: the title, the key, sometimes
+the form, "twelve bar blues in A" or "rhythm changes, straight eighths." That
+single sentence hands every player on stage the same three things: what key
+everyone's in, what the chord changes are, and how long the form runs before
+it repeats. From that point, nobody needs to ask permission to solo. Nobody
+needs to check in mid chorus. Everyone can move independently, in real time,
+because independence is safe when it happens on top of something agreed in
+advance.
+
+Take that sentence away and the same skilled musicians produce noise. Not
+because anyone played badly. Because two people who never agreed on the key
+are, technically, both playing correctly, just not the same song.
+
+## What's the company version of "calling the tune"?
+
+A schema and a shared definition, written down once, in a place everyone
+building on top of it can actually find.
+
+The data world has a name for this now: a data contract. It's an explicit,
+versioned agreement between whoever produces a piece of data and whoever
+consumes it, covering the schema, what the fields actually mean, and who owns
+changes to it going forward
+([Monte Carlo](https://montecarlo.ai/blog-data-contracts-explained),
+[OvalEdge](https://www.ovaledge.com/blog/data-contract-in-data-mesh)). The
+Linux Foundation's Bitol project has even standardized the format, the Open
+Data Contract Standard, so a contract can be read by a human and enforced by a
+machine at the same time
+([Bitol / ODCS](https://dpds.opendatamesh.org/concepts/data-contract/)). That
+last part matters as much as the agreement itself: a contract that only lives
+in someone's head, or a wiki page nobody opens, isn't a contract. It's a
+rumor.
+
+I named this exact gap in [the five medallion layer mistakes I keep
+unpicking](/work/2026-08-medallion-mistakes): layers that behave like folders
+instead of contracts, so a gold table quietly reads straight from bronze
+because it was urgent, and nobody can reason about what breaks if a field
+changes upstream. Same failure, same fix. State the shape once, in a form
+downstream teams can actually trust, before anyone builds on it.
+
+## Why does structure make things faster, not slower?
+
+Because the alternative to a stated structure isn't "no rules." It's everyone
+independently guessing the rules, which is slower and worse than just stating
+them.
+
+A band with a called form can trade fours, take a second chorus, or hand the
+solo to whoever's ready, all without a meeting. A company with an agreed
+schema and a clear definition of, say, "active customer," can let a team ship
+a new dashboard, or let an AI agent query the warehouse directly, without
+someone manually re-checking every field against what three other teams
+assumed it meant. The structure is what lets you delegate. Skip it, and
+"moving fast" quietly turns into "moving in directions nobody agreed on,"
+which is the more expensive kind of slow, because you don't find out until
+the numbers stop matching.
+
+<SharedFormFork />
+
+## What happens when nobody calls the tune?
+
+Two things, and only one of them is loud enough to notice on its own.
+
+In music, you hear it immediately. A wrong key doesn't hide; it clashes in
+real time, someone winces, the band self-corrects or stops. In a company, a
+disagreement over what "active customer" or "revenue" means doesn't clash
+audibly. It just produces two dashboards that both look confident and
+disagree with each other, quietly, for months, until someone in a meeting
+asks which number is right and nobody has a good answer. Gartner's
+data-quality research put the average cost of that kind of drift at $12.9
+million a year, though that figure comes from a 2020 survey of large
+enterprises already sophisticated enough to be shopping for data-quality
+tools, so treat it as a floor for big, data-heavy organizations rather than a
+number every small company should expect
+([Gartner](https://www.gartner.com/en/data-analytics/topics/data-quality)).
+Even at a fraction of that scale, the pattern is the same one the band avoids
+by agreeing the key out loud: silent disagreement is far more expensive than
+a stated disagreement, because a stated one gets fixed on the spot.
+
+## Isn't "more process" just slower, though?
+
+Not if it's the right size. Calling a tune takes one sentence, not a
+rehearsal. A data contract, done well, is the same: a short, versioned
+statement of a table's shape and meaning, owned by whoever produces it, not a
+forty page governance manual nobody reads before shipping. The point was
+never to slow anyone down with approval steps. It's to write the one fact
+down once so twenty people downstream don't each have to guess it separately.
+That's less work overall, not more, the same way a called key is less work
+for the whole band than eight separate guesses.
+
+## Where does the metaphor stop working?
+
+A wrong note is self-correcting. You hear it, wince, and recover within a bar,
+because sound gives instant feedback and low stakes to being wrong out loud.
+Bad data rarely announces itself that way. A schema change three systems
+upstream can silently break a dashboard's numbers for a whole quarter before
+anyone traces it back, because nothing about a wrong number sounds wrong.
+That gap is exactly why a data contract has to be written down and
+machine-checked rather than just spoken once and trusted, the way [the RAG
+system I wrote about](/work/2026-08-rag-sheet-music) has to actually check its
+retrieved pages rather than assume they're right. A band can renegotiate the
+key from song to song with a shouted word. Your systems, and increasingly the
+AI agents querying them, don't have ears, and won't catch a quiet
+disagreement the way a musician catches a clashing note. The agreement has to
+survive without a human standing there to notice when it's broken.
+
+## Is your team improvising on a called tune, or just guessing?
+
+If two teams in your company would give you different answers to "what does
+this number mean," you don't have a data problem so much as an uncalled tune.
+That's usually a short conversation to fix, not a platform rebuild.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6) Ask
+any question you like about what that would take. You'll leave the 30 minutes
+with an answer or a clear next step, not a sales pitch. If the fix is bigger
+than a conversation, [the AI governance & LLMOps page](/services/ai-governance-llmops)
+is where I go deeper on what a well-run one actually looks like.

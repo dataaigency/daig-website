@@ -526,6 +526,59 @@ export function PlatformMeteringFork() {
   )
 }
 
+/** Two players who have never met can improvise together the moment someone
+ *  states the key and the chord changes first; skip that one sentence and
+ *  the same skilled playing converges on a clash instead of music. The
+ *  company mechanism is the same fork, run on a data contract instead of a
+ *  called key: the diagram stays literally about the band, on purpose. */
+export function SharedFormFork() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  return (
+    <FlowPanel
+      caption="Two players who have never played together can improvise together only if someone calls the key and the chord changes first. Skip that one sentence and the same two players, playing just as well, converge on a clash instead of music."
+      minWidth={860}
+    >
+      <svg ref={ref} viewBox="0 0 1040 280" role="img" aria-label="Two halves. Left: no one calls the tune, so player one picks a key and player two picks different chord changes, and their two independently chosen paths converge into a clash of wrong notes. Right: someone calls the tune's key and chord changes first, so both players improvise on that shared form, and their two paths converge into music landing together." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="sf-arrow" />
+
+        {/* left half: no tune called, independent guesses converge on a clash */}
+        <text x={15} y={26} fontSize={11} letterSpacing={2} fill={FK.SUB} fontFamily="var(--font-mono)">NO TUNE CALLED</text>
+        <FNode x={15} y={104} w={145} h={56} label="No tune called" sub="nobody states the key" stroke={FK.AMBER} />
+        <path id="sf-la" d="M 160 132 C 180 132, 180 42, 200 42" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#sf-arrow)" />
+        <path id="sf-lb" d="M 160 132 C 180 132, 180 210, 200 210" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#sf-arrow)" />
+        <FNode x={200} y={20} w={155} h={44} label="Player one" sub="picks a key" stroke={FK.AMBER} />
+        <FNode x={200} y={188} w={155} h={44} label="Player two" sub="picks different changes" stroke={FK.AMBER} />
+        <path id="sf-lc" d="M 355 42 C 372 42, 372 132, 385 132" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#sf-arrow)" />
+        <path id="sf-ld" d="M 355 210 C 372 210, 372 132, 385 132" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#sf-arrow)" />
+        <FNode x={385} y={104} w={145} h={56} label="Clash" sub="wrong notes, stalled tune" stroke={FK.AMBER} />
+
+        <line x1={530} y1={10} x2={530} y2={270} stroke={FK.NODE_STROKE} strokeWidth={1.2} strokeDasharray="4 5" />
+
+        {/* right half: tune called first, independent play converges on music */}
+        <text x={560} y={26} fontSize={11} letterSpacing={2} fill={FK.SUB} fontFamily="var(--font-mono)">TUNE CALLED FIRST</text>
+        <FNode x={560} y={104} w={145} h={56} label="Tune called first" sub="key + changes, once" stroke={FK.FLASH} />
+        <path id="sf-ra" d="M 705 132 C 725 132, 725 42, 745 42" fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#sf-arrow)" />
+        <path id="sf-rb" d="M 705 132 C 725 132, 725 210, 745 210" fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#sf-arrow)" />
+        <FNode x={745} y={20} w={155} h={44} label="Player one" sub="plays the form" stroke={FK.FLASH} />
+        <FNode x={745} y={188} w={155} h={44} label="Player two" sub="plays the form" stroke={FK.FLASH} />
+        <path id="sf-rc" d="M 900 42 C 917 42, 917 132, 930 132" fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#sf-arrow)" />
+        <path id="sf-rd" d="M 900 210 C 917 210, 917 132, 930 132" fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#sf-arrow)" />
+        <FNode x={930} y={104} w={95} h={56} label="Music" sub="lands together" stroke={FK.FLASH} />
+
+        <Dot path="sf-la" dur={1.5} begin={0.2} color={FK.AMBER} />
+        <Dot path="sf-lb" dur={1.5} begin={0.5} color={FK.AMBER} />
+        <Dot path="sf-lc" dur={1.3} begin={1.4} color={FK.AMBER} />
+        <Dot path="sf-ld" dur={1.3} begin={1.7} color={FK.AMBER} />
+        <Dot path="sf-ra" dur={1.5} begin={0.2} />
+        <Dot path="sf-rb" dur={1.5} begin={0.5} />
+        <Dot path="sf-rc" dur={1.3} begin={1.4} />
+        <Dot path="sf-rd" dur={1.3} begin={1.7} />
+      </svg>
+    </FlowPanel>
+  )
+}
+
 /** Two "considerable" days can carry the same headline number and very
  *  different certainty underneath, depending on which avalanche problem
  *  produced it. The fork is the whole lesson: read past the digit. */
