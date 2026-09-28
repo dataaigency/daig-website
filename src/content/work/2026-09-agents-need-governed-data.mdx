@@ -1,0 +1,120 @@
+export const meta = {
+  title: 'Agents need governed data: the boring reason the demo fails on Monday',
+  date: '2026-09-28',
+  tags: ['ai agents', 'data governance', 'ai act'],
+  lang: 'en',
+  summary: 'Gartner expects more than 40% of enterprise AI agents to be demoted or switched off by 2027, and the reason has nothing to do with the model. It is missing plumbing: no agent identity, no access log, no way to answer "what did it touch" once something breaks.',
+}
+
+import { AgentIncidentFork } from '../../components/flows/blog/BlogFlows'
+
+Gartner expects more than 40% of enterprise AI agents to be demoted or
+switched off by 2027. Not because the models got worse. Because when
+something finally goes wrong, nobody can answer one simple question: what did
+the agent actually touch
+([Gartner](https://www.gartner.com/en/newsroom/press-releases/2026-05-26-gartner-says-applying-uniform-governance-across-ai-agents-will-lead-to-enterprise-ai-agent-failure)).
+
+## Why do AI agent pilots stall after the demo already worked?
+
+Because the demo and the incident test two different things. A demo tests
+whether the agent can do the task. An incident tests whether you can
+reconstruct, after the fact, exactly what it did, to which data, on whose
+authority, and why. Most pilots only ever build the first part, so the
+moment an agent does something wrong, or just something surprising, the
+review that follows discovers the real gap isn't the model's judgement.
+It's that nobody can answer the question at all.
+
+Gartner's own diagnosis is blunt: enterprises treat agent governance like a
+light switch, fully locked down or fully trusted, instead of matching it to
+what a given agent can actually do and what it can actually reach. Build the
+agent first and bolt on governance later, or never, and the first real
+incident is where that ordering catches up with you.
+
+## What actually happens when an agent incident gets reviewed?
+
+I like the write-up AIwire ran on this in September, because it names the
+pattern instead of just the statistic. Three things keep recurring in
+incident reviews, and all three are infrastructure gaps that existed long
+before the incident that revealed them
+([AIwire](https://www.hpcwire.com/aiwire/2026/09/09/autopsy-of-an-agent-incident-three-patterns-behind-gartners-40-failure-rate/)).
+
+Nobody can say what the agent touched. Answering that should be one query
+against an access log, filtered by whoever, or whatever, made the call.
+Instead it becomes an inventory project, because the agent never had an
+identity of its own to log against, and the evidence that would answer the
+question was discarded mid-task, before anyone knew it would matter.
+Without evidence, a team can't narrow the fix either. You can't isolate the
+one permission or the one call that caused the problem if you can't
+reconstruct what happened, so the only lever left is a blunt one: cut the
+agent's access across the board, or shut it down. Demotion is what
+remediation looks like when there's nothing to remediate from.
+
+The actual fix, per that same write-up, is treating decision traces as real
+artifacts: for every action that matters, record what context the agent
+pulled, what it checked before acting, how confident it was, and who signed
+off if a human was in the loop. That's not extra paperwork. It's the log
+you'd want anyway the first time someone asks "why did it do that."
+
+<AgentIncidentFork />
+
+## What does "governed data underneath" actually mean for an agent?
+
+Three things, none of them new. An agent needs its own identity, not a
+shared service credential every script calls through, so every action logs
+against a real principal instead of "the API key." It needs to run against
+the same clean, versioned data layers your dashboards already depend on, not
+a side door into raw tables, so a bad read traces back to a specific source
+instead of "somewhere in the warehouse." And it needs a decision trace, not
+just an output: what it retrieved, what it checked, what it decided, in a
+form a person can read six months later without asking the model to explain
+itself.
+
+If that sounds familiar, it should. It's the same argument I made about
+[why a RAG system has to actually check what it retrieves](/work/2026-08-rag-sheet-music),
+and the same one I made about
+[why a data contract has to be written down and machine-checked](/work/2026-09-band-improvise-governance):
+an AI system is only as trustworthy as the layer underneath it, and that
+layer has to be stated once, in a form that can be verified, not assumed.
+
+There's a compliance angle here too, worth stating plainly because it gets
+exaggerated in both directions. The AI Act's Annex III high-risk
+obligations, the ones that would eventually force this kind of logging by
+law for high-risk systems, don't bite until 2 December 2027, after the
+Digital Omnibus pushed the date back
+([Gibson Dunn](https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/);
+I covered the full calendar [here](/work/2026-08-ai-act-deadlines-moved)). So
+no, an ordinary internal agent isn't being audited against Annex III today.
+But GDPR's accountability principle already applies if that agent touches
+personal data: Article 5(2) has required you to be able to demonstrate what
+happened to that data since 2018, the same obligation every other system in
+the company already carries
+([GDPR Art. 5](https://gdpr-info.eu/art-5-gdpr/)). Gartner and AIwire aren't
+describing a future compliance deadline. They're describing a plain
+operational gap that happens to sit exactly where the law is already headed.
+
+## Isn't this just more bureaucracy bolted onto the fun part?
+
+No, and Gartner's own recommendation makes that explicit: not more
+governance, better-matched governance. A read-only agent that summarizes
+reports doesn't need the same controls as one that can write to your CRM or
+send an email on your behalf. The fix isn't a policy document nobody reads
+before shipping. It's identity, logging and clean data layers sized to what
+each agent can actually do, decided once, per agent, at the point you give
+it access, not reconstructed under pressure after the first incident.
+
+## Where do you actually start, this week?
+
+Three checks, in order. Does every agent in production call your systems
+under its own identity, or a shared key? Can you produce, right now, a log
+of every action one specific agent took in the last week? And does that log
+show what data it read and what it changed, or only that it "ran
+successfully"? If any answer is no, that's not a reason to slow the agent
+programme down. It's the specific, small thing to fix before the next one
+goes into production.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6) Ask
+me anything about what "governed enough" looks like for your stack. You'll
+leave the 30 minutes with an answer or a clear next step, not a sales pitch.
+If the fix is bigger than a conversation,
+[the AI governance & LLMOps page](/services/ai-governance-llmops) goes deeper
+on what that setup actually looks like.
