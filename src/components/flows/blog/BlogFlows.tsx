@@ -623,3 +623,47 @@ export function AvalancheConfidenceFork() {
     </FlowPanel>
   )
 }
+
+/** Same incident, two outcomes. Without an identity and a log tied to the
+ *  agent, "what did it touch" is unanswerable and the only lever left is a
+ *  blanket lockdown. With them, the same incident is one query and a narrow
+ *  fix, so the agent keeps working. */
+export function AgentIncidentFork() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  return (
+    <FlowPanel
+      caption="Same incident, two outcomes. Without an identity and a log tied to the agent, review can't tell what it touched, so the only lever left is a blanket lockdown. With them, the same incident is one query and a narrow fix, and the agent keeps working."
+      minWidth={780}
+    >
+      <svg ref={ref} viewBox="0 0 940 340" role="img" aria-label="An agent acts, and something breaks. That forks into two branches. Upper branch: no agent identity and no access log, shared credentials, so review can't reconstruct what happened and the only fix is a blanket lockdown. Lower branch: the agent has its own identity and a logged decision trace, so review is one query and the fix is narrow, agent stays in production." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="ai-arrow" />
+
+        <path id="ai-e1" d="M 155 139 L 183 139" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#ai-arrow)" />
+        <FNode x={15} y={112} w={140} h={54} label="Agent acts" />
+        <FNode x={185} y={112} w={230} h={54} label="Something breaks" sub="incident review opens" />
+        <EdgeLabel x={169} y={118} text="triggers" />
+
+        {/* upper branch: no identity, no log, review stalls */}
+        <path id="ai-fa" d="M 415 139 C 430 100, 420 70, 445 54" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#ai-arrow)" />
+        <path id="ai-e2" d="M 635 54 L 663 54" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#ai-arrow)" />
+        <FNode x={445} y={30} w={190} h={48} label="No identity, no log" sub="shared API key" stroke={FK.AMBER} />
+        <FNode x={665} y={30} w={180} h={48} label="Can't reconstruct it" sub="goes to blanket lockdown" stroke={FK.AMBER} />
+        <text x={428} y={88} fontSize={9.5} letterSpacing={0.8} fill={FK.AMBER} fontFamily="var(--font-mono)" textAnchor="start">NO LOG</text>
+
+        {/* lower branch: own identity, logged, review is one query */}
+        <path id="ai-fb" d="M 415 139 C 430 180, 420 210, 445 252" fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#ai-arrow)" />
+        <path id="ai-e3" d="M 635 252 L 663 252" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#ai-arrow)" />
+        <FNode x={445} y={228} w={190} h={48} label="Own identity, logged" sub="every call attributed" stroke={FK.FLASH} />
+        <FNode x={665} y={228} w={180} h={48} label="One query answers it" sub="narrow fix, agent stays" stroke={FK.FLASH} />
+        <text x={428} y={198} fontSize={9.5} letterSpacing={0.8} fill={FK.FLASH} fontFamily="var(--font-mono)" textAnchor="start">HAS LOG</text>
+
+        <Dot path="ai-e1" dur={1.4} begin={0} />
+        <Dot path="ai-fa" dur={1.8} begin={0.8} color={FK.AMBER} />
+        <Dot path="ai-e2" dur={1.2} begin={2} color={FK.AMBER} />
+        <Dot path="ai-fb" dur={1.8} begin={0.8} />
+        <Dot path="ai-e3" dur={1.2} begin={2} />
+      </svg>
+    </FlowPanel>
+  )
+}
