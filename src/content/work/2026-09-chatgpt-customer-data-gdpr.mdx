@@ -1,0 +1,147 @@
+export const meta = {
+  title: 'Can your team use ChatGPT with customer data? The GDPR answer in plain words',
+  date: '2026-09-30',
+  tags: ['gdpr', 'chatgpt', 'ai-governance'],
+  lang: 'en',
+  summary: 'Yes, but only through the right door. Which ChatGPT tiers come with a data processing agreement, what EU data residency really covers, and the one-page checklist to run before customer data goes in.',
+}
+
+import { ChatgptDoors } from '../../components/flows/blog/BlogFlows'
+
+Somewhere in your company, someone pasted a customer email into ChatGPT this
+week to get a cleaner reply. Probably more than one person. The question is
+not whether it happens. It is which account they were logged into when it did,
+because the answer to "is that GDPR-compliant?" changes completely with that
+one detail.
+
+This is a plain-words guide, not legal advice. Your data protection officer or
+counsel has the last word. But the practical answer is more settled than the
+compliance-vendor blogs make it sound.
+
+## So, can we use ChatGPT with customer data?
+
+Yes, through a business door with a signed data processing agreement (DPA).
+No, through a personal account.
+
+The reason is GDPR Article 28. When you send customer personal data to a
+vendor to process on your behalf, you stay the controller and the vendor
+becomes your processor, and you need a written contract that says so. That is
+the same rule that applies to your cloud host or your email tool. If the
+vendor is a processor, the customer data stays under your instructions. If
+there is no contract, there is no processor relationship, and you have simply
+handed personal data to a third party.
+
+OpenAI offers a DPA for its business products and the API, not for consumer
+accounts
+([iubenda's GDPR review](https://www.iubenda.com/en/blog/openai-gdpr-compliance/),
+[OpenAI's DPA](https://openai.com/policies/data-processing-addendum/)).
+For customers in the EEA, the contracting party is OpenAI Ireland Limited, and
+anything it transfers outside the EEA is covered by standard contractual
+clauses or an adequacy decision, as the DPA states.
+
+<ChatgptDoors />
+
+## What is the difference between the personal, Business and API doors?
+
+Mostly three things: the contract, the training default and where the data sits.
+
+**Personal accounts (Free, Plus, Pro).** No DPA. Conversations are used to
+improve the models unless the user switches that off in settings, and the
+switch only applies to future chats. Deleted chats can linger on OpenAI's
+systems for up to 30 days
+([secureprivacy.ai](https://www.secureprivacy.ai/blog/gpt-5-training-data-opt-out)).
+This is the door your team is most likely using by accident.
+
+**ChatGPT Business and Enterprise.** A DPA is available, and conversations are
+excluded from training by default
+([eesel.ai's pricing and plan summary](https://www.eesel.ai/blog/chatgpt-work-pricing)).
+This is the sensible default for a team that wants a chat interface. One
+catch worth knowing: European data residency covers Enterprise and Edu
+workspaces, not Business
+([OpenAI's residency announcement](https://openai.com/index/introducing-data-residency-in-europe/)).
+
+**The API.** A DPA is available, and API data is not used for training unless
+you opt in. For products you build yourself, this is the cleanest door,
+because you control exactly what gets sent.
+
+I am leaving list prices out on purpose. Every source I found quotes USD only,
+and the plans change often. Check the current EUR price on OpenAI's own
+pricing page before you budget.
+
+## What does "European data residency" actually cover?
+
+Where your content is stored at rest, and, for some plans, where it is
+processed. Not a promise that no non-EU company is involved.
+
+OpenAI announced European data residency for ChatGPT Enterprise, ChatGPT Edu
+and the API Platform. On the API side, a new Project set to the Europe region
+is handled in-region with zero data retention, meaning requests and responses
+are not stored at rest. It only works for new Projects, so an existing one
+cannot be switched over. For ChatGPT Enterprise and Edu, customer content
+(prompts, uploaded files, images) can be stored at rest in Europe, and since
+16 January 2026 eligible customers can also choose in-region GPU inference
+([OpenAI](https://openai.com/index/introducing-data-residency-in-europe/),
+summarised by [Maginative](https://www.maginative.com/article/openai-introduces-european-data-residency-for-enterprises-and-developers/)).
+
+That is useful. It is also residency, not sovereignty: the provider is still a
+US company, which matters for some buyers and not for others. I wrote the long
+version in
+[An EU region is not sovereignty](/work/2026-09-eu-region-not-sovereignty).
+
+## Do we need a DPIA before we start?
+
+Often yes, when the use is more than "polish this sentence".
+
+A data protection impact assessment (DPIA) under Article 35 is required when
+processing is likely to be high risk. The European Data Protection Board's
+guidance lists nine criteria, including large-scale processing, sensitive data,
+new technology, profiling or scoring, and vulnerable people, and two or more
+generally means you need one
+([EDPB high-risk criteria, as summarised by Presencis](https://presencis.com/questions/dpia-for-ai-systems/)).
+Generative AI counts as new technology on its own, so it takes only one more.
+
+Two examples. Drafting replies to customer emails with names in them is
+probably low risk, and a short written assessment is enough. Feeding support
+tickets that contain health details, or CVs, into a model to rank people is
+squarely DPIA territory. When in doubt, write the assessment. It is cheaper
+than explaining its absence.
+
+## Has any regulator actually fined anyone over ChatGPT?
+
+One did, and then a court took it back. The lesson is not what most people draw.
+
+In December 2024 Italy's regulator, the Garante, fined OpenAI €15 million,
+citing a missing legal basis for training, weak transparency and an unreported
+breach. On 18 March 2026 the Court of Rome annulled that fine, and it did so
+on jurisdiction, not on the merits: once OpenAI set up in Ireland, the Irish
+Data Protection Commission became its lead authority
+([ppc.land's report on the ruling](https://ppc.land/italian-court-kills-openais-eur15m-fine-and-it-wasnt-even-close/),
+[ai-regulation.com](https://ai-regulation.com/court-of-rome-openai-gdpr-ruling/)).
+The court never ruled the practices lawful. So "the fine was cancelled" is not
+a permission slip, and your obligations as a controller did not move an inch.
+
+## What should we do this week?
+
+Five checks, in this order. Print them if you like.
+
+1. **Find the doors already open.** Ask, without blame, who uses AI tools for
+   work and on which account.
+2. **Close the personal door for customer data.** One clear sentence in your
+   policy: no customer personal data in personal accounts, ever.
+3. **Pick one business door** and sign its DPA. Business for a chat interface,
+   API for something you build.
+4. **Match the door to the data.** Sensitive data or a hard residency
+   requirement points at Enterprise or an in-region API Project.
+5. **Write the DPIA, or write down why you do not need one.** One page is a
+   fine start.
+
+If you build on the API, the same governance thinking applies once agents can
+act on your data. [Agents need governed data](/work/2026-09-agents-need-governed-data)
+covers that side.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6) Ask
+me anything about which door fits your team and your data. You'll leave the 30
+minutes with an answer or a clear next step, not a sales pitch. If the setup
+is bigger than a conversation,
+[the AI governance & LLMOps page](/services/ai-governance-llmops) shows what
+it looks like.

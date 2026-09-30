@@ -667,3 +667,47 @@ export function AgentIncidentFork() {
     </FlowPanel>
   )
 }
+
+/** Post: "Can your team use ChatGPT with customer data?" One prompt with customer
+ *  data, three doors, three very different contract positions. */
+export function ChatgptDoors() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  return (
+    <FlowPanel
+      caption="The same prompt, three doors. A personal account has no data processing agreement and may train on the chat. A Business workspace has the agreement and no training by default. An API project set to Europe adds in-region handling with zero retention."
+      minWidth={780}
+    >
+      <svg ref={ref} viewBox="0 0 940 340" role="img" aria-label="A prompt containing customer data can go through three doors. Personal account: no data processing agreement, training on by default, so you have handed personal data to a third party. Business workspace: agreement available and no training by default, but European data residency covers Enterprise and Edu, not Business. API project set to Europe: agreement, in-region handling and zero data retention." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="cd-arrow" />
+
+        <FNode x={15} y={116} w={190} h={54} label="Prompt with" sub="customer data" />
+
+        {/* top door: personal account */}
+        <path id="cd-a" d="M 205 143 C 225 100, 230 60, 255 54" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#cd-arrow)" />
+        <path id="cd-a2" d="M 455 54 L 503 54" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#cd-arrow)" />
+        <FNode x={257} y={30} w={198} h={48} label="Personal account" sub="Free, Plus, Pro" stroke={FK.AMBER} />
+        <FNode x={505} y={30} w={350} h={48} label="No DPA, training on by default" sub="you handed data to a third party" stroke={FK.AMBER} />
+
+        {/* middle door: business workspace */}
+        <path id="cd-b" d="M 205 143 L 253 143" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#cd-arrow)" />
+        <path id="cd-b2" d="M 455 143 L 503 143" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#cd-arrow)" />
+        <FNode x={257} y={119} w={198} h={48} label="Business workspace" sub="chat interface" />
+        <FNode x={505} y={119} w={350} h={48} label="DPA, no training by default" sub="residency covers Enterprise, not Business" />
+
+        {/* bottom door: API with EU project */}
+        <path id="cd-c" d="M 205 143 C 225 190, 230 245, 255 252" fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#cd-arrow)" />
+        <path id="cd-c2" d="M 455 252 L 503 252" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#cd-arrow)" />
+        <FNode x={257} y={228} w={198} h={48} label="API, Europe project" sub="you build the product" stroke={FK.FLASH} />
+        <FNode x={505} y={228} w={350} h={48} label="DPA, in-region, zero retention" sub="you control what is sent" stroke={FK.FLASH} />
+
+        <Dot path="cd-a" dur={1.6} begin={0} color={FK.AMBER} />
+        <Dot path="cd-a2" dur={1.4} begin={1.6} color={FK.AMBER} />
+        <Dot path="cd-b" dur={1.0} begin={0.3} />
+        <Dot path="cd-b2" dur={1.4} begin={1.3} />
+        <Dot path="cd-c" dur={1.6} begin={0} />
+        <Dot path="cd-c2" dur={1.4} begin={1.6} />
+      </svg>
+    </FlowPanel>
+  )
+}
