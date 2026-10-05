@@ -5,7 +5,7 @@ import { LakehouseFlow, PipelinesFlow, AiDataFlow, GovernanceFlow } from './comp
 import AboutFlow from './components/flows/AboutFlow'
 import WorkFlow from './components/flows/WorkFlow'
 import ProblemChain from './components/flows/ProblemChain'
-import { AuditStackMap, MedallionMistakesMap, SurfPipeline, WarehouseVsLakehouse, AiActTimeline, PowerBiLicensingCliff, RagSheetMusic, MarkingRunway, DataResidencyFork, AvalancheConfidenceFork, LlmMenuFork, PlatformMeteringFork, SharedFormFork, AgentIncidentFork } from './components/flows/blog/BlogFlows'
+import { AuditStackMap, MedallionMistakesMap, SurfPipeline, WarehouseVsLakehouse, AiActTimeline, PowerBiLicensingCliff, RagSheetMusic, MarkingRunway, DataResidencyFork, AvalancheConfidenceFork, LlmMenuFork, PlatformMeteringFork, SharedFormFork, AgentIncidentFork, TideTableVsKpi } from './components/flows/blog/BlogFlows'
 
 /** Server-render every flow diagram to markup so scripts/export-diagrams.mjs
  *  can extract standalone SVG files into assets/diagrams/. */
@@ -33,6 +33,7 @@ export function renderAll(): Record<string, string> {
     'blogs/platform-metering-fork': <PlatformMeteringFork />,
     'blogs/shared-form-fork': <SharedFormFork />,
     'blogs/agent-incident-fork': <AgentIncidentFork />,
+    'blogs/tide-table-vs-kpi': <TideTableVsKpi />,
   }
   return Object.fromEntries(Object.entries(items).map(([name, el]) => [name, renderToStaticMarkup(el)]))
 }

@@ -1,0 +1,122 @@
+export const meta = {
+  title: 'The tide table is the oldest data product',
+  date: '2026-10-05',
+  tags: ['data for humans', 'data products', 'reference data'],
+  lang: 'en',
+  summary: 'A tide table is computed years ahead, published once, and trusted by everyone who reads it. Your KPI definitions can work the same way.',
+}
+
+import { TideTableVsKpi } from '../../components/flows/blog/BlogFlows'
+
+Before a surf session I look at the tide table. Not the forecast, the table.
+It is a boring grid of times and heights, and it has never once argued with
+anyone. The harbour master reads the same grid. So does the skipper, the
+fisherman and the kid with the bodyboard. Nobody asks which version is
+current, or whether the number came from the sales team or from finance.
+
+Most companies would pay a lot for that kind of agreement about their own
+numbers. The tide table has had it for generations.
+
+## What is a tide table, really?
+
+A published prediction of high and low water, for named places, for every day
+of a year, calculated well before the year starts. National hydrographic
+offices publish them annually. In Germany, for example, the BSH issues tide
+tables for the North Sea, the British Isles and the Atlantic coast of Europe
+every year
+([BSH tide publications](https://eu.nvcharts.com/41714/gezeitentafeln-2025-europaeische-gewaesser/)).
+
+That is already the shape of a good data product: a named owner, a fixed
+format, a regular release, and consumers who simply read it.
+
+## How can anyone know the tide a year ahead?
+
+Because the inputs are stable. The standard method is harmonic analysis,
+recognised by the International Hydrographic Organization and used by
+national offices including SHOM in France, the UKHO and the BSH. It splits
+the tide into individual cycles driven by the Earth, Moon and Sun, fits them
+to a long record from a tide gauge, and then adds them back up for any future
+date, including a correction for the 18.6-year lunar nodal cycle
+([Copernicus Ocean Science](https://os.copernicus.org/articles/15/1363/2019/)).
+
+Two details matter for us. The hard work is done once, from years of
+observations, and then reused. And the output is a table, not a model you
+have to run. The reader never touches the maths.
+
+## What does a tide table not tell you?
+
+Honestly, quite a lot, and the honesty is the point. It predicts the
+astronomical tide only. It does not include wind, air pressure or river flow,
+which can matter a great deal
+([NOAA via Ocean Motion](https://www.oceanmotion.org/html/background/tides-observing.htm)).
+Roughly one centimetre of water level per hectopascal of pressure, as a rule
+of thumb, so a deep low can lift the sea noticeably above the table.
+
+And the table is not embarrassed by that. Storm surge is simply the
+difference between the observed water level and the predicted one. The
+prediction stays fixed, so the gap can be measured. A separate warning
+service, not the table, deals with storms. In the Netherlands that is KNMI
+working with Rijkswaterstaat
+([ECMWF](https://www.ecmwf.int/sites/default/files/elibrary/2008/17518-probability-forecasts-water-levels-coast-netherlands.pdf)).
+
+Tide tables don't promise everything. They promise one clearly scoped thing,
+and they keep that promise.
+
+## What is the business version of a tide table?
+
+Reference data and the definitions built on it. Reference data is the slow,
+shared stuff everything else leans on: what counts as an active customer,
+what "revenue" includes, which currency rate applies on which date, how
+regions roll up. A data contract is the agreement about its shape, owner and
+change rules. I wrote about that in [why a band can improvise and your company
+cannot](/work/2026-09-band-improvise-governance).
+
+Now picture "revenue". Without a published definition, sales computes it one
+way, finance another, and an AI agent asked to summarise the quarter invents
+a third from whatever columns it finds. Each is defensible. None matches.
+This is the quiet failure behind [folders instead of contracts in the
+medallion layers](/work/2026-08-medallion-mistakes).
+
+<TideTableVsKpi />
+
+## How do you publish a KPI like a tide table?
+
+Five habits, borrowed straight from the table.
+
+1. **One owner.** A named person or team, not "the data team".
+2. **One scoped promise.** Write down what the number includes and, just as
+   plainly, what it leaves out, the way the table leaves out the weather.
+3. **An edition.** Put a version and a date on the definition. When it
+   changes, publish a new edition and say so, rather than quietly editing.
+4. **Compute once, read many.** Build the number in one place, in your gold
+   layer, and let dashboards and agents read it instead of recomputing it.
+5. **Measure the gap.** Compare observed against expected, the way surge is
+   observed minus predicted, and treat a growing gap as a signal.
+
+None of this needs a platform rebuild. A one-page definition and a single
+governed table is often enough to start.
+
+## Where does the metaphor stop working?
+
+Three places, and they matter.
+
+First, the tide is physics. Nobody votes on the Moon's orbit. A KPI is a
+human decision, so someone has to make that decision and defend it, and the
+table's calm authority is partly borrowed from the sky. Second, a tide table
+changes slowly and on a calendar. Your business changes mid-year: new
+products, new pricing, a merger. Your editions will come faster, and they
+need a change process the table never required. Third, the tide has no
+adversaries and no incentives. Inside a company, a number can move someone's
+bonus, which is exactly why it needs an owner who is not the person being
+measured.
+
+## Does everyone in your company read the same table?
+
+If two people can open two reports and disagree about last month, you don't
+have a reporting problem. You have an unpublished table.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6) Ask
+any question you like about how to publish your first definitions. You'll
+leave the 30 minutes with an answer or a clear next step. For the shared
+structure behind this, [the lakehouse architecture
+page](/services/lakehouse-architecture) shows where such a table lives.
