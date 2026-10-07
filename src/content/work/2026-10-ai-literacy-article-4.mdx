@@ -1,0 +1,104 @@
+export const meta = {
+  title: 'The AI literacy rule got softer in July. It did not go away',
+  date: '2026-10-07',
+  tags: ['eu ai act', 'ai literacy', 'compliance'],
+  lang: 'en',
+  summary: 'Since 2 August 2026, national authorities can enforce Article 4 of the EU AI Act. The July Omnibus rewrote it from "ensure a sufficient level" to "support the development of" AI literacy. Here is what that means for a small company, and a one-afternoon way to build the paper trail.',
+}
+
+import { LiteracyTrail } from '../../components/flows/blog/BlogFlows'
+
+If your company uses ChatGPT, Copilot, or any AI feature inside a tool you
+already pay for, Article 4 of the EU AI Act probably applies to you. It is the
+quietest obligation in the Act, and since 2 August 2026 it is the one national
+authorities can actually enforce. It also just got softer. Softer is not the
+same as gone.
+
+## What does Article 4 of the AI Act say now?
+
+Providers and deployers of AI systems must take measures to support the
+development of AI literacy among their staff and the other people who run or
+use AI systems on their behalf. The earlier wording asked you to ensure, "to
+their best extent", a sufficient level of literacy. The Digital Omnibus
+(Regulation (EU) 2026/1744, in force since 27 July 2026) dropped the
+"sufficient level" and added that you do not have to guarantee any specific
+level of literacy for any person
+([Cuatrecasas](https://www.cuatrecasas.com/en/global/intellectual-property/art/digital-omnibus-ai-has-been-published),
+[Lawandtechnology.eu](https://lawandtechnology.eu/en/ai-literacy-digital-omnibus-article-4-ai-act/)).
+So the duty moved from a result to an effort. You still have to make the effort.
+
+One thing to watch: the Commission's first proposal would have removed the
+company duty entirely and left it to the Commission and Member States to
+encourage training. That is not what was adopted. Some summaries written
+before the final text still describe the proposal, so check the date on
+whatever you read. The final text keeps the duty on you, and adds a duty on
+the Commission and Member States to support companies, especially small ones.
+
+## Who has to do something, and who checks?
+
+If you use AI systems in a professional setting, you are a "deployer", and that
+is most companies with a ChatGPT subscription. The people covered are your
+staff and anyone else operating AI on your behalf, so contractors and agency
+freelancers count too. Supervision sits with national market surveillance
+authorities, not the AI Office, and they have been able to enforce since
+2 August 2026
+([European Commission AI literacy Q&A](https://digital-strategy.ec.europa.eu/en/policies/ai-talent-skills-and-literacy)).
+I could not find a fixed fine written into Article 4 itself, so penalties come
+from national rules and will differ by country. Do not read that as "nothing
+happens". Read it as "nobody can tell you the price in advance".
+
+## What counts as "AI literacy" for a 30-person company?
+
+Nothing that needs a certificate. The Act asks you to take account of people's
+knowledge, experience, education and the context where the AI is used, and
+the amended text no longer asks you to guarantee any particular level. The
+Commission's Q&A also stresses documenting what you do. Its public repository of practices lists
+more than 40 real initiatives, from e-learning to workshops, with a clear
+warning: copying one does not give you a presumption of compliance
+([AI Office living repository](https://digital-strategy.ec.europa.eu/en/policies/repository-ai-literacy-practices)).
+
+In practice, "enough" for most small teams is three things people can say out
+loud: what the tool does and does not do, what must never go into it (customer
+data, contracts, anything under NDA), and who to ask when unsure. A person who
+drafts marketing copy needs a different conversation than a person who
+summarises HR files.
+
+## How do you build the paper trail in one afternoon?
+
+Follow the chain in the diagram. The point is the record at the end, because
+"we told people in a meeting once" will not survive a question.
+
+<LiteracyTrail />
+
+1. **List the tools.** Ask every team what AI they use, including the free
+   accounts. The real list is always longer than the approved one.
+2. **List the people.** Staff, contractors, freelancers who use those tools for you.
+3. **Group by role.** Two or three groups is plenty. Sales, finance and
+   whoever builds things.
+4. **Pick one measure per group.** A 45-minute session, a one-page rule sheet,
+   a short recorded walkthrough. Small and real beats big and imaginary.
+5. **Write it down.** Date, who attended or read it, what it covered. One
+   spreadsheet is fine. Re-run it when you add a tool or a hire.
+
+## What does this have to do with your data?
+
+Everything, and this is where I spend my days. The question people ask in the
+session is almost always "what can I paste in here?" You can only answer that
+if you know what data you have and where the sensitive parts live. If the
+honest answer is "we are not sure", the literacy session is where that gap
+shows up first. Literacy is one of the four things that never moved, which I mapped in
+[the August post on the deadlines](/work/2026-08-ai-act-deadlines-moved), and
+the next date on that map is covered in
+[the post on the Article 50 marking deadline](/work/2026-09-article-50-marking-deadline).
+
+## Where do you start this week?
+
+Send one message to your team asking which AI tools they use, and put the
+answers in a spreadsheet. That is step one, and it takes ten minutes.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6) Ask
+me anything about what your team can safely paste into an AI tool. You will
+leave the 30 minutes with an answer or a clear next step, not a sales pitch.
+If the data side needs real work,
+[the AI governance & LLMOps page](/services/ai-governance-llmops) shows what
+that looks like.
