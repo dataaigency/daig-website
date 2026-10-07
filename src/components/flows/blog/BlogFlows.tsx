@@ -667,3 +667,43 @@ export function AgentIncidentFork() {
     </FlowPanel>
   )
 }
+
+/** The Article 4 paper trail: from "which AI tools are in use" to a dated
+ *  record. Each step has the gap that usually breaks it; the last node is the
+ *  one an authority can actually be shown. */
+export function LiteracyTrail() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  const nodes = [
+    { x: 10, label: 'AI tools in use', sub: 'the real list', flag: 'shadow use' },
+    { x: 222, label: 'Who touches them', sub: 'staff and contractors', flag: 'contractors forgotten' },
+    { x: 434, label: 'What each role needs', sub: 'sales is not finance', flag: 'one course for all' },
+    { x: 646, label: 'A measure is taken', sub: 'session, guide, rule', flag: 'nothing scheduled' },
+  ]
+  const w = 170
+  return (
+    <FlowPanel
+      caption="Article 4 in practice is a short chain: know which AI tools are in use, who touches them, what each role needs, then take a measure and write it down. Each step has a gap that usually breaks it, and the dated record at the end is the part you can show an authority."
+      minWidth={780}
+    >
+      <svg ref={ref} viewBox="0 0 1040 175" role="img" aria-label="A chain of five steps: AI tools in use, who touches them, what each role needs, a measure is taken, and a dated record. Each of the first four steps is flagged with the gap that usually breaks it: shadow use, contractors forgotten, one course for everyone, nothing scheduled. The last step, the dated record, is the evidence you can show." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="lt-arrow" />
+        {[0, 1, 2, 3].map((i) => (
+          <path key={i} id={`lt-e${i}`} d={`M ${10 + i * 212 + w} 56 L ${10 + (i + 1) * 212 - 2} 56`} fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#lt-arrow)" />
+        ))}
+        {nodes.map((n) => (
+          <g key={n.label}>
+            <FNode x={n.x} y={32} w={w} h={48} label={n.label} sub={n.sub} />
+            {drop(n.x + w / 2, 80, 108)}
+            {amberTag(n.x + w / 2, 112, n.flag)}
+          </g>
+        ))}
+        <FNode x={858} y={32} w={w} h={48} label="A dated record" sub="who, what, when" stroke={FK.FLASH} />
+        <Dot path="lt-e0" dur={1.3} begin={0} />
+        <Dot path="lt-e1" dur={1.3} begin={0.5} />
+        <Dot path="lt-e2" dur={1.3} begin={1} />
+        <Dot path="lt-e3" dur={1.3} begin={1.5} />
+      </svg>
+    </FlowPanel>
+  )
+}
