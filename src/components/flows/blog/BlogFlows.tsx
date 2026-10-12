@@ -667,3 +667,56 @@ export function AgentIncidentFork() {
     </FlowPanel>
   )
 }
+
+/** The simple stack and its tripwires. Apps feed one database, Power BI reads
+ *  it, readers pay a seat each. Three limits are the honest signals to move to
+ *  Fabric; until one trips, Fabric only adds a bill. */
+export function SimpleStackTripwires() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  const trips = [
+    { y: 168, label: 'Model over 1 GB' },
+    { y: 222, label: 'Refresh over 8 times a day' },
+    { y: 276, label: 'Sources nobody owns' },
+  ]
+  return (
+    <FlowPanel
+      caption="For a small team the plain stack is one database and Power BI Pro. Fabric earns its bill only when a tripwire trips: a model past 1 GB, refreshes past eight a day, or sources nobody owns."
+      minWidth={860}
+    >
+      <svg ref={ref} viewBox="0 0 1020 330" role="img" aria-label="A left to right chain: business apps feed one database, Power BI Pro reads it, and readers each hold a Pro seat. Below Power BI, three amber tripwires hang off the chain: a model over 1 GB, refreshes over 8 times a day, and sources nobody owns. Any of them leads to the final green node: now Fabric earns its bill." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="st-arrow" />
+
+        <path id="st-e1" d="M 170 66 L 213 66" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#st-arrow)" />
+        <path id="st-e2" d="M 385 66 L 433 66" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#st-arrow)" />
+        <path id="st-e3" d="M 615 66 L 663 66" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#st-arrow)" />
+        <FNode x={20} y={39} w={150} h={54} label="Business apps" sub="CRM, shop, finance" />
+        <FNode x={215} y={39} w={170} h={54} label="One database" sub="Postgres or SQL" />
+        <FNode x={435} y={39} w={180} h={54} label="Power BI Pro" sub="import, scheduled" />
+        <FNode x={665} y={39} w={160} h={54} label="Readers" sub="about €13 a seat" />
+        <EdgeLabel x={191} y={46} text="load" />
+        <EdgeLabel x={409} y={46} text="import" />
+        <EdgeLabel x={639} y={46} text="share" />
+
+        {/* tripwires hang off Power BI */}
+        <line x1={525} y1={93} x2={525} y2={140} stroke={FK.NODE_STROKE} strokeWidth={1.2} strokeDasharray="3 4" />
+        <text x={540} y={134} fontSize={9.5} letterSpacing={0.8} fill={FK.AMBER} fontFamily="var(--font-mono)" textAnchor="start">TRIPWIRES</text>
+        {trips.map((t, i) => (
+          <g key={t.label}>
+            <FNode x={380} y={t.y} w={290} h={40} label={t.label} stroke={FK.AMBER} />
+            <path id={`st-t${i}`} d={`M 670 ${t.y + 20} C 710 ${t.y + 20}, 720 238, 760 238`} fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#st-arrow)" />
+          </g>
+        ))}
+        <line x1={380} y1={140} x2={670} y2={140} stroke={FK.NODE_STROKE} strokeWidth={1.2} strokeDasharray="3 4" />
+        <line x1={380} y1={140} x2={380} y2={188} stroke={FK.NODE_STROKE} strokeWidth={1.2} strokeDasharray="3 4" />
+        <FNode x={762} y={208} w={236} h={60} label="Now Fabric earns its bill" sub="pause it, size it small" stroke={FK.FLASH} />
+        <text x={20} y={310} fontSize={10.5} letterSpacing={0.8} fill={FK.SUB} fontFamily="var(--font-mono)">UNTIL ONE TRIPS, FABRIC ONLY ADDS A BILL</text>
+
+        <Dot path="st-e1" dur={1.2} begin={0} />
+        <Dot path="st-e2" dur={1.2} begin={0.9} />
+        <Dot path="st-e3" dur={1.2} begin={1.8} />
+        <Dot path="st-t1" dur={1.6} begin={1} color={FK.AMBER} />
+      </svg>
+    </FlowPanel>
+  )
+}

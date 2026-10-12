@@ -1,0 +1,124 @@
+export const meta = {
+  title: 'Do you need Microsoft Fabric, or just Power BI and a database?',
+  date: '2026-10-12',
+  tags: ['fabric', 'power bi', 'small business'],
+  lang: 'en',
+  summary: 'For many small European teams the right answer is one database and Power BI Pro. Here are the three limits that tell you when that stops being true.',
+}
+
+import { SimpleStackTripwires } from '../../components/flows/blog/BlogFlows'
+
+Most pages that compare Microsoft Fabric with Power BI compare features. Both
+have dashboards, both connect to lots of sources, both have a Copilot button.
+Then they conclude that Fabric is "more powerful", which is true of a lorry
+compared to a bicycle and tells you nothing about your commute.
+
+So here is the answer the listicles avoid. If you are a team of five to
+twenty people with a handful of business systems, you probably do not need
+Fabric yet. One database and Power BI Pro will carry you further than the
+sales material suggests. And there are three concrete signals that tell you
+when that stops being true.
+
+## What is the "just Power BI and a database" stack?
+
+It is the boring version. Your business apps (CRM, webshop, finance tool) load
+their data into one database every night. A plain Postgres or SQL database in a
+European region is fine. Power BI reads it, imports it on a schedule, and your
+people open the reports.
+
+No lakehouse, no capacity to pause, no medallion layers. If you have read my
+posts on [the warehouse or lakehouse question](/work/2026-08-warehouse-or-lakehouse)
+or [the medallion mistakes](/work/2026-08-medallion-mistakes), this is the
+stage before all that. It is a perfectly respectable place to live.
+
+## What does it cost, compared with Fabric?
+
+The database is the small part. The smallest burstable PostgreSQL server in
+West Europe lists at roughly €13 a month on third-party price trackers, a dollar list
+price converted at the 1.1664 ECB reference rate of 25 August 2026
+([Bytebase's Azure price table](https://www.bytebase.com/dbcost/azure-flexible/instance/B1ms.md)).
+That is only the entry tier, and I could not check Microsoft's own euro page
+when writing, so open the Azure pricing page, pick West Europe and
+euros, and read today's number before you plan around it.
+
+The seats are the real line. Power BI Pro runs about €13 per user per month in
+Europe, based on Microsoft's 14 dollar list price after the April 2025
+increase ([Toucan Toco's European breakdown](https://www.toucantoco.com/en/blog/power-bi-pricing)).
+Twenty readers is about €260 a month.
+
+Now compare. A pay as you go Fabric F2 left on around the clock is about €278
+a month, around €165 on a one year reservation, and on every capacity below F64
+your readers still need their own Pro seat on top
+([my F2 pricing breakdown has the sources](/work/2026-08-fabric-f2-pricing)).
+So Fabric at this size does not replace the plain stack's cost. It adds to it.
+That extra spend has to buy you something. The next three sections are what it
+should buy.
+
+## When does Power BI Pro alone run out? Tripwire one: the model gets too big
+
+A Power BI Pro semantic model is capped at 1 GB. Premium Per User raises the
+ceiling to 100 GB, which Microsoft describes as an upper bound rather than a
+promise ([Microsoft's Premium Per User FAQ](https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-premium-per-user-faq)).
+
+One gigabyte sounds tiny, but Power BI compresses imported data hard. For a
+company with a few years of invoices, orders and web analytics, it is often
+enough. It stops being enough with event level data, such as every click or
+every sensor reading, which grows quickly. If your reports are heading there,
+that is a real reason to look at something built for volume.
+
+## Tripwire two: you need fresher data than eight refreshes a day
+
+On Pro, a model can refresh on a schedule up to eight times a day. Premium Per
+User and capacities allow 48
+([Microsoft community answers confirm the Pro limit](https://community.fabric.microsoft.com/t5/Service/Limit-Refresh-Power-BI-Semantic-Model-Using-Power-Automate/m-p/4741699)).
+
+Eight is plenty for a sales review that is read each morning. It is not enough
+if the warehouse team wants stock levels every fifteen minutes. Be honest about
+whether anyone actually acts on data that fresh. In my experience most "we need
+real time" requests turn out to mean "we need it by 9am", which one night
+refresh handles for free.
+
+## Tripwire three: nobody owns the sources
+
+This is the one that has nothing to do with software limits, and it is the most
+common reason I tell teams to start building structure.
+
+When your numbers come from nine places and three of them are spreadsheets
+someone emails around, the database stops being a tidy hub and becomes another
+copy. Revenue means one thing in the CRM and another in finance. No tool fixes
+that, and a bigger platform just moves the argument into a lakehouse.
+
+What helps is a named owner per source and a simple agreed definition per
+metric, written down. If you reach the point where that agreement needs
+layers, history and checks that run themselves, that is when a lakehouse
+earns its place. [My lakehouse architecture work](/services/lakehouse-architecture)
+is exactly that step.
+
+<SimpleStackTripwires />
+
+## What if I just want to be ready?
+
+Resist it. Buying a platform for the company you hope to be in three years
+means paying the floor price today for capacity that sits idle. Fabric is
+rented by the hour whether it is busy or not, and a small team rarely uses
+what it rented.
+
+You can also move later without a rewrite. Your data model, your metric
+definitions and the habit of having an owner for each source all travel with
+you. The expensive mistake is not starting small. It is starting big with the
+sources still unowned.
+
+## So which one should you pick?
+
+Start with one European region database and Power BI Pro seats for the people
+who read and build. Write down who owns each source. Then watch for the three
+tripwires: a model near 1 GB, a real need for more than eight refreshes a day,
+or sources nobody can vouch for.
+
+If none of them has tripped, spend your money on something else. If one has,
+Fabric starts to make sense, and the sizing advice in the
+[Fabric or BigQuery comparison](/work/2026-09-fabric-vs-bigquery) applies.
+
+Not sure which side of the line you are on? Book a free intake call. Ask any
+question, and you will leave with an answer or a clear next step from the free
+30 minutes.
