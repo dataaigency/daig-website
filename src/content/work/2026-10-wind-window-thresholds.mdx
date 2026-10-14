@@ -1,0 +1,141 @@
+export const meta = {
+  title: 'What a kitesurfing wind window teaches you about alerts that actually mean something',
+  date: '2026-10-14',
+  tags: ['data for humans', 'alerting', 'data quality'],
+  lang: 'en',
+  summary: 'Nobody asks a kitesurfer "is 18 knots high?" They ask whether 18 knots is right for the kite on the beach. Alerts work better when they are built the same way.',
+}
+
+import { WindWindowGates } from '../../components/flows/blog/BlogFlows'
+
+Ask a kitesurfer whether 18 knots is a lot of wind and you will get a
+question back: on which kite? On a big 12 metre kite, 18 knots is the top of
+the comfortable range. On a 9, it is the sweet spot. On a 7, it is barely
+getting started. Same number, three different answers, and nobody on the
+beach thinks that is strange.
+
+Now look at the alerts in your company. Most of them are a number and a
+line. Revenue below X. Pipeline duration above Y. Error count above Z. When
+they fire, the question nobody can answer is the one every kitesurfer asks
+first: compared to what, and for whom?
+
+## What is a wind window, really?
+
+A wind window is the range of conditions in which a given setup works. It
+has a floor, because below it the kite will not keep you moving. It has a
+ceiling, because above it the kite is too much. And the floor and ceiling
+depend on the gear you rigged.
+
+Kite size charts make this concrete. One manufacturer's chart for a rider of
+70 to 80 kilograms suggests roughly 13 to 15 square metres at 10 to 13
+knots, 11 to 12 at 14 to 17, 9 to 10 at 18 to 22, and 7 to 8 at 23 to 28
+([Airush](https://airush.com/blogs/news/what-kite-size-should-you-choose-based-on-the-wind)).
+Other brands and riders shift those numbers, and the sources are clear that
+these are guidelines, not standards. That is the point. The window belongs
+to the combination of kite, rider and conditions, not to the wind alone.
+
+The data world has the same idea under a drier name: an operating range. A
+pipeline that runs in forty minutes on a Monday and ninety on a month-end
+close is not broken. Ninety minutes on a quiet Tuesday might be.
+
+## Why does one threshold fail?
+
+Because a single line cannot tell a normal gust from a real problem.
+
+Wind is not one number. At any moment it swings between lulls and gusts.
+Guidance for kiters says to choose your kite for the top gust rather than the
+average, and that gusts usually last under 20 seconds, so watching a live
+reading for a few minutes tells you more than any one value
+([MAC Kiteboarding](https://www.mackiteboarding.com/kitesurfing-safely-in-gusty-conditions.htm)).
+A simple alarm at 20 knots would ring on every gust of a perfectly good
+afternoon, and stay silent when the average is fine but the swings are
+wild.
+
+Your monitoring does the same thing. A threshold on a metric that
+naturally swings with the day of the week, the month end or the marketing
+campaign fires on harmless moves, and stays quiet during a slow drift that
+never crosses the line. After a few weeks the team learns the lesson the
+threshold taught: these alerts do not mean anything. Then the one that does
+arrives and gets the same shrug.
+
+<WindWindowGates />
+
+## What does a window check instead?
+
+Three questions, in order, and the order matters.
+
+**Is it in range for what is running?** The floor and ceiling depend on the
+setup. In a data stack that means comparing a job against its own usual range
+for this day and this load, not against one number for all days. Static limits
+still have a place for hard boundaries like a contractual deadline. Everything
+that naturally varies deserves a range that varies with it.
+
+**Is the spread small enough to trust the average?** Kiters talk about the
+gap between lulls and gusts. One forum rule of thumb treats up to about 5
+knots of variation as normal and more than 8 as risky for beginners
+([Seabreeze](https://www.seabreeze.com.au/forums/Kitesurfing/Newbies-Tips-Tricks/What-amount-of-wind-Gust-is-ok)),
+though nobody pretends it is an official standard. The data version is
+variance. A daily total that is "about right" because a big error and a big
+omission cancelled each other out is a gust-heavy day. The average looks fine.
+Do not trust it.
+
+**Is the direction safe?** Offshore wind is the one that experienced kiters
+treat as the main hazard, because it keeps pushing you away from the coast
+and into open water if something fails
+([Seabreeze](https://www.seabreeze.com.au/forums/Kitesurfing/Victoria/On-shore-vs-Off-shore-in-Vic-that-is-)).
+Direction here is a failure mode, not a size. Some conditions are worse
+because of what happens when things go wrong. In a data stack, think of the
+feed that quietly serves a finance report versus the feed that only fills a
+spare dashboard. The same stall deserves a different response.
+
+Any no, and you stay on shore. Three yeses, and you go. No heroics, no
+negotiation with the forecast.
+
+## How does this reduce alert noise?
+
+It moves the question from "is the number big?" to "is this outside normal
+for this situation, and does it matter?" That is a shift from alerting on
+causes to alerting on symptoms, the idea at the heart of the Google SRE
+chapter on monitoring: page a human only for something that is urgent, real
+and actionable, and keep the rest as dashboards and tickets
+([Google SRE book](https://sre.google/sre-book/monitoring-distributed-systems/)).
+A conference talk drawing on that chapter adds the human cost: people can only
+respond with urgency a few times a day before the fatigue sets in
+([Rabenstein, SREcon 2016](https://www.usenix.net/sites/default/files/conference/protected-files/srecon16europe_slides_rabenstein.pdf)).
+I have not found a trustworthy number for how many alerts teams ignore, and
+the figures that circulate come from vendor blogs with no method behind them,
+so I will not quote one. Ask your own team instead. Which alerts do people
+mute without reading? That list is your noise budget.
+
+For a small team the practical version is short:
+
+1. List the alerts that fired last month. Mark each as acted on, ignored or muted.
+2. For every ignored one, ask what the window should have been: what range is normal for this day and this load?
+3. Add the spread and the stakes. Alert on gusty behaviour and on who downstream depends on the number.
+4. Keep a few hard lines for deadlines and compliance. Not everything needs a window.
+
+This is the kind of cleanup I do in [automation and DataOps work](/services/automation-dataops),
+and it connects to what I wrote about [reading a surf forecast as a small data
+platform](/work/2026-08-surf-forecast-lakehouse) and about [acting on data that is
+honest about its uncertainty](/work/2026-09-avalanche-report-imperfect-data).
+
+## Where does the metaphor stop working?
+
+The wind has a physical cliff. Past a certain strength, no amount of skill
+makes a small kite a good idea, and the sea punishes a bad call within
+minutes. Most business metrics have no such cliff. Your normal range drifts
+as the company grows, and the right window last year is the wrong one now.
+So a data window needs reviewing on a schedule, which the beach never asks
+of you. And a kiter can see the water and feel the pull. A pipeline gives no
+such feedback until someone has built it, which is why the checks have to be
+written down.
+
+## Are your alerts a number, or a window?
+
+If your team mutes more alerts than it reads, the fix is rarely more tooling.
+It is usually one afternoon of deciding what normal looks like, for whom, and
+what stays a page.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6) Ask
+any question you like about your alerts. You will leave the 30 minutes with an
+answer or a clear next step.

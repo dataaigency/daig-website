@@ -667,3 +667,58 @@ export function AgentIncidentFork() {
     </FlowPanel>
   )
 }
+
+/** One number against one threshold rings on every gust and teaches the
+ *  team to ignore the alarm. A window checks the same reading against the
+ *  range for the gear in use, the gust spread and the direction, and only
+ *  then says go. */
+export function WindWindowGates() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  return (
+    <FlowPanel
+      caption="The same wind reading, two ways to judge it. One threshold rings on every gust until nobody listens. A window asks three questions in order (in range for the kite you rigged, gusts close to lulls, wind not blowing offshore) and any no keeps you on the beach."
+      minWidth={860}
+    >
+      <svg ref={ref} viewBox="0 0 1040 330" role="img" aria-label="Top row, one threshold: a wind reading feeds one alarm set above 20 knots, which rings on every gust, mostly harmless ones, so the alarm gets ignored, including the one that mattered. Bottom row, a window: the same reading passes three checks in order, in range for the kite you rigged, gust spread small, direction not offshore. If all pass, go out. Any no, stay on shore." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="ww-arrow" />
+
+        <text x={15} y={22} fontSize={11} letterSpacing={2} fill={FK.SUB} fontFamily="var(--font-mono)">ONE THRESHOLD</text>
+        <path id="ww-a1" d="M 165 61 L 273 61" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#ww-arrow)" />
+        <path id="ww-a2" d="M 465 61 L 573 61" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#ww-arrow)" />
+        <path id="ww-a3" d="M 765 61 L 873 61" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#ww-arrow)" />
+        <FNode x={15} y={36} w={150} h={50} label="Wind reading" sub="gusts 14 to 26 kn" />
+        <FNode x={275} y={36} w={190} h={50} label="One alarm" sub="above 20 knots" />
+        <FNode x={575} y={36} w={190} h={50} label="Rings on every gust" sub="mostly harmless ones" stroke={FK.AMBER} />
+        <FNode x={875} y={36} w={150} h={50} label="Ignored" sub="the real one too" stroke={FK.AMBER} />
+        <EdgeLabel x={219} y={40} text="feeds" />
+        <EdgeLabel x={519} y={40} text="fires" />
+        <EdgeLabel x={819} y={40} text="teaches" />
+
+        <line x1={15} y1={120} x2={1025} y2={120} stroke={FK.NODE_STROKE} strokeWidth={1.2} strokeDasharray="4 5" />
+
+        <text x={15} y={156} fontSize={11} letterSpacing={2} fill={FK.SUB} fontFamily="var(--font-mono)">A WINDOW</text>
+        <path id="ww-b1" d="M 145 201 L 183 201" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#ww-arrow)" />
+        <path id="ww-b2" d="M 345 201 L 383 201" fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#ww-arrow)" />
+        <path id="ww-b3" d="M 545 201 L 583 201" fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#ww-arrow)" />
+        <path id="ww-b4" d="M 745 201 L 833 201" fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#ww-arrow)" />
+        <FNode x={15} y={176} w={130} h={50} label="Wind reading" sub="same numbers" />
+        <FNode x={185} y={176} w={160} h={50} label="In range?" sub="for the kite rigged" />
+        <FNode x={385} y={176} w={160} h={50} label="Gusts near lulls?" sub="spread stays small" />
+        <FNode x={585} y={176} w={160} h={50} label="Not offshore?" sub="direction checked" />
+        <FNode x={835} y={176} w={190} h={50} label="Go out" sub="three yeses" stroke={FK.FLASH} />
+        <EdgeLabel x={789} y={180} text="all pass" />
+        {drop(465, 226, 262)}
+        {amberTag(465, 266, 'any no: stay on shore')}
+
+        <Dot path="ww-a1" dur={1.3} begin={0} />
+        <Dot path="ww-a2" dur={1.3} begin={1.4} color={FK.AMBER} />
+        <Dot path="ww-a3" dur={1.3} begin={2.8} color={FK.AMBER} />
+        <Dot path="ww-b1" dur={0.8} begin={0} />
+        <Dot path="ww-b2" dur={0.8} begin={0.9} />
+        <Dot path="ww-b3" dur={0.8} begin={1.8} />
+        <Dot path="ww-b4" dur={1.2} begin={2.7} />
+      </svg>
+    </FlowPanel>
+  )
+}
