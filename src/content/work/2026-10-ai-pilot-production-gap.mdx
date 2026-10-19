@@ -1,0 +1,93 @@
+export const meta = {
+  title: 'Your AI pilot worked. Production did not. What sits underneath',
+  date: '2026-10-19',
+  tags: ['ai pilots', 'data quality', 'data governance'],
+  lang: 'en',
+  summary: 'Surveys of European companies keep finding that most AI pilots never reach production, and the barriers named are data quality and integration, not the model. Here is why a pilot hides the problem, and a five-question checklist for the layer underneath.',
+}
+
+import { PilotProductionGap } from '../../components/flows/blog/BlogFlows'
+
+A pilot is a magic trick done at close range. Someone picks the data, fixes
+it by hand, and the audience sees it work. Then you try to run the trick
+every day, for everyone, on data nobody picked. That is where most European
+AI projects stall, and the numbers are consistent about it.
+
+## How many AI pilots actually reach production?
+
+Fewer than you would hope, though every figure comes from a survey with its
+own sample, so treat them as a pattern, not a constant. A July 2026 report
+from the consultancy OMMAX surveyed 250 senior decision-makers in Germany,
+France, Italy, the Netherlands and the UK. It found that 79% of AI
+initiatives fail during or after the pilot stage, and 65% exceed their budget
+([Consultancy.eu](https://www.consultancy.eu/news/14088/european-companies-face-ai-execution-gap-as-79-of-initiatives-miss-their-goals)).
+A separate vendor survey by Alteryx, run by Coleman Parkes with 525 EU
+respondents, reports that around three quarters of pilots fail to reach
+production
+([IT Europa](https://iteuropa.com/news/eu-firms-struggle-scale-ai-beyond-pilots-says-alteryx-research)).
+Alteryx sells data tooling, so weigh its framing accordingly. The direction
+still agrees across independent sources.
+
+## What stops them?
+
+Not the model. In the OMMAX survey the biggest barriers to scaling were
+integration complexity (40%) and data quality (28%). Alteryx names weak data
+foundations and low trust in outputs, and points at a specific habit:
+putting generative AI straight on top of raw, poorly governed sources, which
+makes inconsistent answers and hallucinations more likely.
+
+Ownership matters too. In the same OMMAX data, IT owns most AI initiatives
+(48%) and business units own only 7%. A feature that nobody in the business
+is accountable for is a feature nobody notices drifting.
+
+## Why does the demo hide the problem?
+
+Because the pilot quietly includes a data team of one. Look at the diagram.
+
+<PilotProductionGap />
+
+In the top row, a person picks a small extract, cleans it, and feeds the
+feature something tidy. That person is the missing layer. In the bottom row
+the same feature meets live sources: duplicates, renamed columns, a field
+that was free text last quarter. Nobody is cleaning it, so the answers drift,
+people stop trusting them, and use fades. The model did not change. The
+cleaning did.
+
+## What is the layer underneath, in plain words?
+
+Three boring things. Data that is checked on its way in, so a broken source
+fails loudly instead of feeding the model quietly. Definitions that are
+written down once, so "active customer" means the same thing to the feature
+and to finance. And an owner, a named person who gets the alert when it
+breaks. I wrote about the same gap from the agent side in
+[the post on agents and governed data](/work/2026-09-agents-need-governed-data),
+and the usual causes of a shaky foundation are in
+[the five medallion mistakes](/work/2026-08-medallion-mistakes).
+
+## What is the five-question checklist before you scale a pilot?
+
+1. **Where does production data come from?** Name the live sources. If the
+   pilot used an extract, who made it, and how?
+2. **What did the person fixing the extract actually fix?** Write the fixes
+   down. Each one is a check the pipeline now has to run on its own.
+3. **Who owns the answer?** One named person in the business, not only IT.
+4. **How will you notice drift?** A small set of questions with known
+   answers, run weekly, is enough to start.
+5. **What happens when a source breaks?** The right answer is that the feature
+   says "I don't know", not that it answers confidently with stale data.
+
+If you can answer all five, scale. If you can answer three, fix the other two
+first. That is cheaper than the six months of quiet disappointment between a
+great demo and a switched-off feature.
+
+## Where do you start this week?
+
+Take your best pilot and ask the person who prepared its data to list what
+they fixed by hand. That list is your production work plan.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6) Ask
+me anything about getting a pilot ready for real data. You will leave the 30
+minutes with an answer or a clear next step, not a sales pitch. If the
+foundation needs building,
+[the AI governance & LLMOps page](/services/ai-governance-llmops) shows what
+that looks like.

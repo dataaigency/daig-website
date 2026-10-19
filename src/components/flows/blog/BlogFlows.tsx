@@ -667,3 +667,49 @@ export function AgentIncidentFork() {
     </FlowPanel>
   )
 }
+
+/** Same AI feature, two lives: the pilot runs on a hand-fixed extract and
+ *  works; production runs on live sources nobody cleans and drifts. */
+export function PilotProductionGap() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  const xs = [130, 410, 690]
+  const w = 210
+  return (
+    <FlowPanel
+      caption="The same AI feature lives two lives. In the pilot, someone hand-fixes a small extract and the demo works. In production the live sources arrive unfixed, nobody owns the cleaning, and the answers drift. The model is identical in both rows; the data layer is not."
+      minWidth={780}
+    >
+      <svg ref={ref} viewBox="0 0 1020 270" role="img" aria-label="Two rows. Pilot: a hand-picked extract, fixed by hand by someone, ends in a demo that works. Production: live sources, with nobody fixing them, end in answers that drift. A dashed line separates the rows." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="pg-arrow" />
+        <text x={10} y={60} fontSize={10.5} letterSpacing={0.8} fill={FK.SUB} fontFamily="var(--font-mono)">PILOT</text>
+        <text x={10} y={210} fontSize={10.5} letterSpacing={0.8} fill={FK.SUB} fontFamily="var(--font-mono)">PRODUCTION</text>
+        <line x1={10} y1={135} x2={1010} y2={135} stroke={FK.NODE_STROKE} strokeWidth={1.2} strokeDasharray="5 5" />
+
+        {[0, 1].map((i) => (
+          <path key={`t${i}`} id={`pg-t${i}`} d={`M ${xs[i] + w} 56 L ${xs[i + 1] - 2} 56`} fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pg-arrow)" />
+        ))}
+        <FNode x={xs[0]} y={32} w={w} h={48} label="Hand-picked extract" sub="a few thousand clean rows" />
+        <FNode x={xs[1]} y={32} w={w} h={48} label="Someone fixes it" sub="by hand, quietly" />
+        <FNode x={xs[2]} y={32} w={w} h={48} label="The demo works" sub="applause" stroke={FK.FLASH} />
+        <EdgeLabel x={xs[0] + w + 35} y={48} text="clean" />
+        <EdgeLabel x={xs[1] + w + 35} y={48} text="feeds" />
+
+        {[0, 1].map((i) => (
+          <path key={`b${i}`} id={`pg-b${i}`} d={`M ${xs[i] + w} 206 L ${xs[i + 1] - 2} 206`} fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#pg-arrow)" />
+        ))}
+        <FNode x={xs[0]} y={182} w={w} h={48} label="Live sources" sub="duplicates, gaps, renames" />
+        <FNode x={xs[1]} y={182} w={w} h={48} label="Nobody fixes it" sub="no owner, no checks" stroke={FK.AMBER} />
+        <FNode x={xs[2]} y={182} w={w} h={48} label="Answers drift" sub="trust drops, use stops" stroke={FK.AMBER} />
+        <EdgeLabel x={xs[0] + w + 35} y={198} text="raw" />
+        <EdgeLabel x={xs[1] + w + 35} y={198} text="feeds" />
+        {amberTag(xs[1] + w / 2, 246, 'the missing layer')}
+
+        <Dot path="pg-t0" dur={1.3} begin={0} />
+        <Dot path="pg-t1" dur={1.3} begin={0.6} />
+        <Dot path="pg-b0" dur={1.3} begin={0.3} color={FK.AMBER} />
+        <Dot path="pg-b1" dur={1.3} begin={0.9} color={FK.AMBER} />
+      </svg>
+    </FlowPanel>
+  )
+}
