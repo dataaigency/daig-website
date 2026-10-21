@@ -667,3 +667,52 @@ export function AgentIncidentFork() {
     </FlowPanel>
   )
 }
+
+/** BigQuery locks a dataset to the location chosen at creation, and a query
+ *  job runs in exactly one location, so mixed-location joins fail until the
+ *  data is copied or replicated into one place first. */
+export function BigQueryLocationLock() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  return (
+    <FlowPanel
+      caption="A BigQuery dataset is locked to the location you picked on day one, and each query job runs in a single location. Join data from two locations and the job fails; copy or replicate one side first and it runs."
+      minWidth={880}
+    >
+      <svg ref={ref} viewBox="0 0 1040 310" role="img" aria-label="Two datasets, one in the EU multi-region and one in europe-west3 Frankfurt, feed a query job that runs in a single location. If the job joins both, it fails with a location mismatch. If one dataset is copied or replicated into the other's location first, the join runs in one place." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="bl-arrow" />
+
+        <path id="bl-e1" d="M 215 67 C 270 67, 280 135, 328 140" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#bl-arrow)" />
+        <path id="bl-e2" d="M 215 233 C 270 233, 280 165, 328 160" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#bl-arrow)" />
+        <FNode x={15} y={40} w={200} h={54} label="EU multi-region" sub="BigQuery picks Belgium or NL" />
+        <FNode x={15} y={206} w={200} h={54} label="europe-west3" sub="Frankfurt, locked at creation" />
+        <FNode x={330} y={123} w={190} h={54} label="One query job" sub="runs in one location" />
+        <EdgeLabel x={262} y={40} text="read" />
+        <EdgeLabel x={262} y={282} text="read" />
+
+        {/* upper branch: joined as-is, the locations disagree */}
+        <path id="bl-fa" d="M 520 140 C 570 120, 590 80, 640 66" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#bl-arrow)" />
+        <path id="bl-ea" d="M 830 66 L 858 66" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#bl-arrow)" />
+        <FNode x={640} y={42} w={190} h={48} label="Join both as they are" sub="two locations, one job" stroke={FK.AMBER} />
+        <FNode x={860} y={42} w={165} h={48} label="Job fails" sub="not found in location" stroke={FK.AMBER} />
+        <text x={586} y={42} fontSize={9.5} letterSpacing={0.8} fill={FK.AMBER} fontFamily="var(--font-mono)" textAnchor="middle">AS IS</text>
+        {drop(942, 90, 114)}
+        {amberTag(942, 118, 'mismatch')}
+
+        {/* lower branch: bring the data to one place first */}
+        <path id="bl-fb" d="M 520 160 C 570 190, 590 232, 640 244" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#bl-arrow)" />
+        <path id="bl-eb" d="M 830 244 L 858 244" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#bl-arrow)" />
+        <FNode x={640} y={220} w={190} h={48} label="Copy or replicate first" sub="one side moves" stroke={FK.FLASH} />
+        <FNode x={860} y={220} w={165} h={48} label="Join in one place" sub="the job runs" stroke={FK.FLASH} />
+        <text x={590} y={282} fontSize={9.5} letterSpacing={0.8} fill={FK.SUB} fontFamily="var(--font-mono)" textAnchor="middle">MOVE FIRST</text>
+
+        <Dot path="bl-e1" dur={1.6} begin={0} />
+        <Dot path="bl-e2" dur={1.6} begin={0.4} />
+        <Dot path="bl-fa" dur={1.6} begin={1.6} color={FK.AMBER} />
+        <Dot path="bl-ea" dur={1.0} begin={2.8} color={FK.AMBER} />
+        <Dot path="bl-fb" dur={1.6} begin={1.6} />
+        <Dot path="bl-eb" dur={1.0} begin={2.8} />
+      </svg>
+    </FlowPanel>
+  )
+}
