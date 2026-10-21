@@ -1,0 +1,138 @@
+export const meta = {
+  title: 'Is your BigQuery data really in the EU? Regions, the EU multi-region, and the choice you cannot undo',
+  date: '2026-10-21',
+  tags: ['bigquery', 'gdpr', 'data residency'],
+  lang: 'en',
+  summary: 'The EU multi-region keeps BigQuery data in Belgium or the Netherlands, but BigQuery chooses which, and the choice is permanent. Here is how to pick a location, what breaks when locations mix, and what residency still does not cover.',
+}
+
+import { BigQueryLocationLock } from '../../components/flows/blog/BlogFlows'
+
+"We set BigQuery to EU" is a sentence I hear a lot. It is usually true. It is
+also usually less precise than the person saying it thinks, and one part of it
+cannot be fixed later without moving all your data. That is worth knowing
+before the first table exists, not after the hundredth.
+
+This post is the practical half of a story I started in
+[an EU region is not sovereignty](/work/2026-09-eu-region-not-sovereignty).
+That one asked who can be compelled to hand data over. This one asks a simpler
+question first: where do the bytes actually sit, and what did you commit to
+when you picked?
+
+## What does the BigQuery "EU" location actually mean?
+
+It means a multi-region, and your data lives in just one of two places inside
+it. Google's documentation says data in the EU multi-region is only stored in
+europe-west1 (Belgium) or europe-west4 (the Netherlands), and that BigQuery
+decides which one automatically
+([BigQuery locations](https://cloud.google.com/bigquery/docs/locations)).
+You do not get to choose. You also do not get Frankfurt, Paris or Madrid
+from that setting, even though all three are EU cities.
+
+For most companies that is fine. "Inside the EU, in one of two EU countries"
+satisfies the usual contract line. It stops being fine when a client or a
+sector regulator names a country, or when your own policy says Germany. Then
+the multi-region is the wrong tool and a single region is the right one.
+
+## Which single regions can I choose instead?
+
+BigQuery offers regions across the EU, including europe-west1 (Belgium),
+europe-west4 (Netherlands), europe-west3 (Frankfurt), europe-west9 (Paris)
+and europe-southwest1 (Madrid)
+([BigQuery locations](https://cloud.google.com/bigquery/docs/locations)).
+The list changes as Google opens regions, so check the page on the day you
+decide rather than trusting a blog post, this one included.
+
+A single region gives you control over the country. It costs you something
+too: the multi-region is not a safety net, and a single region is not either.
+Google is explicit that choosing a multi-region does not give you cross-region
+replication or protection from a regional outage
+([cross-region dataset replication](https://cloud.google.com/bigquery/docs/data-replication)).
+Your data sits in one region inside it. If you want a second copy somewhere
+else, that is a feature you turn on, with a read-only secondary replica in a
+region you name.
+
+## Can I change the location later?
+
+No. After you create a dataset, its location cannot be changed
+([BigQuery locations](https://cloud.google.com/bigquery/docs/locations)). The
+usual fix is to create a new dataset in the right place and copy the data
+across. For a small team that is a weekend of work. For a platform with
+dozens of datasets, scheduled queries, views and dashboards pointing at them,
+it is a project with a name and a budget.
+
+That is the real reason to decide early. Residency is not hard. Changing your
+mind about residency is.
+
+## What breaks when my datasets sit in different locations?
+
+Queries stop working across the gap. A query job runs in one location, and
+datasets in other locations are not visible to it. The classic symptom is the
+error that says a dataset was "not found in location"
+([a typical write-up of the error](https://oneuptime.com/blog/post/2026-08-27-fix-bigquery-dataset-not-found-location-us/markdown)),
+when the dataset plainly exists. It exists. It is just somewhere else.
+
+<BigQueryLocationLock />
+
+This bites in three ordinary ways. A team creates its first dataset in the
+default US location by accident, then adds an EU one and wonders why the join
+fails. An export lands in a Cloud Storage bucket in one region while the
+dataset reading it sits in another. Or two projects, set up by two different
+people, quietly pick two different locations.
+
+Two settings help. You can pin a project default with an
+`ALTER PROJECT` statement that sets `default_location`, so new datasets stop
+landing in the wrong place, and you can set the location explicitly on
+automated jobs instead of letting BigQuery guess. Google has also been
+previewing "global queries", which can reference data across locations, but
+you have to enable them and they copy remote data to a primary location, so
+read the residency consequences before you switch that on.
+
+## What does the EU setting still not cover?
+
+Three things, and they are the honest limits of "we picked the EU".
+
+First, a location is about storage and processing, not about who the provider
+answers to. A US-headquartered provider running an EU region is still a
+US-headquartered provider, which is the whole subject of
+[the sovereignty post](/work/2026-09-eu-region-not-sovereignty).
+
+Second, the location of a dataset says nothing about where you send data
+afterwards. A dashboard tool, an export to a spreadsheet, an AI service
+called from a query: each is its own transfer, with its own location, and
+each needs its own answer. If you use BigQuery next to AI services, check the
+region of each one separately. I walk through that on the AI side in
+[the EU-hosted LLM post](/work/2026-09-eu-hosted-llm-menu).
+
+Third, GDPR itself does not demand EU-only storage. It demands a lawful basis
+for transfers outside the EEA. Residency requirements usually come from a
+contract, a sector rule or company policy. Find out which of those you are
+actually answering to before you pay for stricter than you need.
+
+## So which location should I pick?
+
+Here is the short version I give small teams.
+
+- **Nobody has named a country.** Use the EU multi-region. It is simple, and
+  "stored in Belgium or the Netherlands" is a defensible sentence.
+- **A contract, regulator or policy names a country.** Use that single region,
+  from day one, in every environment.
+- **Everything sits in one place already.** Set the project default location
+  now so the next dataset does not drift.
+- **Some data is already in the wrong place.** Move it while the platform is
+  small. It only gets harder.
+
+Then write the decision down in one line, in the README of the repo that
+creates your datasets. Future you will want to know it was a choice and not
+an accident.
+
+If you are not sure which of those four describes your company, or what your
+contracts actually require, that is exactly the sort of question to bring to
+a first call. I can compare it to the platform you have and tell you whether
+the location is fine or needs fixing. If you are still choosing a platform,
+[the Fabric versus BigQuery comparison](/work/2026-09-fabric-vs-bigquery) is
+the place to start. Ask any question you like in the free 30 minutes; you leave with an answer or
+a clear next step. The platform side of this is what
+[my lakehouse architecture work](/services/lakehouse-architecture) covers.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6)
