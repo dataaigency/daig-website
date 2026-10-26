@@ -667,3 +667,44 @@ export function AgentIncidentFork() {
     </FlowPanel>
   )
 }
+
+/** Same prompt change, two outcomes. Checked by eye on three tries, the
+ *  regression ships and a customer finds it. Run against a small saved set of
+ *  real failures, one case goes red before release and the fix is small. */
+export function EvalSetFork() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  return (
+    <FlowPanel
+      caption="Same prompt change, two outcomes. Checked by eye on three tries, the regression ships and a customer finds it. Run against thirty saved cases, one goes red before release and the fix is small."
+      minWidth={780}
+    >
+      <svg ref={ref} viewBox="0 0 940 340" role="img" aria-label="A prompt change forks into two branches. Upper branch: checked by eye on three tries, it looks fine, ships, and a customer finds the regression. Lower branch: run against thirty saved cases built from real failures, one case fails before release and the fix is small." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="es-arrow" />
+
+        <path id="es-e1" d="M 155 139 L 183 139" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#es-arrow)" />
+        <FNode x={15} y={112} w={140} h={54} label="Prompt change" />
+        <FNode x={185} y={112} w={230} h={54} label="Time to release" sub="how do you know it works?" />
+        <EdgeLabel x={169} y={118} text="tweak" />
+
+        <path id="es-fa" d="M 415 139 C 430 100, 420 70, 445 54" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#es-arrow)" />
+        <path id="es-e2" d="M 635 54 L 663 54" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#es-arrow)" />
+        <FNode x={445} y={30} w={190} h={48} label="Three tries by eye" sub="looks fine" stroke={FK.AMBER} />
+        <FNode x={665} y={30} w={180} h={48} label="Customer finds it" sub="old bug is back" stroke={FK.AMBER} />
+        <text x={428} y={88} fontSize={9.5} letterSpacing={0.8} fill={FK.AMBER} fontFamily="var(--font-mono)" textAnchor="start">VIBES</text>
+
+        <path id="es-fb" d="M 415 139 C 430 180, 420 210, 445 252" fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#es-arrow)" />
+        <path id="es-e3" d="M 635 252 L 663 252" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#es-arrow)" />
+        <FNode x={445} y={228} w={190} h={48} label="30 saved cases" sub="from real failures" stroke={FK.FLASH} />
+        <FNode x={665} y={228} w={180} h={48} label="One goes red" sub="fixed before release" stroke={FK.FLASH} />
+        <text x={428} y={198} fontSize={9.5} letterSpacing={0.8} fill={FK.FLASH} fontFamily="var(--font-mono)" textAnchor="start">EVAL SET</text>
+
+        <Dot path="es-e1" dur={1.4} begin={0} />
+        <Dot path="es-fa" dur={1.8} begin={0.8} color={FK.AMBER} />
+        <Dot path="es-e2" dur={1.2} begin={2} color={FK.AMBER} />
+        <Dot path="es-fb" dur={1.8} begin={0.8} />
+        <Dot path="es-e3" dur={1.2} begin={2} />
+      </svg>
+    </FlowPanel>
+  )
+}
