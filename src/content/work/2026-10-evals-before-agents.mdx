@@ -1,0 +1,106 @@
+export const meta = {
+  title: 'Evals before agents: how you know your AI feature actually works',
+  date: '2026-10-26',
+  tags: ['ai evaluation', 'llm', 'ai agents'],
+  lang: 'en',
+  summary: 'You do not need a platform to test an AI feature. You need 20 to 50 real failures saved as test cases, a grader for each, and the habit of running them before every change. Here is the small version that works.',
+}
+
+import { EvalSetFork } from '../../components/flows/blog/BlogFlows'
+
+Most teams test an AI feature the way you test a new coffee machine. Press
+the button three times, taste it, say "seems fine". That works until you
+change something. Then you are tasting again, and you cannot taste the thing
+that quietly broke.
+
+An eval is the grown-up version of that taste test, written down so it can be
+repeated. It is smaller and less scary than the tooling around it suggests.
+
+## What is an eval, in plain words?
+
+A saved list of questions or tasks, each with a clear way to say pass or fail,
+that you run every time you change the prompt, the model, the data or the
+tools. That is all. If you have ever kept a spreadsheet of "things that broke
+last time", you have the seed of one.
+
+Nothing in it needs a vendor. A spreadsheet and a script are enough to start.
+
+## How many test cases do you need?
+
+Fewer than you think. Anthropic's engineering team, writing about how they
+evaluate agents, says that "20-50 simple tasks drawn from real failures is a
+great start"
+([Anthropic](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)).
+Early changes tend to have big effects, so a small set shows them.
+
+Where do the cases come from? Not from your imagination. From your own
+history:
+
+- the checks someone already runs by hand before each release
+- bug reports and support tickets, ranked by how much they hurt a user
+- the things the feature must refuse to do, not only what it must do
+
+That last one matters more than it looks. The same write-up warns that
+one-sided evals produce one-sided agents: test only "should search" and you
+get an agent that searches for everything.
+
+One European note. If a case comes from a real customer message, strip the
+personal data before it goes into a shared test file. A test set that quietly
+becomes a copy of customer data is a GDPR problem you built for yourself.
+
+<EvalSetFork />
+
+## How do you grade an answer without reading every one?
+
+Use the cheapest grader that is honest, in this order.
+
+1. **Code.** Did the output contain the right order number? Did the database
+   row actually change? Fast, free, repeatable. Brittle on anything open-ended.
+2. **A second model as judge.** For answers where wording varies, a model
+   scores against a written rubric. Flexible, but it needs calibrating against
+   human judgement, and it is not deterministic.
+3. **A person.** Slow and costly, and the gold standard. Use it to spot-check
+   and to calibrate the model judge, not to grade everything.
+
+Anthropic's advice is to prefer deterministic graders where you can and add
+model graders only where you must. Two more rules from the same source save a
+lot of pain. Grade what the agent produced, not the exact path it took,
+because agents find valid routes you did not plan. And a good task is one
+where two domain experts would independently reach the same verdict. If your
+own team disagrees on pass or fail, the task is not ready.
+
+## What does a bad result tell you?
+
+Read the transcripts, not just the score. A pass rate near zero across many
+runs usually means a broken test or grader, not a hopeless agent. A pass rate
+near 100 percent means the set has done its job and now works as a regression
+guard. Time to add harder cases, drawn from the new failures.
+
+## Why do evals come before agents, not after?
+
+Because an agent multiplies the cost of not knowing. A chatbot that is wrong
+gives one bad answer. An agent that is wrong acts on it, across several steps,
+with real data. Gartner expects more than 40% of enterprise agents to be
+demoted or switched off by 2027 over governance gaps found only after
+incidents
+([Gartner](https://www.gartner.com/en/newsroom/press-releases/2026-05-26-gartner-says-applying-uniform-governance-across-ai-agents-will-lead-to-enterprise-ai-agent-failure)).
+An eval set will not fix that alone. Logging and identity matter too, as I
+wrote in [the agents and governed data post](/work/2026-09-agents-need-governed-data).
+But it is the cheapest way to find out a change broke something before a
+customer does.
+
+It also pairs with grounding. If your assistant answers from your own
+documents, [check what it retrieves](/work/2026-08-rag-sheet-music) and put
+those cases in the set first.
+
+## Where do you start on Monday?
+
+Pick one AI feature. Open your last month of complaints. Write down 20 of
+them as cases, with a pass rule each. Run them by script before the next
+change. That is an afternoon, and it turns "seems fine" into something you can
+defend.
+
+If you want a second pair of eyes on the set, or on what sits underneath the
+feature, that is what [the AI governance and LLMOps work](/services/ai-governance-llmops)
+covers. Book a free intake call, ask any question, and you will leave the 30
+minutes with an answer or a clear next step.
