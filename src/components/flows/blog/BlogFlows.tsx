@@ -667,3 +667,53 @@ export function AgentIncidentFork() {
     </FlowPanel>
   )
 }
+
+/** Power BI and GDPR: Microsoft's part ends at the service boundary; the three
+ *  exits that decide whether personal data stays controlled are the buyer's. */
+export function PowerBiGdprHandoff() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  const mainY = 130
+  const mainH = 54
+  const mid = mainY + mainH / 2
+  const rows = [
+    { y: 20, mid: 44, stroke: FK.AMBER, a: 'Publish to web', as: 'public link, no sign-in', b: 'Anyone can open it', bs: 'no audit of viewers', tag: 'tenant setting: off' },
+    { y: 130, mid: 154, stroke: FK.AMBER, a: 'Export to Excel', as: 'a copy leaves the service', b: 'Lives in inboxes', bs: 'outside your controls', tag: 'limit by group' },
+    { y: 240, mid: 264, stroke: FK.FLASH, a: 'Named seat + row filter', as: 'sign-in, row-level security', b: 'Each reader sees their rows', bs: 'access you can show', tag: 'your design' },
+  ]
+  return (
+    <FlowPanel
+      caption="Microsoft's side of the GDPR handshake ends at the service boundary: where the data sits and how it is processed. What happens once a report leaves the dataset is three settings you own, and two of them are routes for personal data to walk out."
+      minWidth={900}
+    >
+      <svg ref={ref} viewBox="0 0 1040 320" role="img" aria-label="Personal data flows into the Power BI service in an EU region, where Microsoft acts as processor under its data protection addendum. From there it forks three ways, all the customer's responsibility. Publish to web creates a public link anyone can open with no sign-in. Export to Excel puts a copy outside the service. A named seat with row-level security lets each reader see only their own rows." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="pg-arrow" />
+
+        <path id="pg-e1" d={`M 160 ${mid} L 188 ${mid}`} fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pg-arrow)" />
+        <FNode x={10} y={mainY} w={150} h={mainH} label="Personal data" sub="customers, staff" />
+        <FNode x={190} y={mainY} w={200} h={mainH} label="Power BI service" sub="EU region, processor" />
+        <text x={290} y={mainY + mainH + 30} fontSize={9.5} letterSpacing={0.8} fill={FK.SUB} fontFamily="var(--font-mono)" textAnchor="middle">MICROSOFT'S PART ENDS HERE</text>
+
+        {rows.map((r, i) => (
+          <g key={i}>
+            <path id={`pg-f${i}`} d={`M 390 ${mid} C 410 ${mid}, 405 ${r.mid}, 430 ${r.mid}`} fill="none" stroke={r.stroke} strokeWidth={1.5} markerEnd="url(#pg-arrow)" />
+            <path id={`pg-g${i}`} d={`M 640 ${r.mid} L 678 ${r.mid}`} fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pg-arrow)" />
+            <FNode x={432} y={r.y} w={208} h={48} label={r.a} sub={r.as} stroke={r.stroke} />
+            <FNode x={680} y={r.y} w={190} h={48} label={r.b} sub={r.bs} stroke={r.stroke} />
+            {r.stroke === FK.AMBER ? amberTag(885, r.mid + 4, r.tag, 'start') : (
+              <text x={899} y={r.mid + 4} fontSize={10.5} letterSpacing={0.8} fill={FK.FLASH} fontFamily="var(--font-mono)" textAnchor="start">{r.tag.toUpperCase()}</text>
+            )}
+          </g>
+        ))}
+
+        <Dot path="pg-e1" dur={1.6} begin={0} />
+        <Dot path="pg-f0" dur={1.8} begin={1.2} color={FK.AMBER} />
+        <Dot path="pg-f1" dur={1.8} begin={1.2} color={FK.AMBER} />
+        <Dot path="pg-f2" dur={1.8} begin={1.2} />
+        <Dot path="pg-g0" dur={1.2} begin={2.6} color={FK.AMBER} />
+        <Dot path="pg-g1" dur={1.2} begin={2.6} color={FK.AMBER} />
+        <Dot path="pg-g2" dur={1.2} begin={2.6} />
+      </svg>
+    </FlowPanel>
+  )
+}
