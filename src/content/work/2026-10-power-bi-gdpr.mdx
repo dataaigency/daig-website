@@ -1,0 +1,126 @@
+export const meta = {
+  title: 'Is Power BI GDPR compliant? The honest configuration answer',
+  date: '2026-10-28',
+  tags: ['power bi', 'gdpr', 'governance', 'microsoft'],
+  lang: 'en',
+  summary: "Power BI is a tool, not a verdict. What Microsoft covers as your processor, what stays your job, and the three settings that decide whether personal data stays under control.",
+}
+
+import { PowerBiGdprHandoff } from '../../components/flows/blog/BlogFlows'
+
+"Is Power BI GDPR compliant?" is a bit like asking whether a kitchen is
+hygienic. The kitchen can be excellent. What matters is what you do in it.
+
+So the honest answer is: Power BI can be used in a GDPR-compliant way, and
+whether yours is depends on settings and habits that are yours, not
+Microsoft's. Here is the split.
+
+## What does Microsoft cover?
+
+Under GDPR you are the controller of your customers' and staff's personal data.
+Microsoft is your processor. The law says a controller may only use processors
+that give sufficient guarantees, and Microsoft presents its data protection
+addendum as exactly that for its commercial customers. The GDPR terms sit as an
+attachment to it and commit Microsoft to the processor duties in Article 28
+([Microsoft's GDPR commitments](https://learn.microsoft.com/en-us/legal/gdpr)).
+
+Be aware that this is not universally accepted. In 2022 the German Data
+Protection Conference concluded the addendum did not meet the requirements of
+Article 28(3), and in 2023 seven German supervisory authorities published
+guidance for controllers on using it
+([ReuschLaw's summary](https://www.reuschlaw.de/en/news/guidelines-for-microsoft-365/)).
+That debate is about Microsoft 365 as a whole, not Power BI alone. It does mean
+a careful German or Dutch customer should read the current terms, not just
+trust a badge.
+
+So the contract exists. It is the starting line, not the finish.
+
+## Where does Power BI keep my data?
+
+In the region your tenant lives in. Microsoft also runs an EU Data Boundary, a
+commitment to store and process customer data for its enterprise services inside
+the EU, with documented exceptions. Microsoft is explicit that this is a
+contractual commitment, not a legal jurisdiction
+([Microsoft Power Platform docs](https://learn.microsoft.com/en-us/power-platform/admin/macro-regions)).
+
+Two wrinkles worth knowing. If you need workspaces placed in a specific other
+region, that is Multi-Geo, which is a capacity feature, and the capacity's
+region cannot be changed after creation; you create a new one and move the
+workspaces
+([Multi-Geo for Power BI Embedded](https://learn.microsoft.com/en-us/Power-Bi/developer/embedded/embedded-multi-geo)).
+Microsoft's Microsoft 365 documentation also says tenants that bought Multi-Geo
+fall outside the EU Data Boundary scope, so check which commitment you actually
+want before you buy it
+([EU Data Boundary for Microsoft 365](https://learn.microsoft.com/en-us/microsoft-365/enterprise/m365-dr-eu-data-boundary?view=o365-worldwide)).
+
+Residency is also only half of sovereignty. Where the bytes sit does not decide
+whose law can reach them, which I explained in
+[the EU region post](/work/2026-09-eu-region-not-sovereignty).
+
+## What about Copilot and the AI features?
+
+Check the tenant setting. Microsoft's Power BI blog said in 2024 that capacities
+in the EU no longer need the cross-geography switch to use Copilot, with
+traffic staying inside the EU data boundary
+([Power BI blog](https://powerbi.microsoft.com/en-gb/blog/copilot-in-power-bi-soon-available-to-more-users-in-your-organization/)).
+The setting that allows processing outside your geography applies to customers
+whose capacity sits outside the EU and US
+([Fabric admin portal docs](https://learn.microsoft.com/en-us/fabric/admin/service-admin-portal-copilot)).
+I could not reach Microsoft's pages directly while writing this, so I am going
+off those summaries. Open the admin portal, find the Copilot section, and read
+what your tenant says today.
+
+## Which settings decide whether personal data stays controlled?
+
+Three, and they are all yours.
+
+<PowerBiGdprHandoff />
+
+**Publish to web.** This creates a public link that anyone can open with no
+sign-in, and there is no built-in audit of who looked. It lives in the tenant
+settings and can be off for everyone or limited to named groups. US government
+baselines say disable it unless the mission needs it
+([CISA's Power BI baseline](https://cisa.gov/resources-tools/services/m365-power-bi)).
+A report with customer names behind a public link is a data breach waiting for
+someone to forward the URL.
+
+**Export.** Every export puts a copy of the data into a file, and a file is out
+of reach of everything Power BI does for you. Decide who may export, and let
+that be a group rather than "everyone".
+
+**Who sees which rows.** Named seats plus row-level security means the sales
+lead in Ghent sees Ghent. That is both better GDPR practice (data minimisation)
+and a better dashboard.
+
+None of these three are a Microsoft failing. They are the part of the handshake
+the processor cannot do for you, because only you know who should see what.
+
+## What does a sane Power BI GDPR setup look like?
+
+- The Microsoft data protection addendum is accepted, and you know where your
+  tenant's region is.
+- Publish to web is off, or limited to a short list of people.
+- Export is limited to a named group.
+- Reports containing personal data use row-level security and named seats.
+- Personal data is minimised upstream: if a dashboard needs a region, do not
+  load the customer's address.
+- Your records of processing mention Power BI, and you have decided whether the
+  AI features are on.
+
+Notice what is not on the list: a certificate. Certifications describe how a
+vendor runs its side. Your side is configuration plus a decision per report.
+If you are weighing the wider platform, the same logic applies to Fabric; I walk
+through how its pricing shapes that choice in
+[the Fabric pricing post](/work/2026-08-fabric-f2-pricing).
+
+I am not a lawyer and this is not legal advice. For anything high stakes, your
+data protection officer or counsel has the final word.
+
+## What next?
+
+If you would like a second pair of eyes on your tenant settings and how
+personal data moves through your reports, that is the sort of thing I do under
+[AI governance and data work](/services/ai-governance-llmops). Ask any question
+you like in the free 30 minutes; you leave with an answer or a clear next step.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6)
