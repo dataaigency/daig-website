@@ -667,3 +667,49 @@ export function AgentIncidentFork() {
     </FlowPanel>
   )
 }
+
+/** Fabric and GDPR: what the platform side covers, and what stays the buyer's job. */
+export function FabricGdprSplit() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  const lane = (id: string, y: number, color: string) => [235, 475].map((x, i) => (
+    <path key={`${id}${i}`} id={`${id}${i}`} d={`M ${x + 210} ${y} L ${x + 238} ${y}`} fill="none" stroke={color} strokeWidth={1.5} markerEnd="url(#fg-arrow)" />
+  ))
+  return (
+    <FlowPanel
+      caption="Personal data enters Fabric and splits two ways. Microsoft's part is the platform: where capacity runs and the audited controls around it. Your part is everything about the data itself, including erasing it, which a plain delete does not finish."
+      minWidth={860}
+    >
+      <svg ref={ref} viewBox="0 0 1020 310" role="img" aria-label="Personal data enters Fabric and splits into two lanes. Microsoft's part: a capacity in an EU region, an audited platform with SOC 2 and ISO 27001 reports, and tenant metadata, some of which stays in the home region. Your part: what you load, who can see it, and erasure on request, where old table versions survive a plain delete until you vacuum them." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="fg-arrow" />
+
+        <text x={235} y={22} fontSize={10.5} letterSpacing={1} fill={FK.SUB} fontFamily="var(--font-mono)">MICROSOFT'S PART: THE PLATFORM</text>
+        <text x={235} y={205} fontSize={10.5} letterSpacing={1} fill={FK.SUB} fontFamily="var(--font-mono)">YOUR PART: THE DATA</text>
+        <line x1={215} y1={165} x2={1005} y2={165} stroke={FK.NODE_STROKE} strokeWidth={1.2} strokeDasharray="5 5" />
+
+        <FNode x={15} y={138} w={150} h={54} label="Personal data" sub="customers, staff" />
+        <path id="fg-up" d="M 165 160 C 200 140, 200 70, 233 60" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#fg-arrow)" />
+        <path id="fg-dn" d="M 165 170 C 200 190, 200 235, 233 240" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#fg-arrow)" />
+
+        {lane('fg-t', 60, FK.EDGE)}
+        <FNode x={235} y={36} w={210} h={48} label="Capacity in an EU region" sub="storage and compute stay put" />
+        <FNode x={475} y={36} w={210} h={48} label="Audited platform" sub="SOC 2, ISO 27001, 27018" />
+        <FNode x={715} y={36} w={210} h={48} label="Tenant metadata" sub="some stays in home region" stroke={FK.AMBER} />
+        {amberTag(820, 90, 'check what stays home')}
+
+        {lane('fg-b', 240, FK.EDGE)}
+        <FNode x={235} y={216} w={210} h={48} label="What you load" sub="minimise, document why" />
+        <FNode x={475} y={216} w={210} h={48} label="Who can see it" sub="roles, labels, retention" />
+        <FNode x={715} y={216} w={210} h={48} label="Erase on request" sub="delete, then vacuum" stroke={FK.AMBER} />
+        {amberTag(820, 270, 'old versions survive a delete')}
+
+        <Dot path="fg-up" dur={1.6} begin={0} />
+        <Dot path="fg-dn" dur={1.6} begin={0} />
+        <Dot path="fg-t0" dur={1.2} begin={1.4} />
+        <Dot path="fg-t1" dur={1.2} begin={2.4} color={FK.AMBER} />
+        <Dot path="fg-b0" dur={1.2} begin={1.4} />
+        <Dot path="fg-b1" dur={1.2} begin={2.4} color={FK.AMBER} />
+      </svg>
+    </FlowPanel>
+  )
+}
