@@ -1,0 +1,118 @@
+export const meta = {
+  title: 'Microsoft Fabric and GDPR: what the certifications cover, and what stays your job',
+  date: '2026-11-04',
+  tags: ['fabric', 'gdpr', 'compliance'],
+  lang: 'en',
+  summary: 'Fabric ships with audit reports and an EU region option. That covers the platform. Here is the part of GDPR that stays with you: what you load, who sees it, and how you erase it.',
+}
+
+import { FabricGdprSplit } from '../../components/flows/blog/BlogFlows'
+
+"Is Fabric GDPR compliant?" is the question I hear most, and it is slightly
+the wrong question. A platform cannot be compliant on your behalf. GDPR
+attaches to what you do with personal data, and Fabric is the place you do it.
+
+The better question is a split one. What does Microsoft cover, what does it
+leave with you, and where does the line sit? Here is my working answer.
+
+<FabricGdprSplit />
+
+## What does Microsoft actually cover?
+
+The platform side. Microsoft publishes SOC 1, SOC 2 and SOC 3 reports for
+Fabric ([Fabric blog](https://blog.fabric.microsoft.com/en-us/blog/author/Rick%20Xu)),
+and it has announced ISO/IEC 27001, 27017, 27018 and 27701 certificates
+([Fabric community update](https://community.fabric.microsoft.com/t5/Fabric-Updates-Blog/Updated-Microsoft-Fabric-compliance-offerings/ba-p/5172035)).
+Those are independent audits of how the service is run: access control,
+change management, incident handling. Useful, and worth attaching to your
+vendor file.
+
+It also covers where capacity runs. You pick a region when you create a
+capacity, and the workspaces under it keep their content there. The region
+stays fixed after creation
+([Microsoft's multi-geo docs](https://learn.microsoft.com/en-us/fabric/admin/service-admin-premium-multi-geo)).
+I went through what residency does and does not buy you in
+[the sovereignty post](/work/2026-09-eu-region-not-sovereignty), so I will not
+repeat it here.
+
+## What do the certificates not tell you?
+
+Three things, and they are the ones auditors and customers actually ask about.
+
+A certificate is not a statement about your use. SOC 2 tells you Microsoft
+runs the service in a controlled way. It says nothing about whether you had
+a lawful basis to load your customer table into it.
+
+A certificate is not a map of your data. Even with a chosen region, the
+multi-geo docs say some tenant metadata stays in the tenant's home region,
+and detailed semantic model metadata from scanning is always stored there.
+That is usually fine, but "all in the EU" is a sentence to confirm against
+the page, not assume. Check your home region in the About dialog of the
+Fabric portal
+([how to find it](https://learn.microsoft.com/en-us/fabric/admin/find-fabric-home-region)).
+
+And moving later is not instant. When you move content between capacities in
+different regions, the source data may remain in the old region for up to 30
+days (same multi-geo page). Pick the region once and carefully.
+
+## What is still your job?
+
+Everything about the data itself. In my projects it comes down to three
+questions.
+
+**What did you load, and why?** Under GDPR you need a lawful basis and a
+purpose for each use of personal data. A lakehouse invites "load everything,
+decide later". That is the habit to break. Load what a named report needs,
+write down why, and keep that note with the pipeline. It also makes the
+record of processing activities nearly free to produce.
+
+**Who can see it?** Workspace roles, row-level security and sensitivity
+labels are your configuration, not Microsoft's. The most common finding in a
+first look at a stack is a workspace everyone in the company can open, with
+a raw customer table in it. The certificate has nothing to say about that.
+
+**Can you actually erase it?** This is the one that surprises people. Fabric
+tables are stored as Delta tables, and a Delta table keeps older versions of
+its files so you can time travel. A plain DELETE removes the rows from the
+current version. The old files stay until a vacuum removes them
+([the Delta Lake mechanics, from Databricks' docs](https://docs.databricks.com/gcp/security/privacy/gdpr-delta)).
+So an erasure request is a two step job: delete, then vacuum within a period
+you can defend, and handle backups and downstream copies on purpose.
+Shortening retention to make erasure real also removes your ability to
+restore, which is a business decision to take with whoever owns the risk. I
+could not find a Microsoft page that walks through this for Fabric
+specifically, so test it on your own tables before you promise a deadline to
+a data subject.
+
+## What about Copilot and the AI features?
+
+Treat them as a separate switch. Microsoft's documentation describes tenant
+settings that control whether data sent to Azure OpenAI may be processed
+outside your capacity's region, and Microsoft's blog says capacities inside
+the EU data boundary do not need to enable that cross-geo setting, so EU
+capacity data is not stored or processed outside the boundary
+([Fabric data agent settings](https://learn.microsoft.com/en-ie/Fabric/data-science/data-agent-tenant-settings)).
+Read your tenant's own settings, because wording and defaults change. If a
+feature is on and nobody remembers switching it on, that is the finding.
+
+## A checklist you can use this week
+
+1. Write down your tenant home region and each capacity region.
+2. Collect Microsoft's data processing terms and audit reports in one folder.
+3. List the personal data in Fabric, with a purpose beside each table.
+4. Review who can open each workspace. Remove "everyone".
+5. Run a test erasure on a copy of one table: delete, vacuum, confirm.
+6. Check the Copilot and cross-geo tenant settings and note the result.
+
+None of this needs a bigger platform. It needs an afternoon and someone to
+own it. If you are still weighing the price side, I covered what an EU-region
+capacity costs in [the F2 pricing post](/work/2026-08-fabric-f2-pricing), and the
+design work behind clean, deletable tables is what
+[my lakehouse architecture service](/services/lakehouse-architecture) is for.
+
+Send me your setup, or just your biggest worry about it. Ask any question you
+like in the free 30 minutes; you leave with an answer or a clear next step.
+This is general information, not legal advice, so for contract questions
+bring your lawyer too.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6)
