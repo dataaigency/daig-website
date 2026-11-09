@@ -667,3 +667,47 @@ export function AgentIncidentFork() {
     </FlowPanel>
   )
 }
+
+/** A prompt to Gemini on Vertex AI passes three settings you own before it is EU-resident and unretained. */
+export function VertexGdprGates() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  const gates = [
+    { x: 205, label: 'Endpoint', sub: 'choose the EU one', flag: 'global: any location' },
+    { x: 415, label: 'Retention', sub: 'caching off, exception', flag: 'cache and abuse logs' },
+    { x: 625, label: 'Grounding', sub: 'skip plain Search grounding', flag: 'search logs kept' },
+  ]
+  const w = 170
+  const y = 40
+  const mid = y + 27
+  return (
+    <FlowPanel
+      caption="A signed agreement is only the start. A prompt to Gemini on Vertex AI passes three settings that are yours to get right: which endpoint it hits, what gets retained, and whether it touches Search grounding. Leave a default in place and the prompt leaks at that gate."
+      minWidth={780}
+    >
+      <svg ref={ref} viewBox="0 0 1020 190" role="img" aria-label="A prompt travels left to right through three gates: endpoint, retention and grounding. Under each gate an amber tag names the default that leaks: a global endpoint can process anywhere, caching and abuse logs keep prompts, and Google Search grounding stores search data. The prompt ends at a green node: processed in the EU, nothing kept." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="vg-arrow" />
+        <path id="vg-e0" d={`M 150 ${mid} L ${gates[0].x - 3} ${mid}`} fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#vg-arrow)" />
+        {gates.slice(0, -1).map((g, i) => (
+          <path key={i} id={`vg-e${i + 1}`} d={`M ${g.x + w} ${mid} L ${gates[i + 1].x - 3} ${mid}`} fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#vg-arrow)" />
+        ))}
+        <path id="vg-e4" d={`M ${gates[2].x + w} ${mid} L 827 ${mid}`} fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#vg-arrow)" />
+        <FNode x={20} y={y} w={130} h={54} label="Your prompt" sub="with personal data" />
+        {gates.map((g) => (
+          <g key={g.label}>
+            <FNode x={g.x} y={y} w={w} h={54} label={g.label} sub={g.sub} />
+            {drop(g.x + w / 2, y + 54, y + 90)}
+            {amberTag(g.x + w / 2, y + 94, g.flag)}
+          </g>
+        ))}
+        <FNode x={830} y={y} w={170} h={54} label="EU-processed, not kept" sub="the goal" stroke={FK.FLASH} />
+        <EdgeLabel x={178} y={y + 10} text="sent" />
+        <Dot path="vg-e0" dur={1.2} begin={0} />
+        <Dot path="vg-e1" dur={1.2} begin={1} />
+        <Dot path="vg-e2" dur={1.2} begin={2} />
+        <Dot path="vg-e3" dur={1.2} begin={3} />
+        <Dot path="vg-e4" dur={1.2} begin={4} />
+      </svg>
+    </FlowPanel>
+  )
+}

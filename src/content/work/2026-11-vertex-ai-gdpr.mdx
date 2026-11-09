@@ -1,0 +1,117 @@
+export const meta = {
+  title: 'Is Vertex AI GDPR compliant? The three settings that decide it',
+  date: '2026-11-09',
+  tags: ['vertex ai', 'gemini', 'gdpr', 'google cloud'],
+  lang: 'en',
+  summary: 'Vertex AI gives you the contract and the EU endpoints. It does not give you zero retention or EU-only processing by default. Here are the three settings that decide whether a Gemini prompt with personal data stays inside your GDPR story.',
+}
+
+import { VertexGdprGates } from '../../components/flows/blog/BlogFlows'
+
+Vertex AI can be used in a GDPR-compliant way. It is not compliant by
+default. The agreement is the easy part. What decides it is three settings
+that are yours to get right: which endpoint your prompts hit, what gets
+retained, and whether you touch Search grounding.
+
+A note before we start. Google has been renaming this product line, and the
+documentation now appears under "Gemini Enterprise Agent Platform" as well as
+Vertex AI. I use the old name because it is what people still search for.
+
+## What does Google actually give you on the paper side?
+
+The contract piece is solid. Under the Google Cloud terms, the Cloud Data
+Processing Addendum applies, which makes Google your processor and you the
+controller. That is the Article 28 relationship GDPR asks for
+([Google Cloud terms](https://cloud.google.com/terms/data-processing-addendum)).
+
+Google also states that it does not use your data to train its models
+without your permission or instruction, and says so in its Training
+Restriction terms
+([Google Cloud generative AI privacy whitepaper](https://services.google.com/fh/files/misc/genai_privacy_google_cloud.pdf)).
+
+That is the same shape of answer as for the other big vendors: the paper is
+fine, and the configuration is where it goes wrong.
+
+## Does an EU region keep my prompts in the EU?
+
+Only if you pick an EU endpoint. Google's own wording is that requests sent
+to a global endpoint may be processed in any Google Cloud location around the
+world. The EU multi-region endpoint keeps machine learning processing in EU
+member states instead, and that area does not include the UK
+([Vertex AI data governance](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/data-governance)).
+
+So the first gate is boring and easy to miss. A team copies a code sample,
+the sample points at a global endpoint, and the prompt with a customer's name
+in it is processed somewhere you never chose. Nothing is broken. Nothing
+warns you. The fix is a line of config, and a check in code review.
+
+Residency is also not sovereignty. A US company can still be compelled by US
+law whatever the server location. I covered that distinction in
+[An EU region is not sovereignty](/work/2026-09-eu-region-not-sovereignty),
+and it applies here as it does everywhere.
+
+## Does Vertex AI keep my prompts?
+
+By default, some data is kept for a limited time, and zero data retention is
+something you set up, not something you get. Google's documentation says that
+to reach zero data retention you must disable data caching. It also says
+that if you are in scope for prompt logging for abuse monitoring, you can
+request an exception
+([Vertex AI data governance](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/data-governance)).
+
+Read the scope part twice. Per that page, prompt logging for abuse
+monitoring applies to customers whose use of Google Cloud runs under the
+standard online terms and who do not have an invoiced billing account. If you
+buy through a reseller or on invoice terms, your situation can differ. This
+is a question for your Google contract, not for a blog post, and I would not
+guess.
+
+The practical lesson: "we are on Vertex, so nothing is stored" is not a
+sentence you can put in a DPIA. "We disabled caching and requested the abuse
+monitoring exception, and here is the date" is.
+
+## What about grounding with Google Search?
+
+This one is the sharp edge. Google's documentation says there is no way to
+disable storage of the related data when you use Grounding with Google
+Search, and it points to Web Grounding for Enterprise as the option for zero
+retention
+([Vertex AI data governance](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/data-governance)).
+
+Some third-party pages put a number on how long that data is kept. I could
+not match any of them to a Google page, so I am not quoting one. Look it up
+at the source when you write your records.
+
+The risk is a feature switch that undoes your careful setup. You turn on
+grounding to make answers fresher. A prompt containing personal data now
+leaves a trail you thought you had closed.
+
+<VertexGdprGates />
+
+## So what should you do on Monday?
+
+Six steps, in the order I would do them.
+
+1. Confirm the Cloud Data Processing Addendum is in your agreement, and
+   write down which entity signed.
+2. Point every call at an EU endpoint, and add a test that fails if a
+   global endpoint appears in config.
+3. Disable caching for workloads with personal data.
+4. Ask whether you are in scope for abuse monitoring logging, and if yes,
+   request the exception. Keep the confirmation.
+5. Keep Search grounding away from prompts with personal data, or use the
+   enterprise variant.
+6. Decide whether the use needs a DPIA. If prompts carry customer data at
+   scale, assume yes, and write the settings above into it.
+
+None of this is exotic. It is the same discipline as pinning a BigQuery
+dataset to a location. Choose once, on purpose, and record it.
+
+If you are weighing Gemini against the other models on the menu, the
+[EU-hosted LLM post](/work/2026-09-eu-hosted-llm-menu) lays out the options.
+And if you want a second pair of eyes on a setup before it ships, that is
+part of my [AI governance work](/services/ai-governance-llmops). Ask any
+question you like in the free 30 minutes; you leave with an answer or a clear
+next step.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6)
