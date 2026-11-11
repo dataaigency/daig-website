@@ -1,0 +1,151 @@
+export const meta = {
+  title: 'Which AI vendors already mark their output for you? An Article 50 check, three weeks out',
+  date: '2026-11-11',
+  tags: ['eu ai act', 'compliance', 'governance', 'llm'],
+  lang: 'en',
+  summary: 'On 2 December 2026 every generative AI feature in the EU has to mark its own output. OpenAI, Google and Anthropic now watermark some text, but how you call the model, and what your code does to the answer, decides whether that mark is yours too.',
+}
+
+import { MarkRouteChain } from '../../components/flows/blog/BlogFlows'
+
+Three weeks from today, on 2 December 2026, the last grace period in
+Article 50 of the AI Act closes. Generative AI features that were already
+live before 2 August now have to mark their output in a machine-readable
+way, like everything shipped since. I covered [what that deadline does and
+does not cover](/work/2026-09-article-50-marking-deadline) in September.
+Since then the big model vendors have moved, and the question I get most
+is a practical one: "our vendor watermarks now, so we're done, right?"
+
+Sometimes. It depends on the route.
+
+## Who actually has to mark the output?
+
+The provider of the AI system does, and if you built a model into a
+product of your own, that is very likely you. Article 50(2) puts the
+marking duty on whoever places the generative system on the market or
+puts it into service. Law firm readings of the final Code of Practice
+agree that a company which builds a third-party model into its own
+user-facing product becomes a provider for this purpose, and releasing
+something under an open-source licence does not exempt it from Article 50
+([Bird & Bird](https://www.twobirds.com/en/insights/2026/taking-the-eu-ai-act-to-practice-the-final-transparency-code-of-practice),
+[Stibbe](https://www.stibbe.com/publications-and-insights/water-marking-the-machine-making-ai-generated-content-detectable)).
+
+So the vendor's watermark is not a separate compliance stamp. It is a tool
+that can do your marking for you, if it makes it all the way to your user.
+
+## What changed in the last few weeks?
+
+Two of the three big US labs now mark text, and the third says it does
+through its API.
+
+- **OpenAI** announced its text watermark, called textGrain, on 5 October
+  2026. It switches on by default for ChatGPT and Codex users in the EU,
+  rolling out over several weeks. For the API it is opt-in on selected
+  models and off by default. Images from ChatGPT and the API carry C2PA
+  Content Credentials plus a SynthID watermark. The detector is not public;
+  approved researchers and organisations can apply
+  ([Cloud Security Alliance](https://labs.cloudsecurityalliance.org/research/csa-research-note-eu-ai-act-text-watermarking-20261009-csa-s/),
+  [The Rundown](https://www.therundown.ai/news/openai-textgrain-eu-chatgpt-codex-watermarks),
+  [OpenAI Help Center](https://help.openai.com/en/articles/8912793-provenance-signals-in-openai-generated-content)).
+- **Anthropic** applies its text watermark at the model level, worldwide,
+  across its own API and apps and, for supported models, through AWS,
+  Google Cloud and Microsoft Foundry. Its help centre says the Amazon
+  Bedrock rollout completes by 10 November, and older models are being
+  retrofitted. Detection is in private preview for eligible organisations,
+  including companies checking their own Claude output
+  ([Claude Help Center](https://support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content),
+  [Anthropic](https://www.anthropic.com/news/claude-text-watermark)).
+- **Google** marks Gemini app output with SynthID. For the Gemini API and
+  AI Studio, a Google staff member first said on the developer forum that
+  text was not watermarked, then corrected that in August 2026: it carries
+  SynthID. Researchers at ETH Zurich probed the APIs and also found Gemini
+  text watermarked. There is no public text detector, and I found no clear
+  statement yet for Gemini on Vertex AI
+  ([Google AI Developers Forum](https://discuss.ai.google.dev/t/does-gemini-api-text-output-carry-synthid-watermarking-gemini-2-5-flash-lite-gemini-3-1-flash-lite-eu-ai-act-art-50-2/177241),
+  [ETH Zurich SRI Lab](https://www.sri.inf.ethz.ch/blog/probing-synthid-gemini-apis)).
+
+All three signed the Commission's voluntary [Code of Practice on
+Transparency of AI-Generated
+Content](https://digital-strategy.ec.europa.eu/en/news/strong-backing-code-practice-transparency-ai-generated-content),
+published on 10 June 2026, along with Mistral, Meta, Microsoft and roughly
+190 organisations in total by the end of July.
+
+## Which vendors mark text, and where is the catch?
+
+| You build on | Text marked? | Where | The catch |
+| --- | --- | --- | --- |
+| Claude | Yes, by default | Anthropic API and apps, plus AWS, Google Cloud and Microsoft Foundry for supported models | Non-default sampling settings can weaken the mark on some models; detector is private preview |
+| OpenAI | EU ChatGPT and Codex by default; API opt-in | OpenAI's own products and API | API mark is off unless you turn it on; I found no documentation that it reaches Azure OpenAI yet |
+| Gemini | Yes, per Google staff | Gemini API and AI Studio | Vertex AI unconfirmed; no public detector |
+| Mistral | No documented text mark found | n/a | Signed the Code; check its current documentation before relying on it |
+| Open-weight model you host | Only what you add | Your infrastructure | The marking is yours to build |
+
+Status as of 11 November 2026. This is moving weekly, so check your vendor's
+own documentation the week you ship.
+
+## Why does the route matter as much as the model?
+
+Because the same model can be marked on one route and unmarked on
+another. OpenAI's mark is on by default in ChatGPT in the EU but off by
+default on the API, which is where your product lives. Claude's mark
+travels to the cloud partners because it sits in the model itself, but the
+rollout reached each partner on its own schedule. Gemini through AI Studio
+and Gemini through Vertex AI are not, for this question, the same thing.
+
+<MarkRouteChain />
+
+The third link is the one teams forget: your own code. Anthropic's own
+help page says heavy editing, paraphrasing, translation or mixing with
+other text can remove a detectable mark, and that very short passages leave
+too little text for a reliable signal. A support bot that drafts in English
+and translates to Dutch, or a pipeline that asks a second model to "make
+this friendlier", may be shipping text with no surviving mark at all.
+
+## Does short text need a mark?
+
+Less of one. The Code eases its text-marking commitments for very short
+text, under 200 tokens, where a statistical watermark is not reliable
+([Wilson Sonsini](https://www.wsgr.com/en/insights/eu-commission-publishes-ai-transparency-code-of-practice.html),
+[Freshfields](https://www.freshfields.com/en/our-thinking/blogs/technology-quotient/eu-ai-act-unpacked-33-the-final-code-of-practice-on-transparency-of-ai-generate-102n4yx)).
+That does not cancel the separate duty to tell people they are talking to
+an AI, which has applied since August. A chatbot of one-line answers still
+needs its disclosure line.
+
+## Can anyone check that the mark is really there?
+
+Not easily, and that is worth knowing before you lean on it. None of the
+three text detectors is open to the public today. A September 2026
+paper titled [Watermarks Without
+Verification](https://arxiv.org/abs/2609.09604) makes exactly that point:
+outsiders cannot currently verify the labs' text watermarking claims. For a
+small company this means your evidence is documentation, not a test you can
+run. Keep the vendor page you relied on, with its date, next to your
+feature list.
+
+## What should you do before 2 December?
+
+A short list, and most of it is an afternoon.
+
+1. **List every feature that generates text, images or audio for a user**,
+   with its launch date and the exact model and route it calls.
+2. **Match each one to the table above.** Direct Claude, Gemini via AI
+   Studio, or OpenAI with the API watermark switched on: probably covered
+   at the model. Anything else: assume the duty is yours.
+3. **Trace your own code.** Translation, rewriting, a second model pass, or
+   changed sampling settings can strip a mark. Note where they happen.
+4. **Fill the gaps** with your own marking: signed metadata where the format
+   allows it, logging where it does not. Text from an open-weight model needs
+   this most.
+5. **File the evidence.** Vendor documentation with dates, and the
+   disclosure line your users see.
+
+This is the same inventory that sits underneath [AI governance and
+LLMOps](/services/ai-governance-llmops) generally: knowing which AI runs
+where, on what. If you are also choosing between providers, the [EU-hosted
+LLM menu](/work/2026-09-eu-hosted-llm-menu) covers the residency side of the
+same decision.
+
+If you want a second pair of eyes on which of your features are covered by
+your vendor and which are not, [book a free intake
+call](https://calendar.app.google/F5mvmg12xMpF73fw6). Ask any question; you
+will leave the 30 minutes with an answer or a clear next step.

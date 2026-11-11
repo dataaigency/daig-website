@@ -667,3 +667,47 @@ export function AgentIncidentFork() {
     </FlowPanel>
   )
 }
+
+/** Article 50 vendor marks: the mark only counts if it survives every hop
+ *  from the model to the user. Any break puts the marking duty back on you. */
+export function MarkRouteChain() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  const y = 70
+  const h = 56
+  const nodes = [
+    { x: 15, w: 170, label: 'Model', sub: "vendor's mark, or none", flag: 'no mark built in' },
+    { x: 265, w: 180, label: 'Route', sub: 'direct API or cloud partner', flag: 'route not covered' },
+    { x: 525, w: 190, label: 'Your code', sub: 'rewrite, translate, sample', flag: 'edits strip it' },
+  ]
+  return (
+    <FlowPanel
+      caption="A vendor's watermark only does your Article 50 marking for you if it survives the whole trip: the model has to mark, the route you call it through has to carry the mark, and your own code must not rewrite, translate or resample the text away. Break any link and the marking duty is back on you."
+      minWidth={820}
+    >
+      <svg ref={ref} viewBox="0 0 1020 262" role="img" aria-label="Four nodes left to right: the model, the route you call it through, your own code, and the user. Text flows along them and reaches the user with the mark intact, shown in green. Under each of the first three an amber tag marks where the mark can be lost: the model has no mark built in, the route is not covered, or your edits strip it. A line underneath says any break puts the marking duty back on you." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="mrc-arrow" />
+        <path id="mrc-e1" d={`M 185 ${y + h / 2} L 263 ${y + h / 2}`} fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#mrc-arrow)" />
+        <path id="mrc-e2" d={`M 445 ${y + h / 2} L 523 ${y + h / 2}`} fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#mrc-arrow)" />
+        <path id="mrc-e3" d={`M 715 ${y + h / 2} L 798 ${y + h / 2}`} fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#mrc-arrow)" />
+        <EdgeLabel x={225} y={y + h / 2 - 8} text="calls" />
+        <EdgeLabel x={485} y={y + h / 2 - 8} text="returns" />
+        <EdgeLabel x={757} y={y + h / 2 - 8} text="ships" />
+        {nodes.map((n) => (
+          <g key={n.label}>
+            <FNode x={n.x} y={y} w={n.w} h={h} label={n.label} sub={n.sub} />
+            {drop(n.x + n.w / 2, y + h, y + h + 34)}
+            {amberTag(n.x + n.w / 2, y + h + 42, n.flag)}
+          </g>
+        ))}
+        <FNode x={800} y={y} w={205} h={h} label="Reaches the user" sub="mark intact, duty covered" stroke={FK.FLASH} />
+        <text x={20} y={30} fontSize={11} letterSpacing={1.6} fill={FK.SUB} fontFamily="var(--font-mono)" textAnchor="start">ONE CHAIN, THREE PLACES TO LOSE THE MARK</text>
+        <line x1={20} y1={214} x2={715} y2={214} stroke={FK.AMBER} strokeWidth={1.2} strokeDasharray="3 4" />
+        <text x={20} y={240} fontSize={10.5} letterSpacing={0.8} fill={FK.AMBER} fontFamily="var(--font-mono)" textAnchor="start">ANY BREAK: THE MARKING DUTY IS BACK ON YOU</text>
+        <Dot path="mrc-e1" dur={1.2} begin={0} />
+        <Dot path="mrc-e2" dur={1.2} begin={0.6} />
+        <Dot path="mrc-e3" dur={1.2} begin={1.2} />
+      </svg>
+    </FlowPanel>
+  )
+}
