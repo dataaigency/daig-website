@@ -1,0 +1,195 @@
+export const meta = {
+  title: 'BigQuery on-demand or slots? Where the line falls, in euros',
+  date: '2026-11-16',
+  tags: ['bigquery', 'pricing', 'gcp'],
+  lang: 'en',
+  summary: 'On-demand bills the bytes a query scans. Slots bill the compute time it holds. One number from your own job logs, slot-hours per TiB, tells you which meter is cheaper. Here is the EU math and the query that finds your number.',
+}
+
+import { SlotsBreakEvenGate } from '../../components/flows/blog/BlogFlows'
+
+Most BigQuery cost guides say the same thing: once you scan enough data, move
+to reservations. Then they quote a threshold in dollars, for US regions, and
+leave you to guess whether it holds for a project in Belgium or the
+Netherlands. It doesn't, quite. And the threshold is the wrong question
+anyway. Volume doesn't decide which model is cheaper. The shape of your
+queries does.
+
+## What are you actually paying for in each model?
+
+On-demand bills the bytes your queries scan. Capacity pricing, which Google
+sells as BigQuery editions, bills slot time. Slots are BigQuery's virtual
+CPUs, and you pay for them by the slot-hour.
+
+So the same query runs through two different meters. A query that reads a
+wide table but only filters and sums it scans a lot and computes very
+little. A query that reads a modest table but joins it five ways, sorts it
+and runs window functions over it scans little and computes a lot. The first
+kind is cheaper on slots. The second kind is cheaper on-demand. Most
+workloads are a mix, which is why nobody can hand you a universal threshold.
+
+Here are the European list prices. Google publishes them in USD, so I
+converted at the ECB reference rate of 1.1052 dollars per euro (13 November
+2026). Prices are from
+[Google's BigQuery pricing page](https://cloud.google.com/bigquery/pricing),
+checked 16 November 2026. If your billing account pays in euros, Google
+charges the EUR prices listed on its
+[Cloud Platform SKUs page](https://cloud.google.com/skus/?currency=EUR&filter=BigQuery),
+so check your exact line there.
+
+| Location | On-demand, per TiB | Standard, per slot-hour | Enterprise, per slot-hour | Break-even (Standard / Enterprise) |
+|---|---|---|---|---|
+| EU multi-region | €5.66 | €0.040 | €0.060 | 142 / 95 |
+| Belgium, Netherlands (`europe-west1`, `europe-west4`) | €6.79 | €0.040 | €0.060 | 170 / 114 |
+| Frankfurt (`europe-west3`) | €7.35 | €0.047 | €0.071 | 156 / 104 |
+| Paris (`europe-west9`) | €7.07 | €0.047 | €0.071 | 150 / 100 |
+| Madrid (`europe-southwest1`) | €7.07 | €0.043 | €0.064 | 166 / 111 |
+
+The first TiB scanned each month is free on-demand, once per billing account.
+
+One quirk worth knowing. The EU multi-region charges less per TiB than any
+single European region, the same as the US. But slot prices in the EU
+multi-region and in Belgium or the Netherlands are identical. So the same
+workload crosses over to slots sooner in `europe-west4` than it does in the
+EU multi-region.
+
+## Where does the line actually fall?
+
+Divide the on-demand price per TiB by the slot-hour price. That gives you how
+many slot-hours the price of one TiB buys. In the EU multi-region on Standard
+edition, €5.66 buys about 142 slot-hours.
+
+That ratio is the whole decision. If your queries burn fewer than about 142
+slot-hours for every TiB they scan, slots are cheaper. If they burn more,
+on-demand is cheaper. The exchange rate cancels out of the division, so the
+break-even holds whatever the euro does this month.
+
+<SlotsBreakEvenGate />
+
+## Why does a slot bill come out higher than the slot time you used?
+
+Because the autoscaler bills what it allocates, not what you use. It scales
+in multiples of 50 slots, and by default each scale-up is billed for at
+least one minute
+([Google's autoscaling docs](https://cloud.google.com/bigquery/docs/slots-autoscaling-intro)).
+A two-second dashboard query that triggers a scale-up still opens a 50-slot,
+one-minute window. That's 50 slot-minutes, about €0.03 at EU Standard rates,
+for a query that needed a fraction of it.
+
+One of those is nothing. A dashboard firing small queries all day is a
+different story, and that's exactly the workload small teams tend to have.
+Google now offers fluid scaling, an opt-in setting per reservation that
+bills per second with no minimum duration. If your traffic is bursty, it is
+the first thing to switch on.
+
+So treat 142 as a ceiling, not a target. If your number comes out at 130, the
+rounding can eat the difference. I'd want real headroom below the break-even
+before moving anything.
+
+## How do you find your own number?
+
+You already have it. BigQuery logs the slot time and bytes billed for every
+job, including on-demand ones. Run this in the region where your data lives
+(swap `region-eu` for `region-europe-west4` and so on):
+
+```sql
+SELECT
+  SUM(total_bytes_billed) / POW(1024, 4) AS tib_billed,
+  SUM(total_slot_ms) / 1000 / 3600 AS slot_hours,
+  SAFE_DIVIDE(
+    SUM(total_slot_ms) / 1000 / 3600,
+    SUM(total_bytes_billed) / POW(1024, 4)
+  ) AS slot_hours_per_tib
+FROM `region-eu`.INFORMATION_SCHEMA.JOBS
+WHERE creation_time > TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 DAY)
+  AND job_type = 'QUERY'
+  AND statement_type != 'SCRIPT';
+```
+
+The last line matters. A multi-statement script creates a parent job whose
+totals already include its children, so leaving it in counts everything
+twice
+([Google's INFORMATION_SCHEMA guidance](https://cloud.google.com/bigquery/docs/information-schema-jobs)).
+Bytes billed already reflects what on-demand charges you: cached results are
+free and small tables are rounded up to the 10 MB minimum.
+
+Compare `slot_hours_per_tib` with the break-even for your location and
+edition. Editions and on-demand can run side by side per project, so if the
+number looks good you can test a reservation on one project before moving the
+rest.
+
+## Does any of this matter at small-team volume?
+
+Often not, and that's worth saying out loud. Take a hypothetical team
+scanning 3 TiB a month in the EU multi-region. The first TiB is free, so
+on-demand costs 2 × €5.66, about €11 a month. No reservation saves
+meaningful money on €11. Spend the time on partitioning instead.
+
+It starts to matter around tens of TiB. Say the same team grows to 40 TiB a
+month. On-demand is 39 × €5.66, about €221. Now the ratio decides it. The
+two ratios below are illustrations, not typical values, which is the whole
+point of measuring your own:
+
+- At 60 slot-hours per TiB, the month uses 2,400 slot-hours. On Standard
+  that's about €96, before the autoscaler's rounding. Slots win.
+- At 200 slot-hours per TiB, it's 8,000 slot-hours, about €318. On-demand
+  wins, by a lot.
+
+Same bill today, opposite answers. That's why "switch once you pass X TiB"
+advice misleads.
+
+## What about predictability, the other reason people switch?
+
+A reservation with a maximum slot count gives you a hard ceiling per hour.
+A Standard reservation capped at 100 slots in the EU can't cost more than
+about €4 an hour, whatever anyone runs. On-demand's worst case is one
+careless `SELECT *` across your biggest table.
+
+But you don't need to change models to get a ceiling. On-demand has its own
+brakes: a maximum bytes billed setting per query, and custom daily quotas
+per project or per user. If a surprise bill is what scares you, set those
+first. They are free and take ten minutes.
+
+## Standard or Enterprise?
+
+Standard is the cheapest slot, but Google's
+[editions comparison](https://cloud.google.com/bigquery/docs/editions-intro)
+lists it without the fine-grained security controls: column-level access,
+row-level security and data masking. It also has no BI Engine. If you protect
+personal data columns with policy tags, which is a sensible GDPR habit, your
+realistic comparison is Enterprise at €0.060 per slot-hour. In the EU
+multi-region that drops the break-even to about 95 slot-hours per TiB.
+
+Commitments are the other Enterprise lever. One-year and three-year
+commitments exist only on Enterprise and Enterprise Plus. They start at 50
+slots, are tied to one region and renew automatically unless you cancel. In
+the EU, a one-year Enterprise commitment is about €0.048 per slot-hour and a
+three-year one about €0.036. But a commitment runs around the clock: 50 slots
+for a year in the EU comes to roughly €1,744 a month. That's a floor most
+five-person teams have no reason to pay.
+
+## So which should you pick?
+
+- **Under a few TiB a month:** stay on-demand, set maximum bytes billed and a
+  daily quota, and move on.
+- **Tens of TiB a month:** run the query above. Well under the break-even
+  for your region and edition, test a reservation on one project with fluid
+  scaling on. Near or over it, stay put.
+- **Personal data behind column or row security:** compare against
+  Enterprise, not Standard.
+- **Steady load all day, every day, for years:** that's the only case where
+  a commitment earns its floor.
+
+If BigQuery versus Fabric is still an open question for you, I compared their
+metering models in
+[the Fabric or BigQuery post](/work/2026-09-fabric-vs-bigquery). If you're
+still choosing between the EU multi-region and a single region, read
+[why an EU region is not the same as sovereignty](/work/2026-09-eu-region-not-sovereignty)
+first, because that choice also moves your price. Keeping warehouse spend
+visible and boring is part of
+[the automation and DataOps work](/services/automation-dataops).
+
+Want a second pair of eyes on your own number?
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6) Ask
+any question you like, bring the query output if you have it, and you'll
+leave the 30 minutes with an answer or a clear next step.
