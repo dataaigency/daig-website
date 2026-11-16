@@ -667,3 +667,56 @@ export function AgentIncidentFork() {
     </FlowPanel>
   )
 }
+
+/** The same month of queries runs through two meters. On-demand counts the
+ *  bytes scanned; capacity counts slot time, but bills what the autoscaler
+ *  allocated (50-slot steps, one-minute minimum), not what was used. The two
+ *  meet at one ratio from your own job logs: slot-hours per TiB scanned. */
+export function SlotsBreakEvenGate() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  return (
+    <FlowPanel
+      caption="The same month of queries runs through two meters. On-demand counts the bytes your queries scan. Capacity counts slot time, but bills what the autoscaler allocated, rounded up in 50-slot steps, not what you used. One ratio from your own job logs decides it: in the EU multi-region on Standard edition, under about 142 slot-hours per TiB scanned, slots are cheaper; over it, on-demand is."
+      minWidth={860}
+    >
+      <svg ref={ref} viewBox="0 0 1020 290" role="img" aria-label="Your last 30 days of queries fork into two meters. Upper lane: bytes scanned, the on-demand meter, priced at 5.66 euros per tebibyte in the EU multi-region. Lower lane: slot-hours allocated by the autoscaler in 50-slot steps, marked as billed at or above what was used, priced at 0.040 euros per slot-hour on EU Standard edition. Both lanes meet at one gate, slot-hours per tebibyte, with a break-even of about 142: under it slots win, over it on-demand wins. The gate leads to the cheaper meter for your workload." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="sb-arrow" />
+
+        <FNode x={15} y={122} w={140} h={56} label="Your queries" sub="last 30 days" />
+
+        {/* upper lane: on-demand meter */}
+        <path id="sb-fa" d="M 155 150 C 178 150, 176 56, 198 56" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#sb-arrow)" />
+        <FNode x={200} y={32} w={170} h={48} label="Bytes scanned" sub="on-demand meter" />
+        <path id="sb-a1" d="M 370 56 L 428 56" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#sb-arrow)" />
+        <EdgeLabel x={399} y={48} text="× rate" />
+        <FNode x={430} y={32} w={180} h={48} label="€5.66 per TiB" sub="EU multi-region" />
+
+        {/* lower lane: capacity meter, billed on allocation */}
+        <path id="sb-fb" d="M 155 150 C 178 150, 176 244, 198 244" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#sb-arrow)" />
+        <FNode x={200} y={220} w={170} h={48} label="Slot-hours allocated" sub="autoscaler: 50-slot steps" stroke={FK.AMBER} />
+        {amberTag(226, 206, 'billed ≥ used', 'start')}
+        <path id="sb-b1" d="M 370 244 L 428 244" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#sb-arrow)" />
+        <EdgeLabel x={399} y={236} text="× rate" />
+        <FNode x={430} y={220} w={180} h={48} label="€0.040 per slot-hour" sub="EU Standard edition" />
+
+        {/* both lanes meet at the one ratio that decides it */}
+        <path id="sb-ga" d="M 610 56 C 636 56, 632 150, 658 150" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#sb-arrow)" />
+        <path id="sb-gb" d="M 610 244 C 636 244, 632 150, 658 150" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#sb-arrow)" />
+        <FNode x={660} y={118} w={190} h={64} label="Slot-hours per TiB" sub="break-even about 142" />
+        <text x={755} y={206} fontSize={9.5} letterSpacing={0.8} fill={FK.SUB} fontFamily="var(--font-mono)" textAnchor="middle">UNDER 142: SLOTS</text>
+        <text x={755} y={222} fontSize={9.5} letterSpacing={0.8} fill={FK.SUB} fontFamily="var(--font-mono)" textAnchor="middle">OVER 142: ON-DEMAND</text>
+        <path id="sb-e" d="M 850 150 L 883 150" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#sb-arrow)" />
+        <FNode x={885} y={118} w={125} h={64} label="Cheaper meter" sub="for your workload" stroke={FK.FLASH} />
+
+        <Dot path="sb-fa" dur={1.4} begin={0} />
+        <Dot path="sb-fb" dur={1.4} begin={0} />
+        <Dot path="sb-a1" dur={1} begin={1.4} />
+        <Dot path="sb-b1" dur={1} begin={1.4} color={FK.AMBER} />
+        <Dot path="sb-ga" dur={1.3} begin={2.4} />
+        <Dot path="sb-gb" dur={1.3} begin={2.4} />
+        <Dot path="sb-e" dur={0.8} begin={3.7} />
+      </svg>
+    </FlowPanel>
+  )
+}
