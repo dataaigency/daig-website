@@ -667,3 +667,64 @@ export function AgentIncidentFork() {
     </FlowPanel>
   )
 }
+
+/** Pseudonymised data under the Council's proposed Article 25a: the same
+ *  tokenised extract is personal data or not depending on who receives it,
+ *  and it never stops being personal data for whoever holds the key. */
+export function PseudonymKeyFork() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  return (
+    <FlowPanel
+      caption="One tokenised extract, three recipients. A processor working for you gets no exemption, and a recipient who can link the tokens back makes it personal data again. Only an independent party with nothing to join it to could fall outside the GDPR under the proposed rule. The key stays with you, so for you it is always personal data."
+      minWidth={860}
+    >
+      <svg ref={ref} viewBox="0 0 1030 360" role="img" aria-label="A customer table is pseudonymised, swapping IDs for tokens, while the key or lookup table is kept separately and stays personal data for you. The tokenised extract then forks three ways. To a processor under a data processing agreement, it is still personal data, with no exemption. To an independent party that holds nothing to join it to, it is not personal data for them. To a recipient who can link it, for example with its own customer list, it becomes personal data again." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="pk-arrow" />
+
+        <path id="pk-e1" d="M 130 170 L 198 170" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pk-arrow)" />
+        <path id="pk-e2" d="M 360 170 L 418 170" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pk-arrow)" />
+        <FNode x={10} y={143} w={120} h={54} label="Customer table" sub="names, emails" />
+        <FNode x={200} y={143} w={160} h={54} label="Pseudonymise" sub="swap IDs for tokens" />
+        <FNode x={420} y={143} w={170} h={54} label="Tokenised extract" sub="what leaves your hands" />
+        <EdgeLabel x={165} y={162} text="tokenise" />
+        <EdgeLabel x={390} y={162} text="export" />
+
+        {/* the key never leaves: personal data for its holder */}
+        {drop(280, 197, 262)}
+        <FNode x={200} y={262} w={160} h={48} label="Key / lookup table" sub="kept separately" />
+        {amberTag(280, 330, 'yours: always personal')}
+
+        {/* upper branch: processor, no exemption */}
+        <path id="pk-fa" d="M 590 170 C 615 130, 620 70, 648 54" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#pk-arrow)" />
+        <path id="pk-ea" d="M 830 54 L 853 54" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pk-arrow)" />
+        <FNode x={650} y={30} w={180} h={48} label="Processor under DPA" sub="agency, BI vendor" stroke={FK.AMBER} />
+        <FNode x={855} y={30} w={165} h={48} label="Still personal data" sub="Art. 25a(4): no exemption" stroke={FK.AMBER} />
+        <text x={600} y={112} fontSize={9.5} letterSpacing={0.8} fill={FK.AMBER} fontFamily="var(--font-mono)" textAnchor="end">PROCESSOR</text>
+
+        {/* middle branch: independent party with nothing to join */}
+        <path id="pk-fm" d="M 590 170 L 648 170" fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#pk-arrow)" />
+        <path id="pk-em" d="M 830 170 L 853 170" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pk-arrow)" />
+        <FNode x={650} y={146} w={180} h={48} label="Independent party" sub="holds nothing to join" />
+        <FNode x={855} y={146} w={165} h={48} label="Not personal for them" sub="if truly no means" stroke={FK.FLASH} />
+        <EdgeLabel x={619} y={162} text="no key" />
+
+        {/* lower branch: recipient who can link the tokens back */}
+        <path id="pk-fb" d="M 590 170 C 615 210, 620 270, 648 286" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#pk-arrow)" />
+        <path id="pk-eb" d="M 830 286 L 853 286" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#pk-arrow)" />
+        <FNode x={650} y={262} w={180} h={48} label="Recipient who can link" sub="e.g. own customer list" stroke={FK.AMBER} />
+        <FNode x={855} y={262} w={165} h={48} label="Personal data again" sub="the handover counts too" stroke={FK.AMBER} />
+        <text x={600} y={236} fontSize={9.5} letterSpacing={0.8} fill={FK.AMBER} fontFamily="var(--font-mono)" textAnchor="end">CAN LINK</text>
+
+        <Dot path="pk-e1" dur={1.4} begin={0} />
+        <Dot path="pk-e2" dur={1.2} begin={0.8} />
+        <Dot path="pk-fa" dur={1.6} begin={1.6} color={FK.AMBER} />
+        <Dot path="pk-ea" dur={1} begin={2.8} color={FK.AMBER} />
+        <Dot path="pk-fm" dur={1.2} begin={1.6} />
+        <Dot path="pk-em" dur={1} begin={2.8} />
+        <Dot path="pk-fb" dur={1.6} begin={1.6} color={FK.AMBER} />
+        <Dot path="pk-eb" dur={1} begin={2.8} color={FK.AMBER} />
+      </svg>
+    </FlowPanel>
+  )
+}
