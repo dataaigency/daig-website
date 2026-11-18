@@ -1,0 +1,151 @@
+export const meta = {
+  title: 'Is pseudonymised data still personal data? What the GDPR change on the table would and would not fix',
+  date: '2026-11-18',
+  tags: ['gdpr', 'digital omnibus', 'data governance'],
+  lang: 'en',
+  summary: 'EU governments agreed their Digital Omnibus position in October, including a new rule on pseudonymised data. It is not law yet, and even if it lands as drafted, the table you hashed is still personal data for you and for every processor you send it to.',
+}
+
+import { PseudonymKeyFork } from '../../components/flows/blog/BlogFlows'
+
+Most data teams have done this at least once. Swap the customer
+name for a token, hash the email column, send the table to an agency or a
+partner and call it "anonymised". It feels like the responsible thing to
+do. It is a good thing to do. It just does not mean what most people think
+it means, and the law around it is moving right now.
+
+On 21 October 2026, EU member states agreed their negotiating position on
+the Digital Omnibus, the package that reopens parts of the GDPR. One of the
+changes is a new Article 25a on pseudonymised data
+([Addleshaw Goddard](https://www.addleshawgoddard.com/en/insights/insights-briefings/2026/data-protection/eu-digital-omnibus-european-council-adopts-its-position/),
+[Lewis Silkin](https://www.lewissilkin.com/insights/2026/11/09/digital-rulebook-simplification-of-eu-data-protection-and-cyber-rules-102o7e4)).
+The headlines read as if pseudonymised data is about to fall outside the
+GDPR. For most small and mid-sized companies, it is not. Here is what
+actually changes, for whom, and what to do while it is still being argued.
+
+## What is pseudonymised data, legally?
+
+The GDPR defines pseudonymisation as processing personal data so it can no
+longer be tied to a person without extra information, as long as that extra
+information (the key, the lookup table, the salt) is kept separately and
+protected ([GDPR Art. 4(5)](https://gdpr-info.eu/art-4-gdpr/)). Recital 26
+then says the quiet part: data that could be re-attributed using that extra
+information is still personal data
+([Recital 26](https://gdpr-info.eu/recitals/no-26/)).
+
+Anonymised data is the other thing. It cannot be tied back to anyone, by
+anyone, with means reasonably likely to be used. Only that falls outside the
+GDPR. A hashed email is pseudonymised, not anonymised: anyone holding the
+same email list can hash it the same way and match the rows.
+
+## Who is it personal data for?
+
+This is where it got interesting in September 2025. In *EDPS v SRB*
+(C-413/23 P), the Court of Justice looked at pseudonymised comments that the
+EU's Single Resolution Board had sent to Deloitte. The Court said the answer
+depends on who is looking
+([FPF](https://fpf.org/blog/rethinking-personal-data-the-cjeus-contextual-turn-in-edps-vs-srb/),
+[Taylor Wessing](https://www.taylorwessing.com/en/insights-and-events/insights/2025/09/analysis-of-the-cjeu-judgment)).
+
+For the SRB, which held the key, the comments were personal data, full stop.
+For Deloitte, which had no key and no realistic way to get one, they might
+not be. But the Court also held that the SRB still owed the people involved
+the usual transparency about who would receive their data, judged from the
+SRB's side at the time it collected it. What the data is for the recipient
+does not change what you owe as the sender.
+
+<PseudonymKeyFork />
+
+## What would the new Article 25a actually say?
+
+The Commission's November 2025 proposal wanted to rewrite the definition of
+personal data itself, in Article 4(1), to build that "depends on who is
+looking" idea into the core of the GDPR
+([White & Case](https://www.whitecase.com/insight-alert/gdpr-under-revision-key-takeaways-from-digital-omnibus-regulation-proposal)).
+The EDPB and the EDPS objected in a joint opinion in February 2026, and
+member states have now dropped that rewrite
+([LEXIA](https://www.lexia.it/en/2026/03/12/digital-omnibus-edpb-edps/)).
+
+In its place, the Council's mandate (document ST 14756/26) adds a narrower
+rule on pseudonymised data alone. As reported by the firms that have read
+it, it does four things:
+
+- **A recipient that cannot identify anyone is outside it.** Pseudonymised
+  data is not personal data for a third party with no means to re-identify.
+- **Passing it on can switch it back on.** If that third party hands the
+  data to someone who can identify people, the handover and that recipient's
+  use are processing of personal data again.
+- **Processors get no exemption.** For a processor working on your behalf,
+  pseudonymised data stays personal data, always.
+- **The EDPB, not the Commission, writes the detail.** The Commission's
+  planned implementing acts on re-identification are replaced by an EDPB
+  opinion on pseudonymisation and anonymisation.
+
+Notice what is missing from that list: you. Nothing in it changes the status
+of the data for the company that pseudonymised it and still holds the key.
+
+## Is any of this law yet?
+
+No. The Council position is one side of a negotiation. The European
+Parliament handles the file in a joint committee of its industry and civil
+liberties committees, and as of late October it had not voted. Several
+trackers expect a committee vote in the first quarter of 2027 at the
+earliest, after which the two sides still have to agree a final text
+([Praxikon](https://www.praxikon.com/en/avg/digital-omnibus/ep-ontwerpverslag)).
+Until then the GDPR applies exactly as written, and the Parliament may want
+something quite different.
+
+Meanwhile the EDPB has been busy on the other side of the line. Its draft
+Guidelines 02/2026 on anonymisation, open for consultation until 30 October
+2026, set a three-part test (no singling out a record, no linking, no
+inferring) and treat anonymising itself as processing that needs a legal
+basis
+([EDPB](https://www.edpb.europa.eu/system/files/2026-07/edpb_guidelines_202602_anonymisation_v1_en_0.pdf)).
+In plain words: "we anonymised it" is a claim you will be asked to prove.
+
+## What does this mean for a small data team?
+
+Look at who actually receives your pseudonymised tables. In most small companies,
+it is the BI agency, the analytics consultant, the cloud data
+platform, the marketing tool. Those are processors working under a data
+processing agreement. Under the Council's own text, nothing changes for
+them. The data is personal data, the agreement still matters, and so does
+everything else.
+
+Where the new rule could genuinely help is real data sharing with
+independent parties: a research partner, a benchmarking pool, an industry
+body that only ever sees tokens. If the rule lands as drafted, and if the
+recipient truly cannot re-identify, that recipient may not carry GDPR duties
+for that data. You still do.
+
+## What should you do now, before the law settles?
+
+None of these depend on how the negotiation ends:
+
+1. **Keep the key somewhere else.** The lookup table or salt lives in a
+   separate workspace or project, with its own access list, not in the same
+   schema as the tokens. In a lakehouse, that usually means pseudonymising
+   on the way into silver and locking the mapping away from everyone who
+   only needs the analytics.
+2. **Name things honestly.** Stop calling hashed tables "anonymised" in
+   documentation, contracts and dashboards. The word has a legal meaning and
+   a regulator will read it that way.
+3. **Sort recipients into two lists.** Processors on one, independent third
+   parties on the other. Only the second list is even in scope for the
+   proposed change.
+4. **Write down why a recipient cannot re-identify.** What do they hold that
+   could be joined to your tokens? If you cannot answer that today, the new
+   rule would not help you tomorrow.
+
+This sits right next to the residency question from
+[An EU region is not sovereignty](/work/2026-09-eu-region-not-sovereignty):
+both are about what a technical setup actually guarantees once a lawyer
+reads it. And if you are tracking the AI side of the same Omnibus package,
+[the AI Act deadlines post](/work/2026-08-ai-act-deadlines-moved) covers what
+already changed there.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6) Ask
+any question about where your keys live and who sees what. You will leave
+the 30 minutes with an answer or a clear next step. If the work turns out to
+be bigger, [the lakehouse architecture page](/services/lakehouse-architecture)
+shows how we build those separated layers in practice.
