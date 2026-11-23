@@ -667,3 +667,63 @@ export function AgentIncidentFork() {
     </FlowPanel>
   )
 }
+
+/** The tide table is fitted once from stable inputs and published as one
+ *  agreed edition. A KPI left to each team is recomputed from raw rows with
+ *  each team's own rules. Same reading, two kinds of trust. */
+export function TideTableVsKpi() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  return (
+    <FlowPanel
+      caption="The tide table is fitted once from years of gauge records, published as one edition, and read by everyone. A KPI nobody has published gets recomputed from raw rows by each team with its own rules, so one question returns several answers."
+      minWidth={860}
+    >
+      <svg ref={ref} viewBox="0 0 1040 340" role="img" aria-label="Two rows. Top row, the tide table: years of gauge records and the moon and sun are fitted once into constants, published as one dated annual edition, and the skipper, the harbour and the surfer all read the same high water time. Bottom row, an unpublished KPI: raw orders are recomputed by the sales team, the finance team and an AI agent, each with its own rule for revenue, producing three different numbers." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="tt-arrow" />
+
+        {/* top row: tide table */}
+        <text x={15} y={22} fontSize={11} letterSpacing={2} fill={FK.SUB} fontFamily="var(--font-mono)">TIDE TABLE</text>
+        <FNode x={15} y={40} w={170} h={56} label="Gauge records" sub="years of readings" />
+        <path id="tt-a" d="M 185 68 L 243 68" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#tt-arrow)" />
+        <EdgeLabel x={214} y={52} text="fit once" />
+        <FNode x={245} y={40} w={170} h={56} label="Constants" sub="moon and sun cycles" />
+        <path id="tt-b" d="M 415 68 L 473 68" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#tt-arrow)" />
+        <EdgeLabel x={444} y={52} text="compute" />
+        <FNode x={475} y={40} w={190} h={56} label="Published edition" sub="dated, one for all" stroke={FK.FLASH} />
+        <path id="tt-c" d="M 665 68 C 700 68, 700 68, 733 68" fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#tt-arrow)" />
+        <EdgeLabel x={699} y={52} text="read" />
+        <FNode x={735} y={40} w={290} h={56} label="Skipper, harbour, surfer" sub="same high water time" stroke={FK.FLASH} />
+
+        <line x1={15} y1={150} x2={1025} y2={150} stroke={FK.NODE_STROKE} strokeWidth={1.2} strokeDasharray="4 5" />
+
+        {/* bottom row: unpublished KPI */}
+        <text x={15} y={176} fontSize={11} letterSpacing={2} fill={FK.SUB} fontFamily="var(--font-mono)">UNPUBLISHED KPI</text>
+        <FNode x={15} y={228} w={170} h={56} label="Raw orders" sub="rows, no agreed rule" />
+        <path id="tt-d" d="M 185 256 C 220 256, 215 200, 245 200" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#tt-arrow)" />
+        <path id="tt-e" d="M 185 256 L 243 256" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#tt-arrow)" />
+        <path id="tt-f" d="M 185 256 C 220 256, 215 312, 245 312" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#tt-arrow)" />
+        <FNode x={245} y={184} w={190} h={32} label="Sales rule" stroke={FK.AMBER} />
+        <FNode x={245} y={240} w={190} h={32} label="Finance rule" stroke={FK.AMBER} />
+        <FNode x={245} y={296} w={190} h={32} label="AI agent's guess" stroke={FK.AMBER} />
+        <path id="tt-g" d="M 435 200 L 563 200" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#tt-arrow)" />
+        <path id="tt-h" d="M 435 256 L 563 256" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#tt-arrow)" />
+        <path id="tt-i" d="M 435 312 L 563 312" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#tt-arrow)" />
+        <FNode x={565} y={184} w={170} h={32} label="Revenue, number one" stroke={FK.AMBER} />
+        <FNode x={565} y={240} w={170} h={32} label="Revenue, number two" stroke={FK.AMBER} />
+        <FNode x={565} y={296} w={170} h={32} label="Revenue, number three" stroke={FK.AMBER} />
+        {amberTag(775, 262, 'three answers, one question', 'start')}
+
+        <Dot path="tt-a" dur={1.2} begin={0} />
+        <Dot path="tt-b" dur={1.2} begin={1} />
+        <Dot path="tt-c" dur={1.2} begin={2} />
+        <Dot path="tt-d" dur={1.2} begin={0.3} color={FK.AMBER} />
+        <Dot path="tt-e" dur={1.2} begin={0.6} color={FK.AMBER} />
+        <Dot path="tt-f" dur={1.2} begin={0.9} color={FK.AMBER} />
+        <Dot path="tt-g" dur={1.4} begin={1.8} color={FK.AMBER} />
+        <Dot path="tt-h" dur={1.4} begin={2.1} color={FK.AMBER} />
+        <Dot path="tt-i" dur={1.4} begin={2.4} color={FK.AMBER} />
+      </svg>
+    </FlowPanel>
+  )
+}
