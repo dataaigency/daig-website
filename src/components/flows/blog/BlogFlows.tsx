@@ -667,3 +667,56 @@ export function AgentIncidentFork() {
     </FlowPanel>
   )
 }
+
+/** Dataform, dbt Core and the hosted dbt platform all compile the same SQL
+ *  files and send them to the same BigQuery project. The fork is only about
+ *  who runs the compile-and-schedule step in the middle, and what that
+ *  costs: nothing to run, a runner you own, or a per-seat subscription. */
+export function TransformRunnerFork() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  const mono = (x: number, y: number, text: string) => (
+    <text x={x} y={y} fontSize={9.5} letterSpacing={0.8} fill={FK.SUB} fontFamily="var(--font-mono)" textAnchor="start">{text.toUpperCase()}</text>
+  )
+  return (
+    <FlowPanel
+      caption="All three routes compile the same SQL files and send them to the same BigQuery project, so the query bill follows your SQL, not the tool. What you are choosing is who runs the step in the middle: Google, you, or a second vendor."
+      minWidth={800}
+    >
+      <svg ref={ref} viewBox="0 0 1020 345" role="img" aria-label="SQL models in Git fork into three routes that all end in the same BigQuery project. Dataform runs inside Google Cloud at no licence cost with nothing to run, but works with BigQuery only. dbt Core has no licence cost but runs on a runner you maintain, including its secrets and upgrades. The hosted dbt platform costs about 91 euros per seat per month and adds a second vendor and a second data processing agreement. BigQuery bills the SQL, not the tool." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="tr-arrow" />
+
+        <FNode x={15} y={143} w={170} h={54} label="Your SQL models" sub="in Git, linked by ref()" />
+
+        <path id="tr-a1" d="M 185 170 C 241 170, 241 56, 298 56" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#tr-arrow)" />
+        <path id="tr-b1" d="M 185 170 L 298 170" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#tr-arrow)" />
+        <path id="tr-c1" d="M 185 170 C 241 170, 241 284, 298 284" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#tr-arrow)" />
+
+        <FNode x={300} y={30} w={250} h={52} label="Dataform" sub="runs inside Google Cloud" />
+        <FNode x={300} y={144} w={250} h={52} label="dbt Core" sub="open source, on a runner you own" />
+        <FNode x={300} y={258} w={250} h={52} label="dbt platform" sub="hosted for you, as a subscription" />
+
+        <path id="tr-a2" d="M 550 56 C 674 56, 674 170, 798 170" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#tr-arrow)" />
+        <path id="tr-b2" d="M 550 170 L 798 170" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#tr-arrow)" />
+        <path id="tr-c2" d="M 550 284 C 674 284, 674 170, 798 170" fill="none" stroke={FK.EDGE} strokeWidth={1.5} markerEnd="url(#tr-arrow)" />
+
+        {mono(565, 44, '€0, nothing to run')}
+        {mono(565, 162, '€0 licence, you run it')}
+        {mono(565, 306, 'about €91 a seat a month')}
+
+        {amberTag(312, 102, 'BigQuery only', 'start')}
+        {amberTag(312, 216, 'runner, secrets, upgrades: yours', 'start')}
+        {amberTag(312, 330, 'second vendor, second DPA', 'start')}
+
+        <FNode x={800} y={143} w={205} h={54} label="BigQuery" sub="bills the SQL, not the tool" stroke={FK.FLASH} />
+
+        <Dot path="tr-a1" dur={1.4} begin={0} />
+        <Dot path="tr-b1" dur={1.4} begin={0.3} />
+        <Dot path="tr-c1" dur={1.4} begin={0.6} />
+        <Dot path="tr-a2" dur={1.8} begin={1.4} />
+        <Dot path="tr-b2" dur={1.8} begin={1.7} />
+        <Dot path="tr-c2" dur={1.8} begin={2} />
+      </svg>
+    </FlowPanel>
+  )
+}

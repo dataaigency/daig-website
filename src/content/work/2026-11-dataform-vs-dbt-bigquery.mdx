@@ -1,0 +1,173 @@
+export const meta = {
+  title: 'Dataform or dbt on BigQuery? Free and native versus the industry standard',
+  date: '2026-11-23',
+  tags: ['bigquery', 'dbt', 'dataform', 'comparison'],
+  lang: 'en',
+  summary: 'Both tools turn SQL files into tested BigQuery tables, and BigQuery bills you the same either way. The real choice is who runs the step in the middle: Google, you, or a second vendor at about €91 a seat.',
+}
+
+import { TransformRunnerFork } from '../../components/flows/blog/BlogFlows'
+
+When I last checked what Google suggests for "dataform vs dbt", one of the
+suggestions was "dataform vs dbt reddit". That tells you what people think
+of the comparison pages: rows of ticks, a sponsored conclusion, and no
+answer for a team of three who just want their tables built every morning.
+
+I build transformations with dbt by default, on BigQuery and on Fabric. So
+read this as the view of someone with a habit, who still points small
+BigQuery teams at Dataform fairly often.
+
+## Which one should a small BigQuery team pick?
+
+If BigQuery is your only warehouse and you plan to keep it that way, start
+with Dataform. If a second warehouse is on the horizon, or you need to hire
+people who already know the tool, pick dbt Core. Pay for the hosted dbt
+platform only when you would rather rent the scheduler than run it.
+
+The reason this is a calmer decision than the internet suggests: both tools
+do the same job. You write SELECT statements in files, point them at each
+other with a `ref()`, and the tool works out the build order, creates the
+tables and runs your checks. The SQL that lands in BigQuery is yours either
+way.
+
+<TransformRunnerFork />
+
+## What does each one actually cost, in euros?
+
+Dataform costs nothing, dbt Core costs nothing, and the hosted dbt platform
+costs about €91 per developer a month on its Starter plan. In all three
+cases you pay BigQuery separately for the queries.
+
+**Dataform.** Google's
+[pricing page](https://cloud.google.com/dataform/pricing) says it in one
+line: "Dataform is a free service." You are charged through BigQuery for the
+queries it runs, plus whatever you use around it, such as Cloud Logging or a
+scheduler. For a small team that surrounding cost is noise next to the query
+bill.
+
+**dbt Core.** The open source engine is free under Apache 2.0, and dbt Labs
+[says it stays that way](https://www.getdbt.com/blog/fivetran-dbt-20-future)
+in the Rust-based v2 that started rolling out in June 2026. Free does not
+mean nothing to run, though. Something has to execute `dbt build` on a
+schedule: a CI job, a small container, an Airflow task. That runner, its
+service account key and its upgrades are yours.
+
+**The dbt platform** (what used to be called dbt Cloud). The
+[Developer plan](https://docs.getdbt.com/docs/platform/billing/plans-and-billing)
+is free for one seat and 3,000 successfully built models a month; go over
+and the remaining runs are cancelled until the month resets. The
+[Starter plan](https://www.getdbt.com/pricing) lists at $100 per user per
+month for up to five developers, 15,000 built models a month and one
+project. dbt publishes that price in dollars only. At the ECB reference rate
+of 17 November 2026 ($1.0989 to the euro, as published by the
+[Banque de France](https://www.banque-france.fr/en/statistics/rates-and-prices/exchange-rates-daily-parities-2026-11-17))
+that is about €91 a seat, so roughly €273 a month for three developers and
+€455 for five.
+
+"Built models" is the number to watch on the hosted plans. Forty models
+rebuilt every hour is close to 29,000 builds a month, which is past the
+Starter allowance. The same forty models built once a night is about 1,200.
+
+## What do you give up with Dataform?
+
+Portability, mostly, and a slice of the ecosystem.
+
+- **It is BigQuery only.** Dataform is a Google Cloud product for BigQuery.
+  If the company later adds Fabric, Snowflake or Postgres, your
+  transformation tool does not come along.
+- **The package shelf is short.** dbt has years of community packages for
+  common checks and source systems. Dataform has a handful, mostly
+  community-built, so you write more helpers yourself.
+- **Reuse is JavaScript, not Jinja.** Dataform files are SQLX: SQL with a
+  config block and JavaScript for anything dynamic. Some teams prefer it.
+  It is still a different skill from the Jinja macros most analytics
+  engineers have on their CV.
+- **Tests are a little more work.** Dataform has assertions for data quality
+  and, since Dataform core 3.0.56,
+  [unit tests](https://cloud.google.com/dataform/docs/test-data) with mock
+  inputs capped at 100 rows each. dbt's one-line YAML tests are quicker to
+  write.
+- **The hiring pool is smaller.** "Knows dbt" is on far more job adverts and
+  far more CVs. If you depend on contractors, that matters.
+
+## What do you give up with dbt?
+
+Either an afternoon a month or a subscription, and a little simplicity.
+
+With dbt Core you own the plumbing. It is not hard, but it is one more
+thing that pages someone when a key expires. With the hosted platform you
+swap that for a per-seat bill and a second supplier in the chain.
+
+It is also a tool in the middle of a big year. dbt Labs and Fivetran
+[completed their merger](https://www.fivetran.com/press/fivetran-dbt-labs-complete-merger-to-create-the-data-infrastructure-for-trusted-ai-agents)
+on 1 June 2026, and the engine is being rewritten at the same time. The
+open source licence commitment is public. I would still pin your version
+and read the upgrade notes before moving a production project to v2.
+
+## Where do your code and run logs live?
+
+With Dataform, inside the Google Cloud project you already have. With dbt
+Core, on your own runner. With the hosted dbt platform, at a second vendor,
+which means a second data processing agreement to read.
+
+Neither tool copies your tables anywhere; the data stays in BigQuery. What
+moves is the code, the credentials that can reach the warehouse, and the run
+logs.
+
+A Dataform repository lives in a region you choose. The
+[locations list](https://cloud.google.com/dataform/docs/locations) includes
+Belgium, the Netherlands, Frankfurt, Paris and Madrid among others, and it
+sits under the same Google Cloud contract as your BigQuery data. There is
+nothing new to sign.
+
+The hosted dbt platform has Frankfurt regions, but dbt's
+[regions page](https://docs.getdbt.com/docs/cloud/about-cloud/access-regions-ip-addresses)
+lists them under Enterprise plans. If an EU-hosted account matters to you,
+ask where a Starter account will live before you put a warehouse credential
+in it. With dbt Core the question does not come up.
+
+The platform choice itself comes first; I compared the two I work on in
+[Fabric or BigQuery for a small European team](/work/2026-09-fabric-vs-bigquery).
+
+## Can you switch later?
+
+Yes, and more cheaply than most tooling moves. Your models are SELECT
+statements with references in both tools: `${ref("orders")}` in Dataform,
+`{{ ref('orders') }}` in dbt. That part is close to search and replace.
+
+What does not port is everything around the SQL: macros or JavaScript
+helpers, packages, test definitions and the scheduling setup. So pick for
+the team you have this year. The layering matters more than the tool
+anyway; the [five medallion mistakes](/work/2026-08-medallion-mistakes)
+happen just as easily in either one.
+
+## The comparison, in one table
+
+| | Dataform | dbt Core | dbt platform (Starter) |
+|---|---|---|---|
+| Licence cost | €0 | €0 | about €91 per developer a month ($100) |
+| Who runs it | Google, inside your project | You, on a runner you maintain | The vendor |
+| Warehouses | BigQuery only | BigQuery, Fabric, Snowflake and more | Same as dbt Core |
+| Plan limits | Google Cloud quotas | None | 5 developers, 15,000 built models a month, 1 project |
+| Reuse language | JavaScript in SQLX | Jinja macros and packages | Jinja macros and packages |
+| Code and logs | Your Google Cloud region | Your own runner | Second vendor; region choice on Enterprise plans |
+| Best fit | BigQuery-only team that wants nothing to run | Team that wants portability and hireable skills | Team that wants dbt without running it |
+
+## So which one, honestly?
+
+For a team of one to five people on BigQuery alone, Dataform is the right
+first answer more often than dbt people like to admit. It is already in the
+console, it costs nothing, and there is nothing to keep alive.
+
+Choose dbt when one of three things is true: you run or expect a second
+platform, you hire for the skill, or you lean on packages you do not want
+to rewrite. Start with Core. Move to the hosted platform on the day the
+runner becomes somebody's least favourite chore.
+
+If you want a second opinion on which side of that line you are on, this is
+the kind of thing I set up in
+[automation and DataOps work](/services/automation-dataops). Bring your
+model count, your schedule and your team's skills. Ask any question you like
+in the free 30 minutes; you leave with an answer or a clear next step.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6)
