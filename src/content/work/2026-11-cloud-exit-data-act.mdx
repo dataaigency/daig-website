@@ -1,0 +1,153 @@
+export const meta = {
+  title: 'Leaving your cloud becomes free on 12 January 2027. What does it still cost?',
+  date: '2026-11-25',
+  tags: ['EU Data Act', 'cloud switching', 'lock-in', 'lakehouse'],
+  lang: 'en',
+  summary: 'From 12 January 2027 an EU cloud customer can no longer be charged a fee for switching provider, egress included. The fee was never the expensive part. Here is what the Data Act clears, and what stays on your bill.',
+}
+
+import { CloudExitToll } from '../../components/flows/blog/BlogFlows'
+
+Brussels spent November arguing about which cloud Europe should buy. On
+11 November two members of the European Parliament presented their draft
+report on the Cloud and AI Development Act, the proposal the Commission
+tabled on 3 June. Committees discuss it on 1 December and vote in 2027
+([Euronews](https://www.euronews.com/2026/11/11/eu-lawmakers-push-to-reduce-europes-dependence-on-foreign-cloud-providers),
+[Parliament procedure file](https://oeil.europarl.europa.eu/oeil/en/procedure-file?reference=2026%2F0138%28COD%29)).
+That law is years from touching a 40-person company.
+
+A quieter rule lands much sooner, and it is already law. On 12 January 2027
+the last piece of the EU Data Act's switching chapter switches on. If you rent
+a data platform from anyone, it changes one line of your exit bill. Only one.
+
+## What changes on 12 January 2027?
+
+Your provider may no longer charge you for switching away. Article 29 of the
+[Data Act](https://eur-lex.europa.eu/eli/reg/2023/2854/oj) says that from
+12 January 2027 providers of data processing services "shall not impose any
+switching charges on the customer for the switching process". Until that day
+they may still charge, but only their own direct costs of the switch
+([Bundesnetzagentur glossary](https://www.bundesnetzagentur.de/SharedDocs/A_Z_Glossar_DataAct_ENG/S/switching-charge.html)).
+
+"Data processing service" is the law's name for cloud: infrastructure,
+platforms and software you rent. A Fabric capacity, a BigQuery project and
+the SaaS tool your finance team lives in all count. The rules apply to
+customers in the EU whatever the provider's home country.
+
+## Does that include egress fees?
+
+Yes, for the switch itself. Egress is the per-gigabyte fee for moving data
+out of a cloud. The Data Act's definition of switching charges names data
+egress charges explicitly, and the Commission has confirmed that reading
+([DLA Piper](https://www.dlapiper.com/en/insights/publications/law-in-tech/2026/cloud-exit-under-the-eu-data-act)).
+
+It does not make all egress free. If you keep both clouds and move data
+between them every night, that is "in-parallel use". From the same date the
+provider may still bill egress for it, but only to pass on its own costs
+([Travers Smith](https://www.traverssmith.com/knowledge/knowledge-container/the-data-acts-changes-to-cloud-services-contracts-tipping-the-scales-on-switching/)).
+Cheaper, not zero.
+
+## How long can a provider make you wait?
+
+About three months in the normal case. These parts have applied since
+12 September 2025
+([Bundesnetzagentur](https://bundesnetzagentur.de/EN/Areas/Digitalisation/DataAct/background/3-provider/start.html)):
+
+- **Notice:** two months at most.
+- **Transition:** 30 calendar days after the notice runs out, during which
+  the provider has to help. You may extend it once. The provider may stretch
+  it to seven months if the move is technically not feasible in time, but it
+  has to tell you so within 14 working days and justify it.
+- **Retrieval:** at least 30 more days to pull out anything left.
+
+Your contract has to spell this out. If yours predates September 2025 and
+says nothing about switching, ask for the current terms.
+
+## What does the law not make free?
+
+Three things, and they are the big ones.
+
+**The rest of your contract.** The definition of a switching charge excludes
+standard service fees and early termination penalties. If you signed a
+three-year commitment for a discount, leaving in year two can still cost you,
+as long as the penalty is proportionate and you were told before signing.
+
+**Running two platforms at once.** No real migration is a clean cut. For a
+few weeks you pay the old platform and the new one, plus cost-based egress
+between them.
+
+**The work.** This is the one that decides whether you can actually leave.
+The Data Act obliges a provider to hand over your exportable data in a
+structured, commonly used, machine-readable format. It does not oblige
+anyone to rebuild what you built on top.
+
+<CloudExitToll />
+
+## If the fee was the small part, what is the lock-in?
+
+Everything that only runs on one vendor's platform. Your tables leave. Your
+scheduled pipelines, SQL written in one dialect, semantic models, report
+layouts, access rules and alerts do not. They get rebuilt by people, and
+people cost more than gigabytes.
+
+The fee was already fading before the law caught up. Google has waived
+transfer fees for customers who leave since January 2024, and Microsoft and
+AWS followed that spring
+([UK CMA overview](https://assets.publishing.service.gov.uk/media/688b8169fc784fa12a089071/Appendix_N_-_Egress_fees___free_switching_programmes.pdf)).
+Read the conditions, though.
+[Google's programme](https://cloud.google.com/exit-cloud) asks for an exit
+notice, gives you 30 days to start and at least 30 more to finish, covers
+only a move of all your workloads on that service, and pays the fee back as
+a credit on your final invoice. From January, for EU customers, the zero
+fee is a legal right, no longer a programme you apply for.
+
+So the exit bill for a small data team looks like this: transfer fee, zero.
+Engineering weeks, the same as before.
+
+## How do you keep your own exit cheap?
+
+By deciding where your logic lives before you need to move it. Five habits
+do most of the work.
+
+1. **Keep tables in an open format.** OneLake stores tables as Delta
+   Parquet or Iceberg, both open standards other engines can read
+   ([Microsoft](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview)).
+   BigQuery exports tables to Cloud Storage with no processing charge
+   ([Google](https://cloud.google.com/bigquery/pricing)). Use that. Avoid
+   storage only one tool can open.
+2. **Keep transformations in code you own.** SQL models in a Git
+   repository move with you. Logic clicked together inside a vendor's
+   visual designer mostly does not.
+3. **Write your definitions down outside the BI tool.** If "active
+   customer" only exists inside one report, it has to be dug out again.
+4. **Know your contract dates.** The commitment end date and any early
+   termination clause set your cheapest moment to leave.
+5. **Do one test export.** Take a real table out and open it somewhere
+   else. An hour now tells you more than the contract does.
+
+I build on both Fabric and BigQuery, and neither is a trap by default. What
+traps a team is building it so that nobody could say what leaving would
+involve. [Fabric or BigQuery for a small European team](/work/2026-09-fabric-vs-bigquery)
+compares the two, and [an EU region is not sovereignty](/work/2026-09-eu-region-not-sovereignty)
+covers the legal side of the same choice.
+
+## Could the rules still change before January?
+
+Not the charge ban, as things stand. The Commission's Digital Omnibus would
+exempt some older contracts for custom-made services, and for services from
+smaller providers, from most of the switching chapter. Even that proposal
+keeps the duty to reduce and then remove switching and egress charges
+([Bird & Bird](https://www.twobirds.com/en/insights/2026/denmark/the-digital-omnibus-on-switching-between-data-processing-services-under-the-data-act--whats-new)).
+It is still being negotiated and is not law. I will update this post if
+that changes.
+
+## Is this a reason to switch?
+
+On its own, no. A free door is not a reason to walk through it. It is a
+reason to check that you could.
+
+[Book a free intake call.](https://calendar.app.google/F5mvmg12xMpF73fw6) Ask
+any question about your own setup and what leaving it would really take.
+You'll leave the 30 minutes with an answer or a clear next step. The
+[lakehouse architecture page](/services/lakehouse-architecture) shows the
+open-format setup this post keeps pointing at.

@@ -727,3 +727,55 @@ export function TideTableVsKpi() {
     </FlowPanel>
   )
 }
+
+/** Leaving a cloud after 12 January 2027: the Data Act clears the data lane
+ *  (no switching charge, egress included), while everything built on top of
+ *  the data still has to be rebuilt by people. */
+export function CloudExitToll() {
+  const ref = useRef<SVGSVGElement>(null)
+  useFlowPause(ref)
+  return (
+    <FlowPanel
+      caption="Two things leave a cloud when you switch. Your data travels the top lane: after a notice of two months at most and a 30-day transition, it moves out with no switching charge from 12 January 2027. Everything you built on top travels the bottom lane, and no law pays for that: your team rebuilds it. A fixed-term contract can still carry an exit penalty, and running both clouds side by side still costs egress at the provider's cost."
+      minWidth={880}
+    >
+      <svg ref={ref} viewBox="0 0 1020 340" role="img" aria-label="A current provider on the left and a new provider on the right, joined by two lanes. Top lane, free from 12 January 2027: notice of at most two months, then a 30-day transition, then your data moves out with a switching charge of zero euros. Bottom lane, not covered by the law, in amber: pipelines, models and reports built on the old platform have to be rebuilt by your team. Two amber flags: a fixed-term contract can still carry an exit penalty, and running both clouds in parallel still costs egress at the provider's cost." style={{ width: '100%', height: 'auto', display: 'block' }}>
+        <ArrowDefs id="ce-arrow" />
+
+        <FNode x={15} y={130} w={180} h={60} label="Current provider" sub="you give notice" />
+        <FNode x={805} y={130} w={200} h={60} label="New provider" sub="data in, logic rebuilt" stroke={FK.FLASH} />
+
+        {/* top lane: what the Data Act makes free */}
+        <text x={255} y={34} fontSize={11} letterSpacing={1.6} fill={FK.SUB} fontFamily="var(--font-mono)" textAnchor="start">FREE FROM 12 JAN 2027</text>
+        <path id="ce-a" d="M 195 150 C 232 150, 220 74, 253 74" fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#ce-arrow)" />
+        <FNode x={255} y={48} w={210} h={52} label="Notice, then transition" sub="max 2 months, then 30 days" />
+        <path id="ce-b" d="M 465 74 L 543 74" fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#ce-arrow)" />
+        <EdgeLabel x={504} y={60} text="no fee" />
+        <FNode x={545} y={48} w={200} h={52} label="Your data moves out" sub="switching charge: €0" />
+        <path id="ce-c" d="M 745 74 C 790 74, 770 150, 803 150" fill="none" stroke={FK.FLASH} strokeWidth={1.5} markerEnd="url(#ce-arrow)" />
+
+        {/* bottom lane: what nobody pays for you */}
+        <text x={255} y={208} fontSize={11} letterSpacing={1.6} fill={FK.AMBER} fontFamily="var(--font-mono)" textAnchor="start">NOT COVERED BY THE LAW</text>
+        <path id="ce-d" d="M 195 170 C 232 170, 220 246, 253 246" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#ce-arrow)" />
+        <FNode x={255} y={220} w={210} h={52} label="Pipelines, models, reports" sub="built on the old platform" stroke={FK.AMBER} />
+        <path id="ce-e" d="M 465 246 L 543 246" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#ce-arrow)" />
+        <EdgeLabel x={504} y={232} text="by hand" />
+        <FNode x={545} y={220} w={200} h={52} label="Rebuilt by your team" sub="the real cost of leaving" stroke={FK.AMBER} />
+        <path id="ce-f" d="M 745 246 C 790 246, 770 170, 803 170" fill="none" stroke={FK.AMBER} strokeWidth={1.5} markerEnd="url(#ce-arrow)" />
+
+        {/* costs the charge ban leaves alone */}
+        {drop(105, 190, 284)}
+        {amberTag(105, 292, 'fixed term: exit penalty')}
+        {drop(645, 272, 284)}
+        {amberTag(645, 292, 'parallel run: egress at cost')}
+
+        <Dot path="ce-a" dur={1.5} begin={0} />
+        <Dot path="ce-b" dur={1.2} begin={1.2} />
+        <Dot path="ce-c" dur={1.5} begin={2.2} />
+        <Dot path="ce-d" dur={1.9} begin={0.4} color={FK.AMBER} />
+        <Dot path="ce-e" dur={2.4} begin={2} color={FK.AMBER} />
+        <Dot path="ce-f" dur={1.9} begin={4} color={FK.AMBER} />
+      </svg>
+    </FlowPanel>
+  )
+}
